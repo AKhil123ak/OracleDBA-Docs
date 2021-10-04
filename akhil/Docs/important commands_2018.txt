@@ -1,0 +1,13 @@
+set heading off;
+set echo off;
+Set pages 9999999 lines 190;
+set long 90000;
+
+spool ap_main_tbl_gether_stats.sql
+select dbms_metadata.get_ddl('PROCEDURE','AP_CO_GATHER_TABLE_STATS_SEL','FCRHOST') from dual;
+
+select dbms_metadata.get_ddl('PACKAGE','PK_CO_PROPAGATE','FCRHOST') from dual;
+
+
+spool off;
+

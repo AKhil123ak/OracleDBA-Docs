@@ -1,0 +1,82 @@
+RMAN Restoration
+===========================
+
+[oracle@dcdbssrv01:/backup/rmanbackup]$ cat rman_restor.sh
+export ORACLE_SID=JFSTRN
+export ORACLE_HOME=/u01/app/oracle/11.2.0
+export PATH=$ORACLE_HOME/bin:$PATH
+rman auxiliary / msglog=/backup/rmanbackup/rman_${ORACLE_SID}_`date +%d%h%y_%H%M`.log <<EOF
+run{
+ALLOCATE AUXILIARY CHANNEL c1 DEVICE TYPE DISK;
+ALLOCATE AUXILIARY CHANNEL c2 DEVICE TYPE DISK;
+ALLOCATE AUXILIARY CHANNEL c3 DEVICE TYPE DISK;
+duplicate database to JFSTRN nofilenamecheck backup location '/backup/rmanbackup';
+RELEASE CHANNEL c1;
+RELEASE CHANNEL c2;
+RELEASE CHANNEL c3;
+}
+EXIT;
+EOF
+[oracle@dcdbssrv01:/backup/rmanbackup]$
+====================================================================================================
+========================================================================================
+RMAN BACKUP
+============================================
+
+[oracle@dcdbssrv01:/backup/rmanbackup]$ cat rman_backup.sh
+export ORACLE_SID=JFSTRN
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0/dbhome_1
+export PATH=$ORACLE_HOME/bin:$PATH
+rman target / msglog=/backup/rmanbackup/rman_${ORACLE_SID}_`date +%d%h%y_%H%M`.log <<EOF
+run {
+ALLOCATE CHANNEL RMAN_BACK_CH01 TYPE DISK;
+ALLOCATE CHANNEL RMAN_BACK_CH02 TYPE DISK;
+ALLOCATE CHANNEL RMAN_BACK_CH03 TYPE DISK;
+BACKUP AS COMPRESSED BACKUPSET DATABASE FORMAT '/backup/rmanbackup/databasefiles_%d_%u_%s_%T';
+BACKUP AS COMPRESSED BACKUPSET CURRENT CONTROLFILE FORMAT '/backup/rmanbackup/controlfile_%d_%u_%s_%T';
+RELEASE CHANNEL RMAN_BACK_CH01;
+RELEASE CHANNEL RMAN_BACK_CH02;
+RELEASE CHANNEL RMAN_BACK_CH03;
+}
+EXIT;
+EOF
+[oracle@dcdbssrv01:/backup/rmanbackup]$
+=============================================================================
+
+Rman backup status check :
+
+set lines 200
+set pages 2000
+col opname format a30
+
+alter session set nls_date_format='dd-mon-yy hh24:mi:ss';
+
+
+
+RMAN BACKUP checking
+======================
+ select sid, opname, round(time_remaining/60) as tim_rem_in_min, sofar,totalwork, sofar/totalwork * 100, start_time,units from v$session_longops where time_remaining > 0 order by start_time;
+
+select sid, opname, round(time_remaining/60) as tim_rem_in_min, sofar,totalwork, start_time,units from v$session_longops where time_remaining > 0 order by start_time;
+ 	
+
+select max(trunc(CHECKPOINT_TIME) ) from v$backup_datafile ;
+
+select name,open_mode,log_mode,database_role from v$database;
+
+
+
+select file# || ' , ' from v$datafile where file# not in (select file# from v$backup_datafile where trunc(CHECKPOINT_TIME) ='26-OCT-15');
+
+
+select count(*) from  v$backup_datafile where trunc(CHECKPOINT_TIME) ='26-OCT-15';
+select count(*) from v$datafile;
+
+  
+  select file# || ' , ' from v$datafile where file# not in (select file# from v$backup_datafile where CHECKPOINT_TIME like '%14-DEC-2014 00:00:00%' );
+  select count(*) from  v$backup_datafile where CHECKPOINT_TIME like '%17-DEC-2014%';
+  select count(*) from v$datafile;
+
+ select max(trunc(CHECKPOINT_TIME) ) from v$backup_datafile ;
+
+select file# || ' , ' from v$datafile where file# not in (select file# from v$backup_datafile where CHECKPOINT_TIME like '%19-DEC-14%' );

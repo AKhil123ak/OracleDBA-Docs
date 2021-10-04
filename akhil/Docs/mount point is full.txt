@@ -1,0 +1,932 @@
+
+
+Script /home/oracle/scripts/JFSPROD_DB.sh
+==== ended successfully on Sat Jul 21 07:31:42 IST 2018 ====
+
+oracle@JFSBNKSRV128:/home/oracle/backup_log $ df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           8.00      5.68      2.32   71% /
+/dev/hd2          14.12      7.13      7.00   51% /usr
+/dev/hd9var       17.00      5.46     11.54   33% /var
+/dev/hd3          18.00     10.28      7.72   58% /tmp
+/dev/hd1           7.00      0.24      6.76    4% /home
+/dev/hd11admin      2.00      0.00      2.00    1% /admin
+/proc                 -         -         -    -  /proc
+/dev/hd10opt       7.00      0.71      6.29   11% /opt
+/dev/livedump      0.25      0.00      0.25    1% /var/adm/ras/livedump
+/dev/osbackup_lv     20.00     18.91      1.09   95% /osbackup
+/dev/backup_lv   1000.00    262.80    737.20   27% /backup
+/dev/u01_lv      199.50     67.94    131.56   35% /u01
+172.17.70.35:/nfs_fs   3195.50   2945.82    249.68   93% /nfs_fs
+oracle@JFSBNKSRV128:/home/oracle/backup_log $
+oracle@JFSBNKSRV128:/home/oracle/backup_log $ cd
+oracle@JFSBNKSRV128:/home/oracle $ cd /osbackup
+oracle@JFSBNKSRV128:/osbackup $ ls -lrt
+total 336
+-rw-------    1 root     system       164122 Jan 16 2016  jfststwspapp025_14Jan16.log
+drwxr-xr-x    2 root     system          256 Mar 03 2016  lost+found
+drwxr-xr-x   86 oracle   oinstall       4096 Jul 21 00:26 oracle_backup
+oracle@JFSBNKSRV128:/osbackup $ cd oracle_backup
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ ls -lrt
+total 672
+drwxr-xr-x    2 oracle   oinstall        256 May 13 2016  JFSCBS
+-rwxr-xr-x    1 oracle   oinstall        664 May 23 2016  rmanbackup.sh
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 2016  BCV_SCRIPTS
+drwxrwxr-x    2 oracle   oinstall       4096 Jul 21 2016  PATCH
+drwxr-x---    2 oracle   oinstall       4096 Feb 28 15:12 28_Feb_2018_15:12:52
+drwxr-x---    2 oracle   oinstall       4096 Feb 28 21:37 28_Feb_2018_21:37:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 00:07 31_Mar_2018_00:07:13
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 02:09 31_Mar_2018_02:09:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 22:33 31_Mar_2018_22:33:21
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 00:21 29_Apr_2018_00:21:26
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 21:45 29_Apr_2018_21:45:37
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 00:31 30_Apr_2018_00:31:46
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 21:32 30_Apr_2018_21:32:17
+drwxr-x---    2 oracle   oinstall       4096 May 31 00:42 31_May_2018_00:42:45
+drwxr-x---    2 oracle   oinstall       4096 May 31 22:19 31_May_2018_22:19:07
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 02:58 1_Jun_2018_02:58:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 15:27 1_Jun_2018_15:27:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 23:53 1_Jun_2018_23:53:14
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 00:30 18_Jun_2018_00:30:55
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 23:29 18_Jun_2018_23:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 01:59 19_Jun_2018_01:59:02
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 21:53 19_Jun_2018_21:53:50
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 23:51 19_Jun_2018_23:51:48
+drwxr-x---    2 oracle   oinstall       4096 Jun 20 22:06 20_Jun_2018_22:06:18
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 00:42 21_Jun_2018_00:42:28
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 21:58 21_Jun_2018_21:58:51
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 00:37 22_Jun_2018_00:37:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 23:11 22_Jun_2018_23:11:37
+drwxr-x---    2 oracle   oinstall       4096 Jun 23 01:50 23_Jun_2018_01:50:26
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 03:12 24_Jun_2018_03:12:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 23:34 24_Jun_2018_23:34:43
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 02:04 25_Jun_2018_02:04:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 22:13 25_Jun_2018_22:13:36
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 00:10 26_Jun_2018_00:10:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 22:43 26_Jun_2018_22:43:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 00:56 27_Jun_2018_00:56:17
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 21:57 27_Jun_2018_21:57:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 00:59 28_Jun_2018_00:59:10
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 22:25 28_Jun_2018_22:25:41
+drwxr-x---    2 oracle   oinstall       4096 Jun 29 01:39 29_Jun_2018_01:39:44
+drwxr-x---    2 oracle   oinstall       4096 Jun 30 23:19 30_Jun_2018_23:19:39
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 01:51 1_Jul_2018_01:51:03
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 10:07 1_Jul_2018_10:07:55
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 16:34 1_Jul_2018_16:34:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 02:36 2_Jul_2018_02:36:56
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 08:07 2_Jul_2018_08:07:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 22:42 2_Jul_2018_22:42:52
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 01:56 3_Jul_2018_01:56:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 23:06 3_Jul_2018_23:06:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 01:40 4_Jul_2018_01:40:24
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 23:12 4_Jul_2018_23:12:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 01:34 5_Jul_2018_01:34:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 22:54 5_Jul_2018_22:54:35
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 01:40 6_Jul_2018_01:40:23
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 22:57 6_Jul_2018_22:57:57
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 01:13 7_Jul_2018_01:13:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 20:24 7_Jul_2018_20:24:49
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 22:13 7_Jul_2018_22:13:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 20:07 8_Jul_2018_20:07:12
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 23:41 8_Jul_2018_23:41:20
+drwxr-x---    2 oracle   oinstall       4096 Jul 09 23:09 9_Jul_2018_23:09:33
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 00:59 10_Jul_2018_00:59:34
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 22:49 10_Jul_2018_22:49:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 00:37 11_Jul_2018_00:37:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 23:05 11_Jul_2018_23:05:42
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 01:07 12_Jul_2018_01:07:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 22:34 12_Jul_2018_22:34:36
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 01:29 13_Jul_2018_01:29:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 22:25 13_Jul_2018_22:25:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 01:03 14_Jul_2018_01:03:02
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 22:36 14_Jul_2018_22:36:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 01:13 15_Jul_2018_01:13:30
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 22:01 15_Jul_2018_22:01:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 02:59 16_Jul_2018_02:59:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 22:24 16_Jul_2018_22:24:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 01:20 17_Jul_2018_01:20:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 22:03 17_Jul_2018_22:03:19
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 00:36 18_Jul_2018_00:36:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 22:19 18_Jul_2018_22:19:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 00:33 19_Jul_2018_00:33:37
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 22:29 19_Jul_2018_22:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 00:36 20_Jul_2018_00:36:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 22:14 20_Jul_2018_22:14:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:26 21_Jul_2018_00:26:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:33 BCV_FILES
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ du -sg *
+0.05    10_Jul_2018_00:59:34
+1.73    10_Jul_2018_22:49:48
+0.06    11_Jul_2018_00:37:58
+1.66    11_Jul_2018_23:05:42
+0.06    12_Jul_2018_01:07:53
+0.05    12_Jul_2018_22:34:36
+0.06    13_Jul_2018_01:29:25
+0.04    13_Jul_2018_22:25:40
+0.07    14_Jul_2018_01:03:02
+0.09    14_Jul_2018_22:36:38
+0.05    15_Jul_2018_01:13:30
+0.04    15_Jul_2018_22:01:58
+0.06    16_Jul_2018_02:59:13
+0.04    16_Jul_2018_22:24:50
+0.06    17_Jul_2018_01:20:48
+0.10    17_Jul_2018_22:03:19
+0.04    18_Jul_2018_00:36:53
+0.04    18_Jul_2018_22:19:28
+1.51    18_Jun_2018_00:30:55
+0.16    18_Jun_2018_23:29:46
+0.04    19_Jul_2018_00:33:37
+1.11    19_Jul_2018_22:29:46
+0.05    19_Jun_2018_01:59:02
+1.67    19_Jun_2018_21:53:50
+0.10    19_Jun_2018_23:51:48
+0.06    1_Jul_2018_01:51:03
+0.24    1_Jul_2018_10:07:55
+0.19    1_Jul_2018_16:34:50
+0.04    1_Jun_2018_02:58:24
+0.08    1_Jun_2018_15:27:06
+0.14    1_Jun_2018_23:53:14
+0.05    20_Jul_2018_00:36:54
+1.33    20_Jul_2018_22:14:28
+0.84    20_Jun_2018_22:06:18
+0.15    21_Jul_2018_00:26:25
+0.58    21_Jun_2018_00:42:28
+0.10    21_Jun_2018_21:58:51
+0.05    22_Jun_2018_00:37:06
+0.10    22_Jun_2018_23:11:37
+0.08    23_Jun_2018_01:50:26
+0.07    24_Jun_2018_03:12:30
+0.05    24_Jun_2018_23:34:43
+0.04    25_Jun_2018_02:04:30
+0.04    25_Jun_2018_22:13:36
+0.07    26_Jun_2018_00:10:06
+0.28    26_Jun_2018_22:43:24
+0.06    27_Jun_2018_00:56:17
+0.16    27_Jun_2018_21:57:46
+0.04    28_Feb_2018_15:12:52
+0.12    28_Feb_2018_21:37:53
+0.05    28_Jun_2018_00:59:10
+0.31    28_Jun_2018_22:25:41
+0.09    29_Apr_2018_00:21:26
+0.11    29_Apr_2018_21:45:37
+0.05    29_Jun_2018_01:39:44
+0.04    2_Jul_2018_02:36:56
+0.19    2_Jul_2018_08:07:11
+0.12    2_Jul_2018_22:42:52
+0.04    30_Apr_2018_00:31:46
+0.15    30_Apr_2018_21:32:17
+0.48    30_Jun_2018_23:19:39
+0.04    31_Mar_2018_00:07:13
+0.05    31_Mar_2018_02:09:53
+0.08    31_Mar_2018_22:33:21
+0.04    31_May_2018_00:42:45
+0.18    31_May_2018_22:19:07
+0.05    3_Jul_2018_01:56:54
+0.12    3_Jul_2018_23:06:13
+0.05    4_Jul_2018_01:40:24
+0.10    4_Jul_2018_23:12:40
+0.06    5_Jul_2018_01:34:48
+0.51    5_Jul_2018_22:54:35
+0.04    6_Jul_2018_01:40:23
+0.14    6_Jul_2018_22:57:57
+0.06    7_Jul_2018_01:13:11
+0.08    7_Jul_2018_20:24:49
+0.05    7_Jul_2018_22:13:38
+1.31    8_Jul_2018_20:07:12
+0.06    8_Jul_2018_23:41:20
+0.14    9_Jul_2018_23:09:33
+0.25    BCV_FILES
+0.00    BCV_SCRIPTS
+0.00    JFSCBS
+0.00    PATCH
+0.00    rmanbackup.sh
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ cd
+oracle@JFSBNKSRV128:/home/oracle $ df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           8.00      5.68      2.32   71% /
+/dev/hd2          14.12      7.13      7.00   51% /usr
+/dev/hd9var       17.00      5.46     11.54   33% /var
+/dev/hd3          18.00     10.28      7.72   58% /tmp
+/dev/hd1           7.00      0.24      6.76    4% /home
+/dev/hd11admin      2.00      0.00      2.00    1% /admin
+/proc                 -         -         -    -  /proc
+/dev/hd10opt       7.00      0.71      6.29   11% /opt
+/dev/livedump      0.25      0.00      0.25    1% /var/adm/ras/livedump
+/dev/osbackup_lv     20.00     18.91      1.09   95% /osbackup
+/dev/backup_lv   1000.00    262.80    737.20   27% /backup
+/dev/u01_lv      199.50     67.94    131.56   35% /u01
+172.17.70.35:/nfs_fs   3195.50   2945.82    249.68   93% /nfs_fs
+oracle@JFSBNKSRV128:/home/oracle $ cd /osbackup
+oracle@JFSBNKSRV128:/osbackup $ ls -lrt
+total 336
+-rw-------    1 root     system       164122 Jan 16 2016  jfststwspapp025_14Jan16.log
+drwxr-xr-x    2 root     system          256 Mar 03 2016  lost+found
+drwxr-xr-x   86 oracle   oinstall       4096 Jul 21 00:26 oracle_backup
+oracle@JFSBNKSRV128:/osbackup $ du -sg *
+0.00    jfststwspapp025_14Jan16.log
+0.00    lost+found
+18.91   oracle_backup
+oracle@JFSBNKSRV128:/osbackup $ cd oracle_backup
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ ls -lrt
+total 672
+drwxr-xr-x    2 oracle   oinstall        256 May 13 2016  JFSCBS
+-rwxr-xr-x    1 oracle   oinstall        664 May 23 2016  rmanbackup.sh
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 2016  BCV_SCRIPTS
+drwxrwxr-x    2 oracle   oinstall       4096 Jul 21 2016  PATCH
+drwxr-x---    2 oracle   oinstall       4096 Feb 28 15:12 28_Feb_2018_15:12:52
+drwxr-x---    2 oracle   oinstall       4096 Feb 28 21:37 28_Feb_2018_21:37:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 00:07 31_Mar_2018_00:07:13
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 02:09 31_Mar_2018_02:09:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 22:33 31_Mar_2018_22:33:21
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 00:21 29_Apr_2018_00:21:26
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 21:45 29_Apr_2018_21:45:37
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 00:31 30_Apr_2018_00:31:46
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 21:32 30_Apr_2018_21:32:17
+drwxr-x---    2 oracle   oinstall       4096 May 31 00:42 31_May_2018_00:42:45
+drwxr-x---    2 oracle   oinstall       4096 May 31 22:19 31_May_2018_22:19:07
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 02:58 1_Jun_2018_02:58:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 15:27 1_Jun_2018_15:27:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 23:53 1_Jun_2018_23:53:14
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 00:30 18_Jun_2018_00:30:55
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 23:29 18_Jun_2018_23:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 01:59 19_Jun_2018_01:59:02
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 21:53 19_Jun_2018_21:53:50
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 23:51 19_Jun_2018_23:51:48
+drwxr-x---    2 oracle   oinstall       4096 Jun 20 22:06 20_Jun_2018_22:06:18
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 00:42 21_Jun_2018_00:42:28
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 21:58 21_Jun_2018_21:58:51
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 00:37 22_Jun_2018_00:37:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 23:11 22_Jun_2018_23:11:37
+drwxr-x---    2 oracle   oinstall       4096 Jun 23 01:50 23_Jun_2018_01:50:26
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 03:12 24_Jun_2018_03:12:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 23:34 24_Jun_2018_23:34:43
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 02:04 25_Jun_2018_02:04:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 22:13 25_Jun_2018_22:13:36
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 00:10 26_Jun_2018_00:10:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 22:43 26_Jun_2018_22:43:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 00:56 27_Jun_2018_00:56:17
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 21:57 27_Jun_2018_21:57:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 00:59 28_Jun_2018_00:59:10
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 22:25 28_Jun_2018_22:25:41
+drwxr-x---    2 oracle   oinstall       4096 Jun 29 01:39 29_Jun_2018_01:39:44
+drwxr-x---    2 oracle   oinstall       4096 Jun 30 23:19 30_Jun_2018_23:19:39
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 01:51 1_Jul_2018_01:51:03
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 10:07 1_Jul_2018_10:07:55
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 16:34 1_Jul_2018_16:34:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 02:36 2_Jul_2018_02:36:56
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 08:07 2_Jul_2018_08:07:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 22:42 2_Jul_2018_22:42:52
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 01:56 3_Jul_2018_01:56:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 23:06 3_Jul_2018_23:06:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 01:40 4_Jul_2018_01:40:24
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 23:12 4_Jul_2018_23:12:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 01:34 5_Jul_2018_01:34:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 22:54 5_Jul_2018_22:54:35
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 01:40 6_Jul_2018_01:40:23
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 22:57 6_Jul_2018_22:57:57
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 01:13 7_Jul_2018_01:13:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 20:24 7_Jul_2018_20:24:49
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 22:13 7_Jul_2018_22:13:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 20:07 8_Jul_2018_20:07:12
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 23:41 8_Jul_2018_23:41:20
+drwxr-x---    2 oracle   oinstall       4096 Jul 09 23:09 9_Jul_2018_23:09:33
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 00:59 10_Jul_2018_00:59:34
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 22:49 10_Jul_2018_22:49:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 00:37 11_Jul_2018_00:37:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 23:05 11_Jul_2018_23:05:42
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 01:07 12_Jul_2018_01:07:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 22:34 12_Jul_2018_22:34:36
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 01:29 13_Jul_2018_01:29:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 22:25 13_Jul_2018_22:25:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 01:03 14_Jul_2018_01:03:02
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 22:36 14_Jul_2018_22:36:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 01:13 15_Jul_2018_01:13:30
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 22:01 15_Jul_2018_22:01:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 02:59 16_Jul_2018_02:59:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 22:24 16_Jul_2018_22:24:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 01:20 17_Jul_2018_01:20:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 22:03 17_Jul_2018_22:03:19
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 00:36 18_Jul_2018_00:36:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 22:19 18_Jul_2018_22:19:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 00:33 19_Jul_2018_00:33:37
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 22:29 19_Jul_2018_22:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 00:36 20_Jul_2018_00:36:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 22:14 20_Jul_2018_22:14:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:26 21_Jul_2018_00:26:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:33 BCV_FILES
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ du -sg *
+0.05    10_Jul_2018_00:59:34
+1.73    10_Jul_2018_22:49:48
+0.06    11_Jul_2018_00:37:58
+1.66    11_Jul_2018_23:05:42
+0.06    12_Jul_2018_01:07:53
+0.05    12_Jul_2018_22:34:36
+0.06    13_Jul_2018_01:29:25
+0.04    13_Jul_2018_22:25:40
+0.07    14_Jul_2018_01:03:02
+0.09    14_Jul_2018_22:36:38
+0.05    15_Jul_2018_01:13:30
+0.04    15_Jul_2018_22:01:58
+0.06    16_Jul_2018_02:59:13
+0.04    16_Jul_2018_22:24:50
+0.06    17_Jul_2018_01:20:48
+0.10    17_Jul_2018_22:03:19
+0.04    18_Jul_2018_00:36:53
+0.04    18_Jul_2018_22:19:28
+1.51    18_Jun_2018_00:30:55
+0.16    18_Jun_2018_23:29:46
+0.04    19_Jul_2018_00:33:37
+1.11    19_Jul_2018_22:29:46
+0.05    19_Jun_2018_01:59:02
+1.67    19_Jun_2018_21:53:50
+0.10    19_Jun_2018_23:51:48
+0.06    1_Jul_2018_01:51:03
+0.24    1_Jul_2018_10:07:55
+0.19    1_Jul_2018_16:34:50
+0.04    1_Jun_2018_02:58:24
+0.08    1_Jun_2018_15:27:06
+0.14    1_Jun_2018_23:53:14
+0.05    20_Jul_2018_00:36:54
+1.33    20_Jul_2018_22:14:28
+0.84    20_Jun_2018_22:06:18
+0.15    21_Jul_2018_00:26:25
+0.58    21_Jun_2018_00:42:28
+0.10    21_Jun_2018_21:58:51
+0.05    22_Jun_2018_00:37:06
+0.10    22_Jun_2018_23:11:37
+0.08    23_Jun_2018_01:50:26
+0.07    24_Jun_2018_03:12:30
+0.05    24_Jun_2018_23:34:43
+0.04    25_Jun_2018_02:04:30
+0.04    25_Jun_2018_22:13:36
+0.07    26_Jun_2018_00:10:06
+0.28    26_Jun_2018_22:43:24
+0.06    27_Jun_2018_00:56:17
+0.16    27_Jun_2018_21:57:46
+0.04    28_Feb_2018_15:12:52
+0.12    28_Feb_2018_21:37:53
+0.05    28_Jun_2018_00:59:10
+0.31    28_Jun_2018_22:25:41
+0.09    29_Apr_2018_00:21:26
+0.11    29_Apr_2018_21:45:37
+0.05    29_Jun_2018_01:39:44
+0.04    2_Jul_2018_02:36:56
+0.19    2_Jul_2018_08:07:11
+0.12    2_Jul_2018_22:42:52
+0.04    30_Apr_2018_00:31:46
+0.15    30_Apr_2018_21:32:17
+0.48    30_Jun_2018_23:19:39
+0.04    31_Mar_2018_00:07:13
+0.05    31_Mar_2018_02:09:53
+0.08    31_Mar_2018_22:33:21
+0.04    31_May_2018_00:42:45
+0.18    31_May_2018_22:19:07
+0.05    3_Jul_2018_01:56:54
+0.12    3_Jul_2018_23:06:13
+0.05    4_Jul_2018_01:40:24
+0.10    4_Jul_2018_23:12:40
+0.06    5_Jul_2018_01:34:48
+0.51    5_Jul_2018_22:54:35
+0.04    6_Jul_2018_01:40:23
+0.14    6_Jul_2018_22:57:57
+0.06    7_Jul_2018_01:13:11
+0.08    7_Jul_2018_20:24:49
+0.05    7_Jul_2018_22:13:38
+1.31    8_Jul_2018_20:07:12
+0.06    8_Jul_2018_23:41:20
+0.14    9_Jul_2018_23:09:33
+0.25    BCV_FILES
+0.00    BCV_SCRIPTS
+0.00    JFSCBS
+0.00    PATCH
+0.00    rmanbackup.sh
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ cd
+oracle@JFSBNKSRV128:/home/oracle $ df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           8.00      5.68      2.32   71% /
+/dev/hd2          14.12      7.13      7.00   51% /usr
+/dev/hd9var       17.00      5.46     11.54   33% /var
+/dev/hd3          18.00     10.28      7.72   58% /tmp
+/dev/hd1           7.00      0.24      6.76    4% /home
+/dev/hd11admin      2.00      0.00      2.00    1% /admin
+/proc                 -         -         -    -  /proc
+/dev/hd10opt       7.00      0.71      6.29   11% /opt
+/dev/livedump      0.25      0.00      0.25    1% /var/adm/ras/livedump
+/dev/osbackup_lv     20.00     18.91      1.09   95% /osbackup
+/dev/backup_lv   1000.00    262.80    737.20   27% /backup
+/dev/u01_lv      199.50     67.94    131.56   35% /u01
+172.17.70.35:/nfs_fs   3195.50   2945.82    249.68   93% /nfs_fs
+oracle@JFSBNKSRV128:/home/oracle $ cd /osbackup
+oracle@JFSBNKSRV128:/osbackup $ ls - lrt
+ls: 0653-341 The file - does not exist.
+ls: 0653-341 The file lrt does not exist.
+oracle@JFSBNKSRV128:/osbackup $ ls -lrt
+total 336
+-rw-------    1 root     system       164122 Jan 16 2016  jfststwspapp025_14Jan16.log
+drwxr-xr-x    2 root     system          256 Mar 03 2016  lost+found
+drwxr-xr-x   86 oracle   oinstall       4096 Jul 21 00:26 oracle_backup
+oracle@JFSBNKSRV128:/osbackup $ cd oracle_backup
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ ls -lrt
+total 672
+drwxr-xr-x    2 oracle   oinstall        256 May 13 2016  JFSCBS
+-rwxr-xr-x    1 oracle   oinstall        664 May 23 2016  rmanbackup.sh
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 2016  BCV_SCRIPTS
+drwxrwxr-x    2 oracle   oinstall       4096 Jul 21 2016  PATCH
+drwxr-x---    2 oracle   oinstall       4096 Feb 28 15:12 28_Feb_2018_15:12:52
+drwxr-x---    2 oracle   oinstall       4096 Feb 28 21:37 28_Feb_2018_21:37:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 00:07 31_Mar_2018_00:07:13
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 02:09 31_Mar_2018_02:09:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 22:33 31_Mar_2018_22:33:21
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 00:21 29_Apr_2018_00:21:26
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 21:45 29_Apr_2018_21:45:37
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 00:31 30_Apr_2018_00:31:46
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 21:32 30_Apr_2018_21:32:17
+drwxr-x---    2 oracle   oinstall       4096 May 31 00:42 31_May_2018_00:42:45
+drwxr-x---    2 oracle   oinstall       4096 May 31 22:19 31_May_2018_22:19:07
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 02:58 1_Jun_2018_02:58:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 15:27 1_Jun_2018_15:27:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 23:53 1_Jun_2018_23:53:14
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 00:30 18_Jun_2018_00:30:55
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 23:29 18_Jun_2018_23:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 01:59 19_Jun_2018_01:59:02
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 21:53 19_Jun_2018_21:53:50
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 23:51 19_Jun_2018_23:51:48
+drwxr-x---    2 oracle   oinstall       4096 Jun 20 22:06 20_Jun_2018_22:06:18
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 00:42 21_Jun_2018_00:42:28
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 21:58 21_Jun_2018_21:58:51
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 00:37 22_Jun_2018_00:37:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 23:11 22_Jun_2018_23:11:37
+drwxr-x---    2 oracle   oinstall       4096 Jun 23 01:50 23_Jun_2018_01:50:26
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 03:12 24_Jun_2018_03:12:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 23:34 24_Jun_2018_23:34:43
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 02:04 25_Jun_2018_02:04:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 22:13 25_Jun_2018_22:13:36
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 00:10 26_Jun_2018_00:10:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 22:43 26_Jun_2018_22:43:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 00:56 27_Jun_2018_00:56:17
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 21:57 27_Jun_2018_21:57:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 00:59 28_Jun_2018_00:59:10
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 22:25 28_Jun_2018_22:25:41
+drwxr-x---    2 oracle   oinstall       4096 Jun 29 01:39 29_Jun_2018_01:39:44
+drwxr-x---    2 oracle   oinstall       4096 Jun 30 23:19 30_Jun_2018_23:19:39
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 01:51 1_Jul_2018_01:51:03
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 10:07 1_Jul_2018_10:07:55
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 16:34 1_Jul_2018_16:34:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 02:36 2_Jul_2018_02:36:56
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 08:07 2_Jul_2018_08:07:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 22:42 2_Jul_2018_22:42:52
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 01:56 3_Jul_2018_01:56:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 23:06 3_Jul_2018_23:06:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 01:40 4_Jul_2018_01:40:24
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 23:12 4_Jul_2018_23:12:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 01:34 5_Jul_2018_01:34:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 22:54 5_Jul_2018_22:54:35
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 01:40 6_Jul_2018_01:40:23
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 22:57 6_Jul_2018_22:57:57
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 01:13 7_Jul_2018_01:13:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 20:24 7_Jul_2018_20:24:49
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 22:13 7_Jul_2018_22:13:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 20:07 8_Jul_2018_20:07:12
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 23:41 8_Jul_2018_23:41:20
+drwxr-x---    2 oracle   oinstall       4096 Jul 09 23:09 9_Jul_2018_23:09:33
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 00:59 10_Jul_2018_00:59:34
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 22:49 10_Jul_2018_22:49:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 00:37 11_Jul_2018_00:37:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 23:05 11_Jul_2018_23:05:42
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 01:07 12_Jul_2018_01:07:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 22:34 12_Jul_2018_22:34:36
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 01:29 13_Jul_2018_01:29:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 22:25 13_Jul_2018_22:25:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 01:03 14_Jul_2018_01:03:02
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 22:36 14_Jul_2018_22:36:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 01:13 15_Jul_2018_01:13:30
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 22:01 15_Jul_2018_22:01:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 02:59 16_Jul_2018_02:59:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 22:24 16_Jul_2018_22:24:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 01:20 17_Jul_2018_01:20:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 22:03 17_Jul_2018_22:03:19
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 00:36 18_Jul_2018_00:36:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 22:19 18_Jul_2018_22:19:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 00:33 19_Jul_2018_00:33:37
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 22:29 19_Jul_2018_22:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 00:36 20_Jul_2018_00:36:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 22:14 20_Jul_2018_22:14:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:26 21_Jul_2018_00:26:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:33 BCV_FILES
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ cd 28_Feb_2018_15:12:52
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/28_Feb_2018_15:12:52 $ ls -lrt
+total 88136
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_168085_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_168084_909004191.dbf
+-rw-r-----    1 oracle   oinstall    4836864 Feb 24 00:55 1_168083_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_168089_909004191.dbf
+-rw-r-----    1 oracle   oinstall      59392 Feb 24 00:55 1_168088_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_168087_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_168086_909004191.dbf
+-rw-r-----    1 oracle   oinstall         82 Feb 24 00:55 begin_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_20387_913667695.dbf
+-rw-r-----    1 oracle   oinstall    2750976 Feb 24 00:55 1_20386_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_20392_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_20391_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_20390_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:55 1_20389_913667695.dbf
+-rw-r-----    1 oracle   oinstall       2048 Feb 24 00:55 1_20388_913667695.dbf
+-rw-r-----    1 oracle   oinstall         82 Feb 24 00:55 begin_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall        245 Feb 24 00:57 end_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall   27115520 Feb 24 00:57 JFSPPROD_BCV_STDCtl.ctl
+-rw-r-----    1 oracle   oinstall       5632 Feb 24 00:57 1_168092_909004191.dbf
+-rw-r-----    1 oracle   oinstall      18944 Feb 24 00:57 1_168091_909004191.dbf
+-rw-r-----    1 oracle   oinstall    2092032 Feb 24 00:57 1_168090_909004191.dbf
+-rw-r-----    1 oracle   oinstall    8110080 Feb 24 00:57 JFSBIP_BCV_STDCtl.ctl
+-rw-r-----    1 oracle   oinstall       1024 Feb 24 00:57 1_20394_913667695.dbf
+-rw-r-----    1 oracle   oinstall      32256 Feb 24 00:57 1_20393_913667695.dbf
+-rw-r-----    1 oracle   oinstall        245 Feb 24 00:57 end_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall       1536 Feb 24 00:57 1_20395_913667695.dbf
+-rw-r-----    1 oracle   oinstall       7793 Feb 24 01:00 JFSPPROD_BCV_24-02-18.log
+-rw-r-----    1 oracle   oinstall       7580 Feb 24 01:00 JFSBIP_BCV_24-02-18.log
+-rw-r-----    1 oracle   oinstall        245 Feb 24 01:02 RO_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall        245 Feb 24 01:03 RO_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall          0 Feb 28 15:12 1
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/28_Feb_2018_15:12:52 $ cd ..
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ rm -rf  28_Feb_2018_15:12:52
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ ls -lrt
+total 664
+drwxr-xr-x    2 oracle   oinstall        256 May 13 2016  JFSCBS
+-rwxr-xr-x    1 oracle   oinstall        664 May 23 2016  rmanbackup.sh
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 2016  BCV_SCRIPTS
+drwxrwxr-x    2 oracle   oinstall       4096 Jul 21 2016  PATCH
+drwxr-x---    2 oracle   oinstall       4096 Feb 28 21:37 28_Feb_2018_21:37:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 00:07 31_Mar_2018_00:07:13
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 02:09 31_Mar_2018_02:09:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 22:33 31_Mar_2018_22:33:21
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 00:21 29_Apr_2018_00:21:26
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 21:45 29_Apr_2018_21:45:37
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 00:31 30_Apr_2018_00:31:46
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 21:32 30_Apr_2018_21:32:17
+drwxr-x---    2 oracle   oinstall       4096 May 31 00:42 31_May_2018_00:42:45
+drwxr-x---    2 oracle   oinstall       4096 May 31 22:19 31_May_2018_22:19:07
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 02:58 1_Jun_2018_02:58:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 15:27 1_Jun_2018_15:27:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 23:53 1_Jun_2018_23:53:14
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 00:30 18_Jun_2018_00:30:55
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 23:29 18_Jun_2018_23:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 01:59 19_Jun_2018_01:59:02
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 21:53 19_Jun_2018_21:53:50
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 23:51 19_Jun_2018_23:51:48
+drwxr-x---    2 oracle   oinstall       4096 Jun 20 22:06 20_Jun_2018_22:06:18
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 00:42 21_Jun_2018_00:42:28
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 21:58 21_Jun_2018_21:58:51
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 00:37 22_Jun_2018_00:37:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 23:11 22_Jun_2018_23:11:37
+drwxr-x---    2 oracle   oinstall       4096 Jun 23 01:50 23_Jun_2018_01:50:26
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 03:12 24_Jun_2018_03:12:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 23:34 24_Jun_2018_23:34:43
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 02:04 25_Jun_2018_02:04:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 22:13 25_Jun_2018_22:13:36
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 00:10 26_Jun_2018_00:10:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 22:43 26_Jun_2018_22:43:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 00:56 27_Jun_2018_00:56:17
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 21:57 27_Jun_2018_21:57:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 00:59 28_Jun_2018_00:59:10
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 22:25 28_Jun_2018_22:25:41
+drwxr-x---    2 oracle   oinstall       4096 Jun 29 01:39 29_Jun_2018_01:39:44
+drwxr-x---    2 oracle   oinstall       4096 Jun 30 23:19 30_Jun_2018_23:19:39
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 01:51 1_Jul_2018_01:51:03
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 10:07 1_Jul_2018_10:07:55
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 16:34 1_Jul_2018_16:34:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 02:36 2_Jul_2018_02:36:56
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 08:07 2_Jul_2018_08:07:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 22:42 2_Jul_2018_22:42:52
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 01:56 3_Jul_2018_01:56:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 23:06 3_Jul_2018_23:06:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 01:40 4_Jul_2018_01:40:24
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 23:12 4_Jul_2018_23:12:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 01:34 5_Jul_2018_01:34:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 22:54 5_Jul_2018_22:54:35
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 01:40 6_Jul_2018_01:40:23
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 22:57 6_Jul_2018_22:57:57
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 01:13 7_Jul_2018_01:13:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 20:24 7_Jul_2018_20:24:49
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 22:13 7_Jul_2018_22:13:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 20:07 8_Jul_2018_20:07:12
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 23:41 8_Jul_2018_23:41:20
+drwxr-x---    2 oracle   oinstall       4096 Jul 09 23:09 9_Jul_2018_23:09:33
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 00:59 10_Jul_2018_00:59:34
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 22:49 10_Jul_2018_22:49:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 00:37 11_Jul_2018_00:37:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 23:05 11_Jul_2018_23:05:42
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 01:07 12_Jul_2018_01:07:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 22:34 12_Jul_2018_22:34:36
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 01:29 13_Jul_2018_01:29:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 22:25 13_Jul_2018_22:25:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 01:03 14_Jul_2018_01:03:02
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 22:36 14_Jul_2018_22:36:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 01:13 15_Jul_2018_01:13:30
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 22:01 15_Jul_2018_22:01:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 02:59 16_Jul_2018_02:59:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 22:24 16_Jul_2018_22:24:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 01:20 17_Jul_2018_01:20:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 22:03 17_Jul_2018_22:03:19
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 00:36 18_Jul_2018_00:36:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 22:19 18_Jul_2018_22:19:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 00:33 19_Jul_2018_00:33:37
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 22:29 19_Jul_2018_22:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 00:36 20_Jul_2018_00:36:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 22:14 20_Jul_2018_22:14:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:26 21_Jul_2018_00:26:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:33 BCV_FILES
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ cd 28_Feb_2018_21:37:53
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/28_Feb_2018_21:37:53 $ ls -lrt
+total 248936
+-rw-r-----    1 oracle   oinstall       2048 Feb 28 15:18 1_168448_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_168447_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_168446_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_168445_909004191.dbf
+-rw-r-----    1 oracle   oinstall   46055936 Feb 28 15:18 1_168444_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_168450_909004191.dbf
+-rw-r-----    1 oracle   oinstall     349696 Feb 28 15:18 1_168449_909004191.dbf
+-rw-r-----    1 oracle   oinstall         82 Feb 28 15:18 begin_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20470_913667695.dbf
+-rw-r-----    1 oracle   oinstall       2048 Feb 28 15:18 1_20469_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20468_913667695.dbf
+-rw-r-----    1 oracle   oinstall    3453440 Feb 28 15:18 1_20467_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20472_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20471_913667695.dbf
+-rw-r-----    1 oracle   oinstall         82 Feb 28 15:18 begin_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20473_913667695.dbf
+-rw-r-----    1 oracle   oinstall        245 Feb 28 15:19 end_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall   27115520 Feb 28 15:19 JFSPPROD_BCV_STDCtl.ctl
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:19 1_168453_909004191.dbf
+-rw-r-----    1 oracle   oinstall      11264 Feb 28 15:19 1_168452_909004191.dbf
+-rw-r-----    1 oracle   oinstall   42178560 Feb 28 15:19 1_168451_909004191.dbf
+-rw-r-----    1 oracle   oinstall        245 Feb 28 15:19 end_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall    8110080 Feb 28 15:19 JFSBIP_BCV_STDCtl.ctl
+-rw-r-----    1 oracle   oinstall       1536 Feb 28 15:19 1_20476_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:19 1_20475_913667695.dbf
+-rw-r-----    1 oracle   oinstall      67584 Feb 28 15:19 1_20474_913667695.dbf
+-rw-r-----    1 oracle   oinstall       7441 Feb 28 15:21 JFSPPROD_BCV_28-02-18.log
+-rw-r-----    1 oracle   oinstall       7580 Feb 28 15:21 JFSBIP_BCV_28-02-18.log
+-rw-r-----    1 oracle   oinstall        245 Feb 28 15:23 RO_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall        245 Feb 28 15:24 RO_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall          0 Feb 28 21:37 1
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/28_Feb_2018_21:37:53 $ rm -rf 28_Feb_2018_21:37:53
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/28_Feb_2018_21:37:53 $ ls -lrt
+total 248936
+-rw-r-----    1 oracle   oinstall       2048 Feb 28 15:18 1_168448_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_168447_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_168446_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_168445_909004191.dbf
+-rw-r-----    1 oracle   oinstall   46055936 Feb 28 15:18 1_168444_909004191.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_168450_909004191.dbf
+-rw-r-----    1 oracle   oinstall     349696 Feb 28 15:18 1_168449_909004191.dbf
+-rw-r-----    1 oracle   oinstall         82 Feb 28 15:18 begin_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20470_913667695.dbf
+-rw-r-----    1 oracle   oinstall       2048 Feb 28 15:18 1_20469_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20468_913667695.dbf
+-rw-r-----    1 oracle   oinstall    3453440 Feb 28 15:18 1_20467_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20472_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20471_913667695.dbf
+-rw-r-----    1 oracle   oinstall         82 Feb 28 15:18 begin_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:18 1_20473_913667695.dbf
+-rw-r-----    1 oracle   oinstall        245 Feb 28 15:19 end_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall   27115520 Feb 28 15:19 JFSPPROD_BCV_STDCtl.ctl
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:19 1_168453_909004191.dbf
+-rw-r-----    1 oracle   oinstall      11264 Feb 28 15:19 1_168452_909004191.dbf
+-rw-r-----    1 oracle   oinstall   42178560 Feb 28 15:19 1_168451_909004191.dbf
+-rw-r-----    1 oracle   oinstall        245 Feb 28 15:19 end_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall    8110080 Feb 28 15:19 JFSBIP_BCV_STDCtl.ctl
+-rw-r-----    1 oracle   oinstall       1536 Feb 28 15:19 1_20476_913667695.dbf
+-rw-r-----    1 oracle   oinstall       1024 Feb 28 15:19 1_20475_913667695.dbf
+-rw-r-----    1 oracle   oinstall      67584 Feb 28 15:19 1_20474_913667695.dbf
+-rw-r-----    1 oracle   oinstall       7441 Feb 28 15:21 JFSPPROD_BCV_28-02-18.log
+-rw-r-----    1 oracle   oinstall       7580 Feb 28 15:21 JFSBIP_BCV_28-02-18.log
+-rw-r-----    1 oracle   oinstall        245 Feb 28 15:23 RO_status_JFSPPROD.txt
+-rw-r-----    1 oracle   oinstall        245 Feb 28 15:24 RO_status_JFSBIP.txt
+-rw-r-----    1 oracle   oinstall          0 Feb 28 21:37 1
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/28_Feb_2018_21:37:53 $ cd ..
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ ls -lrt
+total 664
+drwxr-xr-x    2 oracle   oinstall        256 May 13 2016  JFSCBS
+-rwxr-xr-x    1 oracle   oinstall        664 May 23 2016  rmanbackup.sh
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 2016  BCV_SCRIPTS
+drwxrwxr-x    2 oracle   oinstall       4096 Jul 21 2016  PATCH
+drwxr-x---    2 oracle   oinstall       4096 Feb 28 21:37 28_Feb_2018_21:37:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 00:07 31_Mar_2018_00:07:13
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 02:09 31_Mar_2018_02:09:53
+drwxr-x---    2 oracle   oinstall       4096 Mar 31 22:33 31_Mar_2018_22:33:21
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 00:21 29_Apr_2018_00:21:26
+drwxr-x---    2 oracle   oinstall       4096 Apr 29 21:45 29_Apr_2018_21:45:37
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 00:31 30_Apr_2018_00:31:46
+drwxr-x---    2 oracle   oinstall       4096 Apr 30 21:32 30_Apr_2018_21:32:17
+drwxr-x---    2 oracle   oinstall       4096 May 31 00:42 31_May_2018_00:42:45
+drwxr-x---    2 oracle   oinstall       4096 May 31 22:19 31_May_2018_22:19:07
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 02:58 1_Jun_2018_02:58:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 15:27 1_Jun_2018_15:27:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 01 23:53 1_Jun_2018_23:53:14
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 00:30 18_Jun_2018_00:30:55
+drwxr-x---    2 oracle   oinstall       4096 Jun 18 23:29 18_Jun_2018_23:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 01:59 19_Jun_2018_01:59:02
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 21:53 19_Jun_2018_21:53:50
+drwxr-x---    2 oracle   oinstall       4096 Jun 19 23:51 19_Jun_2018_23:51:48
+drwxr-x---    2 oracle   oinstall       4096 Jun 20 22:06 20_Jun_2018_22:06:18
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 00:42 21_Jun_2018_00:42:28
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 21:58 21_Jun_2018_21:58:51
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 00:37 22_Jun_2018_00:37:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 23:11 22_Jun_2018_23:11:37
+drwxr-x---    2 oracle   oinstall       4096 Jun 23 01:50 23_Jun_2018_01:50:26
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 03:12 24_Jun_2018_03:12:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 23:34 24_Jun_2018_23:34:43
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 02:04 25_Jun_2018_02:04:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 22:13 25_Jun_2018_22:13:36
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 00:10 26_Jun_2018_00:10:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 22:43 26_Jun_2018_22:43:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 00:56 27_Jun_2018_00:56:17
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 21:57 27_Jun_2018_21:57:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 00:59 28_Jun_2018_00:59:10
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 22:25 28_Jun_2018_22:25:41
+drwxr-x---    2 oracle   oinstall       4096 Jun 29 01:39 29_Jun_2018_01:39:44
+drwxr-x---    2 oracle   oinstall       4096 Jun 30 23:19 30_Jun_2018_23:19:39
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 01:51 1_Jul_2018_01:51:03
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 10:07 1_Jul_2018_10:07:55
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 16:34 1_Jul_2018_16:34:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 02:36 2_Jul_2018_02:36:56
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 08:07 2_Jul_2018_08:07:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 22:42 2_Jul_2018_22:42:52
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 01:56 3_Jul_2018_01:56:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 23:06 3_Jul_2018_23:06:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 01:40 4_Jul_2018_01:40:24
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 23:12 4_Jul_2018_23:12:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 01:34 5_Jul_2018_01:34:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 22:54 5_Jul_2018_22:54:35
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 01:40 6_Jul_2018_01:40:23
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 22:57 6_Jul_2018_22:57:57
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 01:13 7_Jul_2018_01:13:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 20:24 7_Jul_2018_20:24:49
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 22:13 7_Jul_2018_22:13:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 20:07 8_Jul_2018_20:07:12
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 23:41 8_Jul_2018_23:41:20
+drwxr-x---    2 oracle   oinstall       4096 Jul 09 23:09 9_Jul_2018_23:09:33
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 00:59 10_Jul_2018_00:59:34
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 22:49 10_Jul_2018_22:49:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 00:37 11_Jul_2018_00:37:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 23:05 11_Jul_2018_23:05:42
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 01:07 12_Jul_2018_01:07:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 22:34 12_Jul_2018_22:34:36
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 01:29 13_Jul_2018_01:29:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 22:25 13_Jul_2018_22:25:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 01:03 14_Jul_2018_01:03:02
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 22:36 14_Jul_2018_22:36:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 01:13 15_Jul_2018_01:13:30
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 22:01 15_Jul_2018_22:01:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 02:59 16_Jul_2018_02:59:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 22:24 16_Jul_2018_22:24:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 01:20 17_Jul_2018_01:20:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 22:03 17_Jul_2018_22:03:19
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 00:36 18_Jul_2018_00:36:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 22:19 18_Jul_2018_22:19:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 00:33 19_Jul_2018_00:33:37
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 22:29 19_Jul_2018_22:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 00:36 20_Jul_2018_00:36:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 22:14 20_Jul_2018_22:14:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:26 21_Jul_2018_00:26:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:33 BCV_FILES
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ find /osbackup/oracle_backup -name -type d -mtime +30 -print
+find: 0652-009 There is a missing conjunction
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $  find /osbackup/oracle_backup -type d -mtime +30 -print
+/osbackup/oracle_backup/18_Jun_2018_00:30:55
+/osbackup/oracle_backup/18_Jun_2018_23:29:46
+/osbackup/oracle_backup/19_Jun_2018_01:59:02
+/osbackup/oracle_backup/19_Jun_2018_21:53:50
+/osbackup/oracle_backup/19_Jun_2018_23:51:48
+/osbackup/oracle_backup/1_Jun_2018_02:58:24
+/osbackup/oracle_backup/1_Jun_2018_15:27:06
+/osbackup/oracle_backup/1_Jun_2018_23:53:14
+/osbackup/oracle_backup/20_Jun_2018_22:06:18
+/osbackup/oracle_backup/21_Jun_2018_00:42:28
+/osbackup/oracle_backup/28_Feb_2018_21:37:53
+/osbackup/oracle_backup/29_Apr_2018_00:21:26
+/osbackup/oracle_backup/29_Apr_2018_21:45:37
+/osbackup/oracle_backup/30_Apr_2018_00:31:46
+/osbackup/oracle_backup/30_Apr_2018_21:32:17
+/osbackup/oracle_backup/31_Mar_2018_00:07:13
+/osbackup/oracle_backup/31_Mar_2018_02:09:53
+/osbackup/oracle_backup/31_Mar_2018_22:33:21
+/osbackup/oracle_backup/31_May_2018_00:42:45
+/osbackup/oracle_backup/31_May_2018_22:19:07
+/osbackup/oracle_backup/BCV_SCRIPTS
+/osbackup/oracle_backup/JFSCBS
+/osbackup/oracle_backup/PATCH
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ find /osbackup/oracle_backup -name "*_2018_*" -type d -mtime +30 -print
+/osbackup/oracle_backup/18_Jun_2018_00:30:55
+/osbackup/oracle_backup/18_Jun_2018_23:29:46
+/osbackup/oracle_backup/19_Jun_2018_01:59:02
+/osbackup/oracle_backup/19_Jun_2018_21:53:50
+/osbackup/oracle_backup/19_Jun_2018_23:51:48
+/osbackup/oracle_backup/1_Jun_2018_02:58:24
+/osbackup/oracle_backup/1_Jun_2018_15:27:06
+/osbackup/oracle_backup/1_Jun_2018_23:53:14
+/osbackup/oracle_backup/20_Jun_2018_22:06:18
+/osbackup/oracle_backup/21_Jun_2018_00:42:28
+/osbackup/oracle_backup/28_Feb_2018_21:37:53
+/osbackup/oracle_backup/29_Apr_2018_00:21:26
+/osbackup/oracle_backup/29_Apr_2018_21:45:37
+/osbackup/oracle_backup/30_Apr_2018_00:31:46
+/osbackup/oracle_backup/30_Apr_2018_21:32:17
+/osbackup/oracle_backup/31_Mar_2018_00:07:13
+/osbackup/oracle_backup/31_Mar_2018_02:09:53
+/osbackup/oracle_backup/31_Mar_2018_22:33:21
+/osbackup/oracle_backup/31_May_2018_00:42:45
+/osbackup/oracle_backup/31_May_2018_22:19:07
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ find /osbackup/oracle_backup -name "*_2018_*" -type d -mtime +30 -delete
+find: 0652-017 -delete is not a valid option.
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ rm -rf 18_Jun_2018_00:30:55
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ rm -rf 18_Jun_2018_23:29:46
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ rm -rf 19_Jun_2018_01:59:02
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ rm -rf 19_Jun_2018_21:53:50 19_Jun_2018_23:51:48 1_Jun_2018_02:58:24 1_Jun_2018_15:27:06 1_Jun_2018_23:53:14
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ ar_2018_02:09:53 31_Mar_2018_22:33:21 31_May_2018_00:42:45 31_May_2018_22:19:07                                        <
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $  find /osbackup/oracle_backup -name "*_2018_*" -type d -mtime +30 -print
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           8.00      5.68      2.32   71% /
+/dev/hd2          14.12      7.13      7.00   51% /usr
+/dev/hd9var       17.00      5.46     11.54   33% /var
+/dev/hd3          18.00     10.28      7.72   58% /tmp
+/dev/hd1           7.00      0.24      6.76    4% /home
+/dev/hd11admin      2.00      0.00      2.00    1% /admin
+/proc                 -         -         -    -  /proc
+/dev/hd10opt       7.00      0.71      6.29   11% /opt
+/dev/livedump      0.25      0.00      0.25    1% /var/adm/ras/livedump
+/dev/osbackup_lv     20.00     12.80      7.20   65% /osbackup
+/dev/backup_lv   1000.00    262.80    737.20   27% /backup
+/dev/u01_lv      199.50     67.93    131.57   35% /u01
+172.17.70.35:/nfs_fs   3195.50   2945.82    249.68   93% /nfs_fs
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $ ls -lrt
+total 504
+drwxr-xr-x    2 oracle   oinstall        256 May 13 2016  JFSCBS
+-rwxr-xr-x    1 oracle   oinstall        664 May 23 2016  rmanbackup.sh
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 2016  BCV_SCRIPTS
+drwxrwxr-x    2 oracle   oinstall       4096 Jul 21 2016  PATCH
+drwxr-x---    2 oracle   oinstall       4096 Jun 21 21:58 21_Jun_2018_21:58:51
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 00:37 22_Jun_2018_00:37:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 22 23:11 22_Jun_2018_23:11:37
+drwxr-x---    2 oracle   oinstall       4096 Jun 23 01:50 23_Jun_2018_01:50:26
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 03:12 24_Jun_2018_03:12:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 24 23:34 24_Jun_2018_23:34:43
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 02:04 25_Jun_2018_02:04:30
+drwxr-x---    2 oracle   oinstall       4096 Jun 25 22:13 25_Jun_2018_22:13:36
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 00:10 26_Jun_2018_00:10:06
+drwxr-x---    2 oracle   oinstall       4096 Jun 26 22:43 26_Jun_2018_22:43:24
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 00:56 27_Jun_2018_00:56:17
+drwxr-x---    2 oracle   oinstall       4096 Jun 27 21:57 27_Jun_2018_21:57:46
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 00:59 28_Jun_2018_00:59:10
+drwxr-x---    2 oracle   oinstall       4096 Jun 28 22:25 28_Jun_2018_22:25:41
+drwxr-x---    2 oracle   oinstall       4096 Jun 29 01:39 29_Jun_2018_01:39:44
+drwxr-x---    2 oracle   oinstall       4096 Jun 30 23:19 30_Jun_2018_23:19:39
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 01:51 1_Jul_2018_01:51:03
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 10:07 1_Jul_2018_10:07:55
+drwxr-x---    2 oracle   oinstall       4096 Jul 01 16:34 1_Jul_2018_16:34:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 02:36 2_Jul_2018_02:36:56
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 08:07 2_Jul_2018_08:07:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 02 22:42 2_Jul_2018_22:42:52
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 01:56 3_Jul_2018_01:56:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 03 23:06 3_Jul_2018_23:06:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 01:40 4_Jul_2018_01:40:24
+drwxr-x---    2 oracle   oinstall       4096 Jul 04 23:12 4_Jul_2018_23:12:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 01:34 5_Jul_2018_01:34:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 05 22:54 5_Jul_2018_22:54:35
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 01:40 6_Jul_2018_01:40:23
+drwxr-x---    2 oracle   oinstall       4096 Jul 06 22:57 6_Jul_2018_22:57:57
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 01:13 7_Jul_2018_01:13:11
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 20:24 7_Jul_2018_20:24:49
+drwxr-x---    2 oracle   oinstall       4096 Jul 07 22:13 7_Jul_2018_22:13:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 20:07 8_Jul_2018_20:07:12
+drwxr-x---    2 oracle   oinstall       4096 Jul 08 23:41 8_Jul_2018_23:41:20
+drwxr-x---    2 oracle   oinstall       4096 Jul 09 23:09 9_Jul_2018_23:09:33
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 00:59 10_Jul_2018_00:59:34
+drwxr-x---    2 oracle   oinstall       4096 Jul 10 22:49 10_Jul_2018_22:49:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 00:37 11_Jul_2018_00:37:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 11 23:05 11_Jul_2018_23:05:42
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 01:07 12_Jul_2018_01:07:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 12 22:34 12_Jul_2018_22:34:36
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 01:29 13_Jul_2018_01:29:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 13 22:25 13_Jul_2018_22:25:40
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 01:03 14_Jul_2018_01:03:02
+drwxr-x---    2 oracle   oinstall       4096 Jul 14 22:36 14_Jul_2018_22:36:38
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 01:13 15_Jul_2018_01:13:30
+drwxr-x---    2 oracle   oinstall       4096 Jul 15 22:01 15_Jul_2018_22:01:58
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 02:59 16_Jul_2018_02:59:13
+drwxr-x---    2 oracle   oinstall       4096 Jul 16 22:24 16_Jul_2018_22:24:50
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 01:20 17_Jul_2018_01:20:48
+drwxr-x---    2 oracle   oinstall       4096 Jul 17 22:03 17_Jul_2018_22:03:19
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 00:36 18_Jul_2018_00:36:53
+drwxr-x---    2 oracle   oinstall       4096 Jul 18 22:19 18_Jul_2018_22:19:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 00:33 19_Jul_2018_00:33:37
+drwxr-x---    2 oracle   oinstall       4096 Jul 19 22:29 19_Jul_2018_22:29:46
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 00:36 20_Jul_2018_00:36:54
+drwxr-x---    2 oracle   oinstall       4096 Jul 20 22:14 20_Jul_2018_22:14:28
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:26 21_Jul_2018_00:26:25
+drwxr-x---    2 oracle   oinstall       4096 Jul 21 00:33 BCV_FILES
+oracle@JFSBNKSRV128:/osbackup/oracle_backup $

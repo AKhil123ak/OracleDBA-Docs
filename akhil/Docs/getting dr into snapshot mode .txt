@@ -1,0 +1,125 @@
+Snapshot standby is a feature in Oracle 11g that allows doing a read-write operation on the standby database.  i. e we can convert the physical standby database to snapshot standby. On that, we can do all types of testing or can be used as a development database. Once the testing is over we can again convert the snapshot database to physical standby. Once it is converted physical standby database, whatever changes were done to the snapshot standby will be reverted.
+
+select NAME, OPEN_MODE, GUARD_STATUS, DATABASE_ROLE from v$database;
+  
+Cancel the recovery process:
+
+alter database recover managed standby database cancel;
+ 
+Enable flashback mode:
+
+show parameter db_recovery_file_dest
+
+NAME TYPE VALUE
+------------------------------------ ----------- ------------------------------
+db_recovery_file_dest string
+db_recovery_file_dest_size big integer 0
+
+alter system set db_recovery_file_dest_size=1g;
+alter system set db_recovery_file_dest='/u03/testdb/TESTER1';
+ 
+System altered.
+ 
+
+show parameter db_recovery_file_dest
+ 
+NAME TYPE VALUE
+------------------------------------ ----------- ------------------------------
+db_recovery_file_dest string /u03/testdb/TESTER1
+db_recovery_file_dest_size big integer 1G
+
+shut immediate
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+
+startup mount;
+ORACLE instance started.
+ 
+Database mounted.
+ 
+alter database flashback on;
+ 
+Database altered.
+ 
+select flashback_on from v$database;
+ 
+FLASHBACK_ON
+------------------
+YES
+
+
+Now the below command will convert it to snapshot standby:
+
+select status from v$instance;
+ 
+STATUS
+------------
+MOUNTED
+
+alter database convert to snapshot standby;
+ 
+Database altered.
+ 
+alter database open;
+ 
+Database altered.
+
+select database_role from v$database;
+ 
+DATABASE_ROLE
+----------------
+SNAPSHOT STANDBY
+ 
+1 row selected.
+
+select open_mode from v$database;
+ 
+OPEN_MODE
+--------------------
+READ WRITE
+
+select NAME,GUARANTEE_FLASHBACK_DATABASE from v$restore_point;
+
+
+convert it to physical standby :
+
+select FLASHBACK_ON from v$database;
+ 
+FLASHBACK_ON
+------------------
+YES
+ 
+1 row selected.
+
+alter database convert to physical standby;
+ 
+Database altered.
+
+
+SQL> select status from v$instance;
+ 
+STATUS
+------------
+STARTED
+ 
+1 row selected.
+
+shut immediate
+ 
+startup nomount;
+alter database recover managed standby database using current logfile disconnect;
+
+select process, status from v$managed_standby;
+
+select NAME, OPEN_MODE, GUARD_STATUS, DATABASE_ROLE from v$database;
+ 
+DATABASE_ROLE
+----------------
+PHYSICAL STANDBY
+
+Check in primary database
+
+select error from v$archived_dest;
+
+ 

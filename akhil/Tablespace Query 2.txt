@@ -1,0 +1,41 @@
+++++++++++++++++++
+tablespace command
+++++++++++++++++++
+
+prompt////////////////////////////////////////////////////
+
+select tablespace_name,bytes/1024/1024 from sys.sm$ts_free order by 1;
+///////////////////////////////////////////////////////////////
+
+column 'Tablespace Name' format a20
+column 'Tablespace Status' format a20
+column 'Tablespace Contents' format a20
+column 'Tablespace Logging' format a20
+column 'Extent Management' format a20
+column 'Segment Space Management' format a25
+Select tablespace_name AS "Tablespace Name",
+status AS "Tablespace Status",
+contents AS "Tablespace Contents",
+logging AS "Tablespace Logging",
+extent_management AS "Extent Management",
+segment_space_management AS "Segment Space Management"
+from DBA_tablespaces;
+
+column 'Tablespace Name' format a20
+Select Total.name "Tablespace Name",
+       nvl(Free_space, 0) "Free Space (MB)",
+       nvl(total_space-Free_space, 0) "Used Space (MB)", 
+       total_space "Total Space (MB)",
+       round((nvl(total_space-Free_space, 0)/nvl(total_space, 0)*100),2) "% Used "
+FROM
+  (select tablespace_name, sum(bytes/1024/1024) Free_Space
+     from sys.dba_free_space
+    group by tablespace_name
+  ) Free,
+  (select b.name,  sum(bytes/1024/1024) TOTAL_SPACE
+     from sys.v_$datafile a, sys.v_$tablespace B
+    where a.ts# = b.ts#
+    group by b.name
+  ) Total
+WHERE Free.Tablespace_name(+) = Total.name
+ORDER BY 5 desc ;

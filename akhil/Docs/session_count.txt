@@ -1,0 +1,32 @@
+select count(*),status from v$session group by status;
+select count(*),status,username from v$session group by username,status;
+
+
+
+set pages 5000
+set heading off
+spool kill_session_31jan.sql
+SELECT 'ALTER SYSTEM KILL SESSION '''||sid||','||serial#||''' immediate;' FROM v$session where status='INACTIVE';
+spool off
+
+SELECT 'ALTER SYSTEM KILL SESSION '''||sid||','||serial#||''' immediate;' FROM v$session where username='FCRHOST';
+
+alter system kill session '3617,7' immediate;
+
+select * from v$instance;
+select sysdate from dual;
+set time on;
+select 'alter system kill session ' || '''' || s.sid ||',' || s.serial# || ''' IMMEDIATE; '  FROM v$session s, v$process p WHERE s.paddr = p.addr(+) and s.machine like '%WORKGROUP\JFSBNKSRV145%';
+
+=====================================================================
+select
+   'alter system kill session '''||
+    sess.sid||', '||sess.serial#||';'
+from
+   v$locked_object lo,
+   dba_objects  ao,
+v$session       sess
+where
+ao.object_id = lo.object_id
+and
+lo.session_id = s.sid;

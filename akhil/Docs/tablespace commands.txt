@@ -1,0 +1,120 @@
+ Increase Size of an Existing Datafile:
+ 
+ 
+ ALTER DATABASE 
+ DATAFILE '/u02/oradata/tgs/thegeekstuff01.dbf' 
+ RESIZE 200M;
+ 
+ 
+ Add New Datafile with Extra Parameters:
+ 
+ 
+ ALTER TABLESPACE thegeekstuff
+ ADD DATAFILE '/u02/oradata/tgs/thegeekstuff02.dbf' 
+ SIZE 100M
+ AUTOEXTEND ON
+ NEXT 512K
+ MAXSIZE 2G;
+ 
+ 
+ View Tablespace and datafile Information:
+ 
+ 
+ SELECT * from DBA_TABLESPACES;
+ 
+ 
+ SELECT file_id, file_name, bytes/1024/1024 size_mb 
+ FROM dba_data_files 
+ WHERE tablespace_name = 'THEGEEKSTUFF';
+ 
+ 
+  Tablespace Extent Management:
+  
+  SELECT extent_management, segment_space_management 
+ FROM dba_tablespaces 
+ WHERE tablespace_name = 'THEGEEKSTUFF'
+ 
+ 
+ CREATE TABLESPACE thegeekstuff 
+ DATAFILE '/u02/oradata/tgs/thegeekstuff01.dbf' 
+ SIZE 100M
+ EXTENT MANAGEMENT LOCAL 
+ SEGMENT SPACE MANAGEMENT AUTO;
+ 
+ 
+  Calculate the Size of Tablespace (Both Total Space and Free Space Available)::
+  
+  
+  select
+  a.tablespace_name,
+  sum(a.bytes)/(1024*1024) total_space_MB,
+  round(b.free,2) Free_space_MB,
+  round(b.free/(sum(a.bytes)/(1024*1024))* 100,2) percent_free
+ from dba_data_files a,
+  (select tablespace_name,sum(bytes)/(1024*1024) free  from dba_free_space
+  group by tablespace_name) b
+ where a.tablespace_name = b.tablespace_name(+)
+  group by a.tablespace_name,b.free
+  
+  
+  
+  
+  Bigfile Tablespace Management:
+  
+  
+  CREATE BIGFILE TABLESPACE thegeekstuffbig 
+ DATAFILE '/u02/oradata/tgs/thegeekstuffbig.dbf' 
+ SIZE 50G;
+ 
+ 
+ SELECT tablespace_name, bigfile FROM dba_tablespaces;
+ 
+ 
+ ALTER TABLESPACE thegeekstuffbig RESIZE 100G;
+ 
+ Rename Tablespace:
+ 
+ ALTER TABLESPACE thegeekstuff RENAME TO TGS;
+ 
+ Drop Tablespace:
+ 
+ 
+ DROP TABLESPACE thegeekstuff INCLUDING CONTENTS;
+ 
+ DROP TABLESPACE thegeekstuff 
+ INCLUDING CONTENTS AND DATAFILES;
+ 
+ 
+ Drop a Specific datafaile from a Tablespace:
+ 
+ ALTER TABLESPACE thegeekstuff 
+ DROP DATAFILE '/u02/oradata/tgs/thegeekstuff02.dbf';
+ 
+ Bring Tablespace Online or Offline:
+ 
+ ALTER TABLESPACE thegeekstuff OFFLINE;
+ ALTER TABLESPACE users OFFLINE NORMAL;
+ ALTER TABLESPACE thegeekstuff ONLINE;
+ 
+ ALTER DATABASE DATAFILE '/u02/oradata/tgs/thegeekstuff02.dbf' offline;
+
+ALTER DATABASE DATAFILE '/u02/oradata/tgs/thegeekstuff02.dbf' online;
+
+
+ Set a Tablespace as Read-Only Temporarily:
+ 
+ ALTER TABLESPACE THEGEEKSTUFF READ ONLY;
+ 
+ ALTER TABLESPACE THEGEEKSTUFF READ WRITE;
+ 
+ 
+  Rename or Move Datafile to a Different Folderv:
+  
+  ALTER TABLESPACE thegeekstuff OFFLINE NORMAL;
+  cp /u02/oradata/tgs/thegeekstuff02.dbf /u03/oradata/tgs/thegeekstuff02.dbf
+  
+  ALTER TABLESPACE thegeekstuff
+ RENAME DATAFILE '/u02/oradata/tgs/thegeekstuff02.dbf'
+ TO '/u03/oradata/tgs/thegeekstuff02.dbf';
+ 
+ 

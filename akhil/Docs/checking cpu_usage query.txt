@@ -1,0 +1,41 @@
+set pages 500 lines 190
+COLUMN sid FORMAT 9999
+COLUMN serial# FORMAT 9999999
+COLUMN message FORMAT A90
+COLUMN progress_pct FORMAT 99999999.00
+COLUMN elapsed FORMAT A20
+COLUMN remaining FORMAT A10
+SELECT s.sid, s.serial#, sl.message, ROUND(sl.elapsed_seconds/60) || ':'
+|| MOD(sl.elapsed_seconds,60) elapsed,
+ROUND(sl.time_remaining/60) || ':' || MOD(sl.time_remaining,60) remaining,
+ROUND(sl.sofar/sl.totalwork*100, 2) progress_pct FROM v$session s,
+v$session_longops sl WHERE s.sid=sl.sid AND s.serial#=sl.serial# and
+sl.time_remaining >0
+
+cpu_usage_sec
+======================
+select username, sum(VALUE/100) cpu_usage_sec from v$session ss, v$sesstat
+se, v$statname sn where se.statistic# = sn.statistic# and name like '%CPU
+used by this session%'
+and se.sid = ss.sid
+and username is not null
+and username not in ('SYS', 'SYSTEM', 'SYSMAN', 'DBSNMP') group by
+username order by 2 desc;
+
+SELECT S.SID, S.USERNAME, S.SERIAL#, S.TERMINAL, S.STATUS, S.OSUSER,
+P.PROGRAM, S.PROCESS, A.SQL_TEXT FROM V$SESSION S, V$SQLAREA A, V$PROCESS
+P WHERE S.SQL_HASH_VALUE=A.HASH_VALUE AND S.SQL_ADDRESS=A.ADDRESS AND
+S.PADDR=P.ADDR AND S.STATUS='ACTIVE'
+
+
+select s.username "User Name", s.osuser "OS User", s.status "Status",
+lockwait "Lock Wait", s.program "Program", s.machine "Machine",
+s.logon_time "Connect Time", p.program "P Program", si.physical_reads
+"Physical Reads", si.block_gets "Block Gets", si.consistent_gets
+"Consistent Gets", si.block_changes "Block Changes", si.consistent_changes
+"Consistent Changes", s.process "Process", p.spid, p.pid, s.serial#,
+si.sid from sys.v_$sess_io si, sys.v_$session s, sys.v_$process p where
+s.username is not null and si.sid(+)=s.sid and p.addr(+)=s.paddr and
+s.status='ACTIVE'
+and s.username<>'SYS'
+order by status,si.consistent_gets+si.block_gets desc

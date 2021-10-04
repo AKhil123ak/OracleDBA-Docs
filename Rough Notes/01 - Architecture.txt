@@ -1,0 +1,255 @@
+login as: oracle
+oracle@192.168.43.155's password:
+[oracle@linux ~]$ . orcl.env
+[oracle@linux ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Wed Jul 5 08:13:37 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> startup
+ORACLE instance started.
+
+Total System Global Area 1235959808 bytes
+Fixed Size                  2252784 bytes
+Variable Size             788529168 bytes
+Database Buffers          436207616 bytes
+Redo Buffers                8970240 bytes
+Database mounted.
+Database opened.
+SQL> show parameter sga
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+lock_sga                             boolean     FALSE
+pre_page_sga                         boolean     FALSE
+sga_max_size                         big integer 1184M
+sga_target                           big integer 0
+SQL> show parameter shared
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+hi_shared_memory_address             integer     0
+max_shared_servers                   integer
+shared_memory_address                integer     0
+shared_pool_reserved_size            big integer 9227468
+shared_pool_size                     big integer 0
+shared_server_sessions               integer
+shared_servers                       integer     1
+SQL> create pfile from spfile;
+
+File created.
+
+SQL>
+SQL> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$ cd $ORACLE_HOME /dbs
+[oracle@linux 11.2.0.4]$ ^C
+[oracle@linux 11.2.0.4]$ cd $ORACLE_HOME/dbs
+[oracle@linux dbs]$ ls -ltr
+total 24
+-rwxrwxr-x. 1 oracle oinstall 2851 May 15  2009 init.ora
+-rwxrwxr-x. 1 oracle oinstall   24 Jul  1 19:22 lkORCL
+-rwxrwxr-x. 1 oracle oinstall 1536 Jul  1 19:26 orapworcl
+-rwxrwxr-x. 1 oracle oinstall 1544 Jul  5 08:13 hc_orcl.dat
+-rwxrwxr-x. 1 oracle oinstall 2560 Jul  5 08:14 spfileorcl.ora
+-rw-r--r--. 1 oracle oinstall  936 Jul  5 08:15 initorcl.ora
+[oracle@linux dbs]$ vi initorcl.ora
+[oracle@linux dbs]$ ps -fu oracle
+UID        PID  PPID  C STIME TTY          TIME CMD
+oracle    3343  3339  0 08:12 ?        00:00:00 sshd: oracle@pts/1
+oracle    3344  3343  0 08:12 pts/1    00:00:00 -bash
+oracle    3382     1  0 08:13 ?        00:00:00 ora_pmon_orcl
+oracle    3384     1  0 08:13 ?        00:00:00 ora_psp0_orcl
+oracle    3386     1  0 08:13 ?        00:00:00 ora_vktm_orcl
+oracle    3390     1  0 08:13 ?        00:00:00 ora_gen0_orcl
+oracle    3392     1  0 08:13 ?        00:00:00 ora_diag_orcl
+oracle    3394     1  0 08:13 ?        00:00:00 ora_dbrm_orcl
+oracle    3396     1  0 08:13 ?        00:00:00 ora_dia0_orcl
+oracle    3398     1  0 08:13 ?        00:00:00 ora_mman_orcl
+oracle    3400     1  0 08:13 ?        00:00:00 ora_dbw0_orcl
+oracle    3402     1  0 08:13 ?        00:00:00 ora_lgwr_orcl
+oracle    3404     1  0 08:13 ?        00:00:00 ora_ckpt_orcl
+oracle    3406     1  0 08:13 ?        00:00:00 ora_smon_orcl
+oracle    3408     1  0 08:13 ?        00:00:00 ora_reco_orcl
+oracle    3410     1  0 08:13 ?        00:00:00 ora_mmon_orcl
+oracle    3412     1  0 08:13 ?        00:00:00 ora_mmnl_orcl
+oracle    3414     1  0 08:13 ?        00:00:00 ora_d000_orcl
+oracle    3416     1  0 08:13 ?        00:00:00 ora_s000_orcl
+oracle    3425     1  0 08:13 ?        00:00:00 ora_qmnc_orcl
+oracle    3455     1  0 08:14 ?        00:00:00 ora_cjq0_orcl
+oracle    3457     1  0 08:14 ?        00:00:00 ora_q000_orcl
+oracle    3459     1  0 08:14 ?        00:00:00 ora_q001_orcl
+oracle    3539     1  0 08:18 ?        00:00:00 ora_j000_orcl
+oracle    3541     1  0 08:18 ?        00:00:00 ora_j001_orcl
+oracle    3542  3344 19 08:18 pts/1    00:00:00 ps -fu oracle
+[oracle@linux dbs]$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Wed Jul 5 08:21:09 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> select file_name from dba_data_files;
+
+FILE_NAME
+--------------------------------------------------------------------------------
+/u01/app/PROD/oradata/orcl/users01.dbf
+/u01/app/PROD/oradata/orcl/undotbs01.dbf
+/u01/app/PROD/oradata/orcl/sysaux01.dbf
+/u01/app/PROD/oradata/orcl/system01.dbf
+/u01/app/PROD/oradata/orcl/example01.dbf
+
+SQL> select member from v$logfile;
+
+MEMBER
+--------------------------------------------------------------------------------
+/u01/app/PROD/oradata/orcl/redo03.log
+/u01/app/PROD/oradata/orcl/redo02.log
+/u01/app/PROD/oradata/orcl/redo01.log
+
+SQL> select name from V$controlfile;
+
+NAME
+--------------------------------------------------------------------------------
+/u01/app/PROD/oradata/orcl/control01.ctl
+/u01/app/PROD/fast_recovery_area/orcl/control02.ctl
+
+SQL> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux dbs]$ cd $ORACLE_HOME/dbs
+[oracle@linux dbs]$ ls -ltr
+total 24
+-rwxrwxr-x. 1 oracle oinstall 2851 May 15  2009 init.ora
+-rwxrwxr-x. 1 oracle oinstall   24 Jul  1 19:22 lkORCL
+-rwxrwxr-x. 1 oracle oinstall 1536 Jul  1 19:26 orapworcl
+-rwxrwxr-x. 1 oracle oinstall 1544 Jul  5 08:13 hc_orcl.dat
+-rwxrwxr-x. 1 oracle oinstall 2560 Jul  5 08:14 spfileorcl.ora
+-rw-r--r--. 1 oracle oinstall  936 Jul  5 08:15 initorcl.ora
+[oracle@linux dbs]$ sqlplus /as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Use SQL*Plus to execute SQL, PL/SQL and SQL*Plus statements.
+
+Usage 1: sqlplus -H | -V
+
+    -H             Displays the SQL*Plus version and the
+                   usage help.
+    -V             Displays the SQL*Plus version.
+
+Usage 2: sqlplus [ [<option>] [{logon | /nolog}] [<start>] ]
+
+  <option> is: [-C <version>] [-L] [-M "<options>"] [-R <level>] [-S]
+
+    -C <version>   Sets the compatibility of affected commands to the
+                   version specified by <version>.  The version has
+                   the form "x.y[.z]".  For example, -C 10.2.0
+    -L             Attempts to log on just once, instead of
+                   reprompting on error.
+    -M "<options>" Sets automatic HTML markup of output.  The options
+                   have the form:
+                   HTML [ON|OFF] [HEAD text] [BODY text] [TABLE text]
+                   [ENTMAP {ON|OFF}] [SPOOL {ON|OFF}] [PRE[FORMAT] {ON|OFF}]
+    -R <level>     Sets restricted mode to disable SQL*Plus commands
+                   that interact with the file system.  The level can
+                   be 1, 2 or 3.  The most restrictive is -R 3 which
+                   disables all user commands interacting with the
+                   file system.
+    -S             Sets silent mode which suppresses the display of
+                   the SQL*Plus banner, prompts, and echoing of
+                   commands.
+
+  <logon> is: {<username>[/<password>][@<connect_identifier>] | / }
+              [AS {SYSDBA | SYSOPER | SYSASM}] [EDITION=value]
+
+    Specifies the database account username, password and connect
+    identifier for the database connection.  Without a connect
+    identifier, SQL*Plus connects to the default database.
+
+    The AS SYSDBA, AS SYSOPER and AS SYSASM  options are database
+    administration privileges.
+
+    <connect_identifier> can be in the form of Net Service Name
+    or Easy Connect.
+
+      @[<net_service_name> | [//]Host[:Port]/<service_name>]
+
+        <net_service_name> is a simple name for a service that resolves
+        to a connect descriptor.
+
+        Example: Connect to database using Net Service Name and the
+                 database net service name is ORCL.
+
+           sqlplus myusername/mypassword@ORCL
+
+        Host specifies the host name or IP address of the database
+        server computer.
+
+        Port specifies the listening port on the database server.
+
+        <service_name> specifies the service name of the database you
+        want to access.
+
+        Example: Connect to database using Easy Connect and the
+                 Service name is ORCL.
+
+           sqlplus myusername/mypassword@Host/ORCL
+
+    The /NOLOG option starts SQL*Plus without connecting to a
+    database.
+
+    The EDITION specifies the value for Session Edition.
+
+
+  <start> is: @<URL>|<filename>[.<ext>] [<parameter> ...]
+
+    Runs the specified SQL*Plus script from a web server (URL) or the
+    local file system (filename.ext) with specified parameters that
+    will be assigned to substitution variables in the script.
+
+When SQL*Plus starts, and after CONNECT commands, the site profile
+(e.g. $ORACLE_HOME/sqlplus/admin/glogin.sql) and the user profile
+(e.g. login.sql in the working directory) are run.  The files may
+contain SQL*Plus commands.
+
+Refer to the SQL*Plus User's Guide and Reference for more information.
+[oracle@linux dbs]$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Wed Jul 5 08:25:51 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> archive log list;
+Database log mode              No Archive Mode
+Automatic archival             Disabled
+Archive destination            USE_DB_RECOVERY_FILE_DEST
+Oldest online log sequence     5
+Current log sequence           7
+SQL> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux dbs]$ vi initorcl.ora
+[oracle@linux dbs]$ cd /u01/app/PROD/fast_recovery_area/
+[oracle@linux fast_recovery_area]$ ls -ltr
+total 8
+drwxrwxr-x. 2 oracle oinstall 4096 Jul  1 19:22 orcl
+drwxrwxr-x. 3 oracle oinstall 4096 Jul  1 19:23 ORCL
+[oracle@linux fast_recovery_area]$ cd $ORACLE_HOME/dbs
+[oracle@linux dbs]$ vi initorcl.ora
+[oracle@linux dbs]$

@@ -1,0 +1,15 @@
+/u01/oradev/DEV/app/oracle/12.1.0/DEV_jfststoragla087.env
+
+
+initPROD.ora
+
+
+
+export ORACLE_SID=PROD
+
+rman target /
+
+run{
+allocate channel t1 type 'sbt_tape' parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_monthly.opt)';
+restore controlfile from 'PROD_fmtre82m_1_1_20190302_controlfie';
+}

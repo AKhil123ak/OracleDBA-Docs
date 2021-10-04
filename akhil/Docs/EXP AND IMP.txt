@@ -1,0 +1,74 @@
+nohup 
+
+expdp sqlplus \/ as sysdba DIRECTORY=ANYRECON_PROD_exp DUMPFILE=ANYRECON_PROD_13OCT18_%u.dmp LOGFILE=ANYRECON_PROD_13OCT18.log schemas=ANYRECON_PROD status=120 parallel=2
+
+   
+ expdp sqlplus \/ as sysdba DIRECTORY=ANYRECON_PROD_exp DUMPFILE=ANYRECON_PROD_13OCT18_%u.dmp LOGFILE=ANYRECON_PROD_13OCT18.log schemas=ANYRECON_PROD status=120 parallel=2  
+   
+   AS SYSDBA DIRECTORY=ANYRECON_PROD_exp DUMPFILE=ANYRECON_PROD_12OCT18_%u.dmp logfile=ANYRECON_PROD_13OCT18.log schemas=ANYRECON_PROD status=120 parallel=5
+   
+   
+   
+impdp sqlplus \"/ as sysdba\" Directory=ANYRECON_UAT_IMP DUMPFILE=ANYRECON_PROD_13OCT18_%u.dmp  LOGFILE=ANYRECON_PROD_13OCT18 remap_schema=ANYRECON_PROD:ANYRECON_UAT REMAP_TABLESPACE=ANYRECON_PROD:ANYRECON_UAT TABLE_EXISTS_ACTION=REPLACE status=120 parallel=5
+
+ select object_type,count(*) from dba_objects where owner='PRD_BIPLATFORM' GROUP BY object_type;
+
+OBJECT_TYPE               COUNT(*)
+----------------------- ----------
+SEQUENCE                         1
+LOB                              1
+TRIGGER                          1
+TABLE                           98
+INDEX                           51
+
+
+
+
+
+
+  tables=FCRUSER.FCT_ALL_FCR_TXNS_MMDD remap_schema=FCRUSER:FCRARCH remap_tablespace=FCRDEFAULT:FCRDEFAULT EXCLUDE=INDEX:"= 'IN_FCT_ALL_FCR_TXNS_MMDD_2'",INDEX:"= 'IN_FCT_ALL_FCR_TXNS_MMDD_3'"
+
+select * from  dba_directories;
+
+CREATE or replace DIRECTORY FCRARCH_EXP as '/backup';
+
+create or replace DIRECTORY PRD_BIPLATFORM_EXP as '/tempstage/JFSBIP';
+
+
+expdp  \"/ as sysdba\"  DIRECTORY=PRD_BIPLATFORM_EXP DUMPFILE=PRD_BIPLATFORM.XMLP_SCHED_DATA_31OCT18_%u.dmp LOGFILE=PRD_BIPLATFORM.XMLP_SCHED_DATA_31OCT18.log tables=PRD_BIPLATFORM.XMLP_SCHED_DATA status=120 parallel=2 
+
+
+RO_USER
+RW_USER
+
+expdp  \"/ as sysdba\"  DIRECTORY=EXPENZINGUAT DUMPFILE=EXPENZINGUAT_22_nov_18_%u.dmp LOGFILE=EXPENZINGUAT_22_nov_18.log schemas=EXPENZINGUAT status=120 parallel=2
+
+
+
+
+impdp \"/ as sysdba\"  Directory=EXPENZ DUMPFILE=EXPENZINGUAT_22_nov_18_%u.dmp  LOGFILE=EXPENZ_PROD_22_nov_18 remap_schema=EXPENZINGUAT:EXPENZINGPROD REMAP_TABLESPACE=EXPENZINGUAT:EXPENZINGPROD  status=120 parallel=2
+
+nohup sh 
+
+
+impdp \"/ as sysdba\"  Directory=EXPENZINGUAT schema=janabank_qc_p2p content=ALL dumpfile=JANABANK_QC_P2P.DMP  logfile=janabank_qc_p2p_imp.log status=120
+
+
+=====================================================interim dump exp and imp====================================
+set lines 300 pages 200;
+col DIRECTORY_PATH for a50;
+select * from  dba_directories;
+CREATE or replace DIRECTORY FCRARCH_EXP as '/backup';
+expdp  \"/ as sysdba\" DIRECTORY=FCRARCH_EXP DUMPFILE=jfs_cbs_dump_12APR%u.dmp logfile=jfs_cbs_dump_12APR.log TABLES=FCRHOST.jfs_cbs_dump_12APR  status=120 parallel=4 
+
+jfs_cbs_dump_12APR
+select count(*) from FCRHOST.jfs_cbs_dump_12APR;
+select count(*) from FCRARCH.jfs_cbs_dump_12APR;
+
+set lines 300 pages 200;
+col DIRECTORY_PATH for a50;
+select * from  dba_directories;
+CREATE or replace DIRECTORY FCRARCH_EXP as '/tempstage';
+select * from  dba_directories;
+impdp \"/ as sysdba\"  DIRECTORY=FCRARCH_EXP DUMPFILE=jfs_cbs_dump_12APR%u.dmp logfile=jfs_cbs_dump_12APR_imp.log TABLES=FCRHOST.jfs_cbs_dump_12APR remap_schema=FCRHOST:FCRARCH remap_tablespace=FCRDATA1:FCRARCH status=120 parallel=4
+

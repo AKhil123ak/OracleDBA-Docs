@@ -1,0 +1,7 @@
+SELECT owner, job_name, enabled, LAST_RUN_DURATION, NEXT_RUN_DATE FROM dba_scheduler_jobs where JOB_NAME='SP_SNAPSHOT';
+
+
+
+set lines 200;
+SELECT owner, job_name, enabled, NEXT_RUN_DATE FROM dba_scheduler_jobs where JOB_NAME='SP_SNAPSHOT';
+

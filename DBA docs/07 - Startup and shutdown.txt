@@ -1,0 +1,34 @@
+How to start the database 
+
+# su - oracle
+$. orcl.env
+
+$sqlplus / as sysdba
+
+sql> startup
+
+How to find the database up and running 
+
+$ ps -ef|grep smon
+
+or sql> select status from v$instance;
+
+How to find the database name 
+
+sql> select name from v$database;
+
+find the datafile, redologfile, controlfile locations
+
+sql> select file_name from dba_data_files
+
+sql> select member from v$logfile;
+
+sql> select name from v$controlfile;
+
+find the parmaterfile
+
+sql> show parameter spfile 
+
+shutdown the database 
+
+sql> shutdown immediate

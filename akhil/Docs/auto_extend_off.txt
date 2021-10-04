@@ -1,0 +1,39 @@
+
+AUTOEXTEND OFF;
+====================================================================
+
+select FILE_NAME,TABLESPACE_NAME,AUTOEXTENSIBLE,BYTES/1024/1024/1024, MAXBYTES/1024/1024/1024 from dba_data_files where AUTOEXTENSIBLE='YES'
+
+ALTER DATABASE DATAFILE '+FCRARCH/fcrarch/datafile/sysaux.257.990579221' AUTOEXTEND OFF;
+ALTER DATABASE DATAFILE '+FCRARCH/fcrarch/datafile/system.256.990579221' AUTOEXTEND OFF;
+
+desc dba_data_files
+desc dba_tablespaces;
+desc dba_objects;
+desc dba_tables
+desc dba_free_space
+desc db_operations
+desc dba_roles
+desc dba_profiles
+
+select count(*) from APP_BASE.INF_ALERT_TEMPLATE;
+
+  
+COUNT(*)                                                                      
+
+----------                                                                      
+       
+ 51    
+
+expdp schemas=EXPENSE_MANAGER dumpfile=EXPENSE_MANAGER.dmp logfile=EXPENSE_MANAGER.log
+
+select object_name, object_type, owner from dba_objects where status='INVALID' AND OWNER='SYS';
+
+ select owner, status, validated, count(*) from dba_constraints where owner in ('SYS', 'SYSTEM') group by owner, status, validated;
+ 
+ 
+ select owner, table_name, status, validated from dba_constraints where owner in ('SYS', 'SYSTEM') and (status <> 'ENABLED' or validated <> 'VALIDATED') orDer by owner;
+
+                              
+
+

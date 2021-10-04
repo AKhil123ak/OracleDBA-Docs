@@ -1,0 +1,104 @@
+Roles
++++++++
+
++++++++++++
+CREATE ROLE
++++++++++++
+
+> create role role1;
+
+++++++++++++++++++++++++
+ADD PRIVILEGES TO A ROLE
+++++++++++++++++++++++++
+
+> grant create session,create table to role1;
+
+++++++++++
+VIEW ROLES
+++++++++++
+
+> select * from dba_roles;
+
+> select * from dba_role_privs;
+
+> select * from role_sys_privs;
+
+> select * from dba_role_privs where GRANTEE='U3';
+
+++++++++++++++++++++++
+ASSIGN ROLE TO AN USER
+++++++++++++++++++++++
+
+> grant role1 to u3;
+> select * from session_privs;
+
++++++++++++
+REVOKE ROLE
++++++++++++
+
+> revoke role1 from u3;
+
+++++++++++++++++++++++++++++++++++++
+GRANT AND REVOKE ONE ROLE TO ANOTHER
+++++++++++++++++++++++++++++++++++++
+
+> create role role2;
+> grant role1 to role2;
+> revoke role1 from role2;
+
+
+++++++++++
+PROFILES
+++++++++++
+
+> select * from dba_profiles;
+> select * from session_privs;
+ 
++++++++++++++++
+Create Profile
++++++++++++++++
+
+> create profile profile1 limit FAILED_LOGIN_ATTEMPTS 2 SESSIONS_PER_USER 2;
+> create profile p1 limit FAILED_LOGIN_ATTEMPTS 2 SESSIONS_PER_USER 2;
+
++++++++++++++++++++++++++
+ASSIGN PROFILE TO AN USER
++++++++++++++++++++++++++
+
+> alter user u1 profile profile1;
+> select USERNAME,PROFILE from dba_users where USERNAME='U1';
+> select * from dba_sys_privs where grantee='U33';
+
++++++++++++++
+ALTER PROFILE
++++++++++++++
+
+> alter profile profile01 limit FAILED_LOGIN_ATTEMPTS 5;
+
++++++++++++++++++++++++++
+REMOVE PROFILE FROM USER
++++++++++++++++++++++++++
+
+> alter user U1 profile default;
+
+++++++++++++
+DROP PROFILE
+++++++++++++
+
+> drop profile profile1 CASCADE;
+
+Grant priviliges with Admin option -
+++++++++++++++++++++++++++++++++++++
+
+> grant create session to u1 with admin option;
+
+> select * from dba_sys_privs where grantee='U1';
+
+
+
+
+
+
+
+
+

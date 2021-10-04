@@ -1,0 +1,35 @@
+1. --------------------------------------Create role------------------------
+
+ 
+
+CREATE ROLE MBRO;
+
+ 
+
+set line 200
+
+set pages 500
+
+set heading off
+
+                                 
+
+SELECT 'GRANT SELECT ON ' ||OWNER|| '.'||OBJECT_NAME||' TO CBSRO;' FROM DBA_OBJECTS WHERE OBJECT_TYPE IN ('TABLE','VIEW') AND OWNER IN ('FCRHOST','FCCHOST','FCRBRN');
+
+ 
+
+ 
+
+--------------------------------------------------------------
+
+SELECT 'grant execute on ' ||OWNER|| '.'||OBJECT_NAME||' TO CBSRO;' FROM DBA_OBJECTS WHERE OBJECT_TYPE IN ('FUNCTION', 'PROCEDURE') AND OWNER IN ('FCRHOST','FCCHOST','FCRBRN');
+
+-------------------------------------------------------------------
+
+ 
+
+grant connect, create session, select_catalog_role to dbsupport_clo;
+
+ 
+
+ 

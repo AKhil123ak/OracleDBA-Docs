@@ -1,0 +1,73 @@
+SYS:JFSMIBDB > /
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------
+SQL_ID 0m6v0hz4rz01u
+--------------------
+/* insert com.vayana.ib.bm.core.api.model.user.UserCIF */ insert into
+USER_CIF ("VERSION", CIF_ID, GROUP_ID, PRIMARY_CIF_FLAG, PROFILE_ID,
+id) values (:1 , :2 , :3 , :4 , :5 , :6 )
+
+
+-------------------------------------------------
+| Id  | Operation                | Name | Cost  |
+-------------------------------------------------
+|   0 | INSERT STATEMENT         |      |     1 |
+|   1 |  LOAD TABLE CONVENTIONAL |      |       |
+-------------------------------------------------
+
+Note
+-----
+   - cpu costing is off (consider enabling it)
+
+
+18 rows selected.
+
+SYS:JFSMIBDB > select plan_table_output from table(dbms_xplan.display_awr('78jjhdnpc688c'));
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------
+SQL_ID 78jjhdnpc688c
+--------------------
+/* insert com.vayana.bm.core.api.model.mtc.MTCDevice */ insert into
+INF_MTC_DEVICE ("VERSION", CREATED_BY, CREATED_DATE, APPVERSION,
+LOCALE_ID, MODEL, STATUS_ID, TENANT_CHANNEL_ID, UUID, id) values (:1 ,
+:2 , :3 , :4 , :5 , :6 , :7 , :8 , :9 , :10 )
+
+
+-------------------------------------------------
+| Id  | Operation                | Name | Cost  |
+-------------------------------------------------
+|   0 | INSERT STATEMENT         |      |     1 |
+|   1 |  LOAD TABLE CONVENTIONAL |      |       |
+-------------------------------------------------
+
+Note
+-----
+   - cpu costing is off (consider enabling it)
+
+
+19 rows selected.
+
+SYS:JFSMIBDB > select plan_table_output from table(dbms_xplan.display_awr('7m6ymgrwg349q'));
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------
+SQL_ID 7m6ymgrwg349q
+--------------------
+/* delete com.vayana.bm.core.api.model.mtc.MTCDevice */ delete from
+INF_MTC_DEVICE where id=:1  and "VERSION"=:2
+
+Plan hash value: 2704432998
+
+-----------------------------------------------------------------------------------------------
+| Id  | Operation                    | Name           | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------
+|   0 | DELETE STATEMENT             |                |       |       |     2 (100)|          |
+|   1 |  DELETE                      | INF_MTC_DEVICE |       |       |            |          |
+|   2 |   TABLE ACCESS BY INDEX ROWID| INF_MTC_DEVICE |     1 |    39 |     2   (0)| 00:00:01 |
+|   3 |    INDEX UNIQUE SCAN         | MTC_DEVICE_PK  |     1 |       |     1   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------------------
+
+
+16 rows selected.

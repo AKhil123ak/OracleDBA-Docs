@@ -1,0 +1,9 @@
+          Viewing Job Information in the Data Dictionary:
+DBA_JOBS: DBA_JOBS lists information on all the jobs in the database.
+
+ALL_JOBS: ALL_JOBS has the same information as DBA_JOBS but only on jobs which are accessible to the current user.
+
+USER_JOBS: USER_JOBS again has the same job information, but will only list jobs owned by the current user.
+
+DBA_JOBS_RUNNING: DBA_JOBS_RUNNING contains information on all jobs currently running in the database. This view can be joined with the other views for detailed information on running jobs.
+dba_schedular_jobs

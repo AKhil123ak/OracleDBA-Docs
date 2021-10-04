@@ -1,0 +1,206 @@
+$ ./crsctl start has
+CRS-4123: Oracle High Availability Services has been started.
+$
+$
+$ crsctl stat res -t
+--------------------------------------------------------------------------------
+Name           Target  State        Server                   State details
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.DATA.dg
+               OFFLINE OFFLINE      jfsexpenz01              STABLE
+ora.LISTENER_JFSEXPENZ01.lsnr
+               ONLINE  ONLINE       jfsexpenz01              STABLE
+ora.REDO1.dg
+               OFFLINE OFFLINE      jfsexpenz01              STABLE
+ora.REDO2.dg
+               OFFLINE OFFLINE      jfsexpenz01              STABLE
+ora.asm
+               ONLINE  OFFLINE      jfsexpenz01              Instance Shutdown,ST
+                                                             ABLE
+ora.ons
+               OFFLINE OFFLINE      jfsexpenz01              STABLE
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.cssd
+      1        ONLINE  OFFLINE      jfsexpenz01              STARTING
+ora.diskmon
+      1        OFFLINE OFFLINE                               STABLE
+ora.evmd
+      1        ONLINE  INTERMEDIATE jfsexpenz01              STABLE
+ora.jfsexpen.db
+      1        OFFLINE OFFLINE                               Instance Shutdown,ST
+                                                             ABLE
+--------------------------------------------------------------------------------
+$ crsctl stat res -t
+--------------------------------------------------------------------------------
+Name           Target  State        Server                   State details
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.DATA.dg
+               OFFLINE OFFLINE      jfsexpenz01              STABLE
+ora.LISTENER_JFSEXPENZ01.lsnr
+               ONLINE  ONLINE       jfsexpenz01              STABLE
+ora.REDO1.dg
+               OFFLINE OFFLINE      jfsexpenz01              STABLE
+ora.REDO2.dg
+               OFFLINE OFFLINE      jfsexpenz01              STABLE
+ora.asm
+               ONLINE  OFFLINE      jfsexpenz01              Instance Shutdown,ST
+                                                             ARTING
+ora.ons
+               OFFLINE OFFLINE      jfsexpenz01              STABLE
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.cssd
+      1        ONLINE  ONLINE       jfsexpenz01              STABLE
+ora.diskmon
+      1        OFFLINE OFFLINE                               STABLE
+ora.evmd
+      1        ONLINE  INTERMEDIATE jfsexpenz01              STABLE
+ora.jfsexpen.db
+      1        OFFLINE OFFLINE                               Instance Shutdown,ST
+                                                             ABLE
+--------------------------------------------------------------------------------
+$
+
+$ sqlplus / as sysasm
+
+SQL*Plus: Release 12.2.0.1.0 Production on Thu Feb 14 01:01:05 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL>
+SQL>
+SQL> col  PATH for a30;
+SQL>
+SQL> slect name,path from v$asm_disk;
+SP2-0734: unknown command beginning "slect name..." - rest of line ignored.
+SQL>
+SQL> select name, path from v$asm_disk;
+
+
+NAME                           PATH
+------------------------------ ------------------------------
+DATA_0000                      /dev/DATA01
+DATA_0001                      /dev/DATA02
+DATA_0002                      /dev/DATA03
+DATA_0003                      /dev/DATA04
+DATA_0004                      /dev/DATA05
+DATA_0005                      /dev/DATA06
+DATA_0006                      /dev/DATA07
+DATA_0007                      /dev/DATA08
+DATA_0008                      /dev/DATA09
+DATA_0009                      /dev/DATA10
+DATA_0010                      /dev/DATA11
+
+NAME                           PATH
+------------------------------ ------------------------------
+DATA_0011                      /dev/DATA12
+DATA_0012                      /dev/DATA13
+DATA_0013                      /dev/DATA14
+REDO1_0000                     /dev/REDO1
+REDO2_0000                     /dev/REDO2
+
+16 rows selected.
+
+SQL> SQL>
+SQL>
+SQL> select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup order by name;
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+DATA                           MOUNTED              4200   3915.55469
+REDO1                          MOUNTED                10   5.39550781
+REDO2                          MOUNTED                10   5.59472656
+
+SQL> show parameter disk
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+asm_diskgroups                       string      REDO2, REDO1
+asm_diskstring                       string      /dev/rhdisk*, /dev/DATA*, /dev
+                                                 /REDO*
+SQL> select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup order by name;
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+DATA                           MOUNTED              4200   3915.55469
+REDO1                          MOUNTED                10   5.39550781
+REDO2                          MOUNTED                10   5.59472656
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$
+$ ps -ef|grep d.bin
+  oracle  3145974  3866878   0 00:58:58      -  0:00 /u01/app/12.2.0.1/grid/bin/evmlogger.bin -o /u01/app/12.2.0.1/grid/log/[HOSTNAME]/evmd/evmlogger.info -l /u01/app/12.2.0.1/grid/log/[HOSTNAME]/evmd/evmlogger.log
+  oracle  3211462        1   0 00:58:48      -  0:02 /u01/app/12.2.0.1/grid/bin/ohasd.bin reboot
+  oracle  3866878        1   0 00:58:56      -  0:00 /u01/app/12.2.0.1/grid/bin/evmd.bin
+  oracle  4522084        1   0 00:58:56      -  0:00 /u01/app/12.2.0.1/grid/bin/tnslsnr LISTENER_JFSEXPENZ01 -no_crs_notify -inherit
+  oracle  4653184        1   0 00:59:01      -  0:00 /u01/app/12.2.0.1/grid/bin/cssdagent
+  oracle  3408236        1   0 00:59:02      -  0:00 /u01/app/12.2.0.1/grid/bin/ocssd.bin
+  oracle  3867106        1   2 00:58:56      -  0:02 /u01/app/12.2.0.1/grid/bin/oraagent.bin
+  oracle 28049710  3604674   0 01:09:13  pts/2  0:00 grep d.bin
+$
+$ ps -ef|grep lsnr
+  oracle  4522084        1   0 00:58:56      -  0:00 /u01/app/12.2.0.1/grid/bin/tnslsnr LISTENER_JFSEXPENZ01 -no_crs_notify -inherit
+  oracle 28049716  3604674   0 01:09:27  pts/2  0:00 grep lsnr
+$
+$ lsnrctl status LISTENER_JFSEXPENZ01
+
+LSNRCTL for IBM/AIX RISC System/6000: Version 12.2.0.1.0 - Production on 14-FEB-2019 01:09:34
+
+Copyright (c) 1991, 2017, Oracle.  All rights reserved.
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=JFSEXPENZ01)(PORT=1657)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER_JFSEXPENZ01
+Version                   TNSLSNR for IBM/AIX RISC System/6000: Version 12.2.0.1.0 - Production
+Start Date                14-FEB-2019 00:58:56
+Uptime                    0 days 0 hr. 10 min. 37 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/12.2.0.1/grid/network/admin/listener.ora
+Listener Log File         /u01/app/oracle/diag/tnslsnr/JFSEXPENZ01/listener_jfsexpenz01/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=JFSEXPENZ01)(PORT=1657)))
+Services Summary...
+Service "+ASM" has 1 instance(s).
+  Instance "+ASM", status READY, has 1 handler(s) for this service...
+Service "+ASM_DATA" has 1 instance(s).
+  Instance "+ASM", status READY, has 1 handler(s) for this service...
+Service "+ASM_REDO1" has 1 instance(s).
+  Instance "+ASM", status READY, has 1 handler(s) for this service...
+Service "+ASM_REDO2" has 1 instance(s).
+  Instance "+ASM", status READY, has 1 handler(s) for this service...
+Service "CIBUAT" has 1 instance(s).
+  Instance "CIBUAT", status READY, has 1 handler(s) for this service...
+Service "CIBUATXDB" has 1 instance(s).
+  Instance "CIBUAT", status READY, has 1 handler(s) for this service...
+Service "CKYCUAT" has 1 instance(s).
+  Instance "CKYCUAT", status READY, has 1 handler(s) for this service...
+Service "EDWPRD" has 1 instance(s).
+  Instance "EDWPRD", status READY, has 1 handler(s) for this service...
+Service "EDWPRDXDB" has 1 instance(s).
+  Instance "EDWPRD", status READY, has 1 handler(s) for this service...
+Service "JFSEXPEN" has 1 instance(s).
+  Instance "JFSEXPEN", status READY, has 1 handler(s) for this service...
+Service "JFSEXPENXDB" has 2 instance(s).
+  Instance "CKYCUAT", status READY, has 1 handler(s) for this service...
+  Instance "JFSEXPEN", status READY, has 1 handler(s) for this service...
+Service "JFSIIB" has 1 instance(s).
+  Instance "JFSIIB", status READY, has 1 handler(s) for this service...
+Service "JFSIIBXDB" has 1 instance(s).
+  Instance "JFSIIB", status READY, has 1 handler(s) for this service...
+The command completed successfully
+$

@@ -1,0 +1,198 @@
+TABLESPACE PRACTICAL
+
+> set linesize 100;
+> set pagesize 100;
+> col FILE_NAME format a50;
+> col bytes format 99999,999.99
+> col * format a5;
+
+++++++++++++++++++++++++++++++++++++
+HOW TO VIEW TABLESPACE AND DATAFILES
+++++++++++++++++++++++++++++++++++++
+
+> select TABLESPACE_NAME,FILE_NAME from dba_data_files;
+> select file_id,file_name,tablespace_name,bytes/1024,AUTOEXTENSIBLE,status from dba_data_files order by tablespace_name;
+> select tablespace_name,contents,status from dba_tablespaces;
+
+++++++++++++++++++
+CREATE TABLESPACE 
+******************
+note: the size is for datafile not for tablespace
+
+> Create tablespace PROD13 datafile '/u01/app/PROD/oradata/PROD/PROD229.dbf' size 10m autoextend on maxsize 500m;
+> CREATE TABLESPACE lmtbsb DATAFILE '/u02/oracle/data/lmtbsb01.dbf' SIZE 50M EXTENT MANAGEMENT LOCAL AUTOALLOCATE;
+> CREATE TABLESPACE <tablespace_name> DATAFILE 'datafile_name.dbf' SIZE 20M AUTOEXTEND ON;
+> Create tablespace PROD13 datafile '/u01/app/PROD/oradata/PROD/PROD229.dbf' size 10m autoextend on next 100m maxsize 500m;
+> Create tablespace PROD13 datafile '/u01/app/PROD/oradata/PROD/PROD229.dbf' size 10m extent management local;
+
+++++++++++++++++++
+RENAME TABLESPACE
+++++++++++++++++++
+
+> alter tablespace PROD1 rename to PROD2;
+
++++++++++++++++++++++++++++++++
+ADD DATAFILE OR CREATE DATAFILE
++++++++++++++++++++++++++++++++
+
+> alter tablespace PROD13 add datafile '/u01/app/PROD/oradata/PROD/PROD265.dbf' size 100m autoextend on/off;
+
+++++++++++++++++++++++++++++++++
+RENAMING DATAFILE IN TABLESPACE
+++++++++++++++++++++++++++++++++
+
+> alter tablespace PROD1 offline;
+$ mv /u01/app/PROD/oradata/PROD/datafile1.dbf datafile2.dbf;
+> alter database rename file '/u01/app/PROD/oradata/PROD/datafile4.dbf' to '/u01/app/PROD/oradata/PROD/datafile5.dbf';
+> alter tablespace PROD1 online;
+
++++++++++++++++
+RESIZE DATAFILE
++++++++++++++++ 
+
+> alter database datafile '/u01/app/PROD/oradata/PROD/PROD265.dbf' resize 200m;
+> ALTER DATABASE DATAFILE '/u02/oracle/rbdb1/users03.dbf' AUTOEXTEND OFF/ON;
+
+++++++++++++++++++++++++++++++++++++++++++
+MAKING TABLESPACE READ ONLY or READ WRITE
+++++++++++++++++++++++++++++++++++++++++++
+
+> alter tablespace PROD1 read only;
+> alter tablespace PROD1 read write;
+
++++++++++++++++++++++++++++++++++++++++++++
+CHECK TABLESPACE IS READ ONLY OR READ WRITE
++++++++++++++++++++++++++++++++++++++++++++
+note: If we set tablespace read only, It will affect to the datafiles under the tablespace
+
+> select tablespace_name from dba_tablespaces where status ='READ ONLY';
+> select tablespace_name,status from dba_tablespaces;
+To check datafile mode
+> select name,enabled from v$datafile;
+
+++++++++++++++++++++++++++++++++++++++++++++++
+RELOCATE DATAFILE FROM ONE LOCATION TO ANOTHER
+++++++++++++++++++++++++++++++++++++++++++++++
+
+> alter tablespace PROD13 offline;
+$ mv /u01/app/PROD/oradata/PROD/PROD265.dbf /u02/app/PROD/oradata/PROD
+> alter database rename file '/u01/app/PROD/oradata/PROD/PROD265.dbf' to '/u02/app/PROD/oradata/PROD/PROD265.dbf';
+> alter tablespace PROD13 online;
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+MOVING TABLE FROM ONE TABLESPACE TO ANOTHER TABLESPACE
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+> conn scott/oracle123
+> create table EMP13 as select * from emp;
+conn /as sysdba
+> select TABLE_NAME,TABLESPACE_NAME from dba_tables where TABLE_NAME='EMP13';
+>  alter table SCOTT.EMP13 move tablespace PROD13;
+> select B.FILE_NAME from dba_segments a, dba_data_files b where a.header_file=b.file_ID and segment_name='EMP13';
+
+++++++++++++++++++++++++++++++++++++++++++++
+MOVING INDEX FROM ONE TABLESPACE TO ANOTHER
+++++++++++++++++++++++++++++++++++++++++++++
+
+> alter index emp_indx rebuild tablespace hz; 
+
+++++++++++++++++++++++
+FIND THE DATABASE SIZE
+++++++++++++++++++++++
+
+> select sum(bytes/1024/1024/1024) from dba_data_files;
+> select sum(bytes)/1024/1024 from dba_data_files;
+> select tablespace_name,file_name,bytes/1024/1024/1024 from dba_data_files;
+
++++++++++++++++++++
+FIND THE FREE SPACE
++++++++++++++++++++
+ 
+> select sum(bytes)/1024/1024 from dba_free_space;
+
++++++++++++++++
+DROP DATAFILE
++++++++++++++++
+note: we can not remove all datafiles in a tablespace but we can remove from OS level
+
+> alter tablespace PROD13  drop datafile '/u02/app/PROD/oradata/PROD/PROD265.dbf';
+
++++++++++++++++++++++++++++++++++++
+DROP TABLESPACE INCLUDING DATAFILES
++++++++++++++++++++++++++++++++++++
+
+> drop tablespace PROD13 including contents and datafiles;
+
+++++++++++++++
+REUSE DATAFILE
+++++++++++++++
+ 
+> drop tablespace PROD13;
+Tablespace dropped.
+> create tablespace PROD13 datafile '/u01/app/PROD/oradata/PROD/PROD265.dbf' reuse;
+Tablespace created.
+>  create tablespace PROD1 datafile '/u01/app/PROD/oradata/PROD/datafile01.dbf','/u01/app/PROD/oradata/PROD/datafile05.dbf' reuse;
+
+note:we can reuse datafile to any tablespace
+> create tablespace PROD1 datafile '/u01/app/DEV/oradata/DEV/datafile01.dbf' size 10m;
+> drop tablespace PROD1;
+> alter tablespace PROD2 add datafile '/u01/app/DEV/oradata/DEV/datafile01.dbf' reuse;
+
++++++++++++++++++++++++++
+CREATE BIGFILE TABLESPACE
++++++++++++++++++++++++++
+ 
+>create bigfile tablespace big_ts13 datafile '/u01/app/PROD/oradata/PROD/big_ts13.dbf' size 100m;
+> select NAME,BIGFILE from v$tablespace;
+> alter tablespace BIG_TS13 resize 200m;
+
+--we can not add bigfile tablespace 
+SYS ON PROD:13-JUL-17> alter tablespace big_ts13 add datafile '/u01/app/PROD/oradata/PROD/big_ts15.dbf' size 50m;
+alter tablespace big_ts13 add datafile '/u01/app/PROD/oradata/PROD/big_ts15.dbf' size 50m
+*
+ERROR at line 1:
+ORA-32771: cannot add file to bigfile tablespace
+SYS ON PROD:13-JUL-17>
+
++++++++++++++++++++
+FIND THE BLOCK SIZE
++++++++++++++++++++
+
+>show parameter db_block_size;
+
++++++++++++++++++++++++++++++++
+IDENTIFY TOTAL NO.OF DATAFILES
+++++++++++++++++++++++++++++++
+
+> show parameter db_files;
+
++++++++++++++++++++++++++
+FIND EXISTING TABLESPACES
+++++++++++++++++++++++++++
+
+> desc dba_tablespaces;
+> select tablespace_name from dba_tablespaces;
+
+=================================================
+TO KNOW THE DEFAULT TABLESPACE SET FOR A DATABASE
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+> desc database_properties; 
+> select * from database_properties where property_name like ‘%TABLESPACE%’;
+
++++++++++++++++++++++++++++++++++++++++++++
+QUERY TO FIND THE DATAFILES OF A TABLESPACE
++++++++++++++++++++++++++++++++++++++++++++
+
+> select file_name,bytes/1024/1024 from dba_data_files where tablespace_name='&TBS_NAME';
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+ADDING SPACE TO TABLESPACE:EXTEND DATAFILES METHOD
+++++++++++++++++++++++++++++++++++++++++++++++++++
+NOTE:Before adding space we must check os level space,never proceed without checking
+
+> alter database datafile '&datafile_name' resize &size;
+
+
+

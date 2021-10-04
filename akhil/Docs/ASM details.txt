@@ -1,0 +1,195 @@
+ASMCMD> lsdg
+State    Type    Rebal  Sector  Block       AU  Total_MB  Free_MB  Req_mir_free_MB  Usable_file_MB  Offline_disks  Voting_files  Name
+MOUNTED  EXTERN  N         512   4096  1048576   1331200   458037                0          458037              0             N  DATA/
+MOUNTED  EXTERN  N         512   4096  1048576   1536000   448547                0          448547              0             N  JFSUAT11/
+
+
+export ORACLE_HOME=/u01/app/11.2.0/grid
+$ export ORACLE_SID=+ASM
+
+
+SELECT name, free_mb, total_mb, free_mb/total_mb*100 as percentage FROM v$asm_diskgroup;
+
+select name, TOTAL_MB,FREE_MB,PATH from V$ASM_DISK;
+
+NAME                             TOTAL_MB    FREE_MB PATH
+------------------------------ ---------- ---------- -------------------------------------------------------
+JFSUAT11_0004                      512000     149512 /dev/oradata_nasm001
+JFSUAT11_0005                      512000     149519 /dev/oradata_nasm002
+JFSUAT11_0000                      512000     149516 /dev/oradata_nasm010
+DATA_0000                          409600     140936 /dev/oradata_nasm011
+DATA_0007                          307200     105701 /dev/oradata_nasm003
+DATA_0008                          307200     105698 /dev/oradata_nasm004
+DATA_0009                          307200     105702 /dev/oradata_nasm005
+
+
+JFSTRN:
+FILE_NAME                                                    SIZE_IN_MB
+------------------------------------------------------------ ----------
++DATA/jfstrn/datafile/fcrhost.416.919080615                       30720
++DATA/jfstrn/datafile/fcrhost.415.919080777                       30720
++DATA/jfstrn/datafile/fcrhost.414.919080975                       30720
++DATA/jfstrn/datafile/fcrhost.413.919081237                       30720
++DATA/jfstrn/datafile/fcrhost.412.919081477                       30720
++DATA/jfstrn/datafile/fcrhost.411.919081693                       30720
++DATA/jfstrn/datafile/fcrhost.410.919081847                       30720
++DATA/jfstrn/datafile/fcrhost.409.919081973                       30720
++DATA/jfstrn/datafile/fcrhost.408.919082105                       30720
++DATA/jfstrn/datafile/fcrhost.417.919082275                       30720
++DATA/jfstrn/datafile/fcrhost.418.919082445                       30720
++DATA/jfstrn/datafile/fcrhost.419.919082613                       30720
++DATA/jfstrn/datafile/fcrhost.420.919082833                       30720
++DATA/jfstrn/datafile/fcchost.421.919117065                       30720
++DATA/jfstrn/datafile/fcrbrn.422.919117169                        30720
++DATA/jfstrn/datafile/fcrhost.423.919174241                       30720
++DATA/jfstrn/datafile/perfstat.326.980882587                       2048
+
+FILE_NAME                                                    SIZE_IN_MB
+------------------------------------------------------------ ----------
++JFSUAT11/jfstrn/datafile/fcrhost.326.919078365                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.307.919080255                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.308.919080161                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.309.919080059                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.310.919079971                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.311.919079859                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.338.919079487                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.337.919079405                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.336.919079333                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.335.919079259                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.312.918997389                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.319.919077835                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.320.919077911                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.321.919077989                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.322.919078071                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.323.919078143                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.324.919078217                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.306.919080379                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.327.919078447                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.328.919078541                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.329.919078641                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.330.919078739                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.331.919078845                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.332.919078953                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.333.919079075                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.334.919079181                   30720
++JFSUAT11/jfstrn/datafile/fcrhost.325.919078289                   27721
++JFSUAT11/jfstrn/datafile/undotbs1.367.909587127                  22920
++JFSUAT11/jfstrn/datafile/fcrhost.385.909598581                   10240
++JFSUAT11/jfstrn/datafile/undotbs1.318.919074849                   5120
++JFSUAT11/jfstrn/datafile/system.365.909587127                     5100
++JFSUAT11/jfstrn/datafile/fcchost.386.909598635                    3930
++JFSUAT11/jfstrn/datafile/undotbs1.317.919074783                   2048
++JFSUAT11/jfstrn/datafile/sysaux.366.909587127                     1270
++JFSUAT11/jfstrn/datafile/fcrbrn.387.909598757                      377
++JFSUAT11/jfstrn/datafile/users.368.909587127                      8.75
+
+
+JFSUAT:
+FILE_NAME                                                    SIZE_IN_MB
+------------------------------------------------------------ ----------
++DATA/jfsuat/datafile/undotbs2.396.906196533                      25600
++DATA/jfsuat/datafile/system.332.905953045                         8780
++DATA/jfsuat/datafile/fccuat.dbf                                   7100
++DATA/jfsuat/datafile/sysaux.333.905953045                         3072
++DATA/jfsuat/datafile/perfstat.325.980879731                       2048
++DATA/jfsuat/datafile/fccuat.292.915312413                         1691
++DATA/jfsuat/datafile/fccuat.297.915312377                         1581
++DATA/jfsuat/datafile/fccuat.438.927116841                          534
++DATA/jfsuat/datafile/fcrmig.dbf                                    510
++DATA/jfsuat/datafile/fccuat.439.927117759                          216
++DATA/jfsuat/datafile/fccuat.434.927115519                          183
++DATA/jfsuat/datafile/fccuat.437.927116793                          138
++DATA/jfsuat/datafile/fccuat.432.927115407                          130
++DATA/jfsuat/datafile/fccuat.329.915312489                          125
++DATA/jfsuat/datafile/fccuat.429.927115229                          124
++DATA/jfsuat/datafile/fccuat.433.927115463                          117
++DATA/jfsuat/datafile/fccuat.436.927115687                          116
++DATA/jfsuat/datafile/fccuat.435.927115627                          110
++DATA/jfsuat/datafile/fccuat.431.927115347                          100
++DATA/jfsuat/datafile/fccuat.330.915312453                          100
++DATA/jfsuat/datafile/statspack_data.440.978707157                  100
++DATA/jfsuat/datafile/uat_mds.403.906286303                         100
++DATA/jfsuat/datafile/fccuat.428.927115169                           99
++DATA/jfsuat/datafile/fccuat.430.927115287                           95
++DATA/jfsuat/datafile/uat_biplatform.401.906286301                   64
++DATA/jfsuat/datafile/users.335.905953045                             5
+
+FILE_NAME                                                    SIZE_IN_MB
+------------------------------------------------------------ ----------
++JFSUAT11/jfsuat/datafile/fccuat.391.910113623                     8292
++JFSUAT11/jfsuat/datafile/fccuat.339.915312191                     1566
++JFSUAT11/jfsuat/datafile/fccuat.341.915312075                     1565
++JFSUAT11/jfsuat/datafile/fccuat.340.915312131                     1554
++JFSUAT11/jfsuat/datafile/fccuat.343.915311965                     1538
++JFSUAT11/jfsuat/datafile/fccuat.346.915311797                      573
++JFSUAT11/jfsuat/datafile/fccuat.345.915311853                       95
++JFSUAT11/jfsuat/datafile/fccuat.344.915311909                       95
++JFSUAT11/jfsuat/datafile/fccuat.342.915312021                       94
++JFSUAT11/jfsuat/datafile/fccuat.347.915311743                       90
++JFSUAT11/jfsuat/datafile/fccuat.348.915311687                       89
++JFSUAT11/jfsuat/datafile/fccuat.349.915311633                       86
++JFSUAT11/jfsuat/datafile/fccuat.350.915311579                       79
++JFSUAT11/jfsuat/datafile/fccuat.351.915311523                       77
++JFSUAT11/jfsuat/datafile/fccuat.352.915311469                       74
++JFSUAT11/jfsuat/datafile/fccuat.356.915311253                       68
++JFSUAT11/jfsuat/datafile/fccuat.357.915311197                       67
++JFSUAT11/jfsuat/datafile/fccuat.397.915311089                       67
++JFSUAT11/jfsuat/datafile/fccuat.364.915311143                       66
++JFSUAT11/jfsuat/datafile/fccuat.353.915311415                       64
++JFSUAT11/jfsuat/datafile/fccuat.355.915311307                       63
++JFSUAT11/jfsuat/datafile/fccuat.354.915311361                       63
+
+JFSTST:
+FILE_NAME                                                    SIZE_IN_MB
+------------------------------------------------------------ ----------
++DATA/jfstst/datafile/fcrhost.266.902076619                       10996
++DATA/jfstst/datafile/undotbs1.258.901536119                       6960
++DATA/jfstst/datafile/system.256.901536119                         4140
++DATA/jfstst/datafile/fcchost.267.902076699                        4096
++DATA/jfstst/datafile/perfstat.342.979211639                       2048
++DATA/jfstst/datafile/fcrbrn.268.902077031                         2048
++DATA/jfstst/datafile/uatrep_social.288.916328987                  1024
++DATA/jfstst/datafile/sysaux.257.901536119                          890
++DATA/jfstst/datafile/uatrep_urmserver.300.916328985                500
++DATA/jfstst/datafile/uatrep_ias_activity.305.916328983             500
++DATA/jfstst/datafile/uatrep_ocs.298.916328985                      400
++DATA/jfstst/datafile/uatrep_ias_orasdpm.317.916328979              300
++DATA/jfstst/datafile/prd1_biplatform.425.920476345                 256
++DATA/jfstst/datafile/uatrep_ias_webcenter.337.916328989            250
++DATA/jfstst/datafile/uatrep_ipm.302.916328983                      200
++DATA/jfstst/datafile/uatrep_odi_user.321.916328975                 200
++DATA/jfstst/datafile/uatrep_soainfra.316.916328977                 200
++DATA/jfstst/datafile/uatrep_orabam.293.916328979                   200
++DATA/jfstst/datafile/uatrep_portal.323.916328975                   105
++DATA/jfstst/datafile/uatrep_ocssearch.307.916328981                105
++DATA/jfstst/datafile/sit_mds.270.902330133                         100
++DATA/jfstst/datafile/prd1_mds.426.920476347                        100
++DATA/jfstst/datafile/uatrep_ess.407.916328989                      100
++DATA/jfstst/datafile/uatrep_ias_discuss.294.916328977              100
++DATA/jfstst/datafile/uatrep_orairm.309.916328981                   100
++DATA/jfstst/datafile/uatrep_mds.314.916328979                      100
++DATA/jfstst/datafile/uatrep_biplatform.312.916328981                64
++DATA/jfstst/datafile/sit_biplatform.271.902330133                   64
++DATA/jfstst/datafile/uatrep_ias_iauoes.319.916328977                60
++DATA/jfstst/datafile/uatrep_ias_iau.331.916328979                   60
++DATA/jfstst/datafile/uatrep_disco_pstore.306.916328983              60
++DATA/jfstst/datafile/uatrep_ias_opss.295.916328977                  60
++DATA/jfstst/datafile/uatrep_ias_orasdpxdms.299.916328985            50
++DATA/jfstst/datafile/uatrep_ias_orasdpsds.303.916328983             50
++DATA/jfstst/datafile/uatrep_ias_orasdpls.320.916328977              50
++DATA/jfstst/datafile/uatrep_portal_idx.289.916328987                50
++DATA/jfstst/datafile/uatrep_ias_portlet.290.916328987               25
++DATA/jfstst/datafile/uatrep_disco_ptm5_cache.322.916328975           7
++DATA/jfstst/datafile/uatrep_disco_ptm5_meta.304.916328983            7
++DATA/jfstst/datafile/users.259.901536119                             5
++DATA/jfstst/datafile/uatrep_portal_log.318.916328979                 4
++DATA/jfstst/datafile/uatrep_portal_doc.291.916328987                 4
++DATA/jfstst/datafile/fccdatasml.dbf                                  1
+
+FILE_NAME                                                     SZE_IN_MB
+------------------------------------------------------------ ----------
++JFSUAT11/jfstst/datafile/fcrhost.363.908454571                   30720
++JFSUAT11/jfstst/datafile/system.393.911054815                    30720
++JFSUAT11/jfstst/datafile/fcchost.392.911049955                   30720
+
+

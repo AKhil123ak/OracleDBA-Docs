@@ -1,0 +1,18 @@
+SELECT * FROM DB_OPERATIONS;
+
+0racle123
+
+172.17.75.38
+
+0RACLE123
+
+172.17.70.249
+
+172.17.75.27
+
+scp *.zip oracle@172.17.75.27:/backup/patch
+
+select max(sequence#) from v$archived_log;
+
+select max(sequence#) from v$archived_log where applied='YES';
+

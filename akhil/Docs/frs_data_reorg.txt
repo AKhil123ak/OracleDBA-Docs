@@ -1,0 +1,91 @@
+select * from v$instance;
+select sysdate from dual;
+col OBJECT_NAME for a30
+select owner,object_name,object_type from dba_objects where status='INVALID' ORDER BY OWNER,OBJECT_TYPE;
+select owner,object_name,object_type from dba_objects where  status='INVALID' and owner='FRSPROD' ORDER BY OWNER,OBJECT_TYPE;
+select owner,object_name,object_type from dba_objects where  status='INVALID' and owner='CBTRAIN' ORDER BY OWNER,OBJECT_TYPE;
+select count(*),object_type from dba_objects where status='INVALID' group by object_type;
+select count(*) from dba_objects where  status='INVALID';
+select count(*),object_type from dba_objects where owner='FRSPROD' and status='INVALID' group by object_type;
+select count(*) from dba_objects where owner='FRSPROD' and status='INVALID';
+select count(*),object_type from dba_objects where owner='CBTRAIN' and status='INVALID' group by object_type;
+select count(*) from dba_objects where owner='CBTRAIN' and status='INVALID';
+select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_free order by 1;
+SELECT COUNT(1),STATUS FROM USER_INDEXES GROUP BY STATUS;
+
+SYS@frsprod1 SQL>conn frsprod/frsprod@frsprod
+Connected.
+FRSPROD@frsprod SQL>sho user
+USER is "FRSPROD"
+
+ALTER SESSION ENABLE RESUMABLE TIMEOUT 3600;
+alter session force parallel query;
+alter session force parallel ddl;
+alter session force parallel dml;
+set lines 300
+SELECT COUNT(1),STATUS FROM USER_INDEXES GROUP BY STATUS;
+select INDEX_OWNER,INDEX_NAME,PARTITION_NAME,TABLESPACE_NAME,COMPRESSION,STATUS from dba_ind_partitions where STATUS='UNUSABLE';
+select INDEX_NAME,OWNER,STATUS,COMPRESSION,TABLESPACE_NAME from dba_INDEXES where STATUS='UNUSABLE';
+select OWNER,INDEX_NAME,INDEX_TYPE,TABLE_NAME,DEGREE from dba_indexes where DEGREE='DEFAULT';
+set echo on
+set feed on
+
+
+
+alter table frsprod.CAN_CIM50_KYC_DTLS	move compress;
+alter table frsprod.CAN_CIM50_PAN_DTLS	move compress;
+alter table frsprod.CAN_CIM50_AADHAR_DTLS	move compress;
+alter table frsprod.CAN_ACCTS_280202	move compress;
+alter table frsprod.BOVW_ADVANCES_MIS_HIST_PARTB_D	move compress;
+alter table frsprod.BOVW_ADVANCES_MIS_HIST_519	move compress;
+alter table frsprod.BOVW_ADVANCES_MIS_HIST_505	move compress;
+alter table frsprod.BOVW_ADVANCES_MIS_HIST_PC	move compress;
+alter table frsprod.BOVW_ADVANCES_MIS_HIST_PARTB	move compress;
+alter table frsprod.CAN_FCT_CASA_ACCOUNTS2_505	move compress;
+alter table frsprod.CAN_FCT_CASA_ACCOUNTS2_519	move compress;
+alter table frsprod.CAN_FCT_CASA_ACCOUNTS2	move compress;
+alter table frsprod.CAN_FCT_CASA_ACCOUNTS_30SEP15	move compress;
+alter table frsprod.CAN_FCT_SB_CASA	move compress;
+alter table frsprod.CAN_FCT_CASA_ACCOUNTS_TOP	move compress;
+alter table frsprod.CAN_BOVW_ADV_PSR73_TAB_ADF	move compress;
+alter table frsprod.FCT_ACCT_MIS_PSR71	move compress;
+alter table frsprod.FCT_PSR71_MIS	move compress;
+alter table frsprod.CAN_FCT_ACCT_TEMP_PSR67	move compress;
+alter table frsprod.CAN_FRS_BKSPI_TD	move compress;
+alter table frsprod.CAN_FCT_ACCT_WSHG	move compress;
+alter table frsprod.CAN_FCT_ACCT_TEMP_D	move compress;
+alter table frsprod.CAN_FCT_ACCT_TEMP	move compress;
+alter table frsprod.CAN_FCT_ACCT_DISB_PSR72_ADF	move compress;
+
+select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_free order by 1;
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild  compress  ;' from dba_INDEXES where STATUS='UNUSABLE';
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild  compress  ;' from dba_INDEXES where STATUS='UNUSABLE';
+select INDEX_OWNER,INDEX_NAME,PARTITION_NAME,TABLESPACE_NAME,COMPRESSION,STATUS from dba_ind_partitions where STATUS='UNUSABLE';
+
+select INDEX_NAME,OWNER,STATUS,COMPRESSION,TABLESPACE_NAME from dba_INDEXES where STATUS='UNUSABLE';
+select OWNER,INDEX_NAME,INDEX_TYPE,TABLE_NAME,DEGREE from dba_indexes where DEGREE='DEFAULT';
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   noparallel  ;' from dba_INDEXES where DEGREE='DEFAULT';
+
+
+FRSPROD@frsprod SQL>set echo on
+FRSPROD@frsprod SQL>set feed on
+FRSPROD@frsprod SQL>ALTER index  FRSPROD.CAN_CIM50_KYC_DTLS_INDX1   noparallel	;
+
+Index altered.
+
+select OWNER,INDEX_NAME,INDEX_TYPE,TABLE_NAME,DEGREE from dba_indexes where DEGREE='DEFAULT';
+select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_free order by 1;
+select INDEX_OWNER,INDEX_NAME,PARTITION_NAME,TABLESPACE_NAME,COMPRESSION,STATUS from dba_ind_partitions where STATUS='UNUSABLE';
+select INDEX_NAME,OWNER,STATUS,COMPRESSION,TABLESPACE_NAME from dba_INDEXES where STATUS='UNUSABLE';
+select OWNER,INDEX_NAME,INDEX_TYPE,TABLE_NAME,DEGREE from dba_indexes where DEGREE='DEFAULT';
+select count(*),object_type from dba_objects where status='INVALID' group by object_type;
+select count(*) from dba_objects where  status='INVALID';
+
+
+select count(*),object_type from dba_objects where owner='FRSPROD' and status='INVALID' group by object_type;
+select count(*) from dba_objects where owner='FRSPROD' and status='INVALID';
+select count(*),object_type from dba_objects where owner='CBTRAIN' and status='INVALID' group by object_type;
+select count(*) from dba_objects where owner='CBTRAIN' and status='INVALID';
+spool off
+
+FCT_ACCOUNT_MIS

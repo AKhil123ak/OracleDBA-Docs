@@ -1,0 +1,82 @@
+....sutdown process.....
+1. loging from oracle user...
+
+
+take the output of below commond....
+1. df -gt 
+2. ps -ef | grep pmon 
+   ps -ef | grep tns 
+
+3. ----------ASM DISK INFO
+set line 250
+col diskgroup_name for a40
+col disk_name for a40
+col path for a40
+select g.name diskgroup_name, d.name disk_name, d.os_mb/1024 DiskSize_GB , d.path path 
+from v$asm_diskgroup g, v$asm_disk d where g.GROUP_NUMBER=d.GROUP_NUMBER;
+SET LINESIZE  145
+SET PAGESIZE  9999
+SET VERIFY    off
+COLUMN group_name             FORMAT a20           HEAD 'Disk Group|Name'
+COLUMN sector_size            FORMAT 99,999        HEAD 'Sector|Size'
+COLUMN block_size             FORMAT 99,999        HEAD 'Block|Size'
+COLUMN allocation_unit_size   FORMAT 999,999,999   HEAD 'Allocation|Unit Size'
+COLUMN state                  FORMAT a11           HEAD 'State'
+COLUMN type                   FORMAT a6            HEAD 'Type'
+COLUMN total_mb               FORMAT 999,999,999   HEAD 'Total Size (MB)'
+COLUMN used_mb                FORMAT 999,999,999   HEAD 'Used Size (MB)'
+COLUMN pct_used               FORMAT 999.99        HEAD 'Pct. Used'
+compute sum label "Grand Total: " of total_mb used_mb on report
+SELECT
+    name                                     group_name
+  , sector_size                              sector_size
+  , block_size                               block_size
+  , allocation_unit_size                     allocation_unit_size
+  , state                                    state
+  , type                                     type
+  , total_mb/1024                                total_gb
+  , (total_mb - free_mb)/1024                     used_gb
+  , ROUND(((free_mb / total_mb))*100, 2)  pct_free
+FROM
+    v$asm_diskgroup
+ORDER BY
+    name
+/
+
+4. cd /dev/
+5. ls -lrt 
+6. ps -ef | grep d.bin 
+
+7. (do this one for all instances)
+sqlplus / as sysdba 
+shut immediate;
+
+-- loging with grid user..
+1. shut down asm 
+sqlplus / as sysasm 
+shut immediate;
+
+2. shut down cluster 
+
+crsctl stop has 
+-----------------------------------------------------------------startup process--------------------
+
+
+-- loging with grid user..
+1. startup asm 
+sqlplus / as sysasm 
+startup;
+
+-- loging with oracle user..
+
+1. start up database 
+sqlplus / as sysdba
+startup;
+
+
+
+[oracle@dcdbssrv01:/home/oracle]$ ps -ef|grep pmon
+    grid 14549214        1   0   May 02      - 11:12 asm_pmon_+ASM
+  oracle  5439924 16384356   0 15:29:14  pts/7  0:00 grep pmon
+  oracle 19988748        1   0   Jul 18      -  5:51 ora_pmon_JFSDRTST
+  oracle 24772878        1   0   Aug 03      -  4:42 ora_pmon_JFSSIM

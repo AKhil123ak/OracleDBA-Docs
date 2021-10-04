@@ -1,0 +1,75 @@
+
+Unod tablesapce practicals
+
+
+
+CHECK TABLESPACE INFORMATION
+++++++++++++++++++++++++++++
+
+> select tablespace_name,segment_name from dba_segments where tablespace_name='UNDOTBS';
+> select tablespace_name,segment_name from dba_undo_extents where tablespace_name='UNDOTBS' and status='active';
+> select tablespace_name,segment_name,status from dba_rollback_segs;
+> show parameter undo;
+
+++++++++++++++++++++++++++++++++
+Create tablespace with datafile
+++++++++++++++++++++++++++++++++
+
+>CREATE UNDO TABLESPACE undotbs_020 DATAFILE '/u01/app/PROD/oradata/PROD/undo01237.dbf' SIZE 20M AUTOEXTEND ON;
+
+++++++++++++++++++++++++++
+add datafile to tablespace
+++++++++++++++++++++++++++
+
+>ALTER TABLESPACE undotbs_020 ADD DATAFILE '/u01/app/PROD/oradata/PROD/undo0286.dbf' size 10m AUTOEXTEND ON;
+
++++++++++++++++
+DROP TABLESPACE
++++++++++++++++
+
+> drop tablespace undotbs_020;
+ 
+++++++++++++++++++++++++++
+Switching Undo Tablespaces
+++++++++++++++++++++++++++
+
+> ALTER SYSTEM SET UNDO_TABLESPACE = UNDOTBS_020 SCOPE=both;
+
+delete old undo tablespace
+drop tablespace UNDOTBS_012 including contents and datafiles;
+
++++++++++++++++++++++
+CHANGE UNDO RETENTION
++++++++++++++++++++++
+
+> alter system set undo_retention=1000;
+
+++++++++++++++++++++++++++++++++++
+HOW TO SET UNDO RETENTIO GUARANTEE
+++++++++++++++++++++++++++++++++++
+
+> alter tablespace UNDOTBS_012 retention guarantee;
+> alter tablespace UNDOTBS1 retention noguarantee;
+> select tablespace_name,contents,retention from dba_tablespaces;
+
++++++++++++++++++++++++++
+Views for undo tablespace 
++++++++++++++++++++++++++
+
+? V$undostat     ? V$rollstat         ? V$transaction  ? dba_undo_extents 
+
++++++++++++++++++++++++++++
+View for Sysaux tablespace: 
++++++++++++++++++++++++++++
+
+? V$sysaux_occupants 
+
+++++++++++++++++++++++++++++
+Error 01555:snapshot too old
+++++++++++++++++++++++++++++
+
+when undotablespace is available in retention no guarantee, this error arises
+To solve this error
+- enable table in retention guarantee
+- dont give frequent commit
+- increase your undo datafile  size

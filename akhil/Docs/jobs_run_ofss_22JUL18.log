@@ -1,0 +1,931 @@
+SYS:JFSPPROD > select * from v$instance;
+
+INSTANCE_NUMBER INSTANCE_NAME                                                   
+--------------- ----------------                                                
+HOST_NAME                                                                       
+----------------------------------------------------------------                
+VERSION           STARTUP_T STATUS       PAR    THREAD# ARCHIVE LOG_SWITCH_WAIT 
+----------------- --------- ------------ --- ---------- ------- --------------- 
+LOGINS     SHU DATABASE_STATUS   INSTANCE_ROLE      ACTIVE_ST BLO               
+---------- --- ----------------- ------------------ --------- ---               
+              1 JFSPPROD                                                        
+JFSBNKSRV121                                                                    
+11.2.0.4.0        01-JUL-18 OPEN         NO           1 STARTED                 
+ALLOWED    NO  ACTIVE            PRIMARY_INSTANCE   NORMAL    NO                
+                                                                                
+
+SYS:JFSPPROD > set time on;
+13:14:37 SYS:JFSPPROD > select sysdate from dual;
+
+SYSDATE                                                                         
+---------                                                                       
+22-JUL-18                                                                       
+
+13:14:42 SYS:JFSPPROD > alter session set current_schema='FCRHOST';
+alter session set current_schema='FCRHOST'
+                                 *
+ERROR at line 1:
+ORA-02421: missing or invalid schema authorization identifier 
+
+
+13:16:44 SYS:JFSPPROD > alter session set current_schemas=FCRHOST;
+alter session set current_schemas=FCRHOST
+                  *
+ERROR at line 1:
+ORA-02248: invalid option for ALTER SESSION 
+
+
+13:17:03 SYS:JFSPPROD > ALTER SESSION SET CURRENT_SCHEMA=FCRHOST;
+
+Session altered.
+
+13:17:59 SYS:JFSPPROD > DECLARE
+13:18:13   2   BEGIN
+13:18:13   3     DBMS_SCHEDULER.create_job (
+13:18:13   4      job_name        => 'FCRHOST.JB_FC_DEFERRED_UPDATE',
+13:18:13   5      job_type        => 'PLSQL_BLOCK',
+13:18:13   6      job_action      => 'BEGIN ap_ch_upd_deferred_bal;END;',
+13:18:13   7      start_date      => SYSTIMESTAMP,
+13:18:13   8      repeat_interval => 'freq=minutely; interval=5; bysecond=0;',
+13:18:13   9      end_date        => NULL,
+13:18:13  10      enabled         => TRUE,
+13:18:13  11      comments        => 'Job for deferred update of balance from ch_nobook_deferred for all other accts');
+13:18:13  12  
+13:18:13  13   COMMIT;
+13:18:13  14  END;
+13:18:14  15  /
+
+PL/SQL procedure successfully completed.
+
+13:18:16 SYS:JFSPPROD > DECLARE
+13:18:35   2   BEGIN
+13:18:35   3     DBMS_SCHEDULER.create_job (
+13:18:35   4      job_name        => 'fcrhost.jb_gst_online_split_entry_post',
+13:18:35   5      job_type        => 'PLSQL_BLOCK',
+13:18:35   6      job_action      => 'BEGIN ap_sc_gst_txn_split_entry_post;END;',
+13:18:35   7      start_date      => SYSTIMESTAMP,
+13:18:35   8      repeat_interval => 'freq=minutely; interval=5; bysecond=0;',
+13:18:35   9      end_date        => NULL,
+13:18:35  10      enabled         => TRUE,
+13:18:35  11      comments        => 'Job for posting GST Split Entries for Online Transactions');
+13:18:35  12   COMMIT;
+13:18:35  13  END;
+13:18:35  14  /
+
+PL/SQL procedure successfully completed.
+
+13:18:37 SYS:JFSPPROD > 
+13:18:38 SYS:JFSPPROD > col next_run_date FOR a50
+13:19:22 SYS:JFSPPROD > SELECT job_name, next_run_date, state, enabled FROM dba_scheduler_jobs
+13:19:24   2  ;
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_132                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_133                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_131                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_130                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_13                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_129                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_128                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_127                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_126                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_125                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_115                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_114                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_113                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_112                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_111                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_110                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_11                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_109                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_108                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_107                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_106                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_105                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_104                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_103                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_102                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_101                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_100                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                RUNNING         TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_10                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                RUNNING         TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_124                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_123                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_122                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_121                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_120                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_12                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_119                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_118                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_117                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_116                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_99                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_98                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_97                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_96                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_95                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_94                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_93                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_92                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_91                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_90                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_9                                                              
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_89                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_88                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_87                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_86                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_85                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_84                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_83                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_82                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_81                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_80                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_8                                                              
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_79                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_78                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_77                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_76                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_75                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_74                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_73                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_72                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_71                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_70                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_7                                                              
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_69                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_68                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_67                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_66                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_65                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_64                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_62                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_63                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+PURGE_ALL_AUDIT_TRAILS                                                          
+23-JUL-18 04.00.00.000000 AM ASIA/CALCUTTA         SCHEDULED       TRUE         
+                                                                                
+AUDIT_LAST_ARCHIVE_TIME                                                         
+23-JUL-18 12.00.00.100000 AM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_61                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_60                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_6                                                              
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_59                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_58                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_57                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_56                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_55                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_54                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_53                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_52                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_51                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_50                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_5                                                              
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_49                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_48                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_47                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_46                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_45                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_44                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_43                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_42                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_41                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_40                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_4                                                              
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_39                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_38                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_37                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_36                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_35                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_34                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_33                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_32                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_31                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_30                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_3                                                              
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_29                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_28                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_27                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_26                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_25                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_24                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_23                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_22                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_21                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_20                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_2                                                              
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_19                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_18                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_17                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_160                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_16                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_159                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_158                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_157                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_156                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_155                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_154                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_153                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_152                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_151                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_150                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_15                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_149                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_148                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_147                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_146                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_145                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_144                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_143                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_142                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_141                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_140                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_14                                                             
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_139                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_138                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_137                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_136                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+UTL_RECOMP_SLAVE_135                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+UTL_RECOMP_SLAVE_134                                                            
+22-JUL-18 01.19.22.678175 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+XMLDB_NFS_CLEANUP_JOB                                                           
+                                                   DISABLED        FALSE        
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+SM$CLEAN_AUTO_SPLIT_MERGE                                                       
+23-JUL-18 12.00.00.000000 AM PST8PDT               SCHEDULED       TRUE         
+                                                                                
+RSE$CLEAN_RECOVERABLE_SCRIPT                                                    
+23-JUL-18 12.00.00.200000 AM PST8PDT               SCHEDULED       TRUE         
+                                                                                
+FGR$AUTOPURGE_JOB                                                               
+                                                   DISABLED        FALSE        
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+BSLN_MAINTAIN_STATS_JOB                                                         
+29-JUL-18 12.00.00.800000 AM -07:00                SCHEDULED       TRUE         
+                                                                                
+DRA_REEVALUATE_OPEN_FAILURES                                                    
+                                                   SCHEDULED       TRUE         
+                                                                                
+HM_CREATE_OFFLINE_DICTIONARY                                                    
+                                                   DISABLED        FALSE        
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+ORA$AUTOTASK_CLEAN                                                              
+22-JUL-18 03.00.00.300000 AM PST8PDT               SCHEDULED       TRUE         
+                                                                                
+FILE_WATCHER                                                                    
+                                                   DISABLED        FALSE        
+                                                                                
+PURGE_LOG                                                                       
+22-JUL-18 03.00.00.100000 AM PST8PDT               SCHEDULED       TRUE         
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+MGMT_STATS_CONFIG_JOB                                                           
+01-AUG-18 01.01.01.700000 AM -07:00                SCHEDULED       TRUE         
+                                                                                
+MGMT_CONFIG_JOB                                                                 
+22-JUL-18 01.01.01.600000 AM -07:00                SCHEDULED       TRUE         
+                                                                                
+RLM$SCHDNEGACTION                                                               
+10-MAY-16 01.11.48.000000 PM +05:30                DISABLED        FALSE        
+                                                                                
+
+JOB_NAME                                                                        
+------------------------------                                                  
+NEXT_RUN_DATE                                      STATE           ENABL        
+-------------------------------------------------- --------------- -----        
+RLM$EVTCLEANUP                                                                  
+10-MAY-16 01.10.11.400000 AM -07:00                DISABLED        FALSE        
+                                                                                
+JB_GST_ONLINE_SPLIT_ENTRY_POST                                                  
+22-JUL-18 01.23.00.700000 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+JB_FC_DEFERRED_UPDATE                                                           
+22-JUL-18 01.23.00.100000 PM +05:30                SCHEDULED       TRUE         
+                                                                                
+
+177 rows selected.
+
+13:19:25 SYS:JFSPPROD > col next_run_date FOR a50
+13:20:03 SYS:JFSPPROD > SELECT job_name, next_run_date, state, enabled FROM dba_scheduler_jobs WHERE job_name LIKE '%jb_gst_online_split%';;
+SELECT job_name, next_run_date, state, enabled FROM dba_scheduler_jobs WHERE job_name LIKE '%jb_gst_online_split%';
+                                                                                                                  *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+13:20:04 SYS:JFSPPROD > 
+13:20:06 SYS:JFSPPROD > /
+SELECT job_name, next_run_date, state, enabled FROM dba_scheduler_jobs WHERE job_name LIKE '%jb_gst_online_split%';
+                                                                                                                  *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+13:20:07 SYS:JFSPPROD > col next_run_date FOR a50
+13:20:09 SYS:JFSPPROD > SELECT job_name, next_run_date, state, enabled FROM dba_scheduler_jobs WHERE job_name LIKE '%jb_gst_online_split%';
+
+no rows selected
+
+13:20:11 SYS:JFSPPROD > spool off;

@@ -1,0 +1,35 @@
+select 
+   group_number, 
+   name 
+from 
+   v$asm_diskgroup;
+   
+   
+   select 
+   mount_status,
+   header_status,
+   mode_status,
+   state,
+   total_mb,
+   free_mb,
+   name,
+   path,
+   label 
+from 
+   v$asm_disk;
+   
+   
+   alter diskgroup 
+   my_diskgroup 
+add disk 
+   '/devices/rhdisk1';
+   
+   
+   ALTER DISKGROUP 
+   dgroup1 
+ADD DISK
+   '/devices/diska5' NAME diska5,
+   '/devices/diska6' NAME diska6;
+
+ALTER DISKGROUP dgroup1 ADD DISK
+'/devices/diska*';

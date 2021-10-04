@@ -1,0 +1,12 @@
+08:44:15 SYS:JFSPPROD > shut immediate
+08:44:38 SYS:JFSPPROD >
+08:44:49 SYS:JFSPPROD > startup mount;
+08:45:10 SYS:JFSPPROD >
+08:45:10 SYS:JFSPPROD > alter database activate standby database;
+08:45:54 SYS:JFSPPROD >
+08:45:59 SYS:JFSPPROD > alter database noarchivelog;
+08:46:05 SYS:JFSPPROD >
+08:46:07 SYS:JFSPPROD > alter database open;
+08:46:29 SYS:JFSPPROD >
+08:46:29 SYS:JFSPPROD > select dbid,name,open_mode,log_mode,database_role from v$database;
+08:46:33 SYS:JFSPPROD >

@@ -1,0 +1,2 @@
+alter database tempfile '+BIP_DB/jfsbip/tempfile/prd_ias_temp.268.914075387' resize 200m;
+select bytes/(1024*1024),file_name from dba_temp_files where TABLESPACE_NAME='PRD_IAS_TEMP';

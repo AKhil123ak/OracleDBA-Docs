@@ -1,0 +1,1696 @@
+login as: root
+root@192.168.0.10's password:
+Last login: Sat Jul 22 21:45:33 2017 from 192.168.0.3
+[root@linux ~]#
+[root@linux ~]#
+[root@linux ~]# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.0.10    linux.oracle.com    linux
+[root@linux ~]#
+[root@linux ~]#
+[root@linux ~]# cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 6.3 (Santiago)
+[root@linux ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda3              15G  9.8G  4.0G  72% /
+tmpfs                 1.9G   88K  1.9G   1% /dev/shm
+/dev/sda7              30G  8.7G   20G  31% /Stage
+/dev/sda6             4.9G  197M  4.4G   5% /tmp
+/dev/sda2              29G   22G  6.2G  78% /u01
+/dev/sda1              34G  976M   31G   3% /u02
+Software              834G  335G  500G  41% /media/sf_Software
+[root@linux ~]# clear
+[root@linux ~]#
+[root@linux ~]#
+[root@linux ~]# su - oracle
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ . PROD.env
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sun Jul 23 07:42:48 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> startup
+ORACLE instance started.
+
+Total System Global Area  626327552 bytes
+Fixed Size                  2255832 bytes
+Variable Size             272630824 bytes
+Database Buffers          348127232 bytes
+Redo Buffers                3313664 bytes
+Database mounted.
+Database opened.
+SYS ON PROD:23-JUL-17> clear
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> cl scr
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> create role role11;
+
+Role created.
+
+SYS ON PROD:23-JUL-17> grant create session,create table to role11;
+
+Grant succeeded.
+
+SYS ON PROD:23-JUL-17> select * from dba_roles;
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+CONNECT                        NO       NONE
+RESOURCE                       NO       NONE
+DBA                            NO       NONE
+SELECT_CATALOG_ROLE            NO       NONE
+EXECUTE_CATALOG_ROLE           NO       NONE
+DELETE_CATALOG_ROLE            NO       NONE
+EXP_FULL_DATABASE              NO       NONE
+IMP_FULL_DATABASE              NO       NONE
+LOGSTDBY_ADMINISTRATOR         NO       NONE
+DBFS_ROLE                      NO       NONE
+AQ_ADMINISTRATOR_ROLE          NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+AQ_USER_ROLE                   NO       NONE
+DATAPUMP_EXP_FULL_DATABASE     NO       NONE
+DATAPUMP_IMP_FULL_DATABASE     NO       NONE
+ADM_PARALLEL_EXECUTE_TASK      NO       NONE
+GATHER_SYSTEM_STATISTICS       NO       NONE
+JAVA_DEPLOY                    NO       NONE
+RECOVERY_CATALOG_OWNER         NO       NONE
+SCHEDULER_ADMIN                NO       NONE
+HS_ADMIN_SELECT_ROLE           NO       NONE
+HS_ADMIN_EXECUTE_ROLE          NO       NONE
+HS_ADMIN_ROLE                  NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+GLOBAL_AQ_USER_ROLE            GLOBAL   GLOBAL
+OEM_ADVISOR                    NO       NONE
+OEM_MONITOR                    NO       NONE
+WM_ADMIN_ROLE                  NO       NONE
+JAVAUSERPRIV                   NO       NONE
+JAVAIDPRIV                     NO       NONE
+JAVASYSPRIV                    NO       NONE
+JAVADEBUGPRIV                  NO       NONE
+EJBCLIENT                      NO       NONE
+JMXSERVER                      NO       NONE
+JAVA_ADMIN                     NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+CTXAPP                         NO       NONE
+XDBADMIN                       NO       NONE
+XDB_SET_INVOKER                NO       NONE
+AUTHENTICATEDUSER              NO       NONE
+XDB_WEBSERVICES                NO       NONE
+XDB_WEBSERVICES_WITH_PUBLIC    NO       NONE
+XDB_WEBSERVICES_OVER_HTTP      NO       NONE
+OLAP_DBA                       NO       NONE
+ORDADMIN                       NO       NONE
+OLAP_XS_ADMIN                  NO       NONE
+OWB_USER                       NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+CWM_USER                       NO       NONE
+OLAP_USER                      NO       NONE
+SPATIAL_WFS_ADMIN              NO       NONE
+WFS_USR_ROLE                   NO       NONE
+SPATIAL_CSW_ADMIN              NO       NONE
+CSW_USR_ROLE                   NO       NONE
+MGMT_USER                      NO       NONE
+APEX_ADMINISTRATOR_ROLE        NO       NONE
+OWB$CLIENT                     YES      PASSWORD
+OWB_DESIGNCENTER_VIEW          NO       NONE
+ROLE2                          NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+ROLE11                         NO       NONE
+
+56 rows selected.
+
+SYS ON PROD:23-JUL-17> select * from role_sys_privs;
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            CREATE SESSION                           YES
+DBA                            ALTER SESSION                            YES
+DBA                            DROP TABLESPACE                          YES
+DBA                            BECOME USER                              YES
+DBA                            DROP ROLLBACK SEGMENT                    YES
+DBA                            SELECT ANY TABLE                         YES
+DBA                            INSERT ANY TABLE                         YES
+DBA                            UPDATE ANY TABLE                         YES
+DBA                            DROP ANY INDEX                           YES
+DBA                            SELECT ANY SEQUENCE                      YES
+DBA                            CREATE ROLE                              YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            EXECUTE ANY PROCEDURE                    YES
+DBA                            ALTER PROFILE                            YES
+DBA                            CREATE ANY DIRECTORY                     YES
+DBA                            CREATE ANY LIBRARY                       YES
+DBA                            EXECUTE ANY LIBRARY                      YES
+DBA                            ALTER ANY INDEXTYPE                      YES
+DBA                            DROP ANY INDEXTYPE                       YES
+DBA                            DEQUEUE ANY QUEUE                        YES
+DBA                            EXECUTE ANY EVALUATION CONTEXT           YES
+DBA                            EXPORT FULL DATABASE                     YES
+DBA                            CREATE RULE                              YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            ALTER ANY SQL PROFILE                    YES
+DBA                            ADMINISTER ANY SQL TUNING SET            YES
+DBA                            CHANGE NOTIFICATION                      YES
+DBA                            DROP ANY EDITION                         YES
+DBA                            DROP ANY MINING MODEL                    YES
+DBA                            ALTER ANY MINING MODEL                   YES
+DBA                            ALTER ANY CUBE DIMENSION                 YES
+DBA                            CREATE CUBE                              YES
+DBA                            DROP ANY CUBE BUILD PROCESS              YES
+IMP_FULL_DATABASE              BECOME USER                              NO
+IMP_FULL_DATABASE              CREATE ANY MATERIALIZED VIEW             NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+IMP_FULL_DATABASE              CREATE ANY SYNONYM                       NO
+IMP_FULL_DATABASE              EXECUTE ANY PROCEDURE                    NO
+IMP_FULL_DATABASE              DROP ANY TRIGGER                         NO
+IMP_FULL_DATABASE              DROP ANY LIBRARY                         NO
+DATAPUMP_IMP_FULL_DATABASE     ALTER RESOURCE COST                      NO
+DATAPUMP_IMP_FULL_DATABASE     CREATE SESSION                           NO
+DATAPUMP_IMP_FULL_DATABASE     GRANT ANY OBJECT PRIVILEGE               NO
+DATAPUMP_IMP_FULL_DATABASE     GRANT ANY ROLE                           NO
+IMP_FULL_DATABASE              ALTER USER                               NO
+IMP_FULL_DATABASE              GRANT ANY PRIVILEGE                      NO
+RECOVERY_CATALOG_OWNER         CREATE SYNONYM                           NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+EXP_FULL_DATABASE              READ ANY FILE GROUP                      NO
+SCHEDULER_ADMIN                CREATE ANY JOB                           YES
+OEM_ADVISOR                    CREATE JOB                               NO
+OEM_MONITOR                    MANAGE ANY QUEUE                         NO
+OLAP_DBA                       CREATE ANY TABLE                         NO
+OLAP_DBA                       INSERT ANY CUBE DIMENSION                NO
+OLAP_DBA                       DROP ANY CUBE                            NO
+OLAP_DBA                       DROP ANY MEASURE FOLDER                  NO
+OWB$CLIENT                     CREATE DATABASE LINK                     NO
+OWB$CLIENT                     CREATE INDEXTYPE                         NO
+OWB$CLIENT                     CREATE SESSION                           NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+OWB$CLIENT                     CREATE SYNONYM                           NO
+DBA                            ALTER ROLLBACK SEGMENT                   YES
+DBA                            DELETE ANY TABLE                         YES
+DBA                            ALTER DATABASE                           YES
+DBA                            FORCE ANY TRANSACTION                    YES
+DBA                            ALTER ANY PROCEDURE                      YES
+DBA                            DROP ANY TRIGGER                         YES
+DBA                            DROP ANY MATERIALIZED VIEW               YES
+DBA                            UNDER ANY TYPE                           YES
+DBA                            ALTER ANY LIBRARY                        YES
+DBA                            CREATE DIMENSION                         YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            DEBUG ANY PROCEDURE                      YES
+DBA                            CREATE RULE SET                          YES
+DBA                            ALTER ANY RULE SET                       YES
+DBA                            ANALYZE ANY DICTIONARY                   YES
+DBA                            ALTER ANY EDITION                        YES
+DBA                            CREATE ANY ASSEMBLY                      YES
+DBA                            ALTER ANY CUBE                           YES
+DBA                            SELECT ANY CUBE                          YES
+DBA                            DROP ANY MEASURE FOLDER                  YES
+IMP_FULL_DATABASE              CREATE ANY CLUSTER                       NO
+IMP_FULL_DATABASE              CREATE ANY INDEX                         NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+IMP_FULL_DATABASE              INSERT ANY TABLE                         NO
+IMP_FULL_DATABASE              CREATE ANY LIBRARY                       NO
+IMP_FULL_DATABASE              DROP ANY SEQUENCE                        NO
+IMP_FULL_DATABASE              DROP ROLLBACK SEGMENT                    NO
+IMP_FULL_DATABASE              DROP ANY CONTEXT                         NO
+DATAPUMP_IMP_FULL_DATABASE     AUDIT ANY                                NO
+IMP_FULL_DATABASE              AUDIT SYSTEM                             NO
+RECOVERY_CATALOG_OWNER         CREATE CLUSTER                           NO
+SCHEDULER_ADMIN                EXECUTE ANY PROGRAM                      YES
+SCHEDULER_ADMIN                EXECUTE ANY CLASS                        YES
+AQ_ADMINISTRATOR_ROLE          DEQUEUE ANY QUEUE                        YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+AQ_ADMINISTRATOR_ROLE          CREATE EVALUATION CONTEXT                YES
+JAVADEBUGPRIV                  DEBUG ANY PROCEDURE                      NO
+OLAP_DBA                       INSERT ANY TABLE                         NO
+OLAP_DBA                       DROP ANY TABLE                           NO
+OLAP_DBA                       CREATE ANY CUBE DIMENSION                NO
+OLAP_DBA                       CREATE ANY MEASURE FOLDER                NO
+OLAP_USER                      CREATE CUBE BUILD PROCESS                NO
+MGMT_USER                      CREATE SESSION                           NO
+OWB$CLIENT                     CREATE SEQUENCE                          NO
+ROLE11                         CREATE SESSION                           NO
+RESOURCE                       CREATE SEQUENCE                          NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+RESOURCE                       CREATE TRIGGER                           NO
+DBA                            RESTRICTED SESSION                       YES
+DBA                            CREATE TABLESPACE                        YES
+DBA                            ALTER TABLESPACE                         YES
+DBA                            CREATE USER                              YES
+DBA                            ALTER USER                               YES
+DBA                            LOCK ANY TABLE                           YES
+DBA                            CREATE VIEW                              YES
+DBA                            DROP ANY VIEW                            YES
+DBA                            GRANT ANY ROLE                           YES
+DBA                            CREATE TRIGGER                           YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            CREATE TYPE                              YES
+DBA                            EXECUTE ANY OPERATOR                     YES
+DBA                            CREATE ANY DIMENSION                     YES
+DBA                            ALTER ANY DIMENSION                      YES
+DBA                            CREATE ANY OUTLINE                       YES
+DBA                            ADMINISTER DATABASE TRIGGER              YES
+DBA                            RESUMABLE                                YES
+DBA                            FLASHBACK ANY TABLE                      YES
+DBA                            CREATE ANY RULE SET                      YES
+DBA                            EXECUTE ANY RULE SET                     YES
+DBA                            IMPORT FULL DATABASE                     YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            EXECUTE ANY RULE                         YES
+DBA                            EXECUTE ANY PROGRAM                      YES
+DBA                            CREATE ANY EDITION                       YES
+DBA                            CREATE ASSEMBLY                          YES
+DBA                            ALTER ANY ASSEMBLY                       YES
+DBA                            CREATE CUBE DIMENSION                    YES
+DBA                            CREATE ANY CUBE BUILD PROCESS            YES
+DBA                            UPDATE ANY CUBE DIMENSION                YES
+EXP_FULL_DATABASE              EXECUTE ANY PROCEDURE                    NO
+EXP_FULL_DATABASE              RESUMABLE                                NO
+IMP_FULL_DATABASE              CREATE ANY PROCEDURE                     NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+IMP_FULL_DATABASE              CREATE ANY VIEW                          NO
+IMP_FULL_DATABASE              CREATE TABLESPACE                        NO
+IMP_FULL_DATABASE              SELECT ANY TABLE                         NO
+IMP_FULL_DATABASE              CREATE ANY CONTEXT                       NO
+IMP_FULL_DATABASE              CREATE ANY OPERATOR                      NO
+IMP_FULL_DATABASE              GLOBAL QUERY REWRITE                     NO
+IMP_FULL_DATABASE              DROP ANY OUTLINE                         NO
+IMP_FULL_DATABASE              DROP ANY VIEW                            NO
+IMP_FULL_DATABASE              DROP PROFILE                             NO
+IMP_FULL_DATABASE              DROP USER                                NO
+IMP_FULL_DATABASE              DROP ANY TYPE                            NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DATAPUMP_EXP_FULL_DATABASE     CREATE TABLE                             NO
+DATAPUMP_IMP_FULL_DATABASE     EXECUTE ANY OPERATOR                     NO
+DATAPUMP_IMP_FULL_DATABASE     GRANT ANY PRIVILEGE                      NO
+IMP_FULL_DATABASE              ALTER RESOURCE COST                      NO
+IMP_FULL_DATABASE              CREATE SESSION                           NO
+IMP_FULL_DATABASE              ALTER PROFILE                            NO
+RECOVERY_CATALOG_OWNER         ALTER SESSION                            NO
+AQ_ADMINISTRATOR_ROLE          ENQUEUE ANY QUEUE                        YES
+AQ_ADMINISTRATOR_ROLE          CREATE RULE SET                          YES
+OEM_MONITOR                    CREATE SESSION                           NO
+OEM_MONITOR                    CREATE JOB                               NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+OLAP_DBA                       UPDATE ANY CUBE DIMENSION                NO
+OWB$CLIENT                     ANALYZE ANY                              NO
+OWB$CLIENT                     CREATE DIMENSION                         NO
+RESOURCE                       CREATE CLUSTER                           NO
+RESOURCE                       CREATE PROCEDURE                         NO
+RESOURCE                       CREATE TYPE                              NO
+DBA                            CREATE ANY TABLE                         YES
+DBA                            CREATE ANY INDEX                         YES
+DBA                            CREATE ANY SEQUENCE                      YES
+DBA                            ALTER ANY ROLE                           YES
+DBA                            ANALYZE ANY                              YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            DROP ANY LIBRARY                         YES
+DBA                            CREATE ANY OPERATOR                      YES
+DBA                            CREATE INDEXTYPE                         YES
+DBA                            UNDER ANY TABLE                          YES
+DBA                            DROP ANY DIMENSION                       YES
+DBA                            SELECT ANY DICTIONARY                    YES
+DBA                            GRANT ANY OBJECT PRIVILEGE               YES
+DBA                            CREATE EVALUATION CONTEXT                YES
+DBA                            CREATE ANY EVALUATION CONTEXT            YES
+DBA                            DROP ANY EVALUATION CONTEXT              YES
+DBA                            CREATE ANY RULE                          YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            CREATE JOB                               YES
+DBA                            CREATE ANY JOB                           YES
+DBA                            CREATE MINING MODEL                      YES
+DBA                            INSERT ANY CUBE DIMENSION                YES
+DBA                            DROP ANY CUBE                            YES
+DBA                            UPDATE ANY CUBE BUILD PROCESS            YES
+EXP_FULL_DATABASE              SELECT ANY TABLE                         NO
+EXP_FULL_DATABASE              EXECUTE ANY TYPE                         NO
+IMP_FULL_DATABASE              CREATE PUBLIC DATABASE LINK              NO
+IMP_FULL_DATABASE              CREATE PUBLIC SYNONYM                    NO
+IMP_FULL_DATABASE              CREATE ROLLBACK SEGMENT                  NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+IMP_FULL_DATABASE              CREATE ROLE                              NO
+IMP_FULL_DATABASE              DROP ANY INDEX                           NO
+IMP_FULL_DATABASE              DROP ANY TABLE                           NO
+IMP_FULL_DATABASE              DROP ANY MATERIALIZED VIEW               NO
+IMP_FULL_DATABASE              DROP ANY ROLE                            NO
+IMP_FULL_DATABASE              ALTER ANY TYPE                           NO
+DATAPUMP_IMP_FULL_DATABASE     AUDIT SYSTEM                             NO
+DATAPUMP_IMP_FULL_DATABASE     SELECT ANY TABLE                         NO
+RECOVERY_CATALOG_OWNER         CREATE DATABASE LINK                     NO
+AQ_ADMINISTRATOR_ROLE          CREATE RULE                              YES
+IMP_FULL_DATABASE              MANAGE ANY QUEUE                         NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+OLAP_DBA                       SELECT ANY TABLE                         NO
+OLAP_DBA                       UPDATE ANY CUBE                          NO
+OLAP_DBA                       CREATE ANY CUBE BUILD PROCESS            NO
+OLAP_DBA                       CREATE SEQUENCE                          NO
+OLAP_USER                      CREATE CUBE DIMENSION                    NO
+OWB$CLIENT                     ALTER SESSION                            NO
+DBA                            ALTER SYSTEM                             YES
+DBA                            AUDIT SYSTEM                             YES
+DBA                            CREATE ROLLBACK SEGMENT                  YES
+DBA                            DROP ANY TABLE                           YES
+DBA                            COMMENT ANY TABLE                        YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            CREATE CLUSTER                           YES
+DBA                            ALTER ANY INDEX                          YES
+DBA                            DROP PUBLIC DATABASE LINK                YES
+DBA                            CREATE PROFILE                           YES
+DBA                            ALTER ANY MATERIALIZED VIEW              YES
+DBA                            ALTER ANY TYPE                           YES
+DBA                            DROP ANY TYPE                            YES
+DBA                            UNDER ANY VIEW                           YES
+DBA                            EXECUTE ANY INDEXTYPE                    YES
+DBA                            DROP ANY CONTEXT                         YES
+DBA                            ALTER ANY OUTLINE                        YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            ADMINISTER RESOURCE MANAGER              YES
+DBA                            MANAGE SCHEDULER                         YES
+DBA                            MANAGE FILE GROUP                        YES
+DBA                            CREATE ANY MINING MODEL                  YES
+DBA                            SELECT ANY MINING MODEL                  YES
+DBA                            CREATE ANY MEASURE FOLDER                YES
+DBA                            DELETE ANY MEASURE FOLDER                YES
+EXP_FULL_DATABASE              BACKUP ANY TABLE                         NO
+EXP_FULL_DATABASE              ADMINISTER SQL MANAGEMENT OBJECT         NO
+IMP_FULL_DATABASE              CREATE PROFILE                           NO
+IMP_FULL_DATABASE              COMMENT ANY TABLE                        NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+IMP_FULL_DATABASE              CREATE ANY INDEXTYPE                     NO
+IMP_FULL_DATABASE              CREATE ANY DIMENSION                     NO
+IMP_FULL_DATABASE              ADMINISTER SQL MANAGEMENT OBJECT         NO
+IMP_FULL_DATABASE              DROP ANY CLUSTER                         NO
+IMP_FULL_DATABASE              DROP ANY PROCEDURE                       NO
+IMP_FULL_DATABASE              DROP PUBLIC SYNONYM                      NO
+IMP_FULL_DATABASE              DROP ANY DIRECTORY                       NO
+DATAPUMP_EXP_FULL_DATABASE     CREATE SESSION                           NO
+DATAPUMP_IMP_FULL_DATABASE     CREATE PROFILE                           NO
+DATAPUMP_IMP_FULL_DATABASE     DELETE ANY TABLE                         NO
+EXP_FULL_DATABASE              CREATE SESSION                           NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+RECOVERY_CATALOG_OWNER         CREATE SESSION                           NO
+RECOVERY_CATALOG_OWNER         CREATE TABLE                             NO
+RECOVERY_CATALOG_OWNER         CREATE SEQUENCE                          NO
+RECOVERY_CATALOG_OWNER         CREATE PROCEDURE                         NO
+EXP_FULL_DATABASE              ADMINISTER RESOURCE MANAGER              NO
+OEM_MONITOR                    ADVISOR                                  NO
+OLAP_DBA                       DELETE ANY TABLE                         NO
+OLAP_DBA                       DELETE ANY CUBE DIMENSION                NO
+OLAP_USER                      CREATE JOB                               NO
+OLAP_USER                      CREATE MEASURE FOLDER                    NO
+CONNECT                        CREATE SESSION                           NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            CREATE TABLE                             YES
+DBA                            BACKUP ANY TABLE                         YES
+DBA                            CREATE ANY CLUSTER                       YES
+DBA                            DROP ANY SYNONYM                         YES
+DBA                            DROP PUBLIC SYNONYM                      YES
+DBA                            CREATE ANY VIEW                          YES
+DBA                            CREATE SEQUENCE                          YES
+DBA                            ALTER ANY SEQUENCE                       YES
+DBA                            FORCE TRANSACTION                        YES
+DBA                            CREATE PROCEDURE                         YES
+DBA                            CREATE ANY PROCEDURE                     YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            ALTER RESOURCE COST                      YES
+DBA                            DROP ANY DIRECTORY                       YES
+DBA                            CREATE ANY TYPE                          YES
+DBA                            ALTER ANY OPERATOR                       YES
+DBA                            CREATE ANY INDEXTYPE                     YES
+DBA                            ENQUEUE ANY QUEUE                        YES
+DBA                            ON COMMIT REFRESH                        YES
+DBA                            DEBUG CONNECT SESSION                    YES
+DBA                            DROP ANY RULE SET                        YES
+DBA                            EXECUTE ANY CLASS                        YES
+DBA                            MANAGE ANY FILE GROUP                    YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            EXECUTE ANY ASSEMBLY                     YES
+DBA                            EXECUTE ASSEMBLY                         YES
+DBA                            COMMENT ANY MINING MODEL                 YES
+DBA                            CREATE ANY CUBE DIMENSION                YES
+DBA                            DELETE ANY CUBE DIMENSION                YES
+DBA                            SELECT ANY CUBE DIMENSION                YES
+EXP_FULL_DATABASE              SELECT ANY SEQUENCE                      NO
+IMP_FULL_DATABASE              EXECUTE ANY TYPE                         NO
+IMP_FULL_DATABASE              UPDATE ANY TABLE                         NO
+IMP_FULL_DATABASE              CREATE ANY DIRECTORY                     NO
+IMP_FULL_DATABASE              CREATE ANY TYPE                          NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+IMP_FULL_DATABASE              DROP ANY SYNONYM                         NO
+IMP_FULL_DATABASE              DROP PUBLIC DATABASE LINK                NO
+IMP_FULL_DATABASE              DROP TABLESPACE                          NO
+IMP_FULL_DATABASE              ALTER ANY TRIGGER                        NO
+IMP_FULL_DATABASE              DROP ANY INDEXTYPE                       NO
+IMP_FULL_DATABASE              DROP ANY DIMENSION                       NO
+IMP_FULL_DATABASE              ANALYZE ANY                              NO
+DATAPUMP_IMP_FULL_DATABASE     ALTER USER                               NO
+IMP_FULL_DATABASE              EXECUTE ANY OPERATOR                     NO
+RECOVERY_CATALOG_OWNER         CREATE VIEW                              NO
+RECOVERY_CATALOG_OWNER         CREATE TYPE                              NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+IMP_FULL_DATABASE              ADMINISTER RESOURCE MANAGER              NO
+SCHEDULER_ADMIN                MANAGE SCHEDULER                         YES
+SCHEDULER_ADMIN                CREATE EXTERNAL JOB                      YES
+AQ_ADMINISTRATOR_ROLE          MANAGE ANY QUEUE                         YES
+OLAP_DBA                       SELECT ANY CUBE                          NO
+OWB$CLIENT                     CREATE MATERIALIZED VIEW                 NO
+RESOURCE                       CREATE OPERATOR                          NO
+DBA                            ALTER ANY TABLE                          YES
+DBA                            DROP ANY CLUSTER                         YES
+DBA                            CREATE SYNONYM                           YES
+DBA                            CREATE PUBLIC SYNONYM                    YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            DROP ANY SEQUENCE                        YES
+DBA                            DROP ANY ROLE                            YES
+DBA                            AUDIT ANY                                YES
+DBA                            DROP ANY PROCEDURE                       YES
+DBA                            CREATE ANY TRIGGER                       YES
+DBA                            ALTER ANY TRIGGER                        YES
+DBA                            DROP PROFILE                             YES
+DBA                            GRANT ANY PRIVILEGE                      YES
+DBA                            CREATE LIBRARY                           YES
+DBA                            CREATE OPERATOR                          YES
+DBA                            DROP ANY OUTLINE                         YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            MERGE ANY VIEW                           YES
+DBA                            ADMINISTER SQL TUNING SET                YES
+DBA                            UPDATE ANY CUBE                          YES
+DBA                            INSERT ANY MEASURE FOLDER                YES
+DBA                            ADMINISTER SQL MANAGEMENT OBJECT         YES
+IMP_FULL_DATABASE              CREATE ANY TABLE                         NO
+IMP_FULL_DATABASE              CREATE DATABASE LINK                     NO
+IMP_FULL_DATABASE              CREATE USER                              NO
+IMP_FULL_DATABASE              AUDIT ANY                                NO
+IMP_FULL_DATABASE              CREATE ANY SQL PROFILE                   NO
+IMP_FULL_DATABASE              ALTER ANY PROCEDURE                      NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+IMP_FULL_DATABASE              DROP ANY OPERATOR                        NO
+IMP_FULL_DATABASE              RESUMABLE                                NO
+IMP_FULL_DATABASE              DROP ANY SQL PROFILE                     NO
+EXP_FULL_DATABASE              CREATE TABLE                             NO
+IMP_FULL_DATABASE              GRANT ANY ROLE                           NO
+IMP_FULL_DATABASE              ALTER DATABASE                           NO
+OEM_ADVISOR                    ADMINISTER SQL TUNING SET                NO
+OEM_MONITOR                    SELECT ANY DICTIONARY                    NO
+OEM_MONITOR                    ANALYZE ANY                              NO
+JAVADEBUGPRIV                  DEBUG CONNECT SESSION                    NO
+OLAP_DBA                       UPDATE ANY TABLE                         NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+OLAP_DBA                       SELECT ANY CUBE DIMENSION                NO
+OLAP_DBA                       DROP ANY CUBE DIMENSION                  NO
+OLAP_DBA                       CREATE ANY CUBE                          NO
+OLAP_DBA                       INSERT ANY MEASURE FOLDER                NO
+OLAP_DBA                       DELETE ANY MEASURE FOLDER                NO
+OLAP_DBA                       UPDATE ANY CUBE BUILD PROCESS            NO
+OLAP_DBA                       DROP ANY CUBE BUILD PROCESS              NO
+OLAP_DBA                       CREATE ANY VIEW                          NO
+OWB$CLIENT                     CREATE TYPE                              NO
+RESOURCE                       CREATE TABLE                             NO
+RESOURCE                       CREATE INDEXTYPE                         NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            MANAGE TABLESPACE                        YES
+DBA                            DROP USER                                YES
+DBA                            ALTER ANY CLUSTER                        YES
+DBA                            CREATE ANY SYNONYM                       YES
+DBA                            CREATE DATABASE LINK                     YES
+DBA                            CREATE PUBLIC DATABASE LINK              YES
+DBA                            CREATE MATERIALIZED VIEW                 YES
+DBA                            CREATE ANY MATERIALIZED VIEW             YES
+DBA                            EXECUTE ANY TYPE                         YES
+DBA                            DROP ANY OPERATOR                        YES
+DBA                            QUERY REWRITE                            YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            GLOBAL QUERY REWRITE                     YES
+DBA                            MANAGE ANY QUEUE                         YES
+DBA                            CREATE ANY CONTEXT                       YES
+DBA                            ALTER ANY EVALUATION CONTEXT             YES
+DBA                            ALTER ANY RULE                           YES
+DBA                            DROP ANY RULE                            YES
+DBA                            ADVISOR                                  YES
+DBA                            SELECT ANY TRANSACTION                   YES
+DBA                            DROP ANY SQL PROFILE                     YES
+DBA                            CREATE ANY SQL PROFILE                   YES
+DBA                            READ ANY FILE GROUP                      YES
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DBA                            CREATE EXTERNAL JOB                      YES
+DBA                            DROP ANY ASSEMBLY                        YES
+DBA                            DROP ANY CUBE DIMENSION                  YES
+DBA                            CREATE ANY CUBE                          YES
+DBA                            CREATE MEASURE FOLDER                    YES
+DBA                            CREATE CUBE BUILD PROCESS                YES
+DBA                            FLASHBACK ARCHIVE ADMINISTER             YES
+IMP_FULL_DATABASE              CREATE ANY SEQUENCE                      NO
+IMP_FULL_DATABASE              CREATE ANY TRIGGER                       NO
+IMP_FULL_DATABASE              ALTER ANY TABLE                          NO
+IMP_FULL_DATABASE              ADMINISTER DATABASE TRIGGER              NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+DATAPUMP_IMP_FULL_DATABASE     ALTER PROFILE                            NO
+DATAPUMP_IMP_FULL_DATABASE     ALTER DATABASE                           NO
+IMP_FULL_DATABASE              DELETE ANY TABLE                         NO
+IMP_FULL_DATABASE              GRANT ANY OBJECT PRIVILEGE               NO
+RECOVERY_CATALOG_OWNER         CREATE TRIGGER                           NO
+SCHEDULER_ADMIN                CREATE JOB                               YES
+OEM_ADVISOR                    ADVISOR                                  NO
+OEM_MONITOR                    ANALYZE ANY DICTIONARY                   NO
+OLAP_DBA                       DROP ANY VIEW                            NO
+OLAP_DBA                       CREATE JOB                               NO
+OLAP_USER                      CREATE TABLE                             NO
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+OLAP_USER                      CREATE VIEW                              NO
+OLAP_USER                      CREATE SEQUENCE                          NO
+OLAP_USER                      CREATE CUBE                              NO
+OWB$CLIENT                     CREATE PROCEDURE                         NO
+ROLE11                         CREATE TABLE                             NO
+
+401 rows selected.
+
+SYS ON PROD:23-JUL-17> select * from role_sys_privs where ROLE='ROLE11';
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+ROLE11                         CREATE SESSION                           NO
+ROLE11                         CREATE TABLE                             NO
+
+SYS ON PROD:23-JUL-17> create user u33 identified by u3;
+
+User created.
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+ERROR:
+ORA-01045: user U33 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> grant role11 to u33;
+
+Grant succeeded.
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+Connected.
+U33 ON PROD:23-JUL-17> select * from session_privs;
+
+PRIVILEGE
+----------------------------------------
+CREATE SESSION
+CREATE TABLE
+
+U33 ON PROD:23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> desc dba_role_privs
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ GRANTEE                                            VARCHAR2(30)
+ GRANTED_ROLE                              NOT NULL VARCHAR2(30)
+ ADMIN_OPTION                                       VARCHAR2(3)
+ DEFAULT_ROLE                                       VARCHAR2(3)
+
+SYS ON PROD:23-JUL-17> select * from dba_role_privs where GRANTEE='U33';
+
+GRANTEE                        GRANTED_ROLE                   ADM DEF
+------------------------------ ------------------------------ --- ---
+U33                            ROLE11                         NO  YES
+
+SYS ON PROD:23-JUL-17> revoke role11 from u33;
+
+Revoke succeeded.
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+ERROR:
+ORA-01045: user U33 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :23-JUL-17> select * from dba_role_privs where GRANTEE='U33';
+SP2-0640: Not connected
+ ON :23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> select * from dba_role_privs where GRANTEE='U33';
+
+no rows selected
+
+SYS ON PROD:23-JUL-17> create role role22;
+
+Role created.
+
+SYS ON PROD:23-JUL-17> grant role11 to role22;
+
+Grant succeeded.
+
+SYS ON PROD:23-JUL-17> grant role22 to u33;
+
+Grant succeeded.
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+Connected.
+U33 ON PROD:23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17> revoke role11 from role22;
+
+Revoke succeeded.
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+ERROR:
+ORA-01045: user U33 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> grant role11 to role22;
+
+Grant succeeded.
+
+SYS ON PROD:23-JUL-17> desc role_role_privs
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLE                                      NOT NULL VARCHAR2(30)
+ GRANTED_ROLE                              NOT NULL VARCHAR2(30)
+ ADMIN_OPTION                                       VARCHAR2(3)
+
+SYS ON PROD:23-JUL-17> select * from role_role_privs where ROLE='ROLE22';
+
+ROLE                           GRANTED_ROLE                   ADM
+------------------------------ ------------------------------ ---
+ROLE22                         ROLE11                         NO
+
+SYS ON PROD:23-JUL-17> set linesize 100;
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> col RESOURCE_NAME format a20;
+SYS ON PROD:23-JUL-17> col RESOURCE_TYPE format a20;
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> select * from dba_profiles;
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       COMPOSITE_LIMIT      KERNEL
+DEFAULT
+
+MONITORING_PROFILE             COMPOSITE_LIMIT      KERNEL
+DEFAULT
+
+DEFAULT                        COMPOSITE_LIMIT      KERNEL
+UNLIMITED
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       SESSIONS_PER_USER    KERNEL
+2
+
+MONITORING_PROFILE             SESSIONS_PER_USER    KERNEL
+DEFAULT
+
+DEFAULT                        SESSIONS_PER_USER    KERNEL
+UNLIMITED
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       CPU_PER_SESSION      KERNEL
+DEFAULT
+
+MONITORING_PROFILE             CPU_PER_SESSION      KERNEL
+DEFAULT
+
+DEFAULT                        CPU_PER_SESSION      KERNEL
+UNLIMITED
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       CPU_PER_CALL         KERNEL
+DEFAULT
+
+MONITORING_PROFILE             CPU_PER_CALL         KERNEL
+DEFAULT
+
+DEFAULT                        CPU_PER_CALL         KERNEL
+UNLIMITED
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       LOGICAL_READS_PER_SE KERNEL
+                               SSION
+DEFAULT
+
+MONITORING_PROFILE             LOGICAL_READS_PER_SE KERNEL
+                               SSION
+DEFAULT
+
+DEFAULT                        LOGICAL_READS_PER_SE KERNEL
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+                               SSION
+UNLIMITED
+
+PROFILE1                       LOGICAL_READS_PER_CA KERNEL
+                               LL
+DEFAULT
+
+MONITORING_PROFILE             LOGICAL_READS_PER_CA KERNEL
+                               LL
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+DEFAULT
+
+DEFAULT                        LOGICAL_READS_PER_CA KERNEL
+                               LL
+UNLIMITED
+
+PROFILE1                       IDLE_TIME            KERNEL
+DEFAULT
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+MONITORING_PROFILE             IDLE_TIME            KERNEL
+DEFAULT
+
+DEFAULT                        IDLE_TIME            KERNEL
+UNLIMITED
+
+PROFILE1                       CONNECT_TIME         KERNEL
+DEFAULT
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+MONITORING_PROFILE             CONNECT_TIME         KERNEL
+DEFAULT
+
+DEFAULT                        CONNECT_TIME         KERNEL
+UNLIMITED
+
+PROFILE1                       PRIVATE_SGA          KERNEL
+DEFAULT
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+MONITORING_PROFILE             PRIVATE_SGA          KERNEL
+DEFAULT
+
+DEFAULT                        PRIVATE_SGA          KERNEL
+UNLIMITED
+
+PROFILE1                       FAILED_LOGIN_ATTEMPT PASSWORD
+                               S
+2
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+
+MONITORING_PROFILE             FAILED_LOGIN_ATTEMPT PASSWORD
+                               S
+UNLIMITED
+
+DEFAULT                        FAILED_LOGIN_ATTEMPT PASSWORD
+                               S
+10
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       PASSWORD_LIFE_TIME   PASSWORD
+DEFAULT
+
+MONITORING_PROFILE             PASSWORD_LIFE_TIME   PASSWORD
+DEFAULT
+
+DEFAULT                        PASSWORD_LIFE_TIME   PASSWORD
+180
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       PASSWORD_REUSE_TIME  PASSWORD
+DEFAULT
+
+MONITORING_PROFILE             PASSWORD_REUSE_TIME  PASSWORD
+DEFAULT
+
+DEFAULT                        PASSWORD_REUSE_TIME  PASSWORD
+UNLIMITED
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       PASSWORD_REUSE_MAX   PASSWORD
+DEFAULT
+
+MONITORING_PROFILE             PASSWORD_REUSE_MAX   PASSWORD
+DEFAULT
+
+DEFAULT                        PASSWORD_REUSE_MAX   PASSWORD
+UNLIMITED
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1                       PASSWORD_VERIFY_FUNC PASSWORD
+                               TION
+DEFAULT
+
+MONITORING_PROFILE             PASSWORD_VERIFY_FUNC PASSWORD
+                               TION
+DEFAULT
+
+DEFAULT                        PASSWORD_VERIFY_FUNC PASSWORD
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+                               TION
+NULL
+
+PROFILE1                       PASSWORD_LOCK_TIME   PASSWORD
+DEFAULT
+
+MONITORING_PROFILE             PASSWORD_LOCK_TIME   PASSWORD
+DEFAULT
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+DEFAULT                        PASSWORD_LOCK_TIME   PASSWORD
+1
+
+PROFILE1                       PASSWORD_GRACE_TIME  PASSWORD
+DEFAULT
+
+MONITORING_PROFILE             PASSWORD_GRACE_TIME  PASSWORD
+DEFAULT
+
+
+PROFILE                        RESOURCE_NAME        RESOURCE_TYPE
+------------------------------ -------------------- --------------------
+LIMIT
+----------------------------------------
+DEFAULT                        PASSWORD_GRACE_TIME  PASSWORD
+7
+
+
+48 rows selected.
+
+SYS ON PROD:23-JUL-17> col PROFILE format a20;
+SYS ON PROD:23-JUL-17> /
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             COMPOSITE_LIMIT      KERNEL
+DEFAULT
+
+MONITORING_PROFILE   COMPOSITE_LIMIT      KERNEL
+DEFAULT
+
+DEFAULT              COMPOSITE_LIMIT      KERNEL
+UNLIMITED
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             SESSIONS_PER_USER    KERNEL
+2
+
+MONITORING_PROFILE   SESSIONS_PER_USER    KERNEL
+DEFAULT
+
+DEFAULT              SESSIONS_PER_USER    KERNEL
+UNLIMITED
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             CPU_PER_SESSION      KERNEL
+DEFAULT
+
+MONITORING_PROFILE   CPU_PER_SESSION      KERNEL
+DEFAULT
+
+DEFAULT              CPU_PER_SESSION      KERNEL
+UNLIMITED
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             CPU_PER_CALL         KERNEL
+DEFAULT
+
+MONITORING_PROFILE   CPU_PER_CALL         KERNEL
+DEFAULT
+
+DEFAULT              CPU_PER_CALL         KERNEL
+UNLIMITED
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             LOGICAL_READS_PER_SE KERNEL
+                     SSION
+DEFAULT
+
+MONITORING_PROFILE   LOGICAL_READS_PER_SE KERNEL
+                     SSION
+DEFAULT
+
+DEFAULT              LOGICAL_READS_PER_SE KERNEL
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+                     SSION
+UNLIMITED
+
+PROFILE1             LOGICAL_READS_PER_CA KERNEL
+                     LL
+DEFAULT
+
+MONITORING_PROFILE   LOGICAL_READS_PER_CA KERNEL
+                     LL
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+DEFAULT
+
+DEFAULT              LOGICAL_READS_PER_CA KERNEL
+                     LL
+UNLIMITED
+
+PROFILE1             IDLE_TIME            KERNEL
+DEFAULT
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+MONITORING_PROFILE   IDLE_TIME            KERNEL
+DEFAULT
+
+DEFAULT              IDLE_TIME            KERNEL
+UNLIMITED
+
+PROFILE1             CONNECT_TIME         KERNEL
+DEFAULT
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+MONITORING_PROFILE   CONNECT_TIME         KERNEL
+DEFAULT
+
+DEFAULT              CONNECT_TIME         KERNEL
+UNLIMITED
+
+PROFILE1             PRIVATE_SGA          KERNEL
+DEFAULT
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+MONITORING_PROFILE   PRIVATE_SGA          KERNEL
+DEFAULT
+
+DEFAULT              PRIVATE_SGA          KERNEL
+UNLIMITED
+
+PROFILE1             FAILED_LOGIN_ATTEMPT PASSWORD
+                     S
+2
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+
+MONITORING_PROFILE   FAILED_LOGIN_ATTEMPT PASSWORD
+                     S
+UNLIMITED
+
+DEFAULT              FAILED_LOGIN_ATTEMPT PASSWORD
+                     S
+10
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             PASSWORD_LIFE_TIME   PASSWORD
+DEFAULT
+
+MONITORING_PROFILE   PASSWORD_LIFE_TIME   PASSWORD
+DEFAULT
+
+DEFAULT              PASSWORD_LIFE_TIME   PASSWORD
+180
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             PASSWORD_REUSE_TIME  PASSWORD
+DEFAULT
+
+MONITORING_PROFILE   PASSWORD_REUSE_TIME  PASSWORD
+DEFAULT
+
+DEFAULT              PASSWORD_REUSE_TIME  PASSWORD
+UNLIMITED
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             PASSWORD_REUSE_MAX   PASSWORD
+DEFAULT
+
+MONITORING_PROFILE   PASSWORD_REUSE_MAX   PASSWORD
+DEFAULT
+
+DEFAULT              PASSWORD_REUSE_MAX   PASSWORD
+UNLIMITED
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+PROFILE1             PASSWORD_VERIFY_FUNC PASSWORD
+                     TION
+DEFAULT
+
+MONITORING_PROFILE   PASSWORD_VERIFY_FUNC PASSWORD
+                     TION
+DEFAULT
+
+DEFAULT              PASSWORD_VERIFY_FUNC PASSWORD
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+                     TION
+NULL
+
+PROFILE1             PASSWORD_LOCK_TIME   PASSWORD
+DEFAULT
+
+MONITORING_PROFILE   PASSWORD_LOCK_TIME   PASSWORD
+DEFAULT
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+DEFAULT              PASSWORD_LOCK_TIME   PASSWORD
+1
+
+PROFILE1             PASSWORD_GRACE_TIME  PASSWORD
+DEFAULT
+
+MONITORING_PROFILE   PASSWORD_GRACE_TIME  PASSWORD
+DEFAULT
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE
+-------------------- -------------------- --------------------
+LIMIT
+----------------------------------------
+DEFAULT              PASSWORD_GRACE_TIME  PASSWORD
+7
+
+
+48 rows selected.
+
+SYS ON PROD:23-JUL-17> desc dba_profiles;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ PROFILE                                               NOT NULL VARCHAR2(30)
+ RESOURCE_NAME                                         NOT NULL VARCHAR2(32)
+ RESOURCE_TYPE                                                  VARCHAR2(8)
+ LIMIT                                                          VARCHAR2(40)
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> col LIMIT format a10;
+SYS ON PROD:23-JUL-17> /
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+PROFILE1             COMPOSITE_LIMIT      KERNEL               DEFAULT
+MONITORING_PROFILE   COMPOSITE_LIMIT      KERNEL               DEFAULT
+DEFAULT              COMPOSITE_LIMIT      KERNEL               UNLIMITED
+PROFILE1             SESSIONS_PER_USER    KERNEL               2
+MONITORING_PROFILE   SESSIONS_PER_USER    KERNEL               DEFAULT
+DEFAULT              SESSIONS_PER_USER    KERNEL               UNLIMITED
+PROFILE1             CPU_PER_SESSION      KERNEL               DEFAULT
+MONITORING_PROFILE   CPU_PER_SESSION      KERNEL               DEFAULT
+DEFAULT              CPU_PER_SESSION      KERNEL               UNLIMITED
+PROFILE1             CPU_PER_CALL         KERNEL               DEFAULT
+MONITORING_PROFILE   CPU_PER_CALL         KERNEL               DEFAULT
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+DEFAULT              CPU_PER_CALL         KERNEL               UNLIMITED
+PROFILE1             LOGICAL_READS_PER_SE KERNEL               DEFAULT
+                     SSION
+
+MONITORING_PROFILE   LOGICAL_READS_PER_SE KERNEL               DEFAULT
+                     SSION
+
+DEFAULT              LOGICAL_READS_PER_SE KERNEL               UNLIMITED
+                     SSION
+
+PROFILE1             LOGICAL_READS_PER_CA KERNEL               DEFAULT
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+                     LL
+
+MONITORING_PROFILE   LOGICAL_READS_PER_CA KERNEL               DEFAULT
+                     LL
+
+DEFAULT              LOGICAL_READS_PER_CA KERNEL               UNLIMITED
+                     LL
+
+PROFILE1             IDLE_TIME            KERNEL               DEFAULT
+MONITORING_PROFILE   IDLE_TIME            KERNEL               DEFAULT
+DEFAULT              IDLE_TIME            KERNEL               UNLIMITED
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+PROFILE1             CONNECT_TIME         KERNEL               DEFAULT
+MONITORING_PROFILE   CONNECT_TIME         KERNEL               DEFAULT
+DEFAULT              CONNECT_TIME         KERNEL               UNLIMITED
+PROFILE1             PRIVATE_SGA          KERNEL               DEFAULT
+MONITORING_PROFILE   PRIVATE_SGA          KERNEL               DEFAULT
+DEFAULT              PRIVATE_SGA          KERNEL               UNLIMITED
+PROFILE1             FAILED_LOGIN_ATTEMPT PASSWORD             2
+                     S
+
+MONITORING_PROFILE   FAILED_LOGIN_ATTEMPT PASSWORD             UNLIMITED
+                     S
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+
+DEFAULT              FAILED_LOGIN_ATTEMPT PASSWORD             10
+                     S
+
+PROFILE1             PASSWORD_LIFE_TIME   PASSWORD             DEFAULT
+MONITORING_PROFILE   PASSWORD_LIFE_TIME   PASSWORD             DEFAULT
+DEFAULT              PASSWORD_LIFE_TIME   PASSWORD             180
+PROFILE1             PASSWORD_REUSE_TIME  PASSWORD             DEFAULT
+MONITORING_PROFILE   PASSWORD_REUSE_TIME  PASSWORD             DEFAULT
+DEFAULT              PASSWORD_REUSE_TIME  PASSWORD             UNLIMITED
+PROFILE1             PASSWORD_REUSE_MAX   PASSWORD             DEFAULT
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+MONITORING_PROFILE   PASSWORD_REUSE_MAX   PASSWORD             DEFAULT
+DEFAULT              PASSWORD_REUSE_MAX   PASSWORD             UNLIMITED
+PROFILE1             PASSWORD_VERIFY_FUNC PASSWORD             DEFAULT
+                     TION
+
+MONITORING_PROFILE   PASSWORD_VERIFY_FUNC PASSWORD             DEFAULT
+                     TION
+
+DEFAULT              PASSWORD_VERIFY_FUNC PASSWORD             NULL
+                     TION
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+PROFILE1             PASSWORD_LOCK_TIME   PASSWORD             DEFAULT
+MONITORING_PROFILE   PASSWORD_LOCK_TIME   PASSWORD             DEFAULT
+DEFAULT              PASSWORD_LOCK_TIME   PASSWORD             1
+PROFILE1             PASSWORD_GRACE_TIME  PASSWORD             DEFAULT
+MONITORING_PROFILE   PASSWORD_GRACE_TIME  PASSWORD             DEFAULT
+DEFAULT              PASSWORD_GRACE_TIME  PASSWORD             7
+
+48 rows selected.
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> create profile profile11 limit FAILED_LOGIN_ATTEMPTS 2 SESSIONS_PER_USER 2;
+
+Profile created.
+
+SYS ON PROD:23-JUL-17> alter user u33 profile profile11;
+
+User altered.
+
+SYS ON PROD:23-JUL-17> select USERNAME,PROFILE from dba_users where USERNAME='U33';
+
+USERNAME                       PROFILE
+------------------------------ --------------------
+U33                            PROFILE11
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+Connected.
+U33 ON PROD:23-JUL-17> conn u33/u33
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :23-JUL-17> conn u33/u33
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+ ON :23-JUL-17> conn u33/u33
+ERROR:
+ORA-28000: the account is locked
+
+
+ ON :23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> alter user u33 account unlock;
+
+User altered.
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> conn u33/u3
+Connected.
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> drop profile profile11 CASCADE;
+
+Profile dropped.
+
+SYS ON PROD:23-JUL-17> select * from dba_profiles;
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+PROFILE1             COMPOSITE_LIMIT      KERNEL               DEFAULT
+MONITORING_PROFILE   COMPOSITE_LIMIT      KERNEL               DEFAULT
+DEFAULT              COMPOSITE_LIMIT      KERNEL               UNLIMITED
+PROFILE1             SESSIONS_PER_USER    KERNEL               2
+MONITORING_PROFILE   SESSIONS_PER_USER    KERNEL               DEFAULT
+DEFAULT              SESSIONS_PER_USER    KERNEL               UNLIMITED
+PROFILE1             CPU_PER_SESSION      KERNEL               DEFAULT
+MONITORING_PROFILE   CPU_PER_SESSION      KERNEL               DEFAULT
+DEFAULT              CPU_PER_SESSION      KERNEL               UNLIMITED
+PROFILE1             CPU_PER_CALL         KERNEL               DEFAULT
+MONITORING_PROFILE   CPU_PER_CALL         KERNEL               DEFAULT
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+DEFAULT              CPU_PER_CALL         KERNEL               UNLIMITED
+PROFILE1             LOGICAL_READS_PER_SE KERNEL               DEFAULT
+                     SSION
+
+MONITORING_PROFILE   LOGICAL_READS_PER_SE KERNEL               DEFAULT
+                     SSION
+
+DEFAULT              LOGICAL_READS_PER_SE KERNEL               UNLIMITED
+                     SSION
+
+PROFILE1             LOGICAL_READS_PER_CA KERNEL               DEFAULT
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+                     LL
+
+MONITORING_PROFILE   LOGICAL_READS_PER_CA KERNEL               DEFAULT
+                     LL
+
+DEFAULT              LOGICAL_READS_PER_CA KERNEL               UNLIMITED
+                     LL
+
+PROFILE1             IDLE_TIME            KERNEL               DEFAULT
+MONITORING_PROFILE   IDLE_TIME            KERNEL               DEFAULT
+DEFAULT              IDLE_TIME            KERNEL               UNLIMITED
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+PROFILE1             CONNECT_TIME         KERNEL               DEFAULT
+MONITORING_PROFILE   CONNECT_TIME         KERNEL               DEFAULT
+DEFAULT              CONNECT_TIME         KERNEL               UNLIMITED
+PROFILE1             PRIVATE_SGA          KERNEL               DEFAULT
+MONITORING_PROFILE   PRIVATE_SGA          KERNEL               DEFAULT
+DEFAULT              PRIVATE_SGA          KERNEL               UNLIMITED
+PROFILE1             FAILED_LOGIN_ATTEMPT PASSWORD             2
+                     S
+
+MONITORING_PROFILE   FAILED_LOGIN_ATTEMPT PASSWORD             UNLIMITED
+                     S
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+
+DEFAULT              FAILED_LOGIN_ATTEMPT PASSWORD             10
+                     S
+
+PROFILE1             PASSWORD_LIFE_TIME   PASSWORD             DEFAULT
+MONITORING_PROFILE   PASSWORD_LIFE_TIME   PASSWORD             DEFAULT
+DEFAULT              PASSWORD_LIFE_TIME   PASSWORD             180
+PROFILE1             PASSWORD_REUSE_TIME  PASSWORD             DEFAULT
+MONITORING_PROFILE   PASSWORD_REUSE_TIME  PASSWORD             DEFAULT
+DEFAULT              PASSWORD_REUSE_TIME  PASSWORD             UNLIMITED
+PROFILE1             PASSWORD_REUSE_MAX   PASSWORD             DEFAULT
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+MONITORING_PROFILE   PASSWORD_REUSE_MAX   PASSWORD             DEFAULT
+DEFAULT              PASSWORD_REUSE_MAX   PASSWORD             UNLIMITED
+PROFILE1             PASSWORD_VERIFY_FUNC PASSWORD             DEFAULT
+                     TION
+
+MONITORING_PROFILE   PASSWORD_VERIFY_FUNC PASSWORD             DEFAULT
+                     TION
+
+DEFAULT              PASSWORD_VERIFY_FUNC PASSWORD             NULL
+                     TION
+
+
+PROFILE              RESOURCE_NAME        RESOURCE_TYPE        LIMIT
+-------------------- -------------------- -------------------- ----------
+PROFILE1             PASSWORD_LOCK_TIME   PASSWORD             DEFAULT
+MONITORING_PROFILE   PASSWORD_LOCK_TIME   PASSWORD             DEFAULT
+DEFAULT              PASSWORD_LOCK_TIME   PASSWORD             1
+PROFILE1             PASSWORD_GRACE_TIME  PASSWORD             DEFAULT
+MONITORING_PROFILE   PASSWORD_GRACE_TIME  PASSWORD             DEFAULT
+DEFAULT              PASSWORD_GRACE_TIME  PASSWORD             7
+
+48 rows selected.
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+Connected.
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17> select USERNAME,PROFILE from dba_users where USERNAME='U33';
+select USERNAME,PROFILE from dba_users where USERNAME='U33'
+                             *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+U33 ON PROD:23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> select USERNAME,PROFILE from dba_users where USERNAME='U33';
+
+USERNAME                       PROFILE
+------------------------------ --------------------
+U33                            DEFAULT
+
+SYS ON PROD:23-JUL-17> select * from dba_sys_privs where grantee='U33';
+
+no rows selected
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+Connected.
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17> select * from role_sys_privs where ROLE='ROLE11';
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+ROLE11                         CREATE SESSION                           NO
+ROLE11                         CREATE TABLE                             NO
+
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sun Jul 23 08:06:14 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:23-JUL-17> conn u33/u3
+Connected.
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17>
+U33 ON PROD:23-JUL-17> select * from session_privs;
+
+PRIVILEGE
+----------------------------------------
+CREATE SESSION
+CREATE TABLE
+
+U33 ON PROD:23-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> select * from dba_role_privs where GRANTEE='U33';
+
+GRANTEE                        GRANTED_ROLE                   ADM DEF
+------------------------------ ------------------------------ --- ---
+U33                            ROLE22                         NO  YES
+
+SYS ON PROD:23-JUL-17> create user u5 identified by u5;
+
+User created.
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> grant create session to u5 with admin option;
+
+Grant succeeded.
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> grant create table to u5;
+
+Grant succeeded.
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> select * from dba_sys_privs where grantee='U5';
+
+GRANTEE                        PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+U5                             CREATE SESSION                           YES
+U5                             CREATE TABLE                             NO
+
+SYS ON PROD:23-JUL-17> create user u12 identified by u2;
+
+User created.
+
+SYS ON PROD:23-JUL-17> conn u5/u5
+Connected.
+U5 ON PROD:23-JUL-17>
+U5 ON PROD:23-JUL-17>
+U5 ON PROD:23-JUL-17> grant CREATE SESSION to u2;
+
+Grant succeeded.
+
+U5 ON PROD:23-JUL-17>
+U5 ON PROD:23-JUL-17> conn u2/u2
+Connected.
+U2 ON PROD:23-JUL-17>
+U2 ON PROD:23-JUL-17>
+U2 ON PROD:23-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sun Jul 23 08:11:46 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> revoke CREATE SESSION from u5;
+
+Revoke succeeded.
+
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17>
+SYS ON PROD:23-JUL-17> conn u12/u2
+ERROR:
+ORA-01045: user U12 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :23-JUL-17> conn u2/u2
+Connected.
+U2 ON PROD:23-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$
+[oracle@linux ~]$

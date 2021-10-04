@@ -1,0 +1,15 @@
++DATA/jfspprod/datafile/users.284.909004117                                                                                                                                                                                                                       USERS                          YES
++DATA/jfspprod/datafile/undotbs1.283.909004117                                                                                                                                                                                                                    UNDOTBS1                       YES
++DATA/jfspprod/datafile/sysaux.287.909004117                                                                                                                                                                                                                      SYSAUX                         YES
++DATA/jfspprod/datafile/system.282.909004117                                                                                                                                                                                                                      SYSTEM                         YES
++STGDATA/jfspprod/datafile/fcrdatasml.273.915882741                                                                            
+
+
+
+select FILE_NAME,TABLESPACE_NAME,AUTOEXTENSIBLE,BYTES/1024/1024/1024, MAXBYTES/1024/1024/1024 from dba_data_files where AUTOEXTENSIBLE='YES'
+
+ALTER DATABASE DATAFILE '/uo1/oracle/oatrngdata/a_txn_data04.dbf' AUTOEXTEND OFF;
+
+
+
+

@@ -1,0 +1,34 @@
+SYS:JFSBIP > select * from v$instance;
+
+SYS:JFSBIP > set time on;
+20:17:13 SYS:JFSBIP > select sysdate from dual;
+
+20:18:37 SYS:JFSBIP > select count(*),owner from dba_objects where status='INVALID' group by owner;
+
+20:19:06 SYS:JFSBIP >
+20:19:08 SYS:JFSBIP > select count(*) from PRD_BIPLATFORM.XMLP_SCHED_DATA;    
+
+20:19:23 SYS:JFSBIP > select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_free order by 1;
+
+20:19:38 SYS:JFSBIP >
+20:19:40 SYS:JFSBIP > truncate table PRD_BIPLATFORM.XMLP_SCHED_DATA drop storage;
+
+Table truncated.
+
+20:20:13 SYS:JFSBIP > commit;
+
+Commit complete.
+
+20:20:17 SYS:JFSBIP > select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_free order by 1;
+
+20:20:25 SYS:JFSBIP > select count(*) from PRD_BIPLATFORM.XMLP_SCHED_DATA;
+
+  COUNT(*)                                                                                                                                                              
+----------                                                                                                                                                              
+         0                                                                                                                                                              
+
+20:20:33 SYS:JFSBIP > select count(*),owner from dba_objects where status='INVALID' group by owner;
+
+20:20:45 SYS:JFSBIP >
+20:20:47 SYS:JFSBIP > spool off;
+

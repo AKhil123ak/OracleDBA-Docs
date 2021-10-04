@@ -1,0 +1,119 @@
+Using username "soral301".
+Last login: Tue Aug  7 07:29:34 IST 2018 on ssh from 172.17.73.151
+***************************************************************************
+*                                                                         *
+*      Welcome to Janalakshmi Financial Services.                         *
+*                                                                         *
+*                                                                         *
+* If you are not authorized to use this system, log off now.              *
+* The Access to this system is for Authorized Use only.                   *
+* Use this system is subject to audit at any time by request of           *
+* Janalakshmi Financial Services or IBM management only.                  *
+*                                                                         *
+* This system contains information proprietary to Janalakshmi Financial   *
+* Services                                                                *
+*                                                                         *
+* Any unauthorized user or use of such information may result in          *
+* civil and or criminal penalties. Use of this system equipment           *
+* is subject to monitoring and be controlled at all times by or on behalf *
+* of Janalakshmi Financial Services                                       *
+*                                                                         *
+***************************************************************************
+
+$ s
+ksh: s:  not found.
+$
+$ sudo su - oracle
+soral301_passwd:
+[YOU HAVE NEW MAIL]
+$
+$
+$
+$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Tue Aug 7 12:03:28 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSPPROD > show parameter db_recovery_file_dest
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_recovery_file_dest                string      /backuptemp/JFSPPROD/RECO
+db_recovery_file_dest_size           big integer 10G
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > alter system set db_recovery_file_dest_size=50G scope = both;
+
+System altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > alter database recover managed standby database cancel;
+
+Database altered.
+
+SYS:JFSPPROD > select NAME, OPEN_MODE, GUARD_STATUS, DATABASE_ROLE from v$database;
+
+NAME      OPEN_MODE            GUARD_S DATABASE_ROLE
+--------- -------------------- ------- ----------------
+JFSPPROD  MOUNTED              NONE    PHYSICAL STANDBY
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > shut immediate
+ORA-01109: database not open
+
+
+Database dismounted.
+ORACLE instance shut down.
+SYS:JFSPPROD > startup mount;
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 1.0476E+11 bytes
+Fixed Size                  2258672 bytes
+Variable Size            1.0335E+11 bytes
+Database Buffers         1342177280 bytes
+Redo Buffers               64835584 bytes
+Database mounted.
+SYS:JFSPPROD > select flashback_on from v$database;
+
+FLASHBACK_ON
+------------------
+YES
+
+SYS:JFSPPROD > select status from v$instance;
+
+STATUS
+------------
+MOUNTED
+
+SYS:JFSPPROD > alter database convert to snapshot standby;
+
+Database altered.
+
+SYS:JFSPPROD > alter database open;
+
+Database altered.
+
+SYS:JFSPPROD > select open_mode from v$database;
+
+OPEN_MODE
+--------------------
+READ WRITE
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >

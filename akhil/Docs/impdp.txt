@@ -1,0 +1,1017 @@
+login as: oracle
+oracle@172.17.70.21's password:
+Last unsuccessful login: Sun Sep  9 12:09:11 IST 2018 on ssh from 172.16.15.67
+Last login: Tue Sep 11 16:43:59 IST 2018 on ssh from 172.16.15.66
+***************************************************************************
+*                                                                         *
+*      Welcome to Janalakshmi Financial Services.                         *
+*                                                                         *
+*                                                                         *
+* If you are not authorized to use this system, log off now.              *
+* The Access to this system is for Authorized Use only.                   *
+* Use this system is subject to audit at any time by request of           *
+* Janalakshmi Financial Services or IBM management only.                  *
+*                                                                         *
+* This system contains information proprietary to Janalakshmi Financial   *
+* Services                                                                *
+*                                                                         *
+* Any unauthorized user or use of such information may result in          *
+* civil and or criminal penalties. Use of this system equipment           *
+* is subject to monitoring and be controlled at all times by or on behalf *
+* of Janalakshmi Financial Services                                       *
+*                                                                         *
+***************************************************************************
+
+[YOU HAVE NEW MAIL]
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$ ps -ef|grep pmon
+  oracle 18481398        1   0   Sep 09      -  0:19 ora_pmon_JFSTST
+    grid 44826670        1   0   Sep 09      -  0:12 asm_pmon_+ASM
+  oracle 30540942 33489006   0 21:01:10  pts/1  0:00 grep pmon
+  oracle 59114670        1   0   Sep 09      -  0:20 ora_pmon_JFSDRTST
+  oracle 64029734        1   0   Sep 09      -  0:20 ora_pmon_JFSTRN
+  oracle 64423112        1   0 17:58:38      -  0:00 ora_pmon_JFSUAT
+  oracle 65471612        1   0   Sep 09      -  0:32 ora_pmon_JFSSIM
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$ ps -ef|grep lsnr
+    grid 16252966        1   0   Sep 09      -  3:15 /u01/app/grid/bin/tnslsnr LISTENER_JFS -inherit
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$ cd /u01/app/grid/bin
+[oracle@dcdbssrv01:/u01/app/grid/bin]$
+[oracle@dcdbssrv01:/u01/app/grid/bin]$ ls -ltr
+total 19141000
+-rwxr-xr-x    1 grid     oinstall        153 Nov 07 1997  echodo
+-rwxr-xr-x    1 grid     oinstall       6183 Jan 01 2000  oraenv
+-rwxr-xr-x    1 grid     oinstall       2567 Jan 01 2000  oerr
+-rwxr-xr-x    1 grid     oinstall       2487 Jan 01 2000  gensyslib
+-rwxr-x---    1 grid     oinstall      13855 Jan 01 2000  dbstart
+-rwxr-x---    1 grid     oinstall       6088 Jan 01 2000  dbshut
+-rwxr-xr-x    1 grid     oinstall       2415 Jan 01 2000  dbhome
+-rwxr-xr-x    1 grid     oinstall       5778 Jan 01 2000  coraenv
+-rwxr-xr-x    1 grid     oinstall         48 Sep 25 2000  oraxml
+-rwxr-xr-x    1 grid     oinstall         48 Sep 25 2000  oraxsl
+-rwxr-xr-x    1 grid     oinstall       4109 Oct 18 2002  evt.sh
+-rwxr-xr-x    1 grid     oinstall         44 Dec 05 2002  orajaxb
+-rwxr-xr-x    1 grid     oinstall      13438 Sep 09 2005  crstmpl.scr
+-rwxr-xr-x    1 grid     oinstall       2952 Oct 17 2005  Directory.pm
+-rwxr-xr-x    1 grid     oinstall       1488 Oct 17 2005  Path.pm
+-rwxr-xr-x    1 grid     oinstall       1404 Oct 17 2005  EMAgentPatch.pm
+-rwxr-x---    1 grid     oinstall        281 Oct 17 2005  StartAgent.pl
+-rwxr-xr-x    1 grid     oinstall       2194 Oct 17 2005  EmCommonCmdDriver.pm
+-rwxr-xr-x    1 grid     oinstall       1226 Oct 17 2005  emdfail.command
+-rwxr-xr-x    1 grid     oinstall        495 Apr 14 2006  commonenv.template
+-rwxr-xr-x    1 grid     oinstall       3451 May 02 2006  EMDiag.pm
+-rwxr-xr-x    1 grid     oinstall       2343 Jul 27 2006  AgentMisc.pm
+-rwxr-xr-x    1 grid     oinstall       5653 Sep 06 2006  EMSAConsoleCommon.pm
+-rw-r--r--    1 grid     oinstall       5297 Oct 04 2006  dbgeu_run_action.pl
+-rwxr-xr-x    1 grid     oinstall       6612 Dec 14 2006  EMconnectorCmds.pm
+-rwxr-xr-x    1 grid     oinstall       2923 May 26 2007  CompEMagent.pm
+-rwxr-x---    1 grid     oinstall       2835 Sep 17 2007  nfsPatchPlugin.pm
+-rwxr-xr-x    1 grid     oinstall      10174 Jan 19 2008  emutil.bat.template
+-rwxr-xr-x    1 grid     oinstall       4442 Jan 19 2008  RegisterTType.pm
+-rwxr-xr-x    1 grid     oinstall       5199 Jan 19 2008  CompEMcore.pm
+-rwxr-xr-x    1 grid     oinstall       5693 Jan 19 2008  CompEMcentral.pm
+-rwxr-x---    1 grid     oinstall       4472 Apr 15 2008  patchAgtStPlugin.pm
+-rwxr-xr-x    1 grid     oinstall      34604 May 24 2008  SecureUtil.pm
+-rwxr-xr-x    1 grid     oinstall      28900 Aug 01 2008  SecureAgentCmds.pm
+-rwxr-xr-x    1 grid     oinstall       3265 Aug 01 2008  AgentSubAgent.pm
+-rwxr-xr-x    1 grid     oinstall      24310 Sep 12 2008  EMAgent.pm
+-rw-r--r--    1 grid     oinstall       9069 Oct 06 2008  aqxmlctl.pl
+-rwxr-xr-x    1 grid     oinstall      16758 Mar 18 2009  EMomsCmds.pm
+-rwxr-xr-x    1 grid     oinstall      24550 Mar 24 2009  EMDeploy.pm
+-rwxr-xr-x    1 grid     oinstall       1459 May 12 2009  linkshlib
+-rwxr-xr-x    1 grid     oinstall      70807 Jun 24 2009  SecureOMSCmds.pm
+-rwx------    1 grid     oinstall      54316 Sep 03 2009  xmlwf
+-rwxr-xr-x    1 grid     oinstall       1498 Oct 30 2009  racgwrap.sbs
+-rwxr-xr-x    1 grid     oinstall       2966 Jan 14 2010  asmproxy
+-rwxr-xr-x    1 grid     oinstall       1303 Feb 03 2010  cluvfyrac.sh
+-rwxr-xr-x    1 grid     oinstall       2823 Mar 24 2010  crsdiag.pl
+-rwxr-xr-x    1 grid     oinstall      15615 Mar 26 2010  emctl.template
+-rwxr-x---    1 grid     oinstall       5469 Apr 21 2010  asmcmd
+-rwxr-xr-x    1 grid     oinstall       9172 Jun 08 2010  AgentLifeCycle.pm
+-rwxr-xr-x    1 grid     oinstall       8089 Aug 03 2010  genttsh
+-rwxr-xr-x    1 grid     oinstall      10227 Aug 03 2010  genorasdksh
+-rwxr-xr-x    1 grid     oinstall       3512 Aug 03 2010  genoccish
+-rwxr-xr-x    1 grid     oinstall       3261 Aug 18 2010  symfind
+-rwxr-x---    1 grid     oinstall       9051 Oct 13 2010  appvipcfg.pl
+-rwxr-xr-x    1 grid     oinstall       5770 Nov 22 2010  relink
+-rwxr-xr-x    1 grid     oinstall      39794 Aug 05 2011  emwd.pl
+-rwxr-xr-x    1 grid     oinstall       9803 Oct 03 2011  genclntsh
+-rwxr-xr-x    1 grid     oinstall      34558 Jan 12 2012  asmcmdcore
+-rwxr-xr-x    1 grid     oinstall       2552 Jan 19 2012  sAgentUtils.pm
+-rwxr-xr-x    1 grid     oinstall       4563 Apr 17 2012  genclntst
+-rwxr-xr-x    1 grid     oinstall       3022 Feb 14 2013  oc4jctl.pl
+-rwxr-xr-x    1 grid     oinstall       8490 Apr 05 2013  genagtsh
+-rwxr-xr-x    1 grid     oinstall       6443 Jul 17 2013  oraxlc
+-rwxr-xr-x    1 grid     oinstall     291654 Jul 17 2013  zip
+-rwxr-xr-x    1 grid     oinstall     149006 Jul 17 2013  unzip
+-rwxr-xr-x    1 grid     oinstall       6184 Jul 19 2013  gennttab
+-rwxr-xr-x    1 grid     oinstall       3813 Jul 19 2013  gennfgt
+-rwxr-xr-x    1 grid     oinstall      13397 Jul 20 2013  adapters
+-rwxr-xr-x    1 grid     oinstall   49218230 Jul 21 2013  csscan
+-rwxr-xr-x    1 grid     oinstall      17548 Aug 03 2013  racgvip
+-rwxr-xr-x    1 grid     oinstall   48827019 Aug 07 2013  tns2nis
+-rwxr-xr-x    1 grid     oinstall      28268 Aug 16 2013  lsnodes.bin
+-rwxr-xr-x    1 grid     oinstall      87757 Aug 16 2013  odnsd.bin
+-rwxr-xr-x    1 grid     oinstall    1159948 Aug 24 2013  lxegen
+-rwxr-xr-x    1 grid     oinstall    1103343 Aug 24 2013  lmsgen
+-rwxr-xr-x    1 grid     oinstall    4465695 Aug 24 2013  lxinst
+-rwxr-xr-x    1 grid     oinstall     726212 Aug 24 2013  lxchknlb
+-rwxr-xr-x    1 grid     oinstall    1361748 Aug 24 2013  lcsscan
+-rwxr-x---    1 root     oinstall       1567 Sep 04 2013  acfsroot
+-rwxr-xr-x    1 grid     oinstall      27996 Oct 02 2013  offset
+-rwxr-xr-x    1 grid     oinstall     702260 Oct 02 2013  genksms
+-rwxr-x---    1 grid     oinstall      11388 Oct 02 2013  osh
+-rwxr-x---    1 grid     oinstall      19989 Oct 02 2013  fmputlhp
+-rwxr-x---    1 grid     oinstall     905001 Oct 02 2013  fmputl
+-rwsr-x---    1 root     oinstall      28319 Oct 02 2013  oradism
+-rwxr-x---    1 grid     oinstall    2252133 Oct 02 2013  dbfs_client
+-rwxr-xr-x    1 grid     oinstall    3290034 Oct 02 2013  orabase
+-rwxr-xr-x    1 grid     oinstall          0 Oct 02 2013  tnnfg.dbl
+-rwxr-x---    1 grid     oinstall          0 Oct 02 2013  trcldr
+-rwxr-x---    1 grid     oinstall          0 Oct 02 2013  grdcscan
+-rwxr-xr-x    1 grid     oinstall       6522 Jan 30 2014  asmca
+-rwxr-xr-x    1 grid     oinstall       6759 Jan 30 2014  owm
+-rwxr-xr-x    1 grid     oinstall       3156 Jan 30 2014  orapki
+-rwxr-xr-x    1 grid     oinstall       2772 Jan 30 2014  mkstore
+-rwxr-xr-x    1 grid     oinstall       3746 Jan 30 2014  umu
+-rwxr-xr-x    1 grid     oinstall       2969 Jan 30 2014  trcasst
+-rwxr-xr-x    1 grid     oinstall       1504 Jan 30 2014  statusnc
+-rwxr-xr-x    1 grid     oinstall       6989 Jan 30 2014  rconfig
+-rw-r--r--    1 grid     oinstall       3647 Jan 30 2014  platform_common
+-rwxr-xr-x    1 grid     oinstall       1239 Jan 30 2014  ojvmtc
+-rwxr-xr-x    1 grid     oinstall       1356 Jan 30 2014  ojvmjava
+-rwxr-xr-x    1 grid     oinstall       3541 Jan 30 2014  oidprovtool
+-rwxr-xr-x    1 grid     oinstall       6419 Jan 30 2014  netmgr
+-rwxr-xr-x    1 grid     oinstall       1550 Jan 30 2014  ncomp
+-rwxr-xr-x    1 grid     oinstall       1645 Jan 30 2014  loadjava
+-rwxr-xr-x    1 grid     oinstall       3223 Jan 30 2014  ldifmigrator
+lrwxrwxrwx    1 grid     oinstall         35 Jan 30 2014  lbuilder -> /u01/app/grid/nls/lbuilder/lbuilder
+-rwxr-xr-x    1 grid     oinstall       1569 Jan 30 2014  eusm
+-rwxr-xr-x    1 grid     oinstall       1427 Jan 30 2014  dropjava
+-rwxr-xr-x    1 grid     oinstall       1680 Jan 30 2014  deploync
+-rwxr-xr-x    1 grid     oinstall       2400 Jan 30 2014  bndlchk
+-rwxr-xr-x    1 grid     oinstall       4749 Jan 30 2014  srvconfig
+-rwxr-xr-x    1 grid     oinstall       7338 Jan 30 2014  diagsetup
+-rwxr-x--x    1 grid     oinstall       1500 Jan 30 2014  aqxmlctl
+-rwxr-xr-x    1 grid     oinstall       2004 Jan 30 2014  trcsess
+-rwxr-xr-x    1 grid     oinstall       2828 Jan 30 2014  schemasync
+-rwxr-xr-x    1 grid     oinstall       2113 Jan 30 2014  oidca
+-rwxr-xr-x    1 grid     oinstall       1266 Jan 30 2014  odisrvreg
+-rw-r--r--    1 grid     oinstall         88 Jan 30 2014  netca_deinst.sh
+-rwxr-xr-x    1 grid     oinstall       6337 Jan 30 2014  netca
+-rwxr-x---    1 grid     oinstall        270 Jan 30 2014  extusrupgrade
+-rwxr-x--x    1 grid     oinstall      36062 Jan 30 2014  tstshmO
+-rwxr-x--x    1 grid     oinstall    1098408 Jan 30 2014  orapwdO
+-rwxr-x--x    1 grid     oinstall      11038 Jan 30 2014  maxmemO
+-rwxr-x--x    1 grid     oinstall     954354 Jan 30 2014  dumpsga0
+-rwxr-x--x    1 grid     oinstall   48969785 Jan 30 2014  dbvO
+-rwxr-x--x    1 grid     oinstall      30509 Jan 30 2014  dbfsizeO
+-rwxr-x--x    1 grid     oinstall     952839 Jan 30 2014  mapsga0
+-rwxr-x--x    1 grid     oinstall   48906194 Jan 30 2014  cursizeO
+-rwxr-x--x    1 grid     oinstall   48935478 Jan 30 2014  agtctlO
+-rwxr-x--x    1 grid     oinstall    1327856 Jan 30 2014  sbttestO
+-rwxr-x--x    1 grid     oinstall      27626 Jan 30 2014  hsotsO
+-rwxr-x--x    1 grid     oinstall      29270 Jan 30 2014  hsdepxaO
+-rwxr-x--x    1 grid     oinstall     329257 Jan 30 2014  hsallociO
+-rwxr-x--x    1 grid     oinstall   48985970 Jan 30 2014  nidO
+-rwsr-x---    1 grid     oinstall      28752 Jan 30 2014  jssuO
+-rwxr-x--x    1 grid     oinstall     112225 Jan 30 2014  mkpatchO
+-rwxr-x--x    1 grid     oinstall      10608 Jan 30 2014  skgxpinfoO
+-rwxr-x--x    1 grid     oinstall    1606017 Jan 30 2014  setasmgid0
+-rwxr-xr-x    1 grid     oinstall      11209 Jan 30 2014  rawutl0
+-rwxr-xr-x    1 grid     oinstall   48907638 Jan 30 2014  oklist0
+-rwxr-x--x    1 grid     oinstall   50387240 Jan 30 2014  sqlldrO
+-rwxr-x--x    1 grid     oinstall   49009042 Jan 30 2014  tkprofO
+-rwxr-x--x    1 grid     oinstall   49016316 Jan 30 2014  plshprofO
+-rwxr-x--x    1 grid     oinstall   49082733 Jan 30 2014  impdpO
+-rwxr-x--x    1 grid     oinstall   49074475 Jan 30 2014  expdpO
+-rwxr-x--x    1 grid     oinstall      50065 Jan 30 2014  geneziO
+-rwxr-x--x    1 grid     oinstall      31775 Jan 30 2014  dg4pwdO
+-rwxr-x--x    1 grid     oinstall    1743356 Jan 30 2014  extprocO
+-rwxr-xr-x    1 grid     oinstall   48905137 Jan 30 2014  okdstry0
+-rwxr-xr-x    1 grid     oinstall   48903577 Jan 30 2014  okinit0
+-rwxr-xr-x    1 grid     oinstall      12494 Jan 30 2014  emutil
+-rwxr-xr-x    1 grid     oinstall       6923 Jan 30 2014  targetdeploy.pl
+-rwxr-xr-x    1 grid     oinstall      18340 Jan 30 2014  emctl.pl
+-rwxr--r--    1 grid     oinstall      15476 Jan 30 2014  emctl
+-rwxr-xr-x    1 grid     oinstall       3494 Jan 30 2014  emca
+-rwxr-xr-x    1 grid     oinstall        489 Jan 30 2014  commonenv
+-rwxr-xr-x    1 grid     oinstall      44107 Jan 30 2014  EmctlCommon.pm
+-rwxr-x---    1 grid     oinstall          0 Jan 30 2014  vipca
+-rwxr-----    1 grid     oinstall          0 Jan 30 2014  cssdmonitor.bin
+-rwxr-----    1 grid     oinstall          0 Jan 30 2014  cssdagent.bin
+-rwxr-x--x    1 grid     oinstall   48908031 Jan 31 2014  tnsping0
+-rwxr-x--x    1 grid     oinstall   12594190 Jan 31 2014  wrapO
+-rwxr-x--x    1 grid     oinstall   48969785 Jan 31 2014  dbv
+-rwxr-x--x    1 grid     oinstall      36062 Jan 31 2014  tstshm
+-rwxr-x--x    1 grid     oinstall    1098408 Jan 31 2014  orapwd
+-rwxr-x--x    1 grid     oinstall      11038 Jan 31 2014  maxmem
+-rwxr-x--x    1 grid     oinstall     952839 Jan 31 2014  mapsga
+-rwxr-x--x    1 grid     oinstall     954354 Jan 31 2014  dumpsga
+-rwxr-x--x    1 grid     oinstall      30509 Jan 31 2014  dbfsize
+-rwxr-x--x    1 grid     oinstall   48906194 Jan 31 2014  cursize
+-rwxr-x--x    1 grid     oinstall      27626 Jan 31 2014  hsots
+-rwxr-x--x    1 grid     oinstall     329257 Jan 31 2014  hsalloci
+-rwxr-x--x    1 grid     oinstall   48935478 Jan 31 2014  agtctl
+-rwxr-x--x    1 grid     oinstall    1327856 Jan 31 2014  sbttest
+-rwxr-x--x    1 grid     oinstall      29270 Jan 31 2014  hsdepxa
+-rwxr-x--x    1 grid     oinstall   48924741 Jan 31 2014  loadpspO
+-rwxr-x--x    1 grid     oinstall   48985970 Jan 31 2014  nid
+-rwsr-x---    1 root     oinstall      28752 Jan 31 2014  jssu
+-rwxr-x--x    1 grid     oinstall   49549904 Jan 31 2014  wrcO
+-rwxr-x--x    1 grid     oinstall     743086 Jan 31 2014  uidrvciO
+-rwxr-x--x    1 grid     oinstall      62631 Jan 31 2014  adrciO
+-rwxr-x--x    1 grid     oinstall    1038723 Jan 31 2014  sysresv0
+-rwxr-x--x    1 grid     oinstall     112225 Jan 31 2014  mkpatch
+-rwxr-x--x    1 grid     oinstall      10608 Jan 31 2014  skgxpinfo
+-rwxr-x--x    1 grid     oinstall    1606017 Jan 31 2014  setasmgid
+-rwxr-x--x    1 grid     oinstall   48915769 Jan 31 2014  trcroute0
+-rwxr-x--x    1 grid     oinstall   48908031 Jan 31 2014  tnsping
+-rwxr-x--x    1 grid     oinstall   50390900 Jan 31 2014  sqlplus
+-rwxr-xr-x    1 grid     oinstall   49014336 Jan 31 2014  ldapadd
+-rwxr-xr-x    1 grid     oinstall   48926093 Jan 31 2014  ldapbind
+-rwxr-xr-x    1 grid     oinstall   48927663 Jan 31 2014  ldapcompare
+-rwxr-xr-x    1 grid     oinstall   48929348 Jan 31 2014  ldapdelete
+-rwxr-xr-x    1 grid     oinstall   49014336 Jan 31 2014  ldapmodify
+-rwxr-xr-x    1 grid     oinstall   48967165 Jan 31 2014  ldapsearch
+-rwxr-xr-x    1 grid     oinstall   48926628 Jan 31 2014  ldapmoddn
+-rwxr-xr-x    1 grid     oinstall   49028532 Jan 31 2014  ldapaddmt
+-rwxr-xr-x    1 grid     oinstall   49028532 Jan 31 2014  ldapmodifymt
+-rwxr-xr-x    1 grid     oinstall   48974721 Jan 31 2014  dsml2ldif
+-rwxr-xr-x    1 grid     oinstall      11209 Jan 31 2014  rawutl
+-rwxr-xr-x    1 grid     oinstall   48907638 Jan 31 2014  oklist
+-rwxr-x--x    1 grid     oinstall   49298933 Jan 31 2014  impO
+-rwxr-x--x    1 grid     oinstall   49751026 Jan 31 2014  expO
+-rwxr-x--x    1 grid     oinstall   50387240 Jan 31 2014  sqlldr
+-rwxr-x--x    1 grid     oinstall   49009042 Jan 31 2014  tkprof
+-rwxr-x--x    1 grid     oinstall   49016316 Jan 31 2014  plshprof
+-rwxr-x--x    1 grid     oinstall   48942629 Jan 31 2014  kgmgrO
+-rwxr-x--x    1 grid     oinstall   48924741 Jan 31 2014  loadpsp
+-rwxr-x--x    1 grid     oinstall   49082733 Jan 31 2014  impdp
+-rwxr-x--x    1 grid     oinstall   49074475 Jan 31 2014  expdp
+-rwxr-x--x    1 grid     oinstall      50065 Jan 31 2014  genezi
+-rw-------    1 grid     oinstall   49437499 Jan 31 2014  dgmgrlO
+-rwxr-x--x    1 grid     oinstall   49549904 Jan 31 2014  wrc
+-rwxr-x--x    1 grid     oinstall      31775 Jan 31 2014  dg4pwd
+-rwxr-x--x    1 grid     oinstall     743086 Jan 31 2014  uidrvci
+-rwxr-x--x    1 grid     oinstall    1038723 Jan 31 2014  sysresv
+-rwxr-x--x    1 grid     oinstall    1743356 Jan 31 2014  extproc
+-rwxr-x--x    1 grid     oinstall      62631 Jan 31 2014  adrci
+-rwxr-x--x    1 grid     oinstall   21722380 Jan 31 2014  orionO
+-rwxr-xr-x    1 grid     oinstall   48903577 Jan 31 2014  okinit
+-rwxr-xr-x    1 grid     oinstall   48905137 Jan 31 2014  okdstry
+-rwxr-x--x    1 grid     oinstall    1316719 Jan 31 2014  tnslsnr0
+-rwxr-x--x    1 grid     oinstall   49041080 Jan 31 2014  lsnrctl0
+-rwxr-x--x    1 grid     oinstall   48915769 Jan 31 2014  trcroute
+-rwxr-xr-x    1 grid     oinstall      17099 Aug 11 2017  LaunchEMagent.pm
+-rwxr-xr-x    1 grid     oinstall      44330 Aug 11 2017  EmctlCommon.pm.template
+-rwxr-xr-x    1 grid     oinstall       7378 Aug 11 2017  EmKeyCmds.pm
+-rwxr-xr-x    1 grid     oinstall      17998 Aug 11 2017  AgentStatus.pm
+-rwxr-----    1 grid     oinstall   66870701 Aug 11 2017  diskmon.bin
+-rwxr-x---    1 grid     oinstall      44610 Aug 15 2017  diagcollection.pl
+-rw-------    1 grid     oinstall   50841954 Oct 16 2017  amduO
+-rw-------    1 grid     oinstall   66704142 Oct 16 2017  kfodO
+-rw-------    1 grid     oinstall   51139257 Oct 16 2017  renamedg0
+-rw-------    1 grid     oinstall   50791361 Oct 16 2017  kfedO
+-rwxr-x--x    1 grid     oinstall   21738448 Oct 16 2017  orion
+-rw-------    1 grid     oinstall   61989812 Oct 16 2017  rmanO
+-rwxr-x--x    1 grid     oinstall   12648621 Oct 16 2017  wrap
+-rw-------    1 grid     oinstall     849831 Oct 16 2017  extjoboO
+-rw-------    1 grid     oinstall     849831 Oct 16 2017  extjobO
+-rwxr-x--x    1 grid     oinstall   48961096 Oct 16 2017  kgmgr
+-rwxr-x--x    1 grid     oinstall   49317972 Oct 16 2017  imp
+-rwxr-x--x    1 grid     oinstall   49770193 Oct 16 2017  exp
+-rwxr-xr-x    1 grid     oinstall       9513 Oct 16 2017  osdbagrp0
+-rwxr-xr-x    1 grid     oinstall  313706119 Feb 08 2018  scriptagent.bin
+-rwxr-xr-x    1 grid     oinstall      14181 Feb 08 2018  sclsspawn
+-rwxr-xr-x    1 grid     oinstall    1993448 Feb 08 2018  racgmain
+-rwxr-xr-x    1 grid     oinstall    1716763 Feb 08 2018  racgevtf
+-rwxr-xr-x    1 grid     oinstall    1726112 Feb 08 2018  racgeut
+-rwxr-x---    1 grid     oinstall      35356 Feb 08 2018  osysmond.bin
+-rwxr-----    1 grid     oinstall  313712718 Feb 08 2018  orarootagent.bin
+-rwxr-xr-x    1 grid     oinstall     907765 Feb 08 2018  oranetmonitor.bin
+-rwxr-x---    1 grid     oinstall     123947 Feb 08 2018  oradnssd.bin
+-rwxr-xr-x    1 grid     oinstall  313918206 Feb 08 2018  oraagent.bin
+-rwxr-xr-x    1 grid     oinstall      87068 Feb 08 2018  oprocd
+-rwxr-xr-x    1 grid     oinstall      59096 Feb 08 2018  olsnodes.bin
+-rwxr-x---    1 grid     oinstall      35424 Feb 08 2018  ologgerd
+-rwxr-xr-x    1 grid     oinstall     183509 Feb 08 2018  oifcfg.bin
+-rwxr-----    1 grid     oinstall  277113671 Feb 08 2018  ohasd.bin
+-rwxr-----    1 grid     oinstall     768957 Feb 08 2018  octssd.bin
+-rwxr-xr-x    1 grid     oinstall    3657763 Feb 08 2018  ocssd.bin
+-rwxr-x---    1 grid     oinstall     166273 Feb 08 2018  ocrdump.bin
+-rwxr-x---    1 grid     oinstall     324612 Feb 08 2018  ocrconfig.bin
+-rwxr-x---    1 grid     oinstall     156138 Feb 08 2018  ocrcheck.bin
+-rwxr-x---    1 grid     oinstall      22702 Feb 08 2018  oclumon.bin
+-rwxr-x---    1 grid     oinstall      16354 Feb 08 2018  oclskd.bin
+-rwxr-xr-x    1 grid     oinstall    1050268 Feb 08 2018  mdnsd.bin
+-rwxr-xr-x    1 grid     oinstall      30030 Feb 08 2018  lsdb.bin
+-rwxr-xr-x    1 grid     oinstall      20679 Feb 08 2018  gsd
+-rwxr-xr-x    1 grid     oinstall     500962 Feb 08 2018  gpnptool.bin
+-rwxr-xr-x    1 grid     oinstall     374668 Feb 08 2018  gpnpd.bin
+-rwxr-----    1 grid     oinstall      19115 Feb 08 2018  gnsd.bin
+-rwxr-xr-x    1 grid     oinstall     855292 Feb 08 2018  gipcd.bin
+-rwxr-xr-x    1 grid     oinstall   26492927 Feb 08 2018  evmwatch.bin
+-rwxr-xr-x    1 grid     oinstall   26486366 Feb 08 2018  evmsort.bin
+-rwxr-xr-x    1 grid     oinstall   26461738 Feb 08 2018  evmshow.bin
+-rwxr-xr-x    1 grid     oinstall   26482099 Feb 08 2018  evmpost.bin
+-rwxr-xr-x    1 grid     oinstall   26465478 Feb 08 2018  evmmklib.bin
+-rwxr-xr-x    1 grid     oinstall   26448514 Feb 08 2018  evmmkbin.bin
+-rwxr-xr-x    1 grid     oinstall   26930215 Feb 08 2018  evmlogger.bin
+-rwxr-xr-x    1 grid     oinstall   26455746 Feb 08 2018  evminfo.bin
+-rwxr-xr-x    1 grid     oinstall   32957245 Feb 08 2018  evmd.bin
+-rwxr-xr-x    1 grid     oinstall  277918769 Feb 08 2018  emcrsp.bin
+-rwxr-x---    1 grid     oinstall    1053665 Feb 08 2018  cssvfupgd.bin
+-rwxr-----    1 grid     oinstall  313664498 Feb 08 2018  cssdmonitor
+-rwxr-----    1 grid     oinstall  313664498 Feb 08 2018  cssdagent
+-rwxr-----    1 grid     oinstall  272553116 Feb 08 2018  crsd.bin
+-rwxr-x---    1 grid     oinstall  335620836 Feb 08 2018  crsctl.bin
+-rwxr-xr-x    1 grid     oinstall  277046441 Feb 08 2018  crs_unregister.bin
+-rwxr-xr-x    1 grid     oinstall  277047871 Feb 08 2018  crs_stop.bin
+-rwxr-xr-x    1 grid     oinstall  277054632 Feb 08 2018  crs_stat.bin
+-rwxr-xr-x    1 grid     oinstall  277047951 Feb 08 2018  crs_start.bin
+-rwxr-xr-x    1 grid     oinstall  276878197 Feb 08 2018  crs_setperm.bin
+-rwxr-xr-x    1 grid     oinstall  277047597 Feb 08 2018  crs_relocate.bin
+-rwxr-xr-x    1 grid     oinstall  277076480 Feb 08 2018  crs_register.bin
+-rwxr-xr-x    1 grid     oinstall  277015618 Feb 08 2018  crs_profile.bin
+-rwxr-xr-x    1 grid     oinstall  276891915 Feb 08 2018  crs_getperm.bin
+-rwxr-xr-x    1 grid     oinstall     107388 Feb 08 2018  clssproxy.bin
+-rwxr-xr-x    1 grid     oinstall      21621 Feb 08 2018  clsid.bin
+-rwxr-x---    1 grid     oinstall      53244 Feb 08 2018  clsfmt.bin
+-rwxr-x---    1 grid     oinstall      75270 Feb 08 2018  clsecho.bin
+-rwxr-x---    1 grid     oinstall     154553 Feb 08 2018  clscfg.bin
+-rwxr-xr-x    1 grid     oinstall      22492 Feb 08 2018  cemutls.bin
+-rwxr-xr-x    1 grid     oinstall      14625 Feb 08 2018  cemutlo.bin
+-rwxr-xr-x    1 grid     oinstall  314743604 Feb 08 2018  appagent.bin
+-rwxr-xr-x    1 grid     oinstall    3450630 Jun 07 05:39 xml
+-rwxr-xr-x    1 grid     oinstall    3180463 Jun 07 05:39 schema
+-rwxr-x--x    1 grid     oinstall   50845315 Sep 09 11:55 amdu
+-rwxr-x--x    1 grid     oinstall   66800083 Sep 09 11:55 kfod
+-rwxr-x--x    1 grid     oinstall   51146024 Sep 09 11:55 renamedg
+-rwxr-x--x    1 grid     oinstall   49459735 Sep 09 11:55 dgmgrl
+-rwxr-x--x    1 grid     oinstall   50794722 Sep 09 11:55 kfed
+-rw-------    1 grid     oinstall  272791226 Sep 09 11:55 oracleO
+-rwxr-x--x    1 grid     oinstall   49063254 Sep 09 11:55 lsnrctl
+-rwxr-x--x    1 grid     oinstall    1316751 Sep 09 11:55 tnslsnr
+-rwxr-x--x    1 grid     oinstall   61998982 Sep 09 11:56 rman
+-rwx------    1 grid     oinstall     849683 Sep 09 11:56 extjobo
+-rwsr-x---    1 root     oinstall     849683 Sep 09 11:56 extjob
+-rwxr-xr-x    1 grid     oinstall       9513 Sep 09 12:02 osdbagrp
+-rwsr-s--x    1 grid     oinstall  272791226 Sep 09 12:02 oracle
+-rwxr-x---    1 grid     oinstall       1246 Sep 09 12:03 usrvip
+-rwxr-x---    1 grid     oinstall       3851 Sep 09 12:03 rdtool
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 oranetmonitor
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 oradnssd
+-rwxr-x---    1 grid     oinstall       4258 Sep 09 12:03 ologdbg.pl
+-rwxr-----    1 grid     oinstall       8525 Sep 09 12:03 ohasd
+-rwxr-----    1 grid     oinstall       8525 Sep 09 12:03 octssd
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 ocrpatch
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 ocrdump
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 ocrconfig
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 ocrcheck
+-rwxr-x---    1 grid     oinstall       2018 Sep 09 12:03 oclumon.pl
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 mdnsd
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 gpnptool
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 gpnpd
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 gipcd
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evminfo
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evmd
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 cssvfupgd
+-rwxr-----    1 grid     oinstall       6183 Sep 09 12:03 crswrapexece.pl
+-rwxr-----    1 grid     oinstall       8525 Sep 09 12:03 crsd
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_unregister
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_stop
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_stat
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_start
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_setperm
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_relocate
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_register
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_profile
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crs_getperm
+-rwxr-x---    1 grid     oinstall       3383 Sep 09 12:03 cluutil
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 clssproxy
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 cemutls
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 cemutlo
+-rwxr-x---    1 grid     oinstall        485 Sep 09 12:03 appvipcfg
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 appagent
+-rwxr-x---    1 grid     oinstall       9015 Sep 09 12:03 srvctl
+-rwxr-x---    1 grid     oinstall       2233 Sep 09 12:03 setasmgidwrap
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 scriptagent
+-rwxr-x---    1 grid     oinstall       6671 Sep 09 12:03 scrctl
+-rwxr-x---    1 grid     oinstall       1500 Sep 09 12:03 racgwrap
+-rwxr-x---    1 grid     oinstall       2487 Sep 09 12:03 qosctl
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 osysmond
+-rwxr-----    1 grid     oinstall       8525 Sep 09 12:03 orarootagent
+-rw-------    1 root     system         8525 Sep 09 12:03 oradaemonagent
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 oraagent
+-rwxr-x---    1 grid     oinstall       1181 Sep 09 12:03 onsctl
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 olsnodes
+-rwxr-x---    1 grid     oinstall        861 Sep 09 12:03 ologdbg
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 oifcfg
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 odnsd
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 ocssd
+-rwxr-x---    1 grid     oinstall       1549 Sep 09 12:03 oclumon
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 oclsvmon
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 oclsomon
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 oclskd
+-rwxr-x---    1 grid     oinstall      20309 Sep 09 12:03 oc4jctl
+-rwxr-x---    1 grid     oinstall       3708 Sep 09 12:03 ndfnceca
+-rwxr-x---    1 grid     oinstall       8452 Sep 09 12:03 lsnodes
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 lsdb
+-rwxr-x---    1 grid     oinstall       5503 Sep 09 12:03 gsdctl
+-rwxr-x---    1 grid     oinstall       6139 Sep 09 12:03 gsd.sh
+-rwxr-----    1 grid     oinstall       8525 Sep 09 12:03 gnsd
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evmwatch
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evmsort
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evmshow
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evmpost
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evmmklib
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evmmkbin
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 evmlogger
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 emcrsp
+-rwxr-----    1 grid     oinstall       8525 Sep 09 12:03 diskmon
+-rwxr-x---    1 grid     oinstall        485 Sep 09 12:03 diagcollection.sh
+-rwxr-x---    1 grid     oinstall       2788 Sep 09 12:03 cvures
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 crsctl
+-rwxr-x---    1 grid     oinstall       3813 Sep 09 12:03 crsboot_diags.sh
+-rwxr-x---    1 grid     oinstall        688 Sep 09 12:03 crfsetenv
+-rwxr-x---    1 grid     oinstall       8509 Sep 09 12:03 cluvfy
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 clsid
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 clsfmt
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 clsecho
+-rwxr-x---    1 grid     oinstall       8525 Sep 09 12:03 clscfg
+-rwxr-x---    1 root     oinstall       1197 Sep 09 12:03 acfssinglefsmount
+-rwxr-x---    1 root     oinstall       1185 Sep 09 12:03 acfsregistrymount
+-rwxr-x---    1 root     oinstall       1104 Sep 09 12:03 acfsload
+-rwxr-x---    1 root     oinstall       2785 Sep 09 12:03 acfsdriverstate
+[oracle@dcdbssrv01:/u01/app/grid/bin]$
+[oracle@dcdbssrv01:/u01/app/grid/bin]$ cd tnslsnr
+ksh: tnslsnr: 0403-037 The specified path name is not a directory.
+[oracle@dcdbssrv01:/u01/app/grid/bin]$
+[oracle@dcdbssrv01:/u01/app/grid/bin]$ vi tnslsnr
+[oracle@dcdbssrv01:/u01/app/grid/bin]$
+[oracle@dcdbssrv01:/u01/app/grid/bin]$ echo $ORACLE_HOME
+/u01/app/oracle/11.2.0
+[oracle@dcdbssrv01:/u01/app/grid/bin]$
+[oracle@dcdbssrv01:/u01/app/grid/bin]$ cd /u01/app/oracle/11.2.0
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0]$ ls -ltr
+total 232
+-rw-r-----    1 oracle   oinstall         56 Jan 27 2014  oraInst.loc
+drwxr-xr-x    8 oracle   oinstall        256 Jan 31 2014  ord
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  oracore
+drwxr-xr-x    5 oracle   oinstall        256 Jan 31 2014  olap
+drwxr-xr-x    6 oracle   oinstall        256 Jan 31 2014  odbc
+drwxr-xr-x    6 oracle   oinstall        256 Jan 31 2014  nls
+drwxr-xr-x    6 oracle   oinstall        256 Jan 31 2014  md
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  jdev
+drwxr-xr-x    8 oracle   oinstall        256 Jan 31 2014  javavm
+drwxr-xr-x    8 oracle   oinstall        256 Jan 31 2014  ide
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  has
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  emcli
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  dv
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  diagnostics
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  demo
+drwxr-xr-x    6 oracle   oinstall        256 Jan 31 2014  cv
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  csmig
+drwxr-xr-x    6 oracle   oinstall        256 Jan 31 2014  crs
+drwxr-xr-x    8 oracle   oinstall        256 Jan 31 2014  assistants
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  wwg
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  usm
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  uix
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  sqlj
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  slax
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  scheduler
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  relnotes
+drwxr-xr-x    7 oracle   oinstall        256 Jan 31 2014  precomp
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  owm
+drwxr-xr-x    6 oracle   oinstall        256 Jan 31 2014  plsql
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  mesg
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  utl
+drwxr-xr-x    7 oracle   oinstall        256 Jan 31 2014  xdk
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  instantclient
+drwxr-xr-x   20 oracle   oinstall       4096 Jan 31 2014  oc4j
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  timingframework
+drwxr-xr-x    5 oracle   oinstall       4096 Jan 31 2014  clone
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  j2ee
+drwxr-xr-x    8 oracle   oinstall       4096 Jan 31 2014  apex
+drwxr-xr-x   13 oracle   oinstall       4096 Jan 31 2014  sqldeveloper
+drwxr-xr-x    2 oracle   oinstall       4096 Jan 31 2014  jlib
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  dc_ocm
+drwxr-xr-x    7 oracle   oinstall        256 Jan 31 2014  jdk
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  ucp
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  jdbc
+drwxr-xr-x   26 oracle   oinstall       4096 Jan 31 2014  owb
+drwxr-xr-x    6 oracle   oinstall        256 Jan 31 2014  mgw
+drwxr-xr-x    7 oracle   oinstall        256 Jan 31 2014  opmn
+drwxr-xr-x    6 oracle   oinstall        256 Jan 31 2014  css
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  cdata
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  config
+drwxr-xr-x    3 oracle   oinstall        256 Jan 31 2014  EMStage
+drwxr-xr-x   15 oracle   oinstall       4096 Jan 31 2014  sysman
+drwxr-xr-x   12 oracle   oinstall       4096 Jan 31 2014  ldap
+drwxr-xr-x    9 oracle   oinstall        256 Jan 31 2014  srvm
+drwxr-xr-x    7 oracle   oinstall        256 Jan 31 2014  racg
+drwxr-xr-x   10 oracle   oinstall        256 Jan 31 2014  ctx
+drwxr-xr-x    7 oracle   oinstall        256 Jan 31 2014  sqlplus
+drwxr-xr-x    8 oracle   oinstall       4096 Jan 31 2014  oui
+drwxr-xr-x    5 oracle   oinstall        256 Jan 31 2014  perl
+drwxr-xr-x   11 oracle   oinstall       4096 Jan 31 2014  network
+drwxr-xr-x    5 oracle   oinstall        256 Jan 31 2014  hs
+drwxr-xr-x    4 oracle   oinstall       4096 Jan 31 2014  deinstall
+-rwxr-x---    1 oracle   oinstall        416 Jan 31 2014  root.sh
+drwxr-xr-x   13 oracle   oinstall       4096 Jan 31 2014  rdbms
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  log
+drwxr-xr-x    8 oracle   oinstall       4096 Aug 13 2014  OPatch_old
+lrwxrwxrwx    1 root     system            1 Apr 21 2016  acs -> /
+drwxr-x---   15 oracle   oinstall       4096 May 16 2017  OPatch
+drwxr-xr-x    3 oracle   oinstall        256 Oct 16 2017  patch
+drwxrwx---   14 oracle   oinstall       4096 Oct 16 2017  inventory
+drwxr-xr-x    4 oracle   oinstall        256 Oct 16 2017  suptools
+drwx------    6 oracle   oinstall       4096 Oct 16 2017  cfgtoollogs
+-rw-r-----    1 oracle   oinstall       1089 Feb 01 2018  JFSFC2_pfile_bkp_1Feb18.ora
+drwxr-xr-x    8 oracle   oinstall       4096 Jun 12 11:41 install
+drwxr-xr-x   21 oracle   oinstall       4096 Sep 09 12:29 psu
+drwxr-xr-x    4 oracle   oinstall      12288 Sep 09 12:30 lib
+drwxr-xr-x    9 oracle   oinstall        256 Sep 09 13:00 ccr
+drwxr-xr-x    3 oracle   oinstall        256 Sep 09 13:00 sqlpatch
+drwxr-xr-x    2 oracle   oinstall      16384 Sep 09 13:00 bin
+drwxr-xr-x    2 oracle   oinstall       4096 Sep 11 17:58 dbs
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0]$ cd dbs
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/dbs]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/dbs]$ ls -ltr
+total 600120
+-rw-r-----    1 oracle   oinstall       2851 May 16 2009  init.ora
+-rw-r-----    1 oracle   oinstall         24 Jan 31 2014  lkJFSCBS
+-rw-r--r--    1 oracle   oinstall       3941 Jan 31 2014  run_pupbld.log
+-rw-r-----    1 oracle   oinstall       3584 Jan 31 2014  spfileJFSCSB.ora.jan312014
+-rw-r-----    1 oracle   oinstall         24 Jan 31 2014  lkJFSUAT
+-rw-r--r--    1 oracle   oinstall     194880 Jan 31 2014  run_catalog_uat.log
+-rw-r--r--    1 oracle   oinstall   11151352 Jan 31 2014  run_catproc_uat.log
+-rw-r--r--    1 oracle   oinstall       3722 Jan 31 2014  run_pupbld_uat.log
+-rw-rw----    1 oracle   oinstall       1544 Jan 31 2014  hc_JFSCSB.dat
+-rw-r-----    1 oracle   oinstall       1175 Apr 28 2014  initJFSCBS.ora_ofssbkup_280414
+-rw-r-----    1 oracle   oinstall       1113 Apr 28 2014  initJFSUAT.ora_ofssbkup_280414
+-rw-r-----    1 oracle   oinstall       1217 Apr 29 2014  initJFSUAT.ora.old
+-rw-r-----    1 oracle   asmadmin   15400960 Oct 10 2014  cntrl_545_1_860555330
+-rw-r-----    1 oracle   asmadmin      98304 Oct 10 2014  spfile_547_1_860555335
+-rw-r-----    1 oracle   asmadmin   15400960 Oct 11 2014  cntrl_563_1_860641206
+-rw-r-----    1 oracle   asmadmin      98304 Oct 11 2014  spfile_565_1_860641212
+-rw-r-----    1 oracle   asmadmin   15761408 Oct 13 2014  cntrl_573_1_860814003
+-rw-r-----    1 oracle   asmadmin      98304 Oct 13 2014  spfile_575_1_860814008
+-rw-r-----    1 oracle   asmadmin   15761408 Oct 14 2014  cntrl_577_1_860900404
+-rw-r-----    1 oracle   asmadmin      98304 Oct 14 2014  spfile_579_1_860900409
+-rw-r-----    1 oracle   asmadmin   15761408 Oct 15 2014  cntrl_581_1_860986804
+-rw-r-----    1 oracle   asmadmin      98304 Oct 15 2014  spfile_583_1_860986809
+-rw-r-----    1 oracle   asmadmin   15761408 Oct 16 2014  cntrl_586_1_861073205
+-rw-r-----    1 oracle   asmadmin      98304 Oct 16 2014  spfile_588_1_861073210
+-rw-r-----    1 oracle   oinstall       4608 Nov 16 2014  spfileJFSUAT.ora_15nov2014
+-rw-r-----    1 oracle   asmadmin       1813 Nov 27 2014  pfile26NOV14JFSUAT.ora
+-rw-r-----    1 oracle   asmadmin       1826 Nov 27 2014  pfile26NOVJFSCBS.ora
+-rw-r-----    1 oracle   asmadmin       1826 Jan 22 2015  pfile21jan15.ora
+-rw-r-----    1 oracle   asmadmin   16072704 Feb 07 2015  snapcf_JFSUAT.f
+-rw-r-----    1 oracle   asmadmin       4608 Feb 09 2015  spfileJFSUAT.ora.30Marc15
+-rw-r--r--    1 oracle   oinstall      20414 May 02 2015  1May-BOD.lst
+-rw-r-----    1 oracle   asmadmin       1899 May 03 2015  pfile26NOV_change.ora
+-rw-r-----    1 oracle   asmadmin       1899 Jun 18 2015  initJFSUAT.ora_bkp
+-rw-r-----    1 oracle   oinstall       1974 Jan 14 2016  initJFSCBS.ora_13Jan16
+-rw-r-----    1 oracle   asmadmin       2380 Jan 20 2016  19jan15pfile.ora
+-rw-r-----    1 oracle   oinstall       5632 Feb 28 2016  spfileJFSCBS.ora_bkp_27feb16
+-rw-r-----    1 oracle   oinstall       2379 Feb 28 2016  initJFSCBS.ora
+-rw-r-----    1 oracle   asmadmin       2395 Jun 27 2016  test.ora
+-rw-r-----    1 oracle   asmadmin         24 Jul 13 2016  lkJFSFC2
+-rw-r-----    1 oracle   oinstall         39 Jul 13 2016  initJFSFC2.ora
+-rw-r-----    1 oracle   asmadmin         24 Sep 01 2016  lkJFSDRTST
+-rw-r-----    1 oracle   asmadmin         24 Nov 28 2016  lkJFSSIM
+-rw-r-----    1 oracle   oinstall         41 Nov 28 2016  initJFSSIM_31MAY18.ora
+-rw-r-----    1 oracle   asmadmin       2618 Mar 13 2017  pfile_cbs.ora
+-rw-r-----    1 oracle   asmadmin       2618 Mar 13 2017  pfile_CBS13Mar17.ora
+-rw-r-----    1 oracle   asmadmin       2618 Mar 15 2017  pfile_jfscbs15mar17.ora
+-rw-r-----    1 oracle   oinstall    9863168 Jan 31 2018  c-2837308803-20180131-00
+-rw-r-----    1 oracle   oinstall    9863168 Jan 31 2018  c-2837308803-20180131-01
+-rw-r-----    1 oracle   oinstall    7798784 Jan 31 2018  c-239218279-20180131-00
+-rw-r-----    1 oracle   oinstall    7798784 Jan 31 2018  c-239218279-20180131-01
+-rw-r-----    1 oracle   oinstall   11829248 Jan 31 2018  c-3966586799-20180131-00
+-rw-r-----    1 oracle   oinstall   11829248 Jan 31 2018  c-3966586799-20180131-01
+-rw-r-----    1 oracle   oinstall       2560 Apr 11 19:02 orapwJFSCBS
+-rw-r-----    1 oracle   oinstall       1536 Apr 11 19:03 orapwJFSDRTST
+-rw-r-----    1 oracle   oinstall       1536 Apr 11 19:04 orapwJFSSIM
+-rw-r-----    1 oracle   oinstall   12025856 May 22 15:05 JFSSIM_20180522_25_1_control
+-rw-r-----    1 oracle   oinstall   12058624 May 22 15:05 c-3966586799-20180522-00
+-rw-------    1 oracle   oinstall        392 May 22 15:16 tdpoerror.log
+-rw-r-----    1 oracle   oinstall       1296 May 31 19:10 initJFSSIM.ora
+-rw-r-----    1 oracle   asmadmin    7798784 Aug 27 14:48 c-239218279-20180827-00
+-rw-r-----    1 oracle   asmadmin    7798784 Aug 27 15:01 c-239218279-20180827-01
+-rw-rw----    1 oracle   asmadmin       1544 Aug 27 18:04 hc_JFSFC2.dat
+-rw-rw----    1 oracle   oinstall       1544 Aug 28 14:49 hc_JFSCBS.dat
+-rw-r-----    1 oracle   asmadmin         24 Aug 29 13:51 lkJFSTST
+-rw-r-----    1 oracle   oinstall       1536 Aug 29 15:50 orapwJFSUAT
+-rw-r-----    1 oracle   oinstall       1536 Aug 31 17:32 orapwJFSTRN
+-rw-r-----    1 oracle   asmadmin         24 Sep 02 21:04 lkJFSTRN
+-rw-r-----    1 oracle   oinstall         61 Sep 05 17:00 initJFSDRTST.ora_old
+-rw-r-----    1 oracle   oinstall   10158080 Sep 09 14:26 c-2837308803-20180909-00
+-rw-r-----    1 oracle   oinstall   10158080 Sep 09 15:58 c-2837308803-20180909-01
+-rw-r-----    1 oracle   asmadmin   10076160 Sep 09 16:10 snapcf_JFSDRTST.f
+-rw-r-----    1 oracle   oinstall   10158080 Sep 09 16:10 c-2837308803-20180909-02
+-rw-r-----    1 oracle   oinstall       2264 Sep 09 17:02 initJFSDRTST.ora
+-rw-r-----    1 oracle   oinstall   12255232 Sep 09 17:12 c-3966586799-20180909-00
+-rw-r-----    1 oracle   asmadmin   12468224 Sep 09 17:46 snapcf_JFSSIM.f
+-rw-r-----    1 oracle   oinstall   12550144 Sep 09 17:46 c-3966586799-20180909-01
+-rw-r-----    1 oracle   asmadmin       5632 Sep 09 18:12 spfileJFSTRN.ora
+-rw-r-----    1 oracle   asmadmin       3584 Sep 10 08:57 spfileJFSTST.ora
+-rw-r-----    1 oracle   oinstall    8601600 Sep 10 22:15 snapcf_JFSTST.f
+-rw-r-----    1 oracle   oinstall       4608 Sep 11 14:50 spfileJFSSIM.ora
+-rw-r-----    1 oracle   asmadmin       5632 Sep 11 18:04 spfileJFSUAT.ora
+-rw-r-----    1 oracle   oinstall       5632 Sep 11 19:54 spfileJFSDRTST.ora
+-rw-rw----    1 oracle   asmadmin       1544 Sep 11 21:04 hc_JFSTRN.dat
+-rw-rw----    1 oracle   asmadmin       1544 Sep 11 21:05 hc_JFSSIM.dat
+-rw-rw----    1 oracle   asmadmin       1544 Sep 11 21:05 hc_JFSDRTST.dat
+-rw-rw----    1 oracle   oinstall       1544 Sep 11 21:06 hc_JFSUAT.dat
+-rw-rw----    1 oracle   asmadmin       1544 Sep 11 21:07 hc_JFSTST.dat
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/dbs]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/dbs]$ cd network
+ksh: network:  not found.
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/dbs]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/dbs]$ cd ..
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0]$ cd network
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network]$ ls -ltr
+total 24
+drwxr-xr-x    2 oracle   oinstall       4096 Jan 31 2014  mesg
+drwxr-xr-x    4 oracle   oinstall       4096 Jan 31 2014  install
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  doc
+drwxr-xr-x    4 oracle   oinstall        256 Jan 31 2014  tools
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  jlib
+drwxrwx---    2 oracle   oinstall        256 Jan 31 2014  trace
+drwxrwx---    2 oracle   oinstall        256 Jan 31 2014  log
+drwxr-xr-x    3 oracle   oinstall        256 Aug 29 14:17 admin
+drwxr-xr-x    2 oracle   oinstall       4096 Sep 09 12:29 lib
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network]$ cd admin
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network/admin]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network/admin]$ ls -ltr
+total 40
+-rw-r--r--    1 oracle   oinstall        381 Dec 17 2012  shrept.lst
+drwxr-xr-x    2 oracle   oinstall        256 Jan 31 2014  samples
+-rw-r--r--    1 oracle   oinstall        228 Jun 27 2014  sqlnet.ora
+-rw-r-----    1 oracle   oinstall       1239 Sep 28 2016  tnsnames.ora_28sep16
+-rw-r-----    1 oracle   oinstall        943 Aug 29 14:17 tnsnames.ora_29_aug
+-rw-r--r--    1 oracle   oinstall       1368 Aug 31 17:42 tnsnames.ora
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network/admin]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network/admin]$ vi tnsnames.ora
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network/admin]$
+[oracle@dcdbssrv01:/u01/app/oracle/11.2.0/network/admin]$
+login as: oracle
+oracle@172.17.70.21's password:
+Last unsuccessful login: Sun Sep  9 12:09:11 IST 2018 on ssh from 172.16.15.67
+Last login: Wed Sep 12 05:17:10 IST 2018 on ssh from 172.17.70.254
+***************************************************************************
+*                                                                         *
+*      Welcome to Janalakshmi Financial Services.                         *
+*                                                                         *
+*                                                                         *
+* If you are not authorized to use this system, log off now.              *
+* The Access to this system is for Authorized Use only.                   *
+* Use this system is subject to audit at any time by request of           *
+* Janalakshmi Financial Services or IBM management only.                  *
+*                                                                         *
+* This system contains information proprietary to Janalakshmi Financial   *
+* Services                                                                *
+*                                                                         *
+* Any unauthorized user or use of such information may result in          *
+* civil and or criminal penalties. Use of this system equipment           *
+* is subject to monitoring and be controlled at all times by or on behalf *
+* of Janalakshmi Financial Services                                       *
+*                                                                         *
+***************************************************************************
+
+[YOU HAVE NEW MAIL]
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$ ps-ef|grep pmon
+ksh: ps-ef:  not found.
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$ ps -ef|grep pmon
+  oracle 18481398        1   0   Sep 09      -  0:22 ora_pmon_JFSTST
+    grid 44826670        1   0   Sep 09      -  0:15 asm_pmon_+ASM
+  oracle 20513958  4916376   0 07:56:08  pts/1  0:00 grep pmon
+  oracle 59114670        1   0   Sep 09      -  0:25 ora_pmon_JFSDRTST
+  oracle 64029734        1   0   Sep 09      -  0:26 ora_pmon_JFSTRN
+  oracle 64423112        1   0 17:58:38      -  0:05 ora_pmon_JFSUAT
+  oracle 65471612        1   0   Sep 09      -  0:38 ora_pmon_JFSSIM
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$
+[oracle@dcdbssrv01:/home/oracle]$ ls -lrt
+total 226320
+drwxr-x---    3 oracle   oinstall       4096 Jan 31 2018  sha
+-rw-r-----    1 oracle   oinstall        495 Feb 26 2018  log.log
+-rw-r-----    1 oracle   oinstall       2675 Mar 15 2018  init_jfscdb.ora
+-rw-r-----    1 oracle   oinstall       2134 Mar 15 2018  initJFSDRTST.ora
+-rw-r-----    1 oracle   oinstall       1282 Mar 15 2018  initJFSSIM.ora
+-rw-r-----    1 oracle   oinstall       1090 Mar 15 2018  initJFSFC2.ora
+-rw-r-----    1 oracle   oinstall   10076160 Apr 21 12:48 JFSDRTST_conr_21APR18.ctl
+-rw-r-----    1 oracle   oinstall   23379968 Apr 21 12:49 JFSCBS_conr_21APR18.ctl
+-rw-r-----    1 oracle   oinstall   11976704 Apr 21 12:50 JFSSIM_conr_21APR18.ctl
+-rw-r-----    1 oracle   oinstall    7716864 Apr 21 12:53 JFSFC2_conr_21APR18.ctl
+-rw-r-----    1 oracle   oinstall   10076160 Apr 22 11:46 JFSDRTST_contr_22APR18.ctl
+-rw-r-----    1 oracle   oinstall   23379968 Apr 22 11:47 JFSCBS_contr_22APR18.ctl
+-rw-r-----    1 oracle   oinstall   11976704 Apr 22 11:48 JFSSIM_contr_22APR18.ctl
+-rw-r-----    1 oracle   oinstall    7716864 Apr 22 11:49 JFSFC2_contr_22APR18.ctl
+-rw-------    1 oracle   oinstall        317 May 18 15:51 tdpoerror.log
+-rw-r-----    1 oracle   oinstall         28 May 21 12:11 drop_schema_jfssim.sql
+-rw-r-----    1 oracle   oinstall         31 May 21 12:55 drop_cbs.sql
+-rw-r-----    1 oracle   oinstall       2376 May 21 14:13 file.out
+-rw-r-----    1 oracle   oinstall          0 May 21 14:19 select
+-rwxrwxr-x    1 oracle   oinstall        770 May 22 15:13 rman_jfssim_cont.sh
+-rw-r-----    1 oracle   oinstall       1292 May 22 15:17 backup_JFSSIM_controlfile.log
+drwxr-x---    6 oracle   oinstall        256 May 22 15:58 KAP
+drwxrwxrwx    2 oracle   oinstall       4096 Jun 12 13:31 commands
+-rw-r-----    1 oracle   oinstall        593 Jun 12 15:40 1_SMTB_SMS_LOG_HIST.DDL
+-rw-r-----    1 oracle   oinstall       1212 Jun 12 16:38 3_SMTB_SMS_LOG_reorg.sql
+-rw-r-----    1 oracle   oinstall        202 Jun 12 17:59 0_BACKUP_TABLE.sql
+-rw-r-----    1 oracle   oinstall        777 Jun 12 18:24 ROLLBACK.SQL
+-rw-r-----    1 oracle   oinstall        834 Jun 28 16:00 2_SMTB_SMS_LOG_PURGE.sql
+-rw-r-----    1 oracle   oinstall       3277 Jul 06 18:45 SMTB_SMS_LOG_PURGE_06JUL18.log
+-rw-r-----    1 oracle   oinstall       1783 Jul 06 18:53 D:SMTB_SMS_LOG_PURGE.SPL
+-rw-r-----    1 oracle   oinstall       3337 Jul 06 19:32 SMTB_SMS_LOG_reorg.spl
+-rw-r-----    1 oracle   oinstall      98476 Jul 08 18:31 sp_1_2_JFSFC2.lst
+-rw-r-----    1 oracle   oinstall     115913 Jul 08 18:35 sp_1_2_JFSDRTST.lst
+-rw-r-----    1 oracle   oinstall     105219 Jul 08 18:43 sp_1_2_JFSSIM.lst
+-rw-r-----    1 oracle   oinstall       5216 Jul 08 18:44 spcusr.lis
+-rw-r-----    1 oracle   oinstall       5479 Jul 08 18:44 spctab.lis
+-rw-r-----    1 oracle   oinstall        195 Jul 08 18:44 spcpkg.lis
+-rw-r-----    1 oracle   oinstall      99687 Jul 08 18:46 sp_1_2_JFSCBS.lst
+-rw-r-----    1 oracle   oinstall      34563 Jul 14 18:34 JFSDRTST_readonly_user_creation_14JUL18.log
+-rw-r-----    1 oracle   oinstall    4415993 Jul 14 18:43 grant_select_to_read_only_user.log
+-rw-r-----    1 oracle   oinstall    4418071 Jul 14 18:49 grant_select_to_read_only_user.sql
+-rw-r-----    1 oracle   oinstall      76623 Aug 08 11:38 awrrpt_1_14525_14529.html
+-rw-r-----    1 oracle   oinstall        119 Aug 08 12:53 procinfo.log
+drwxr-x---    2 oracle   oinstall       4096 Aug 12 10:49 scripts
+drwxr-x---    2 oracle   oinstall        256 Aug 24 12:43 METADATA_BKP
+-rw-r-----    1 oracle   oinstall      23311 Sep 07 11:10 userspwrd_7sep18.log
+-rw-r-----    1 oracle   oinstall      10947 Sep 10 22:35 jvm_info.log
+-rw-r-----    1 oracle   oinstall      17720 Sep 11 18:04 Create_Java.log
+-rw-r-----    1 oracle   oinstall      18169 Sep 12 02:14 FCCPAY_FCRPAY_FCRPAYBRN_users_creation_12SEP18.log
+[oracle@dcdbssrv01:/home/oracle]$ cat FCCPAY_FCRPAY_FCRPAYBRN_users_creation_12SEP18.log
+SYS:JFSDRTST > set lines 180 pages 500
+SYS:JFSDRTST > select * from v$instance;
+
+INSTANCE_NUMBER INSTANCE_NAME    HOST_NAME                                                        VERSION           STARTUP_T STATUS       PAR    THREAD# ARCHIVE LOG_SWITCH_WAIT
+--------------- ---------------- ---------------------------------------------------------------- ----------------- --------- ------------ --- ---------- ------- ---------------
+LOGINS     SHU DATABASE_STATUS   INSTANCE_ROLE      ACTIVE_ST BLO                                                                                                       
+---------- --- ----------------- ------------------ --------- ---                                                                                                       
+              1 JFSDRTST         dcdbssrv01                                                       11.2.0.4.0        09-SEP-18 OPEN         NO           1 STOPPED       
+ALLOWED    NO  ACTIVE            PRIMARY_INSTANCE   NORMAL    NO                                                                                                        
+                                                                                                                                                                        
+
+SYS:JFSDRTST >
+SYS:JFSDRTST >
+SYS:JFSDRTST > select susysdate from dual;
+select susysdate from dual
+       *
+ERROR at line 1:
+ORA-00904: "SUSYSDATE": invalid identifier
+
+
+SYS:JFSDRTST >
+SYS:JFSDRTST >
+SYS:JFSDRTST > select sysdate from dual;
+
+SYSDATE                                                                                                                                                                 
+---------                                                                                                                                                               
+12-SEP-18                                                                                                                                                               
+
+SYS:JFSDRTST >
+SYS:JFSDRTST > set time on;
+02:09:49 SYS:JFSDRTST >
+02:09:50 SYS:JFSDRTST > select username from dba_users where username like '%FCCPAY%';
+
+no rows selected
+
+02:10:12 SYS:JFSDRTST > select username from dba_users where username like '%FCRPAYBRN%';
+
+no rows selected
+
+02:10:26 SYS:JFSDRTST > select username from dba_users where username like '%FCRPAY%';
+
+no rows selected
+
+02:10:39 SYS:JFSDRTST >
+02:10:39 SYS:JFSDRTST >
+02:10:40 SYS:JFSDRTST > CREATE USER FCCPAY IDENTIFIED BY fccpay_123 DEFAULT TABLESPACE FCCDRTST TEMPORARY TABLESPACE TEMP PROFILE APPS_PROFILE_PNE ACCOUNT UNLOCK ;
+CREATE USER FCCPAY IDENTIFIED BY fccpay_123 DEFAULT TABLESPACE FCCDRTST TEMPORARY TABLESPACE TEMP PROFILE APPS_PROFILE_PNE ACCOUNT UNLOCK
+*
+ERROR at line 1:
+ORA-00959: tablespace 'TEMP' does not exist
+
+
+02:10:48 SYS:JFSDRTST > select * from v$tempfile;
+
+     FILE# CREATION_CHANGE# CREATION_        TS#     RFILE# STATUS  ENABLED         BYTES     BLOCKS CREATE_BYTES BLOCK_SIZE                                            
+---------- ---------------- --------- ---------- ---------- ------- ---------- ---------- ---------- ------------ ----------                                            
+NAME                                                                                                                                                                    
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+         6       9462184873 09-SEP-18         22          1 ONLINE  READ WRITE 1.0737E+10    1310720   1.0737E+10       8192                                            
++JFSSIM/jfsdrtst/tempfile/temp2.581.986398351                                                                                                                           
+                                                                                                                                                                        
+
+02:11:01 SYS:JFSDRTST >
+02:11:02 SYS:JFSDRTST > CREATE USER FCCPAY IDENTIFIED BY fccpay_123 DEFAULT TABLESPACE FCCDRTST TEMPORARY TABLESPACE TEMP2 PROFILE APPS_PROFILE_PNE ACCOUNT UNLOCK ;
+
+User created.
+
+02:11:36 SYS:JFSDRTST > GRANT CONNECT TO FCCPAY;
+
+Grant succeeded.
+
+02:11:48 SYS:JFSDRTST > GRANT CONNECT TO FCCPAY;
+
+Grant succeeded.
+
+02:11:53 SYS:JFSDRTST > GRANT CREATE SESSION TO FCCPAY;
+
+Grant succeeded.
+
+02:11:59 SYS:JFSDRTST > GRANT UNLIMITED TABLESPACE TO FCCPAY;
+
+Grant succeeded.
+
+02:12:05 SYS:JFSDRTST > CREATE USER FCRPAY IDENTIFIED BY fcrpay_123 DEFAULT TABLESPACE FCRDRTST TEMPORARY TABLESPACE TEMP2 PROFILE APPS_PROFILE_PNE ACCOUNT UNLOCK ;
+
+User created.
+
+02:12:11 SYS:JFSDRTST > GRANT CONNECT TO FCRPAY;
+
+Grant succeeded.
+
+02:12:18 SYS:JFSDRTST > GRANT RESOURCE TO FCRPAY;
+
+Grant succeeded.
+
+02:12:23 SYS:JFSDRTST > GRANT CREATE SESSION TO FCRPAY;
+
+Grant succeeded.
+
+02:12:28 SYS:JFSDRTST > GRANT UNLIMITED TABLESPACE TO FCRPAY;
+
+Grant succeeded.
+
+02:12:34 SYS:JFSDRTST > CREATE USER FCRPAYBRN IDENTIFIED BY fcrpaybrn_123 DEFAULT TABLESPACE BRNDRTST TEMPORARY TABLESPACE TEMP2 PROFILE APPS_PROFILE_PNE ACCOUNT UNLOCK ;
+
+User created.
+
+02:12:41 SYS:JFSDRTST > GRANT CONNECT TO FCRPAYBRN;
+
+Grant succeeded.
+
+02:12:46 SYS:JFSDRTST > GRANT RESOURCE TO FCRPAYBRN;
+
+Grant succeeded.
+
+02:12:51 SYS:JFSDRTST > GRANT CREATE SESSION TO FCRPAYBRN;
+
+Grant succeeded.
+
+02:13:10 SYS:JFSDRTST > GRANT UNLIMITED TABLESPACE TO FCRPAYBRN;
+
+Grant succeeded.
+
+02:13:20 SYS:JFSDRTST > select username from dba_users where username like '%FCCPAY%';
+
+USERNAME                                                                                                                                                                
+------------------------------                                                                                                                                          
+FCCPAY                                                                                                                                                                  
+
+02:13:40 SYS:JFSDRTST >
+02:13:41 SYS:JFSDRTST > select username from dba_users where username like '%FCRPAYBRN%';
+
+USERNAME                                                                                                                                                                
+------------------------------                                                                                                                                          
+FCRPAYBRN                                                                                                                                                               
+
+02:13:49 SYS:JFSDRTST > select username from dba_users where username like '%FCRPAY%';
+
+USERNAME                                                                                                                                                                
+------------------------------                                                                                                                                          
+FCRPAYBRN                                                                                                                                                               
+FCRPAY                                                                                                                                                                  
+
+02:13:58 SYS:JFSDRTST > select username,account_status from dba_users order by username;
+
+USERNAME                       ACCOUNT_STATUS                                                                                                                           
+------------------------------ --------------------------------                                                                                                         
+ANONYMOUS                      LOCKED                                                                                                                                   
+APEX_030200                    LOCKED                                                                                                                                   
+APEX_PUBLIC_USER               LOCKED                                                                                                                                   
+APPQOSSYS                      LOCKED                                                                                                                                   
+BRNDRTST                       OPEN                                                                                                                                     
+CBSDBSIM                       EXPIRED & LOCKED                                                                                                                         
+CTXSYS                         LOCKED                                                                                                                                   
+DBSNMP                         LOCKED                                                                                                                                   
+DBSUPPORT_CLO                  EXPIRED(GRACE)                                                                                                                           
+DIP                            LOCKED                                                                                                                                   
+DRTST_BIPLATFORM               OPEN                                                                                                                                     
+DRTST_MDS                      OPEN                                                                                                                                     
+EXFSYS                         LOCKED                                                                                                                                   
+FCCDRTST                       OPEN                                                                                                                                     
+FCCPAY                         OPEN                                                                                                                                     
+FCRDRTST                       OPEN                                                                                                                                     
+FCRPAY                         OPEN                                                                                                                                     
+FCRPAYBRN                      OPEN                                                                                                                                     
+FLOWS_FILES                    LOCKED                                                                                                                                   
+IN08248F                       OPEN                                                                                                                                     
+JFSDAMORA                      OPEN                                                                                                                                     
+JFSDAM_ORA                     OPEN                                                                                                                                     
+MDDATA                         LOCKED                                                                                                                                   
+MDSYS                          LOCKED                                                                                                                                   
+MGMT_VIEW                      LOCKED                                                                                                                                   
+OLAPSYS                        LOCKED                                                                                                                                   
+ORACLE_OCM                     LOCKED                                                                                                                                   
+ORDDATA                        LOCKED                                                                                                                                   
+ORDPLUGINS                     LOCKED                                                                                                                                   
+ORDSYS                         LOCKED                                                                                                                                   
+OUTLN                          LOCKED                                                                                                                                   
+OWBSYS                         LOCKED                                                                                                                                   
+OWBSYS_AUDIT                   LOCKED                                                                                                                                   
+PERFSTAT                       OPEN                                                                                                                                     
+PRAJAAN                        EXPIRED & LOCKED                                                                                                                         
+READ_ONLY                      OPEN                                                                                                                                     
+SCOTT                          LOCKED                                                                                                                                   
+SIM_BIPLATFORM                 OPEN                                                                                                                                     
+SIM_MDS                        OPEN                                                                                                                                     
+SI_INFORMTN_SCHEMA             LOCKED                                                                                                                                   
+SPATIAL_CSW_ADMIN_USR          LOCKED                                                                                                                                   
+SPATIAL_WFS_ADMIN_USR          LOCKED                                                                                                                                   
+SYS                            OPEN                                                                                                                                     
+SYSMAN                         LOCKED                                                                                                                                   
+SYSMON                         LOCKED                                                                                                                                   
+SYSTEM                         OPEN                                                                                                                                     
+UAT3_BIPLATFORM                EXPIRED                                                                                                                                  
+UAT3_MDS                       EXPIRED                                                                                                                                  
+UAT4_BIPLATFORM                EXPIRED(GRACE)                                                                                                                           
+UAT4_MDS                       OPEN                                                                                                                                     
+WMSYS                          LOCKED                                                                                                                                   
+XDB                            LOCKED                                                                                                                                   
+XS$NULL                        EXPIRED & LOCKED                                                                                                                         
+readonly                       OPEN                                                                                                                                     
+
+54 rows selected.
+
+02:14:22 SYS:JFSDRTST >
+02:14:23 SYS:JFSDRTST >
+02:14:23 SYS:JFSDRTST > spool off;
+[oracle@dcdbssrv01:/home/oracle]$
+
+
+
+
+
+
+
+
+
+
+nohup impdp  / as sysdba  DIRECTORY=METADATA_IMP DUMPFILE=FCCHOST_META_EXP_12SEP18_%u.dmp logfile=IMP_FCCHOST_META_EXP_12SEP18.log remap_schema=FCCHOST:FCCPAY remap_tablespace=FCCDFLT:FCCDRTST,FCCDATAPARTXL:FCCDRTST,FCCDATASML:FCCDRTST,FCCHOST:FCCDRTST,FCCDATAMED:FCCDRTST,FCCDATAXL:FCCDRTST status=120 parallel=8 &
+
+
+
+impdp DIRECTORY=METADATA_IMP DUMPFILE=FCCHOST_META_EXP_12SEP18_%u.dmp logfile=IMP_FCCHOST_META_EXP_12SEP18.log remap_schema=FCCHOST:FCCPAY remap_tablespace=FCCDFLT:FCCDRTST,FCCDATAPARTXL:FCCDRTST,FCCDATASML:FCCDRTST,FCCHOST:FCCDRTST,FCCDATAMED:FCCDRTST,FCCDATAXL:FCCDRTST status=120 parallel=8
+
+impdp DIRECTORY=METADATA_IMP DUMPFILE=FCRBRN_META_EXP_12SEP18_%u.dmp logfile=IMP_FCRBRN_META_EXP_12SEP18.log remap_schema=FCRBRN:FCRPAYBRN remap_tablespace=BRNDATA1:BRNDRTST   status=120 parallel=8
+
+
+
+
+
+Starting "SYS"."SYS_IMPORT_FULL_01":  /******** AS SYSDBA DIRECTORY=METADATA_IMP DUMPFILE=FCRHOST_META_EXP_12SEP18_%u.dmp logfile=IMP_FCRHOST_META_EXP_12SEP18.log REMAP
+_SCHEMA=FCRHOST:FCRPAY REMAP_TABLESPACE=FCRDATA1:FCRDRTST,FCRDATASML:FCRDRTST TABLE_EXISTS_ACTION=REPLACE status=120 parallel=5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

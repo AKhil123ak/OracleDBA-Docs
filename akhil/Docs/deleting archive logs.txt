@@ -1,0 +1,17 @@
+ pwd
+/backuptemp/JFSPPROD/ARCH
+$
+$
+$
+$ rm `ls -lrt|grep "May"|awk '{print $9}'`
+$
+$
+$ ls -ltr
+
+through rman also we can delete the archive logs :
+
+
+
+rman target / cmd=rman_arc_del.rcv
+
+alter profile default limit password_reuse_time unlimited;

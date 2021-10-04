@@ -1,0 +1,124 @@
+role= collection of privileages 
+
+SYS:JFSSIM >
+SYS:JFSSIM > Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+[soral301@dcdbssrv01:/home/soral301]$
+[soral301@dcdbssrv01:/home/soral301]$
+[soral301@dcdbssrv01:/home/soral301]$
+[soral301@dcdbssrv01:/home/soral301]$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Mon Jun 11 10:18:46 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSSIM > select * from dba_roles where role ='CBSRO';
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+CBSRO                          NO       NONE
+
+SYS:JFSSIM > drop role CBSRO ;
+
+Role dropped.
+
+SYS:JFSSIM > create role CBSRO ;
+
+Role created.
+
+SYS:JFSSIM > select * from dba_roles where role ='CBSRO';
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+CBSRO                          NO       NONE
+
+SYS:JFSSIM > desc dba_users
+
+SYS:JFSSIM > desc dba_users;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USERNAME                                  NOT NULL VARCHAR2(30)
+ USER_ID                                   NOT NULL NUMBER
+ PASSWORD                                           VARCHAR2(30)
+ ACCOUNT_STATUS                            NOT NULL VARCHAR2(32)
+ LOCK_DATE                                          DATE
+ EXPIRY_DATE                                        DATE
+ DEFAULT_TABLESPACE                        NOT NULL VARCHAR2(30)
+ TEMPORARY_TABLESPACE                      NOT NULL VARCHAR2(30)
+ CREATED                                   NOT NULL DATE
+ PROFILE                                   NOT NULL VARCHAR2(30)
+ INITIAL_RSRC_CONSUMER_GROUP                        VARCHAR2(30)
+ EXTERNAL_NAME                                      VARCHAR2(4000)
+ PASSWORD_VERSIONS                                  VARCHAR2(8)
+ EDITIONS_ENABLED                                   VARCHAR2(1)
+ AUTHENTICATION_TYPE                                VARCHAR2(8)
+
+SYS:JFSSIM > select USERNAME from  dba_users where USERNAME ='READONLY';
+
+no rows selected
+
+SYS:JFSSIM > select USERNAME,ACCOUNT_STATUS from  dba_users where USERNAME ='READONLY';
+
+no rows selected
+
+SYS:JFSSIM > select USERNAME,ACCOUNT_STATUS,PROFILE from dba_users;
+
+SYS:JFSSIM > select USERNAME,ACCOUNT_STATUS,PROFILE from dba_users where USERNAME ='CBSREADONLY';
+
+USERNAME                       ACCOUNT_STATUS                   PROFILE
+------------------------------ -------------------------------- ------------------------------
+CBSREADONLY                    OPEN                             DEFAULT
+
+SYS:JFSSIM > select distinct username  from v$session ;
+
+USERNAME
+------------------------------
+
+FCRHOST
+SYS
+FCRBRN
+FCCHOST
+JFSDAMORA
+
+6 rows selected.
+
+SYS:JFSSIM > drop user CBSREADONLY cascade;
+drop user CBSREADONLY cascade
+*
+ERROR at line 1:
+ORA-00604: error occurred at recursive SQL level 1
+ORA-01013: user requested cancel of current operation
+
+
+
+SYS:JFSSIM > drop user CBSREADONLY cascade;
+drop user CBSREADONLY cascade
+*
+ERROR at line 1:
+ORA-00604: error occurred at recursive SQL level 1
+ORA-01013: user requested cancel of current operation
+
+
+
+SYS:JFSSIM > drop user CBSREADONLY;
+drop user CBSREADONLY
+*
+ERROR at line 1:
+ORA-01922: CASCADE must be specified to drop 'CBSREADONLY'
+
+
+SYS:JFSSIM > revoke CBSRO from CBSREADONLY;
+revoke CBSRO from CBSREADONLY
+*
+ERROR at line 1:
+ORA-01951: ROLE 'CBSRO' not granted to 'CBSREADONLY'
+
+
+SYS:JFSSIM >

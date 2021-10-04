@@ -1,0 +1,444 @@
+PLAN_TABLE_OUTPUT
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL_ID gbpkhayh6z3vn
+--------------------
+/* load com.vayana.ib.bm.core.api.model.payment.LimitDefinitionDetail
+*/ select limitdefin0_.id as id1_153_111_, limitdefin0_."VERSION" as
+VERSION2_153_111_, limitdefin0_.AUTH_BY as AUTH43_153_111_,
+limitdefin0_.AUTH_DATE as AUTH3_153_111_, limitdefin0_.CREATED_BY as
+CREATED44_153_111_, limitdefin0_.CREATED_DATE as CREATED4_153_111_,
+limitdefin0_.MODIFIED_BY as MODIFIE45_153_111_,
+limitdefin0_.MODIFIED_DATE as MODIFIED5_153_111_,
+limitdefin0_.CHANNEL_ID as CHANNEL46_153_111_, limitdefin0_.CODE as
+CODE6_153_111_, limitdefin0_.COMPANY_ID as COMPANY47_153_111_,
+limitdefin0_.CIF_ID as CIF48_153_111_, limitdefin0_.DESCRIPTION as
+DESCRIPT7_153_111_, limitdefin0_.EFFECTIVE_FROM_DATE as
+EFFECTIV8_153_111_, limitdefin0_.EFFECTIVE_TO_DATE as
+EFFECTIV9_153_111_, limitdefin0_.GLO_DAILY_MAX_TRX_AMOUNT as
+GLO10_153_111_, limitdefin0_.GLO_DAILY_MAX_TRX_ALLOWED as
+GLO11_153_111_, limitdefin0_.GLO_FORTNIGHT_MAX_TRX_AMOUNT as
+GLO12_153_111_, limitdefin0_.GLO_FORTNIGHT_MAX_TRX_ALLOWED as
+GLO13_153_111_, limitdefin0_.GLO_HALFERLY_MAX_TRX_AMOUNT as
+GLO14_153_111_, limitdefin0_.GLO_HALFERLY_MAX_TRX_ALLOWED as
+GLO15_153_111_, limitdefin0_.GLO_MAX_TRX_AMOUNT as GLO16_153_111_,
+limitdefin0_.GLO_MIN_TRX_AMOUNT as GLO17_153_111_,
+limitdefin0_.GLO_MONTHLY_MAX_TRX_AMOUNT as GLO18_153_111_,
+limitdefin0_.GLO_MONTHLY_MAX_TRX_ALLOWED as GLO19_153_111_,
+limitdefin0_.GLO_QUATERLY_MAX_TRX_AMOUNT as GLO20_153_111_,
+limitdefin0_.GLO_QUATERLY_MAX_TRX_ALLOWED as GLO21_153_111_,
+limitdefin0_.GLO_WEEKLY_MAX_TRX_AMOUNT as GLO22_153_111_,
+limitdefin0_.GLO_WEEKLY_MAX_TRX_ALLOWED as GLO23_153_111_,
+limitdefin0_.GLO_YEARLY_MAX_TRX_AMOUNT as GLO24_153_111_,
+limitdefin0_.GLO_YEARLY_MAX_TRX_ALLOWED as GLO25_153_111_,
+limitdefin0_.GROUP_ID as GROUP49_153_111_,
+limitdefin0_.LOGIN_PROFILE_ID as LOGIN50_153_111_,
+limitdefin0_.DEFINITION_ID as DEFINIT51_153_111_,
+limitdefin0_.LIMIT_DEFINITION_TYPE as LIMIT26_153_111_,
+limitdefin0_.BENE_ID as BENE52_153_111_, limitdefin0_.BILLER_ID as
+BILLER53_153_111_, limitdefin0_.PAYEE_INSTRUCTION_ID as
+PAYEE54_153_111_, limitdefin0_.REG_DAILY_MAX_TRX_AMOUNT as
+REG27_153_111_, limitdefin0_.REG_DAILY_MAX_TRX_ALLOWED as
+REG28_153_111_, limitdefin0_.REG_FORTNIGHT_MAX_TRX_AMOUNT as
+REG29_153_111_, limitdefin0_.REG_FORTNIGHT_MAX_TRX_ALLOWED as
+REG30_153_111_, limitdefin0_.REG_HALFERLY_MAX_TRX_AMOUNT as
+REG31_153_111_, limitdefin0_.REG_HALFERLY_MAX_TRX_ALLOWED as
+REG32_153_111_, limitdefin0_.REG_MAX_TRX_AMOUNT as REG33_153_111_,
+limitdefin0_.REG_MIN_TRX_AMOUNT as REG34_153_111_,
+limitdefin0_.REG_MONTHLY_MAX_TRX_AMOUNT as REG35_153_111_,
+limitdefin0_.REG_MONTHLY_MAX_TRX_ALLOWED as REG36_153_111_,
+limitdefin0_.REG_QUATERLY_MAX_TRX_AMOUNT as REG37_153_111_,
+limitdefin0_.REG_QUATERLY_MAX_TRX_ALLOWED as REG38_153_111_,
+limitdefin0_.REG_WEEKLY_MAX_TRX_AMOUNT as REG39_153_111_,
+limitdefin0_.REG_WEEKLY_MAX_TRX_ALLOWED as REG40_153_111_,
+limitdefin0_.REG_YEARLY_MAX_TRX_AMOUNT as REG41_153_111_,
+limitdefin0_.REG_YEARLY_MAX_TRX_ALLOWED as REG42_153_111_,
+limitdefin0_.SEGMENT_ID as SEGMENT55_153_111_,
+limitdefin0_.SPECIAL_CATEGORY_ID as SPECIAL56_153_111_,
+limitdefin0_.STATUS_ID as STATUS57_153_111_, channel1_.id as id1_95_0_,
+channel1_."VERSION" as VERSION2_95_0_, channel1_.AUTH_BY as
+AUTH8_95_0_, channel1_.AUTH_DATE as AUTH3_95_0_, channel1_.CREATED_BY
+as CREATED9_95_0_, channel1_.CREATED_DATE as CREATED4_95_0_,
+channel1_.MODIFIED_BY as MODIFIE10_95_0_, channel1_.MODIFIED_DATE as
+MODIFIED5_95_0_, channel1_.CODE as CODE6_95_0_, channel1_.DESCRIPTION
+as DESCRIPT7_95_0_, company2_.id as id1_39_1_, company2_."VERSION" as
+VERSION2_39_1_, company2_.AUTH_BY as AUTH8_39_1_, company2_.AUTH_DATE
+as AUTH3_39_1_, company2_.CREATED_BY as CREATED9_39_1_,
+company2_.CREATED_DATE as CREATED4_39_1_, company2_.MODIFIED_BY as
+MODIFIE10_39_1_, company2_.MODIFIED_DATE as MODIFIED5_39_1_,
+company2_.AUTH_MATRIX_ID as AUTH11_39_1_, company2_.CHANNEL_ID as
+CHANNEL12_39_1_, company2_.CODE as CODE6_39_1_, company2_.CONTACT_ID as
+CONTACT13_39_1_, company2_.COUNTRY_ID as COUNTRY14_39_1_, co
+
+Plan hash value: 3426224715
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                                                                    | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                                                             |                               |       |       |   348 (100)|          |
+|   1 |  SORT ORDER BY                                                               |                               |     2 | 48558 |   348   (2)| 00:00:05 |
+|   2 |   NESTED LOOPS OUTER                                                         |                               |     2 | 48558 |   347   (1)| 00:00:05 |
+|   3 |    NESTED LOOPS OUTER                                                        |                               |     2 | 48468 |   346   (1)| 00:00:05 |
+|   4 |     NESTED LOOPS OUTER                                                       |                               |     2 | 48358 |   344   (1)| 00:00:05 |
+|   5 |      NESTED LOOPS OUTER                                                      |                               |     2 | 48268 |   342   (1)| 00:00:05 |
+|   6 |       NESTED LOOPS OUTER                                                     |                               |     2 | 48178 |   340   (1)| 00:00:05 |
+|   7 |        NESTED LOOPS OUTER                                                    |                               |     2 | 48090 |   338   (1)| 00:00:05 |
+|   8 |         NESTED LOOPS OUTER                                                   |                               |     2 | 47924 |   336   (1)| 00:00:05 |
+|   9 |          NESTED LOOPS OUTER                                                  |                               |     2 | 47814 |   334   (1)| 00:00:05 |
+|  10 |           HASH JOIN OUTER                                                    |                               |     2 | 47708 |   332   (1)| 00:00:04 |
+|  11 |            HASH JOIN RIGHT OUTER                                             |                               |     1 | 23842 |   308   (1)| 00:00:04 |
+|  12 |             TABLE ACCESS FULL                                                | FND_DOCUMENT_DETAIL           |     1 |  2080 |     2   (0)| 00:00:01 |
+|  13 |             NESTED LOOPS OUTER                                               |                               |     1 | 21762 |   306   (1)| 00:00:04 |
+|  14 |              HASH JOIN OUTER                                                 |                               |     1 | 21699 |   305   (1)| 00:00:04 |
+|  15 |               HASH JOIN RIGHT OUTER                                          |                               |     1 | 21674 |   281   (1)| 00:00:04 |
+|  16 |                TABLE ACCESS FULL                                             | FND_TENANT_APPLICATION_LOCALE |     1 |    30 |     3   (0)| 00:00:01 |
+|  17 |                NESTED LOOPS OUTER                                            |                               |     1 | 21644 |   278   (1)| 00:00:04 |
+|  18 |                 HASH JOIN RIGHT OUTER                                        |                               |     1 | 21599 |   277   (1)| 00:00:04 |
+|  19 |                  TABLE ACCESS FULL                                           | FND_TENANT_OPERATING_COUNTRY  |     1 |    28 |     3   (0)| 00:00:01 |
+|  20 |                  NESTED LOOPS OUTER                                          |                               |     1 | 21571 |   274   (1)| 00:00:04 |
+|  21 |                   NESTED LOOPS OUTER                                         |                               |     1 | 21540 |   274   (1)| 00:00:04 |
+|  22 |                    NESTED LOOPS OUTER                                        |                               |     1 | 21495 |   273   (1)| 00:00:04 |
+|  23 |                     NESTED LOOPS OUTER                                       |                               |     1 | 21467 |   272   (1)| 00:00:04 |
+|  24 |                      NESTED LOOPS OUTER                                      |                               |     1 | 21405 |   271   (1)| 00:00:04 |
+|  25 |                       HASH JOIN RIGHT OUTER                                  |                               |     1 | 21348 |   271   (1)| 00:00:04 |
+|  26 |                        TABLE ACCESS FULL                                     | PAY_BILLER_METADATA           |     1 |  2799 |     2   (0)| 00:00:01 |
+|  27 |                        HASH JOIN RIGHT OUTER                                 |                               |     1 | 18549 |   268   (0)| 00:00:04 |
+|  28 |                         TABLE ACCESS FULL                                    | PAY_BILLER_METADATA           |     1 |  2799 |     2   (0)| 00:00:01 |
+|  29 |                         HASH JOIN RIGHT OUTER                                |                               |     1 | 15750 |   266   (0)| 00:00:04 |
+|  30 |                          TABLE ACCESS FULL                                   | PAY_BILLER_SERVICE            |     1 |   375 |     2   (0)| 00:00:01 |
+|  31 |                          NESTED LOOPS OUTER                                  |                               |     1 | 15375 |   264   (0)| 00:00:04 |
+|  32 |                           HASH JOIN RIGHT OUTER                              |                               |     1 | 12576 |   264   (0)| 00:00:04 |
+|  33 |                            TABLE ACCESS FULL                                 | PAY_BILLER_DATA               |     1 |   339 |     2   (0)| 00:00:01 |
+|  34 |                            NESTED LOOPS OUTER                                |                               |     1 | 12237 |   262   (0)| 00:00:04 |
+|  35 |                             NESTED LOOPS OUTER                               |                               |     1 | 12206 |   262   (0)| 00:00:04 |
+|  36 |                              NESTED LOOPS OUTER                              |                               |     1 | 11791 |   262   (0)| 00:00:04 |
+|  37 |                               NESTED LOOPS OUTER                             |                               |     1 | 11728 |   262   (0)| 00:00:04 |
+|  38 |                                NESTED LOOPS OUTER                            |                               |     1 | 11683 |   262   (0)| 00:00:04 |
+|  39 |                                 NESTED LOOPS OUTER                           |                               |     1 | 11649 |   262   (0)| 00:00:04 |
+|  40 |                                  NESTED LOOPS OUTER                          |                               |     1 | 11604 |   261   (0)| 00:00:04 |
+|  41 |                                   NESTED LOOPS OUTER                         |                               |     1 | 11559 |   260   (0)| 00:00:04 |
+|  42 |                                    NESTED LOOPS OUTER                        |                               |     1 | 11500 |   259   (0)| 00:00:04 |
+|  43 |                                     NESTED LOOPS OUTER                       |                               |     1 | 11455 |   258   (0)| 00:00:04 |
+|  44 |                                      NESTED LOOPS OUTER                      |                               |     1 | 11363 |   258   (0)| 00:00:04 |
+|  45 |                                       NESTED LOOPS OUTER                     |                               |     1 | 10948 |   258   (0)| 00:00:04 |
+|  46 |                                        NESTED LOOPS OUTER                    |                               |     1 | 10903 |   257   (0)| 00:00:04 |
+|  47 |                                         NESTED LOOPS OUTER                   |                               |     1 | 10856 |   257   (0)| 00:00:04 |
+|  48 |                                          NESTED LOOPS OUTER                  |                               |     1 | 10809 |   257   (0)| 00:00:04 |
+|  49 |                                           NESTED LOOPS OUTER                 |                               |     1 | 10764 |   256   (0)| 00:00:04 |
+|  50 |                                            NESTED LOOPS OUTER                |                               |     1 | 10736 |   255   (0)| 00:00:04 |
+|  51 |                                             NESTED LOOPS OUTER               |                               |     1 | 10697 |   254   (0)| 00:00:04 |
+|  52 |                                              NESTED LOOPS OUTER              |                               |     1 | 10648 |   254   (0)| 00:00:04 |
+|  53 |                                               NESTED LOOPS OUTER             |                               |     1 | 10618 |   252   (0)| 00:00:04 |
+|  54 |                                                NESTED LOOPS OUTER            |                               |     1 | 10530 |   251   (0)| 00:00:04 |
+|  55 |                                                 NESTED LOOPS OUTER           |                               |     1 | 10454 |   250   (0)| 00:00:03 |
+|  56 |                                                  NESTED LOOPS OUTER          |                               |     1 | 10409 |   249   (0)| 00:00:03 |
+|  57 |                                                   NESTED LOOPS OUTER         |                               |     1 | 10384 |   248   (0)| 00:00:03 |
+|  58 |                                                    NESTED LOOPS OUTER        |                               |     1 | 10340 |   247   (0)| 00:00:03 |
+|  59 |                                                     NESTED LOOPS OUTER       |                               |     1 | 10252 |   246   (0)| 00:00:03 |
+|  60 |                                                      NESTED LOOPS OUTER      |                               |     1 | 10227 |   245   (0)| 00:00:03 |
+|  61 |                                                       NESTED LOOPS OUTER     |                               |     1 | 10221 |   245   (0)| 00:00:03 |
+|  62 |                                                        NESTED LOOPS OUTER    |                               |     1 | 10176 |   244   (0)| 00:00:03 |
+|  63 |                                                         NESTED LOOPS OUTER   |                               |     1 | 10131 |   244   (0)| 00:00:03 |
+|  64 |                                                          NESTED LOOPS OUTER  |                               |     1 | 10086 |   244   (0)| 00:00:03 |
+|  65 |                                                           NESTED LOOPS OUTER |                               |     1 | 10041 |   243   (0)| 00:00:03 |
+|  66 | R                                                          NESTED LOOPS OUTE |                               |     1 |  9974 |   242   (0)| 00:00:03 |
+|  67 | ER                                                          NESTED LOOPS OUT |                               |     1 |  9848 |   242   (0)| 00:00:03 |
+|  68 | TER                                                          NESTED LOOPS OU |                               |     1 |  9760 |   242   (0)| 00:00:03 |
+|  69 | UTER                                                          NESTED LOOPS O |                               |     1 |  9715 |   241   (0)| 00:00:03 |
+|  70 | OUTER                                                          NESTED LOOPS  |                               |     1 |  9653 |   240   (0)| 00:00:03 |
+|  71 |  OUTER                                                          NESTED LOOPS |                               |     1 |  9625 |   239   (0)| 00:00:03 |
+|  72 | S OUTER                                                          NESTED LOOP |                               |     1 |  9499 |   238   (0)| 00:00:03 |
+|  73 | PS OUTER                                                          NESTED LOO |                               |     1 |  9474 |   237   (0)| 00:00:03 |
+|  74 | OPS OUTER                                                          NESTED LO |                               |     1 |  9429 |   236   (0)| 00:00:03 |
+|  75 | OOPS OUTER                                                          NESTED L |                               |     1 |  9374 |   235   (0)| 00:00:03 |
+|  76 | LOOPS OUTER                                                          NESTED  |                               |     1 |  9343 |   234   (0)| 00:00:03 |
+|  77 |  LOOPS OUTER                                                          NESTED |                               |     1 |  9298 |   233   (0)| 00:00:03 |
+|  78 | D LOOPS OUTER                                                          NESTE |                               |     1 |  9253 |   232   (0)| 00:00:03 |
+|  79 | ED LOOPS OUTER                                                          NEST |                               |     1 |  9173 |   231   (0)| 00:00:03 |
+|  80 | TED LOOPS OUTER                                                          NES |                               |     1 |  9093 |   230   (0)| 00:00:03 |
+|  81 | STED LOOPS OUTER                                                          NE |                               |     1 |  9048 |   229   (0)| 00:00:03 |
+|  82 | ESTED LOOPS OUTER                                                          N |                               |     1 |  9013 |   228   (0)| 00:00:03 |
+|  83 |.NESTED LOOPS OUTER                                                           |                               |     1 |  8985 |   227   (0)| 00:00:03 |
+|  84 |. NESTED LOOPS OUTER                                                          |                               |     1 |  8944 |   226   (0)| 00:00:03 |
+|  85 |.  NESTED LOOPS OUTER                                                         |                               |     1 |  8899 |   225   (0)| 00:00:03 |
+|  86 |.   NESTED LOOPS OUTER                                                        |                               |     1 |  8871 |   224   (0)| 00:00:03 |
+|  87 |.    NESTED LOOPS OUTER                                                       |                               |     1 |  8830 |   223   (0)| 00:00:03 |
+|  88 |.     NESTED LOOPS OUTER                                                      |                               |     1 |  8789 |   222   (0)| 00:00:03 |
+|  89 |.      NESTED LOOPS OUTER                                                     |                               |     1 |  8667 |   221   (0)| 00:00:03 |
+|  90 |.       NESTED LOOPS OUTER                                                    |                               |     1 |  8545 |   220   (0)| 00:00:03 |
+|  91 |.        NESTED LOOPS OUTER                                                   |                               |     1 |  8500 |   219   (0)| 00:00:03 |
+|  92 |.         NESTED LOOPS OUTER                                                  |                               |     1 |  8085 |   219   (0)| 00:00:03 |
+|  93 |.          NESTED LOOPS OUTER                                                 |                               |     1 |  7997 |   218   (0)| 00:00:03 |
+|  94 |.           NESTED LOOPS OUTER                                                |                               |     1 |  7963 |   218   (0)| 00:00:03 |
+|  95 |.            NESTED LOOPS OUTER                                               |                               |     1 |  7837 |   217   (0)| 00:00:03 |
+|  96 |.             NESTED LOOPS OUTER                                              |                               |     1 |  7812 |   216   (0)| 00:00:03 |
+|  97 |.              NESTED LOOPS OUTER                                             |                               |     1 |  7767 |   216   (0)| 00:00:03 |
+|  98 |.               NESTED LOOPS OUTER                                            |                               |     1 |  7722 |   215   (0)| 00:00:03 |
+|  99 |.                NESTED LOOPS OUTER                                           |                               |     1 |  7677 |   215   (0)| 00:00:03 |
+| 100 |.                 NESTED LOOPS OUTER                                          |                               |     1 |  7617 |   215   (0)| 00:00:03 |
+| 101 |.                  NESTED LOOPS OUTER                                         |                               |     1 |  7180 |   215   (0)| 00:00:03 |
+| 102 |.                   NESTED LOOPS OUTER                                        |                               |     1 |  7127 |   214   (0)| 00:00:03 |
+| 103 |.                    NESTED LOOPS OUTER                                       |                               |     1 |  7082 |   213   (0)| 00:00:03 |
+| 104 |.                     NESTED LOOPS OUTER                                      |                               |     1 |  7022 |   212   (0)| 00:00:03 |
+| 105 |.                      NESTED LOOPS OUTER                                     |                               |     1 |  6967 |   211   (0)| 00:00:03 |
+| 106 |.                       NESTED LOOPS OUTER                                    |                               |     1 |  6891 |   210   (0)| 00:00:03 |
+| 107 |.                        NESTED LOOPS OUTER                                   |                               |     1 |  6747 |   209   (0)| 00:00:03 |
+| 108 |.                         NESTED LOOPS OUTER                                  |                               |     1 |  4385 |   209   (0)| 00:00:03 |
+| 109 |.                          NESTED LOOPS OUTER                                 |                               |     1 |  4355 |   207   (0)| 00:00:03 |
+| 110 |.                           NESTED LOOPS OUTER                                |                               |     1 |  4272 |   206   (0)| 00:00:03 |
+| 111 |.                            NESTED LOOPS OUTER                               |                               |     1 |  4231 |   205   (0)| 00:00:03 |
+| 112 |.                             NESTED LOOPS OUTER                              |                               |     1 |  4151 |   204   (0)| 00:00:03 |
+| 113 |.                              NESTED LOOPS OUTER                             |                               |     1 |  4106 |   204   (0)| 00:00:03 |
+| 114 |.                               NESTED LOOPS OUTER                            |                               |     1 |  3536 |   204   (0)| 00:00:03 |
+| 115 |.                                NESTED LOOPS OUTER                           |                               |     1 |  3491 |   204   (0)| 00:00:03 |
+| 116 |.                                 NESTED LOOPS OUTER                          |                               |     1 |  3446 |   203   (0)| 00:00:03 |
+| 117 |.                                  NESTED LOOPS OUTER                         |                               |     1 |  3399 |   203   (0)| 00:00:03 |
+| 118 |.                                   NESTED LOOPS OUTER                        |                               |     1 |  3212 |   203   (0)| 00:00:03 |
+| 119 |.                                    NESTED LOOPS OUTER                       |                               |     1 |  2642 |   203   (0)| 00:00:03 |
+| 120 |.                                     NESTED LOOPS OUTER                      |                               |     1 |  2455 |   203   (0)| 00:00:03 |
+| 121 |.                                      NESTED LOOPS OUTER                     |                               |     1 |  2410 |   203   (0)| 00:00:03 |
+| 122 |.                                       NESTED LOOPS OUTER                    |                               |     1 |  2240 |   203   (0)| 00:00:03 |
+| 123 |.                                        NESTED LOOPS OUTER                   |                               |     1 |  2199 |   203   (0)| 00:00:03 |
+| 124 |.                                         NESTED LOOPS OUTER                  |                               |     1 |  1081 |   203   (0)| 00:00:03 |
+| 125 |.                                          NESTED LOOPS OUTER                 |                               |     1 |  1028 |   203   (0)| 00:00:03 |
+| 126 |.                                           NESTED LOOPS OUTER                |                               |     1 |   591 |   203   (0)| 00:00:03 |
+| 127 |.                                            NESTED LOOPS OUTER               |                               |     1 |   536 |   203   (0)| 00:00:03 |
+| 128 |.                                             MERGE JOIN OUTER                |                               |     1 |   288 |   203   (0)| 00:00:03 |
+| 129 |.                                              NESTED LOOPS OUTER             |                               |     1 |   258 |   202   (0)| 00:00:03 |
+| 130 |.                                               NESTED LOOPS OUTER            |                               |     1 |   219 |   202   (0)| 00:00:03 |
+| 131 |.                                                NESTED LOOPS                 |                               |     1 |   170 |   202   (0)| 00:00:03 |
+| 132 |.                                                 TABLE ACCESS BY INDEX ROWID | LIMIT_DEFINITION_DETAIL       |     1 |   125 |   201   (0)| 00:00:03 |
+| 133 |.                                                  INDEX SKIP SCAN            | DEFINITION_DETAILS_UK         |     1 |       |   200   (0)| 00:00:03 |
+| 134 |.                                                 TABLE ACCESS BY INDEX ROWID | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 135 |.                                                  INDEX UNIQUE SCAN          | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 136 |.                                                TABLE ACCESS BY INDEX ROWID  | FND_SPECIAL_CATEGORY          |     1 |    49 |     0   (0)|          |
+| 137 |.                                                 INDEX UNIQUE SCAN           | SPECIAL_CATEGORY_PK           |     1 |       |     0   (0)|          |
+| 138 |.                                               TABLE ACCESS BY INDEX ROWID   | FND_SEGMENT                   |     1 |    39 |     0   (0)|          |
+| 139 |.                                                INDEX UNIQUE SCAN            | SEGMENT_PK                    |     1 |       |     0   (0)|          |
+| 140 |.                                              BUFFER SORT                    |                               |     1 |    30 |   203   (0)| 00:00:03 |
+| 141 |.                                               TABLE ACCESS BY INDEX ROWID   | PAY_PAYEE_INSTRUCTION         |     1 |    30 |     1   (0)| 00:00:01 |
+| 142 |.                                                INDEX UNIQUE SCAN            | PAY_PAYEE_INSTRUCTION_PK      |     1 |       |     0   (0)|          |
+| 143 |.                                             TABLE ACCESS BY INDEX ROWID     | PAY_BILLER_INSTRUCTION        |     1 |   248 |     0   (0)|          |
+| 144 |.                                              INDEX UNIQUE SCAN              | BILLER_INSTRUCTION_PK         |     1 |       |     0   (0)|          |
+| 145 |.                                            TABLE ACCESS BY INDEX ROWID      | FND_CURRENCY                  |     1 |    55 |     0   (0)|          |
+| 146 |.                                             INDEX UNIQUE SCAN               | CURRENCY_PK                   |     1 |       |     0   (0)|          |
+| 147 |.                                           TABLE ACCESS BY INDEX ROWID       | PAY_BILLER                    |     1 |   437 |     0   (0)|          |
+| 148 |.                                            INDEX UNIQUE SCAN                | BILLER_PK                     |     1 |       |     0   (0)|          |
+| 149 |.                                          TABLE ACCESS BY INDEX ROWID        | ACCT_ACCOUNT                  |     1 |    53 |     0   (0)|          |
+| 150 |.                                           INDEX UNIQUE SCAN                 | ACCOUNT_PK                    |     1 |       |     0   (0)|          |
+| 151 |.                                         TABLE ACCESS BY INDEX ROWID         | PAY_PG_INSTRUCTION            |     1 |  1118 |     0   (0)|          |
+| 152 |.                                          INDEX UNIQUE SCAN                  | PAY_PG_INSTRUCTION_PK         |     1 |       |     0   (0)|          |
+| 153 |.                                        TABLE ACCESS BY INDEX ROWID          | INF_TENANT_SERVICE            |     1 |    41 |     0   (0)|          |
+| 154 |.                                         INDEX UNIQUE SCAN                   | TENANT_SERVICE_PK             |     1 |       |     0   (0)|          |
+| 155 |.                                       TABLE ACCESS BY INDEX ROWID           | PG_MER_AGG_MAPPING_MASTER     |     1 |   170 |     0   (0)|          |
+| 156 |.                                        INDEX UNIQUE SCAN                    | PG_MER_AGG_MAPPING_MASTER_PK  |     1 |       |     0   (0)|          |
+| 157 |.                                      TABLE ACCESS BY INDEX ROWID            | FND_LOOKUP_VALUE              |     1 |    45 |     0   (0)|          |
+| 158 |.                                       INDEX UNIQUE SCAN                     | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 159 |.                                     TABLE ACCESS BY INDEX ROWID             | PG_MERCHANT_MASTER            |     1 |   187 |     0   (0)|          |
+| 160 |.                                      INDEX UNIQUE SCAN                      | PG_MERCHANT_MASTER_PK         |     1 |       |     0   (0)|          |
+| 161 |.                                    TABLE ACCESS BY INDEX ROWID              | PG_AGGREGATOR_MASTER          |     1 |   570 |     0   (0)|          |
+| 162 |.                                     INDEX UNIQUE SCAN                       | PG_AGGREGATOR_MASTER_PK       |     1 |       |     0   (0)|          |
+| 163 |.                                   TABLE ACCESS BY INDEX ROWID               | PG_MERCHANT_MASTER            |     1 |   187 |     0   (0)|          |
+| 164 |.                                    INDEX UNIQUE SCAN                        | PG_MERCHANT_MASTER_PK         |     1 |       |     0   (0)|          |
+| 165 |.                                  TABLE ACCESS BY INDEX ROWID                | PG_BILLER_BUSINESS_SUB_CAT    |     1 |    47 |     0   (0)|          |
+| 166 |.                                   INDEX UNIQUE SCAN                         | PG_BILLER_BUSINESS_SUB_CAT_PK |     1 |       |     0   (0)|          |
+| 167 |.                                 TABLE ACCESS BY INDEX ROWID                 | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 168 |.                                  INDEX UNIQUE SCAN                          | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 169 |.                                TABLE ACCESS BY INDEX ROWID                  | FND_LOOKUP_VALUE              |     1 |    45 |     0   (0)|          |
+| 170 |.                                 INDEX UNIQUE SCAN                           | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 171 |.                               TABLE ACCESS BY INDEX ROWID                   | PG_AGGREGATOR_MASTER          |     1 |   570 |     0   (0)|          |
+| 172 |.                                INDEX UNIQUE SCAN                            | PG_AGGREGATOR_MASTER_PK       |     1 |       |     0   (0)|          |
+| 173 |.                              TABLE ACCESS BY INDEX ROWID                    | FND_LOOKUP_VALUE              |     1 |    45 |     0   (0)|          |
+| 174 |.                               INDEX UNIQUE SCAN                             | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 175 |.                             TABLE ACCESS BY INDEX ROWID                     | PAY_BENE_INSTRUCTION          |     1 |    80 |     1   (0)| 00:00:01 |
+| 176 |.                              INDEX UNIQUE SCAN                              | BENE_INSTRUCTION_PK           |     1 |       |     0   (0)|          |
+| 177 |.                            TABLE ACCESS BY INDEX ROWID                      | INF_TENANT_SERVICE            |     1 |    41 |     1   (0)| 00:00:01 |
+| 178 |.                             INDEX UNIQUE SCAN                               | TENANT_SERVICE_PK             |     1 |       |     0   (0)|          |
+| 179 |.                           TABLE ACCESS BY INDEX ROWID                       | ACCT_PRODUCT                  |     1 |    83 |     1   (0)| 00:00:01 |
+| 180 |.                            INDEX UNIQUE SCAN                                | PRODUCT_PK                    |     1 |       |     0   (0)|          |
+| 181 |.                          TABLE ACCESS BY INDEX ROWID                        | PAY_PAYEE_BANK_BRANCH         |     1 |    30 |     2   (0)| 00:00:01 |
+| 182 |.                           INDEX UNIQUE SCAN                                 | PAY_PAYEE_BANK_BRANCH_PK      |     1 |       |     1   (0)| 00:00:01 |
+| 183 |.                         TABLE ACCESS BY INDEX ROWID                         | PAY_FOREIGN_BANK_BRANCH       |     1 |  2362 |     0   (0)|          |
+| 184 |.                          INDEX UNIQUE SCAN                                  | FOREIGN_BANK_BRANCH_PK        |     1 |       |     0   (0)|          |
+| 185 |.                        TABLE ACCESS BY INDEX ROWID                          | PAY_DOMESTIC_BANK_BRANCH      |     1 |   144 |     1   (0)| 00:00:01 |
+| 186 |.                         INDEX UNIQUE SCAN                                   | DOMESTIC_BANK_BRANCH_PK       |     1 |       |     0   (0)|          |
+| 187 |.                       TABLE ACCESS BY INDEX ROWID                           | FND_TENANT_BRANCH             |     1 |    76 |     1   (0)| 00:00:01 |
+| 188 |.                        INDEX UNIQUE SCAN                                    | TENANT_BRANCH_PK              |     1 |       |     0   (0)|          |
+| 189 |.                      TABLE ACCESS BY INDEX ROWID                            | FND_CURRENCY                  |     1 |    55 |     1   (0)| 00:00:01 |
+| 190 |.                       INDEX UNIQUE SCAN                                     | CURRENCY_PK                   |     1 |       |     0   (0)|          |
+| 191 |.                     TABLE ACCESS BY INDEX ROWID                             | PAY_BENE                      |     1 |    60 |     1   (0)| 00:00:01 |
+| 192 |.                      INDEX UNIQUE SCAN                                      | BENE_PK                       |     1 |       |     0   (0)|          |
+| 193 |.                    TABLE ACCESS BY INDEX ROWID                              | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 194 |.                     INDEX UNIQUE SCAN                                       | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 195 |.                   TABLE ACCESS BY INDEX ROWID                               | ACCT_ACCOUNT                  |     1 |    53 |     1   (0)| 00:00:01 |
+| 196 |.                    INDEX UNIQUE SCAN                                        | ACCOUNT_PK                    |     1 |       |     0   (0)|          |
+| 197 |.                  TABLE ACCESS BY INDEX ROWID                                | PAY_BILLER                    |     1 |   437 |     0   (0)|          |
+| 198 |.                   INDEX UNIQUE SCAN                                         | BILLER_PK                     |     1 |       |     0   (0)|          |
+| 199 |.                 TABLE ACCESS BY INDEX ROWID                                 | PAY_BENE                      |     1 |    60 |     0   (0)|          |
+| 200 |.                  INDEX UNIQUE SCAN                                          | BENE_PK                       |     1 |       |     0   (0)|          |
+| 201 |.                TABLE ACCESS BY INDEX ROWID                                  | FND_LOOKUP_VALUE              |     1 |    45 |     0   (0)|          |
+| 202 |.                 INDEX UNIQUE SCAN                                           | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 203 |.               TABLE ACCESS BY INDEX ROWID                                   | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 204 |.                INDEX UNIQUE SCAN                                            | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 205 |.              TABLE ACCESS BY INDEX ROWID                                    | FND_LOOKUP_VALUE              |     1 |    45 |     0   (0)|          |
+| 206 |.               INDEX UNIQUE SCAN                                             | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 207 |.             TABLE ACCESS BY INDEX ROWID                                     | USER_LOGIN_PROFILE_EXTEND     |     1 |    25 |     1   (0)| 00:00:01 |
+| 208 |.              INDEX UNIQUE SCAN                                              | LOGIN_PROFILE_EXTEND_PK       |     1 |       |     0   (0)|          |
+| 209 |.            TABLE ACCESS BY INDEX ROWID                                      | USER_LOGIN_PROFILE            |     1 |   126 |     1   (0)| 00:00:01 |
+| 210 |.             INDEX UNIQUE SCAN                                               | LOGIN_PROFILE_PK              |     1 |       |     0   (0)|          |
+| 211 |.           TABLE ACCESS BY INDEX ROWID                                       | FND_GROUP                     |     1 |    34 |     0   (0)|          |
+| 212 |.            INDEX UNIQUE SCAN                                                | GROUP_PK                      |     1 |       |     0   (0)|          |
+| 213 |.          TABLE ACCESS BY INDEX ROWID                                        | FND_CONTACT                   |     1 |    88 |     1   (0)| 00:00:01 |
+| 214 |.           INDEX UNIQUE SCAN                                                 | CONTACT_PK                    |     1 |       |     0   (0)|          |
+| 215 |.         TABLE ACCESS BY INDEX ROWID                                         | FND_COMPANY                   |     1 |   415 |     0   (0)|          |
+| 216 |.          INDEX UNIQUE SCAN                                                  | COMPANY_PK                    |     1 |       |     0   (0)|          |
+| 217 |.        TABLE ACCESS BY INDEX ROWID                                          | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 218 |.         INDEX UNIQUE SCAN                                                   | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 219 |.       TABLE ACCESS BY INDEX ROWID                                           | LIMIT_DEFINITION              |     1 |   122 |     1   (0)| 00:00:01 |
+| 220 |.        INDEX UNIQUE SCAN                                                    | DEFINITION_PK                 |     1 |       |     0   (0)|          |
+| 221 |.      TABLE ACCESS BY INDEX ROWID                                            | LIMIT_DEFINITION              |     1 |   122 |     1   (0)| 00:00:01 |
+| 222 |.       INDEX UNIQUE SCAN                                                     | DEFINITION_PK                 |     1 |       |     0   (0)|          |
+| 223 |.     TABLE ACCESS BY INDEX ROWID                                             | INF_TENANT_SERVICE            |     1 |    41 |     1   (0)| 00:00:01 |
+| 224 |.      INDEX UNIQUE SCAN                                                      | TENANT_SERVICE_PK             |     1 |       |     0   (0)|          |
+| 225 |.    TABLE ACCESS BY INDEX ROWID                                              | INF_TENANT_SERVICE            |     1 |    41 |     1   (0)| 00:00:01 |
+| 226 |.     INDEX UNIQUE SCAN                                                       | TENANT_SERVICE_PK             |     1 |       |     0   (0)|          |
+| 227 |.   TABLE ACCESS BY INDEX ROWID                                               | FND_TENANT_APPLICATION        |     1 |    28 |     1   (0)| 00:00:01 |
+| 228 |.    INDEX UNIQUE SCAN                                                        | TENANT_APPLICATION_PK         |     1 |       |     0   (0)|          |
+| 229 |.  TABLE ACCESS BY INDEX ROWID                                                | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 230 |.   INDEX UNIQUE SCAN                                                         | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 231 |. TABLE ACCESS BY INDEX ROWID                                                 | INF_TENANT_SERVICE            |     1 |    41 |     1   (0)| 00:00:01 |
+| 232 |.  INDEX UNIQUE SCAN                                                          | TENANT_SERVICE_PK             |     1 |       |     0   (0)|          |
+| 233 |.TABLE ACCESS BY INDEX ROWID                                                  | FND_TENANT_APPLICATION        |     1 |    28 |     1   (0)| 00:00:01 |
+| 234 |. INDEX UNIQUE SCAN                                                           | TENANT_APPLICATION_PK         |     1 |       |     0   (0)|          |
+| 235 | ABLE ACCESS BY INDEX ROWID                                                 T | INF_SERVICE_APPLICATION       |     1 |    35 |     1   (0)| 00:00:01 |
+| 236 |.INDEX UNIQUE SCAN                                                            | SERVICE_APPLICATION_PK        |     1 |       |     0   (0)|          |
+| 237 | BLE ACCESS BY INDEX ROWID                                                 TA | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 238 | NDEX UNIQUE SCAN                                                           I | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 239 | LE ACCESS BY INDEX ROWID                                                 TAB | INF_SERVICE                   |     1 |    80 |     1   (0)| 00:00:01 |
+| 240 | DEX UNIQUE SCAN                                                           IN | SERVICE_PK                    |     1 |       |     0   (0)|          |
+| 241 | E ACCESS BY INDEX ROWID                                                 TABL | INF_SERVICE                   |     1 |    80 |     1   (0)| 00:00:01 |
+| 242 | EX UNIQUE SCAN                                                           IND | SERVICE_PK                    |     1 |       |     0   (0)|          |
+| 243 |  ACCESS BY INDEX ROWID                                                 TABLE | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 244 | X UNIQUE SCAN                                                           INDE | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 245 | ACCESS BY INDEX ROWID                                                 TABLE  | FND_COUNTRY                   |     1 |    45 |     1   (0)| 00:00:01 |
+| 246 |  UNIQUE SCAN                                                           INDEX | COUNTRY_PK                    |     1 |       |     0   (0)|          |
+| 247 | CCESS BY INDEX ROWID                                                 TABLE A | INF_CHANNEL                   |     1 |    31 |     1   (0)| 00:00:01 |
+| 248 | UNIQUE SCAN                                                           INDEX  | INF_CHANNEL_PK                |     1 |       |     0   (0)|          |
+| 249 | CESS BY INDEX ROWID                                                 TABLE AC | FND_CURRENCY                  |     1 |    55 |     1   (0)| 00:00:01 |
+| 250 | NIQUE SCAN                                                           INDEX U | CURRENCY_PK                   |     1 |       |     0   (0)|          |
+| 251 | ESS BY INDEX ROWID                                                 TABLE ACC | FND_COUNTRY                   |     1 |    45 |     1   (0)| 00:00:01 |
+| 252 | IQUE SCAN                                                           INDEX UN | COUNTRY_PK                    |     1 |       |     0   (0)|          |
+| 253 | SS BY INDEX ROWID                                                 TABLE ACCE | USER_LOGIN_PROFILE_EXTEND     |     1 |    25 |     1   (0)| 00:00:01 |
+| 254 | QUE SCAN                                                           INDEX UNI | LOGIN_PROFILE_EXTEND_PK       |     1 |       |     0   (0)|          |
+| 255 | S BY INDEX ROWID                                                 TABLE ACCES | USER_LOGIN_PROFILE            |     1 |   126 |     1   (0)| 00:00:01 |
+| 256 | UE SCAN                                                           INDEX UNIQ | LOGIN_PROFILE_PK              |     1 |       |     0   (0)|          |
+| 257 |  BY INDEX ROWID                                                 TABLE ACCESS | FND_TENANT_APPLICATION        |     1 |    28 |     1   (0)| 00:00:01 |
+| 258 | E SCAN                                                           INDEX UNIQU | TENANT_APPLICATION_PK         |     1 |       |     0   (0)|          |
+| 259 | BY INDEX ROWID                                                 TABLE ACCESS  | FND_TENANT                    |     1 |    62 |     1   (0)| 00:00:01 |
+| 260 |  SCAN                                                           INDEX UNIQUE | TENANT_PK                     |     1 |       |     0   (0)|          |
+| 261 | Y INDEX ROWID                                                 TABLE ACCESS B | FND_COUNTRY                   |     1 |    45 |     1   (0)| 00:00:01 |
+| 262 | SCAN                                                           INDEX UNIQUE  | COUNTRY_PK                    |     1 |       |     0   (0)|          |
+| 263 |  INDEX ROWID                                                 TABLE ACCESS BY | FND_CONTACT                   |     1 |    88 |     0   (0)|          |
+| 264 | CAN                                                           INDEX UNIQUE S | CONTACT_PK                    |     1 |       |     0   (0)|          |
+| 265 | INDEX ROWID                                                 TABLE ACCESS BY  | USER_LOGIN_PROFILE            |     1 |   126 |     0   (0)|          |
+| 266 | AN                                                           INDEX UNIQUE SC | LOGIN_PROFILE_PK              |     1 |       |     0   (0)|          |
+| 267 | NDEX ROWID                                                 TABLE ACCESS BY I | USER_PROFILE                  |     1 |    67 |     1   (0)| 00:00:01 |
+| 268 | N                                                           INDEX UNIQUE SCA | PROFILE_PK                    |     1 |       |     0   (0)|          |
+| 269 | DEX ROWID                                                 TABLE ACCESS BY IN | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 270 |                                                            INDEX UNIQUE SCAN | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 271 | EX ROWID                                                 TABLE ACCESS BY IND | FND_LOOKUP_VALUE              |     1 |    45 |     0   (0)|          |
+| 272 |                                                           INDEX UNIQUE SCAN  | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 273 | X ROWID                                                 TABLE ACCESS BY INDE | FND_LOOKUP_VALUE              |     1 |    45 |     0   (0)|          |
+| 274 |                                                          INDEX UNIQUE SCAN   | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 275 |  ROWID                                                 TABLE ACCESS BY INDEX | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 276 |                                                         INDEX UNIQUE SCAN    | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 277 |                                                       INDEX UNIQUE SCAN      | PROFILE_EXTEND_PK             |     1 |     6 |     0   (0)|          |
+| 278 | OWID                                                 TABLE ACCESS BY INDEX R | USER_CONTACT_DETAIL           |     1 |    25 |     1   (0)| 00:00:01 |
+| 279 |                                                       INDEX UNIQUE SCAN      | CONTACT_DETAIL_PK             |     1 |       |     0   (0)|          |
+| 280 | WID                                                 TABLE ACCESS BY INDEX RO | FND_CONTACT                   |     1 |    88 |     1   (0)| 00:00:01 |
+| 281 |                                                      INDEX UNIQUE SCAN       | CONTACT_PK                    |     1 |       |     0   (0)|          |
+| 282 | ID                                                 TABLE ACCESS BY INDEX ROW | FND_STATE                     |     1 |    44 |     1   (0)| 00:00:01 |
+| 283 |                                                     INDEX UNIQUE SCAN        | STATE_PK                      |     1 |       |     0   (0)|          |
+| 284 | D                                                 TABLE ACCESS BY INDEX ROWI | USER_LOGIN_PROFILE_EXTEND     |     1 |    25 |     1   (0)| 00:00:01 |
+| 285 |                                                    INDEX UNIQUE SCAN         | LOGIN_PROFILE_EXTEND_PK       |     1 |       |     0   (0)|          |
+| 286 |                                                  TABLE ACCESS BY INDEX ROWID | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 287 |                                                   INDEX UNIQUE SCAN          | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 288 |                                                 TABLE ACCESS BY INDEX ROWID  | FND_TENANT_BRANCH             |     1 |    76 |     1   (0)| 00:00:01 |
+| 289 |                                                  INDEX UNIQUE SCAN           | TENANT_BRANCH_PK              |     1 |       |     0   (0)|          |
+| 290 |                                                TABLE ACCESS BY INDEX ROWID   | FND_CONTACT                   |     1 |    88 |     1   (0)| 00:00:01 |
+| 291 |                                                 INDEX UNIQUE SCAN            | CONTACT_PK                    |     1 |       |     0   (0)|          |
+| 292 |                                               TABLE ACCESS BY INDEX ROWID    | PAY_PAYEE_BANK_BRANCH         |     1 |    30 |     2   (0)| 00:00:01 |
+| 293 |                                                INDEX UNIQUE SCAN             | PAY_PAYEE_BANK_BRANCH_PK      |     1 |       |     1   (0)| 00:00:01 |
+| 294 |                                              TABLE ACCESS BY INDEX ROWID     | FND_SPECIAL_CATEGORY          |     1 |    49 |     0   (0)|          |
+| 295 |                                               INDEX UNIQUE SCAN              | SPECIAL_CATEGORY_PK           |     1 |       |     0   (0)|          |
+| 296 |                                             TABLE ACCESS BY INDEX ROWID      | FND_SEGMENT                   |     1 |    39 |     1   (0)| 00:00:01 |
+| 297 |                                              INDEX UNIQUE SCAN               | SEGMENT_PK                    |     1 |       |     0   (0)|          |
+| 298 |                                            TABLE ACCESS BY INDEX ROWID       | FND_TENANT_APPLICATION        |     1 |    28 |     1   (0)| 00:00:01 |
+| 299 |                                             INDEX UNIQUE SCAN                | TENANT_APPLICATION_PK         |     1 |       |     0   (0)|          |
+| 300 |                                           TABLE ACCESS BY INDEX ROWID        | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 301 |                                            INDEX UNIQUE SCAN                 | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 302 |                                          TABLE ACCESS BY INDEX ROWID         | FND_DEPARTMENT                |     1 |    47 |     0   (0)|          |
+| 303 |                                           INDEX UNIQUE SCAN                  | DEPARTMENT_PK                 |     1 |       |     0   (0)|          |
+| 304 |                                         TABLE ACCESS BY INDEX ROWID          | FND_DEPARTMENT                |     1 |    47 |     0   (0)|          |
+| 305 |                                          INDEX UNIQUE SCAN                   | DEPARTMENT_PK                 |     1 |       |     0   (0)|          |
+| 306 |                                        TABLE ACCESS BY INDEX ROWID           | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 307 |                                         INDEX UNIQUE SCAN                    | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 308 |                                       TABLE ACCESS BY INDEX ROWID            | FND_COMPANY                   |     1 |   415 |     0   (0)|          |
+| 309 |                                        INDEX UNIQUE SCAN                     | COMPANY_PK                    |     1 |       |     0   (0)|          |
+| 310 |                                      TABLE ACCESS BY INDEX ROWID             | FND_DOCUMENT                  |     1 |    92 |     0   (0)|          |
+| 311 |                                       INDEX UNIQUE SCAN                      | DOCUMENT_PK                   |     1 |       |     0   (0)|          |
+| 312 |                                     TABLE ACCESS BY INDEX ROWID              | FND_COUNTRY                   |     1 |    45 |     1   (0)| 00:00:01 |
+| 313 |                                      INDEX UNIQUE SCAN                       | COUNTRY_PK                    |     1 |       |     0   (0)|          |
+| 314 |                                    TABLE ACCESS BY INDEX ROWID               | FND_CITY                      |     1 |    59 |     1   (0)| 00:00:01 |
+| 315 |                                     INDEX UNIQUE SCAN                        | CITY_PK                       |     1 |       |     0   (0)|          |
+| 316 |                                   TABLE ACCESS BY INDEX ROWID                | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 317 |                                    INDEX UNIQUE SCAN                         | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 318 |                                  TABLE ACCESS BY INDEX ROWID                 | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 319 |                                   INDEX UNIQUE SCAN                          | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 320 |                                 TABLE ACCESS BY INDEX ROWID                  | FND_GROUP                     |     1 |    34 |     0   (0)|          |
+| 321 |                                  INDEX UNIQUE SCAN                           | GROUP_PK                      |     1 |       |     0   (0)|          |
+| 322 |                                TABLE ACCESS BY INDEX ROWID                   | FND_COUNTRY                   |     1 |    45 |     0   (0)|          |
+| 323 |                                 INDEX UNIQUE SCAN                            | COUNTRY_PK                    |     1 |       |     0   (0)|          |
+| 324 |                               TABLE ACCESS BY INDEX ROWID                    | FND_CIF                       |     1 |    63 |     0   (0)|          |
+| 325 |                                INDEX UNIQUE SCAN                             | CIF_PK                        |     1 |       |     0   (0)|          |
+| 326 |                              TABLE ACCESS BY INDEX ROWID                     | FND_COMPANY                   |     1 |   415 |     0   (0)|          |
+| 327 |                               INDEX UNIQUE SCAN                              | COMPANY_PK                    |     1 |       |     0   (0)|          |
+| 328 |                             TABLE ACCESS BY INDEX ROWID                      | INF_CHANNEL                   |     1 |    31 |     0   (0)|          |
+| 329 |                              INDEX UNIQUE SCAN                               | INF_CHANNEL_PK                |     1 |       |     0   (0)|          |
+| 330 |                           TABLE ACCESS BY INDEX ROWID                        | PAY_BILLER_METADATA           |     1 |  2799 |     0   (0)|          |
+| 331 |                            INDEX UNIQUE SCAN                                 | BILLER_METADATA_PK            |     1 |       |     0   (0)|          |
+| 332 |                       TABLE ACCESS BY INDEX ROWID                            | FND_TENANT_LOOKUP_VALUE       |     1 |    57 |     0   (0)|          |
+| 333 |                        INDEX UNIQUE SCAN                                     | TENANT_LOOKUP_VALUE_PK        |     1 |       |     0   (0)|          |
+| 334 |                      TABLE ACCESS BY INDEX ROWID                             | FND_TENANT_LOOKUP_TYPE        |     1 |    62 |     1   (0)| 00:00:01 |
+| 335 |                       INDEX UNIQUE SCAN                                      | TENANT_LOOKUP_TYPE_PK         |     1 |       |     0   (0)|          |
+| 336 |                     TABLE ACCESS BY INDEX ROWID                              | FND_TENANT_APPLICATION        |     1 |    28 |     1   (0)| 00:00:01 |
+| 337 |                      INDEX UNIQUE SCAN                                       | TENANT_APPLICATION_PK         |     1 |       |     0   (0)|          |
+| 338 |                    TABLE ACCESS BY INDEX ROWID                               | FND_COUNTRY                   |     1 |    45 |     1   (0)| 00:00:01 |
+| 339 |                     INDEX UNIQUE SCAN                                        | COUNTRY_PK                    |     1 |       |     0   (0)|          |
+| 340 |                   TABLE ACCESS BY INDEX ROWID                                | INF_CHANNEL                   |     1 |    31 |     0   (0)|          |
+| 341 |                    INDEX UNIQUE SCAN                                         | INF_CHANNEL_PK                |     1 |       |     0   (0)|          |
+| 342 |                 TABLE ACCESS BY INDEX ROWID                                  | FND_COUNTRY                   |     1 |    45 |     1   (0)| 00:00:01 |
+| 343 |                  INDEX UNIQUE SCAN                                           | COUNTRY_PK                    |     1 |       |     0   (0)|          |
+| 344 |               TABLE ACCESS FULL                                              | USER_CIF                      | 18368 |   448K|    24   (5)| 00:00:01 |
+| 345 |              TABLE ACCESS BY INDEX ROWID                                     | FND_CIF                       |     1 |    63 |     1   (0)| 00:00:01 |
+| 346 |               INDEX UNIQUE SCAN                                              | CIF_PK                        |     1 |       |     0   (0)|          |
+| 347 |            TABLE ACCESS FULL                                                 | FND_CIF_ACCOUNT               | 33093 |   387K|    24   (5)| 00:00:01 |
+| 348 |           TABLE ACCESS BY INDEX ROWID                                        | ACCT_ACCOUNT                  |     1 |    53 |     1   (0)| 00:00:01 |
+| 349 |            INDEX UNIQUE SCAN                                                 | ACCOUNT_PK                    |     1 |       |     0   (0)|          |
+| 350 |          TABLE ACCESS BY INDEX ROWID                                         | FND_CURRENCY                  |     1 |    55 |     1   (0)| 00:00:01 |
+| 351 |           INDEX UNIQUE SCAN                                                  | CURRENCY_PK                   |     1 |       |     0   (0)|          |
+| 352 |         TABLE ACCESS BY INDEX ROWID                                          | ACCT_PRODUCT                  |     1 |    83 |     1   (0)| 00:00:01 |
+| 353 |          INDEX UNIQUE SCAN                                                   | PRODUCT_PK                    |     1 |       |     0   (0)|          |
+| 354 |        TABLE ACCESS BY INDEX ROWID                                           | ACCT_PRODUCT_TYPE             |     1 |    44 |     1   (0)| 00:00:01 |
+| 355 |         INDEX UNIQUE SCAN                                                    | PRODUCT_TYPE_PK               |     1 |       |     0   (0)|          |
+| 356 |       TABLE ACCESS BY INDEX ROWID                                            | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 357 |        INDEX UNIQUE SCAN                                                     | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 358 |      TABLE ACCESS BY INDEX ROWID                                             | FND_LOOKUP_VALUE              |     1 |    45 |     1   (0)| 00:00:01 |
+| 359 |       INDEX UNIQUE SCAN                                                      | LOOKUP_VALUE_PK               |     1 |       |     0   (0)|          |
+| 360 |     TABLE ACCESS BY INDEX ROWID                                              | FND_LOOKUP_TYPE               |     1 |    55 |     1   (0)| 00:00:01 |
+| 361 |      INDEX UNIQUE SCAN                                                       | LOOKUP_TYPE_PK                |     1 |       |     0   (0)|          |
+| 362 |    TABLE ACCESS BY INDEX ROWID                                               | FND_COUNTRY                   |     1 |    45 |     1   (0)| 00:00:01 |
+| 363 |     INDEX UNIQUE SCAN                                                        | COUNTRY_PK                    |     1 |       |     0   (0)|          |
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+440 rows selected.

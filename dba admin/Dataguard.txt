@@ -1,0 +1,420 @@
+Primary Instance :- logstd
+Standby Instance :- standby
+PROTECTION MODE  :- Maximum Performance Mode(DEFAULT) . No standby redo logfiles required.
+
+
+PRIMARY DATABASE CREATION :
+=============================
+
+I .SAMPLE INIT.ORA FILE
+------------------------
+db_name=logstd
+instance_name=logstd
+db_files = 80							      # INITIAL
+db_file_multiblock_read_count =  8 # INITIAL
+db_cache_size=100m
+shared_pool_size =  50m
+parallel_max_servers = 5                                              # SMALL
+max_dump_file_size = 10240      # limit trace file size to 5 Meg each
+undo_management=manual
+rollback_segments = (rbs01, rbs02, rbs03, rbs04)
+background_dump_dest=D:\oracle\oradata\bdump
+user_dump_dest=D:\oracle\oradata\udump
+core_dump_dest=d:\oracle\oradata\cdump
+control_files=D:\oracle\oradata\control\control01.dbf,D:\oracle\oradata\control\control02.dbf
+db_block_size = 2048
+
+job_queue_processes = 2
+compatible = 9.2.0.0.0
+log_parallelism=1
+
+
+####### PRIMARY DATABASE PARAMETERS WHEN THE DATABASE ROLE IS PRIMARY #########
+
+DB_UNIQUE_NAME=logstd   # by default the instance name is the DB_UNIQUE_NAME
+LOG_ARCHIVE_CONFIG='DG_CONFIG=(logstd,standby)'   # DB_CONFIG should contain the DB_UNIQUE_NAME parameter values of both primary and standby database
+LOG_ARCHIVE_FORMAT=%t_%s_%r.arc
+log_archive_dest_1='LOCATION=D:\oracle\oradata\archives\logstd valid_for=(ALL_LOGFILES,ALL_ROLES) DB_UNIQUE_NAME=logstd'
+log_archive_dest_2='service=tostandby valid_for=(PRIMARY_ROLE) DB_UNIQUE_NAME=standby'
+log_archive_dest_state_1=ENABLE
+log_archive_dest_state_2=ENABLE
+REMOTE_LOGIN_PASSWORDFILE=EXCLUSIVE
+
+####### PARAMETERS ACTIVE ONLY WHEN THE DATABASE ROLE IS STANDBY##########
+
+#standby_archive_dest=D:\oracle\oradata\archives\logstd # should be the same location as in "log_archive_dest_1 locations" value .Set this parameter only if VALID_FOR is not used or not set to ALL_ROLES in log_archive_dest_1 parameter 
+standby_file_management=auto
+fal_server=tostandby
+fal_client=toprimary
+db_file_name_convert='D:\oracle\oradata\data\','D:\oracle\standby\datafile\','D:\oracle\oradata\rbs\','D:\oracle\standby\datafile\'
+log_file_name_convert='D:\oracle\oradata\redo\','D:\oracle\standby\datafile\'
+
+
+***************************************************************************************************************************************************
+
+
+II.SETTING ENVIRONMENT FOR UNIX Environments Only
+==================================================
+
+csh
+
+setenv ORACLE_SID test
+setenv ORACLE_BASE /opt/oracle
+setenv ORACLE_HOME /opt/oracle/product9204
+setenv LD_LIBRARY_PATH $ORACLE_HOME/lib
+setenv TNS_ADMIN $ORACLE_HOME/network/admin
+set path=($ORACLE_HOME/bin . $path)
+
+*****************************************************************************************************************************************************
+III. CREATION OF PRIMARY DATABASE:
+===================================
+
+sqlplus '/ as sysdba'
+
+
+startup nomount pfile=$ORACLE_HOME/dbs/inittest.ora
+
+create database test logfile group 1 '/u02/ORACLE/test/redo01.log' size 1m,
+group 2 '/u02/ORACLE/test/redo02.log' size 1m,
+group 3 '/u02/ORACLE/test/redo03.log' size 1m
+datafile '/u02/ORACLE/test/system01.dbf' size 700m
+undo tablespace UNDOTBS datafile '/u02/ORACLE/test/undotbs01.dbf' size 500m;
+
+
+@$ORACLE_HOME/rdbms/admin/catalog.sql
+
+
+@$ORACLE_HOME/rdbms/admin/catproc.sql 
+
+create temporary tablespace TEMP tempfile '/u02/ORACLE/test/temp01.dbf' size 500m;
+
+
+alter database default temporary tablespace temp;
+
+create tablespace CWMLITE datafile '/u02/ORACLE/test/cwmlite01.dbf' size 20m ;
+
+create tablespace DRSYS datafile '/u02/ORACLE/test/drsys01.dbf' size 20m ;
+
+create tablespace ODM datafile '/u02/ORACLE/test/odm01.dbf' size 20m ;
+
+--create tablespace RPDLMT datafile '/u02/ORACLE/test/rpdlmt01.dbf' size 700m ;
+
+--alter tablespace RPDLMT add datafile '/u02/ORACLE/test/rpdlmt02.dbf' size 1024m ;
+
+create tablespace TOOLS datafile '/u02/ORACLE/test/tools01.dbf' size 25m ;
+
+create tablespace USERS datafile '/u02/ORACLE/test/users01.dbf' size 300m ;
+
+create tablespace XDB datafile '/u02/ORACLE/test/xdb01.dbf' size 20m ;
+
+
+*******************************************************************************************************************************
+NET SERVICE CONFIGURATION COMMON TO BOTH PRIMARY AND STANDBY
+============================================================
+
+LISTENER ENTRY
+--------------
+LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS_LIST =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = 169.195.27.208)(PORT = 1521))
+      )
+    )
+  )
+
+
+SID_LIST_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (ORACLE_HOME = d:\oracle\ora92)
+      (SID_NAME = logstd)
+    )
+    (SID_DESC =
+      (ORACLE_HOME = d:\oracle\ora92)
+      (SID_NAME = standby)
+    )
+  )
+
+
+TNS ENTRY
+---------
+
+
+tostandby =
+ (description =
+    (address_list =
+       (address = (protocol = tcp) (host=169.195.27.208) (port=1521))
+     )
+     (connect_data =
+        (sid = standby)
+      )
+  )
+
+
+toprimary =
+  (description =
+     (address_list =
+        (address = (protocol = tcp) (host = 169.195.27.208) (port=1521))
+      )
+      (connect_data = 
+         (sid = logstd)
+      )
+   )
+
+
+
+
+lsnrctl start test
+
+**********************************************************
+ON PRIMARY DATABASE CREATE THE FOLLOWING OBJECTS
+================================================
+
+create table myobjects
+tablespace users
+as select * from dba_objects;
+
+create  or replace procedure
+load_data
+is
+begin
+for i in 1 .. 2
+loop
+insert into myobjects
+select * from dba_objects;
+end loop;
+commit;
+end;
+/
+
+
+*************************************************************
+
+CREATE THE STANDBY CONTROLFILE FROM THE PRIMARY DATABASE
+========================================================
+
+SQL>ALTER DATABASE CREATE STANDBY CONTROLFILE AS '/dedupe/oracle/control01.ctl';
+
+Note: Please Copy the standby controlfile created from primary to the locations mentioned in CONTROL_FILE parameter of standby database
+
+************************************************************************
+
+SETTING THE PROTECTION MODE
+===========================
+
+SQL> ALTER DATABASE SET STANDBY DATABASE TO MAXIMIZE PERFORMANCE;
+
+
+*************************************************************
+
+
+
+IV. CREATION OF STANDBY DATABASE
+================================
+
+STANDBY DATABASE INITILIZATION PARAMETER FILE
+---------------------------------------------
+db_name=logstd
+instance_name=standby
+db_files = 80							      # INITIAL
+db_file_multiblock_read_count =  8 # INITIAL
+db_cache_size=100m
+shared_pool_size =  50m
+parallel_max_servers = 5                                              # SMALL
+max_dump_file_size = 10240      # limit trace file size to 5 Meg each
+undo_management=manual
+rollback_segments = (rbs01, rbs02, rbs03, rbs04)
+background_dump_dest=D:\oracle\standby\bdump
+user_dump_dest=D:\oracle\standby\udump
+core_dump_dest=D:\oracle\standby\cdump
+control_files=D:\oracle\standby\control\control01.dbf,D:\oracle\standby\control\control02.dbf
+db_block_size = 2048
+remote_login_passwordfile = none
+job_queue_processes = 2
+compatible = 9.2.0.0.0
+log_parallelism=1
+lock_name_space=standby #USED WHEN BOTH PRIMARY AND STANDBY ARE IN SAME MACHINE
+
+####### DATABASE PARAMETERS WHEN THE DATABASE ROLE IS PRIMARY #########
+
+DB_UNIQUE_NAME=standby   # by default the instance name is the DB_UNIQUE_NAME
+LOG_ARCHIVE_CONFIG='DG_CONFIG=(logstd,standby)'   # DB_CONFIG should contain the DB_UNIQUE_NAME parameter values of both primary and standby database
+LOG_ARCHIVE_FORMAT=%t_%s_%r.arc
+log_archive_dest_1='LOCATION=D:\oracle\oradata\archives valid_for=(ALL_LOGFILES,ALL_ROLES) DB_UNIQUE_NAME=standby'
+log_archive_dest_2='service=toprimary valid_for=(PRIMARY_ROLE) DB_UNIQUE_NAME=logstd'
+log_archive_dest_state_1=ENABLE
+log_archive_dest_state_2=ENABLE
+REMOTE_LOGIN_PASSWORDFILE=EXCLUSIVE
+
+
+####### PARAMETERS ACTIVE ONLY WHEN THE DATABASE ROLE IS STANDBY##########
+
+#standby_archive_dest=D:\oracle\oradata\archives # should be the same location as in "log_archive_dest_1 locations" value .Set this parameter only if VALID_FOR is not used or not set to ALL_ROLES in log_archive_dest_1 parameter 
+standby_file_management=auto
+fal_server=toprimary
+fal_client=tostandby
+db_file_name_convert='D:\oracle\oradata\data\','D:\oracle\standby\datafile\','D:\oracle\oradata\rbs\','D:\oracle\standby\datafile\'
+log_file_name_convert='D:\oracle\oradata\redo\','D:\oracle\standby\datafile\'
+
+
+*******************************************************************************************************************
+STARTING THE STANDBY DATABASE :
+===============================
+
+
+SET THE ENVIRONMENT VARIABLES
+
+csh
+
+setenv ORACLE_SID test
+setenv ORACLE_BASE /opt/oracle
+setenv ORACLE_HOME /opt/oracle/product9204
+setenv LD_LIBRARY_PATH $ORACLE_HOME/lib
+setenv TNS_ADMIN $ORACLE_HOME/network/admin
+set path=($ORACLE_HOME/bin . $path)
+
+SQLPLUS /NOLOG
+
+SQL>STARTUP NOMOUNT
+
+SQL>ALTER DATABASE MOUNT STANDBY DATABASE;
+
+SQL>ALTER DATABASE RECOVER MANAGED STANDBY DATABASE DISCONNECT FROM SESSION;
+
+
+SQL>select name,database_role from v$database;
+
+Note: Database Role should be STANDBY
+
+SQL>select process,sequence#,block#,blocks from v$managed_standby;
+
+Note: The process listing should show  Processes like 'MRP','ARCH','RFS'
+
+
+
+****************************************************************************************************************************
+
+MONITORING DATAGUARD 
+=====================
+
+To check whether MRP process is running or not:
+-----------------------------------------------
+SELECT PROCESS||'  '||SEQUENCE#||'  '||BLOCK#||'  '||BLOCKS||' '||status FROM V$MANAGED_STANDBY;
+
+To Identify the existing archived redo log files
+-------------------------------------------------
+select max(SEQUENCE#) "LAST_LOG_GENERATED" FROM V$ARCHIVED_LOG WHERE THREAD# =1 and ARCHIVED='YES';
+
+To verify the redo data was received and applied on the standby database
+--------------------------------------------------------------------------
+select max(SEQUENCE#) "LAST_LOG_APPLIED" FROM V$ARCHIVED_LOG WHERE THREAD# = 1 and APPLIED='YES';
+ 
+
+To check the archive transfer errors
+-----------------------------------
+select status, error from v$archive_dest where dest_id=2;
+
+To know whether a archive file is registered in standby controlfile:
+--------------------------------------------------------------------
+select name ,status from v$archived_log where name like '%231080%';
+
+
+To View the alerts or events pertatining to the standby database
+----------------------------------------------------------------
+
+SELECT MESSAGE FROM V$DATAGUARD_STATUS;
+
+
+
+To check the event for the MRP process
+---------------------------------------
+select distinct event from v$session_wait where sid in(select sid from v$session where program like '%MRP%');
+
+
+*******************************************************************************************************************
+
+SHUTDOWN AND STARTUP OF PHYSICAL STANDBY
+========================================
+
+SHUTDOWN STEPS:
+---------------
+
+set ORACLE_SID=chenprod
+set ORACLE_HOME=set the corresponding ORACLE_HOME
+
+sqlplus "/ as sysdba"
+
+SQL>select user,instance_name,host_name from v$instance;
+
+SQL>select name,database_role from v$database;
+
+Note: Database Role should be STANDBY
+
+SQL> Recover managed standby database cancel;
+
+SQL> Shutdown immediate;
+
+
+STARTUP STEPS:
+--------------
+
+set ORACLE_SID=chenprod
+set ORACLE_HOME=set the corresponding ORACLE_HOME
+
+sqlplus "/ as sysdba"
+
+SQL> startup nomount
+
+SQL> alter database mount standby database;
+
+SQL> alter database recover managed standby database disconnect from session;
+
+SQL>select process,sequence#,block#,blocks from v$managed_standby;
+
+Note: The process listing should show  Processes like 'MRP','ARCH','RFS'.
+
+SQL>select name,database_role from v$database;
+
+
+Note: Database Role should be STANDBY
+
+
+**********************************************************************************************************************
+TROUBLE SHOOTING:
+================
+
+TO MANUALLY REGISTER THE MISSING ARCHIVED LOGFILES USE THE FOLLOWING COMMANDS:
+==============================================================================
+
+ALTER DATABASE REGISTER LOGFILE '/dedupe/deddata9/archives/dedupe/dedupe_230956.dbf';
+
+
+STEPS TO FOLLOW WHEN THE MRP(MANAGED RECOVERY PROCESS) PROCESS FAILS DUE TO THE ERRORS WHILE CREATING A FILE ON THE STANDBY DATABASE(IT MAY BE DUE TO LACK OF DISK SPACE)
+==========================================================================================================================================================================
+
+SQL>select max(to_char(first_time,'dd-mm-yy hh24:mi')) from v$archived_log
+
+SQL>SELECT PROCESS||'  '||SEQUENCE#||'  '||BLOCK#||'  '||BLOCKS||' '||status FROM V$MANAGED_STANDBY where process like 'MRP%'; 
+
+Note: The 'MRP' process will not be running.
+
+ select process, thread#, sequence#, status from v$managed_standby where process='MRP0';
+
+SQL>select name from v$datafile;
+
+Note:- Check for file names like UNNAMED%
+
+SQL>ALTER SYSTEM SET STANDBY_FILE_MANAGEMENT=MANUAL;
+
+
+SQL>ALTER DATABASE CREATE DATAFILE
+'D:\oracle\oradata\data\UNNAMED00007'
+AS 
+'D:\oracle\oradata\data\DATAFILE101.DBF';
+
+
+SQL>ALTER SYSTEM SET STANDBY_FILE_MANAGEMENT=AUTO;
+
+SQL>recover managed standby database disconnect;
+

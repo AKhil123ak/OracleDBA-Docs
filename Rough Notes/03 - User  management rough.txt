@@ -1,0 +1,552 @@
+login as: root
+root@192.168.0.10's password:
+Last login: Sat Jul 22 12:39:12 2017 from 192.168.0.3
+[root@linux ~]#
+[root@linux ~]#
+[root@linux ~]# su - oracle
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ . PROD.env
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ cd /u01/app/PROD/product/11.2.0.4/dbs/
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ ls -trl init*
+-rw-r--r--. 1 oracle oinstall 2851 May 15  2009 init.ora
+-rw-r--r--. 1 oracle oinstall  852 Feb 23 07:31 initUAT.ora_bkp
+-rw-r--r--. 1 oracle oinstall  853 Feb 23 07:33 initUAT1.ora
+-rw-r--r--. 1 oracle oinstall  852 Feb 27 06:38 initUAT.ora
+-rw-r--r--. 1 oracle oinstall 1156 Mar 11 20:38 initRMANDB.ora
+-rw-r--r--. 1 oracle oinstall 1206 Mar 12 07:46 initRCLONEDB.ora
+-rw-r--r--. 1 oracle oinstall 1018 Apr 20 08:55 initPROD.ora_bkp
+-rw-r--r--. 1 oracle oinstall 1004 Jul 12 08:50 initPROD.ora_13july
+-rw-r--r--. 1 oracle oinstall  937 Jul 14 08:36 initPROD.ora
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ ls -trl spfilePROD.ora
+-rw-r-----. 1 oracle oinstall 3584 Jul 22 12:47 spfilePROD.ora
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:20:34 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> startup
+ORACLE instance started.
+
+Total System Global Area  626327552 bytes
+Fixed Size                  2255832 bytes
+Variable Size             272630824 bytes
+Database Buffers          348127232 bytes
+Redo Buffers                3313664 bytes
+Database mounted.
+Database opened.
+SYS ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:21:11 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> show parameter spfile
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+spfile                               string      /u01/app/PROD/product/11.2.0.4
+                                                 /dbs/spfilePROD.ora
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux dbs]$
+[oracle@linux dbs]$ ls -tlr spfilePROD.ora
+-rw-r-----. 1 oracle oinstall 3584 Jul 22 19:20 spfilePROD.ora
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ rm -rf spfilePROD.ora
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:21:32 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> select status from v$instance;
+
+STATUS
+------------
+OPEN
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> conn scott/tiger
+Connected.
+SCOTT ON PROD:22-JUL-17>
+SCOTT ON PROD:22-JUL-17>
+SCOTT ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:22:03 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> shutdown immediate
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SYS ON PROD:22-JUL-17> startup
+ORACLE instance started.
+
+Total System Global Area  626327552 bytes
+Fixed Size                  2255832 bytes
+Variable Size             272630824 bytes
+Database Buffers          348127232 bytes
+Redo Buffers                3313664 bytes
+Database mounted.
+ORA-01092: ORACLE instance terminated. Disconnection forced
+ORA-30012: undo tablespace 'UNDOTBS_012' does not exist or of wrong type
+Process ID: 2428
+Session ID: 1 Serial number: 5
+
+
+SYS ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ vi initPROD.ora
+[oracle@linux dbs]$
+[oracle@linux dbs]$ c
+-bash: c: command not found
+[oracle@linux dbs]$
+[oracle@linux dbs]$
+[oracle@linux dbs]$ cd
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:29:50 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> select name,open_mode,log_mode from v$database;
+
+NAME      OPEN_MODE            LOG_MODE
+--------- -------------------- ------------
+PROD      READ WRITE           ARCHIVELOG
+
+SYS ON PROD:22-JUL-17>  select instance_name,status from v$instance;
+
+INSTANCE_NAME    STATUS
+---------------- ------------
+PROD             OPEN
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> select USERNAME,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE from dba_users where USERNAME='SCOTT';
+
+USERNAME                       DEFAULT_TABLESPACE
+------------------------------ ------------------------------
+TEMPORARY_TABLESPACE
+------------------------------
+SCOTT                          SYSTEM
+TMPGRP16
+
+
+SYS ON PROD:22-JUL-17> set linesize 100;
+SYS ON PROD:22-JUL-17> select USERNAME,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE from dba_users where USERNAME='SCOTT';
+
+USERNAME                       DEFAULT_TABLESPACE             TEMPORARY_TABLESPACE
+------------------------------ ------------------------------ ------------------------------
+SCOTT                          SYSTEM                         TMPGRP16
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> create tablespace testtspace datafile '/u01/app/PROD/oradata/PROD/test1011.dbf' size 500M autoextend on;
+
+Tablespace created.
+
+SYS ON PROD:22-JUL-17> create user test1 identified by test123
+  2  ;
+create user test1 identified by test123
+            *
+ERROR at line 1:
+ORA-01920: user name 'TEST1' conflicts with another user or role name
+
+
+SYS ON PROD:22-JUL-17> create user test11 identified by test123
+  2  ;
+
+User created.
+
+SYS ON PROD:22-JUL-17> conn test11/test123
+ERROR:
+ORA-01045: user TEST11 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :22-JUL-17> exit
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:33:23 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> grat CREATE SESSION to test11;
+SP2-0734: unknown command beginning "grat CREAT..." - rest of line ignored.
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> grant CREATE SESSION to test11;
+
+Grant succeeded.
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> conn test11/test123
+Connected.
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17> select * from tab;
+
+no rows selected
+
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17> create table dev1 (snum number(9), name varchar2(10));
+create table dev1 (snum number(9), name varchar2(10))
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges
+
+
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:36:05 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> alter user test11 default tablespace testtspace;
+
+User altered.
+
+SYS ON PROD:22-JUL-17> alter user test11 quota 10m on testtspace;
+
+User altered.
+
+SYS ON PROD:22-JUL-17> grant create table to test11;
+
+Grant succeeded.
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> conn test11/test123
+Connected.
+TEST11 ON PROD:22-JUL-17> create table dev1 (snum number(9), name varchar2(10));
+
+Table created.
+
+TEST11 ON PROD:22-JUL-17> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEV1                           TABLE
+
+TEST11 ON PROD:22-JUL-17> show user
+USER is "TEST11"
+TEST11 ON PROD:22-JUL-17> insert into sales values (9, 'DBA');
+insert into sales values (9, 'DBA')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+TEST11 ON PROD:22-JUL-17> insert into DEV1 values (9, 'DBA');
+
+1 row created.
+
+TEST11 ON PROD:22-JUL-17> /
+
+1 row created.
+
+TEST11 ON PROD:22-JUL-17> /
+
+1 row created.
+
+TEST11 ON PROD:22-JUL-17> /
+
+1 row created.
+
+TEST11 ON PROD:22-JUL-17> /
+
+1 row created.
+
+TEST11 ON PROD:22-JUL-17> /
+
+1 row created.
+
+TEST11 ON PROD:22-JUL-17> /
+
+1 row created.
+
+TEST11 ON PROD:22-JUL-17> commit;
+
+Commit complete.
+
+TEST11 ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:39:40 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17> select * from dba_sys_privs where GRANTEE='TEST11';
+
+GRANTEE                        PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+TEST11                         CREATE SESSION                           NO
+TEST11                         CREATE TABLE                             NO
+
+SYS ON PROD:22-JUL-17> revoke CREATE SESSION from TEST11;
+
+Revoke succeeded.
+
+SYS ON PROD:22-JUL-17> select * from dba_sys_privs where GRANTEE='TEST11';
+
+GRANTEE                        PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+TEST11                         CREATE TABLE                             NO
+
+SYS ON PROD:22-JUL-17> conn TEST11/test123
+ERROR:
+ORA-01045: user TEST11 lacks CREATE SESSION privilege; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :22-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> grant CREATE SESSION to TEST11;
+
+Grant succeeded.
+
+SYS ON PROD:22-JUL-17> select * from dba_sys_privs where GRANTEE='TEST11';
+
+GRANTEE                        PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+TEST11                         CREATE SESSION                           NO
+TEST11                         CREATE TABLE                             NO
+
+SYS ON PROD:22-JUL-17> conn test/test123
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :22-JUL-17>
+ ON :22-JUL-17>
+ ON :22-JUL-17> conn test11/test123
+Connected.
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:42:22 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> alter user TEST11 account lock;
+
+User altered.
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> conn test11/teet123
+ERROR:
+ORA-28000: the account is locked
+
+
+Warning: You are no longer connected to ORACLE.
+ ON :22-JUL-17> conn /as sysdba
+Connected.
+SYS ON PROD:22-JUL-17> set linesize 200;
+SYS ON PROD:22-JUL-17> col ACCOUNT_STATUS format a10;
+SYS ON PROD:22-JUL-17> col TEMPORARY_TABLESPACE format a20;
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> col TEMPORARY_TABLESPACE format a20;
+SYS ON PROD:22-JUL-17> col DEFAULT_TABLESPACE format a10;
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> select USERNAME,ACCOUNT_STATUS,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE,PROFILE from dba_users where USERNAME='TEST11';
+
+USERNAME                       ACCOUNT_ST DEFAULT_TA TEMPORARY_TABLESPACE PROFILE
+------------------------------ ---------- ---------- -------------------- ------------------------------
+TEST11                         LOCKED     TESTTSPACE TMPGRP16             DEFAULT
+
+SYS ON PROD:22-JUL-17> alter user TEST11 account unlock;
+
+User altered.
+
+SYS ON PROD:22-JUL-17> select USERNAME,ACCOUNT_STATUS,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE,PROFILE from dba_users where USERNAME='TEST11';
+
+USERNAME                       ACCOUNT_ST DEFAULT_TA TEMPORARY_TABLESPACE PROFILE
+------------------------------ ---------- ---------- -------------------- ------------------------------
+TEST11                         OPEN       TESTTSPACE TMPGRP16             DEFAULT
+
+SYS ON PROD:22-JUL-17>  alter user test11 identified by test89;
+
+User altered.
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> conn test11/test89
+Connected.
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17>
+TEST11 ON PROD:22-JUL-17> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DEV1                           TABLE
+
+TEST11 ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ sqlplus '/as sysdba'
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Jul 22 19:45:37 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SYS ON PROD:22-JUL-17>
+SYS ON PROD:22-JUL-17> conn scott/tiger
+Connected.
+SCOTT ON PROD:22-JUL-17>
+SCOTT ON PROD:22-JUL-17>
+SCOTT ON PROD:22-JUL-17> select * from DEV1;
+select * from DEV1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SCOTT ON PROD:22-JUL-17> select * from TEST11.DEV1;
+select * from TEST11.DEV1
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SCOTT ON PROD:22-JUL-17>
+SCOTT ON PROD:22-JUL-17>
+SCOTT ON PROD:22-JUL-17> exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ clear
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$
+[oracle@linux ~]$ clear
+[oracle@linux ~]$
+[oracle@linux ~]$

@@ -1,0 +1,119 @@
+Using username "soral301".
+Last login: Wed Sep 26 11:09:26 2018 from 172.17.73.151
+********************************************************************************
+
+"!!! SYSTEM WARNING !!!"
+This system is for the use of authorized JFS personnel only and by accessing
+this system you hereby consent to the system being monitored by JFS. Any
+unauthorized use will be considered a breach of JFS’s Information Security
+policies and may also be unlawful under law. JFS reserves the right to take
+any action including disciplinary action or legal proceedings in a court of
+law against persons involved in the violation of the access restrictions herein.
+- IT Management Group
+
+********************************************************************************
+[soral301@SPDCGLRECONDB01 ~]$ topas
+bash: topas: command not found...
+[soral301@SPDCGLRECONDB01 ~]$ top
+top - 09:58:33 up 1 day, 19:59,  3 users,  load average: 1.08, 1.03, 1.05
+Tasks: 329 total,   1 running, 328 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.3 us,  0.0 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu1  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu2  :  0.0 us,  0.3 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu3  :  0.0 us,  0.0 sy,  0.0 ni, 96.0 id,  4.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu4  :  0.3 us,  0.3 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu5  :  0.3 us,  0.3 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu6  :  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+%Cpu7  :  0.3 us,  0.3 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :  8010736 total,   185812 free,  1121688 used,  6703236 buff/cache
+KiB Swap: 15626236 total, 15626236 free,        0 used.  3513808 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 5146 oracle    -2   0 1528096  17932  14944 S   1.0  0.2  22:57.30 asm_vktm_+asm
+10361 oracle    -2   0 2845188  19336  16652 S   1.0  0.2  22:06.61 ora_vktm_glrcon
+ 4987 oracle    20   0 1710836  60352  32032 S   0.7  0.8  16:49.41 oraagent.bin
+10395 oracle    20   0 2849288  68852  63740 S   0.7  0.9   1:00.45 ora_ckpt_glrcon
+ 4914 oracle    20   0  824688  33524  18336 S   0.3  0.4   3:18.31 orarootagent.bi
+ 5078 oracle    20   0  846916  24976  13104 S   0.3  0.3   3:12.62 cssdagent
+10419 oracle    20   0 2846060  23104  19816 S   0.3  0.3   1:54.64 ora_fenc_glrcon
+24715 soral301  20   0  157900   2476   1568 R   0.3  0.0   0:00.30 top
+    1 root      20   0  193904   7072   3972 S   0.0  0.1   0:10.21 systemd
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.19 kthreadd
+    3 root      20   0       0      0      0 S   0.0  0.0   0:00.10 ksoftirqd/0
+    5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0H
+    7 root      rt   0       0      0      0 S   0.0  0.0   0:00.09 migration/0
+    8 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh
+    9 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/0
+   10 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/1
+   11 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/2
+   12 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/3
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/4
+   14 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/5
+   15 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/6
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcuob/7
+   17 root      20   0       0      0      0 S   0.0  0.0   1:20.71 rcu_sched
+   18 root      20   0       0      0      0 S   0.0  0.0   0:14.46 rcuos/0
+   19 root      20   0       0      0      0 S   0.0  0.0   0:17.09 rcuos/1
+   20 root      20   0       0      0      0 S   0.0  0.0   0:16.97 rcuos/2
+   21 root      20   0       0      0      0 S   0.0  0.0   0:18.66 rcuos/3
+   22 root      20   0       0      0      0 S   0.0  0.0   0:06.02 rcuos/4
+   23 root      20   0       0      0      0 S   0.0  0.0   0:08.68 rcuos/5
+   24 root      20   0       0      0      0 S   0.0  0.0   0:19.09 rcuos/6
+[soral301@SPDCGLRECONDB01 ~]$ free -g
+              total        used        free      shared  buff/cache   available
+Mem:              7           1           0           2           6           3
+Swap:            14           0          14
+[soral301@SPDCGLRECONDB01 ~]$ uname
+Linux
+[soral301@SPDCGLRECONDB01 ~]$ uname -a
+Linux SPDCGLRECONDB01 3.10.0-327.el7.x86_64 #1 SMP Thu Oct 29 17:29:29 EDT 2015 x86_64 x86_64 x86_64 GNU/Linux
+[soral301@SPDCGLRECONDB01 ~]$ cd
+[soral301@SPDCGLRECONDB01 ~]$ cd /etc
+[soral301@SPDCGLRECONDB01 etc]$ ls
+abrt                       default                     group          libuser.conf              oracleafd.conf          request-key.conf       sudoers.d
+adjtime                    depmod.d                    group-         libvirt                   oraInst.loc             request-key.d          sudoers.d.24sepbkp
+aliases                    dhcp                        grub2.cfg      locale.conf               oratab                  resolv.conf            sudoers.rpmnew
+aliases.db                 DIR_COLORS                  grub.d         localtime                 os-release              rhsm                   sudo-ldap.conf
+alsa                       DIR_COLORS.256color         gshadow        login.defs                PackageKit              rpc                    sysconfig
+alternatives               DIR_COLORS.lightbgcolor     gshadow-       login.defs.24sepbkp       pam.d                   rpm                    sysctl.conf
+anacrontab                 dleyna-server-service.conf  gss            logrotate.conf            passwd                  rsyncd.conf            sysctl.conf.24sepbkp
+asound.conf                dnsmasq.conf                gssproxy       logrotate.d               passwd-                 rsyslog.conf           sysctl.conf.rpmnew
+at.deny                    dnsmasq.d                   hba.conf       lsm                       pbm2ppa.conf            rsyslog.conf.24sepbkp  sysctl.d
+at-spi2                    dracut.conf                 host.conf      lvm                       pinforc                 rsyslog.d              systemd
+audisp                     dracut.conf.d               hostname       machine-id                pkcs11                  rwtab                  system-release
+audit                      drirc                       hosts          magic                     pki                     rwtab.d                system-release-cpe
+avahi                      e2fsck.conf                 hosts.allow    mail.rc                   plymouth                samba                  tcsd.conf
+bash_completion.d          enscript.cfg                hosts.deny     makedumpfile.conf.sample  pm                      sane.d                 terminfo
+bashrc                     environment                 hp             man_db.conf               pnm2ppa.conf            sasl2                  tmpfiles.d
+binfmt.d                   ethertypes                  idmapd.conf    maven                     polkit-1                scl                    trusted-key.key
+bluetooth                  exports                     init.d         mke2fs.conf               popt.d                  securetty              tuned
+bonobo-activation          exports.d                   inittab        modprobe.d                postfix                 security               udev
+brltty                     favicon.png                 inputrc        modules-load.d            ppp                     selinux                udisks2
+brltty.conf                fcoe                        iproute2       motd                      prelink.conf.d          services               unbound
+cgconfig.conf              festival                    ipsec.conf     mtab                      printcap                sestatus.conf          updatedb.conf
+cgconfig.d                 filesystems                 ipsec.d        mtools.conf               profile                 setroubleshoot         UPower
+cgrules.conf               firefox                     ipsec.secrets  multipath                 profile.d               setuptool.d            usb_modeswitch.conf
+cgsnapshot_blacklist.conf  firewalld                   iscsi          my.cnf                    protocols               sgml                   usb_modeswitch.d
+chkconfig.d                fonts                       issue          my.cnf.d                  pulse                   shadow                 vconsole.conf
+chrony.conf                fprintd.conf                issue.net      nanorc                    purple                  shadow-                vimrc
+chrony.keys                fstab                       java           netconfig                 python                  shells                 virc
+cifs-utils                 fstab.original              jvm            NetworkManager            qemu-ga                 skel                   vmware-tools
+cron.d                     fuse.conf                   jvm-commmon    networks                  qemu-kvm                smartmontools          wgetrc
+cron.daily                 gconf                       kdump.conf     nfsmount.conf             radvd.conf              snmp                   wpa_supplicant
+cron.deny                  gcrypt                      kernel         nsswitch.conf             rc0.d                   sos.conf               wvdial.conf
+cron.hourly                gdbinit                     krb5.conf      nsswitch.conf.bak         rc1.d                   sound                  X11
+cron.monthly               gdbinit.d                   krb5.conf.d    nsswitch.conf.rpmnew      rc2.d                   speech-dispatcher      xdg
+crontab                    gdm                         kshrc          ntp                       rc3.d                   ssh                    xinetd.d
+cron.weekly                geoclue                     ksmtuned.conf  numad.conf                rc4.d                   ssl                    xml
+crypttab                   GeoIP.conf                  ld.so.cache    odbcinst.ini              rc5.d                   statetab               yum
+csh.cshrc                  GeoIP.conf.default          ld.so.conf     oddjob                    rc6.d                   statetab.d             yum.conf
+csh.login                  ghostscript                 ld.so.conf.d   oddjobd.conf              rc.d                    subgid                 yum.repos.d
+cups                       gnome-vfs-2.0               libaudit.conf  oddjobd.conf.d            rc.local                subuid
+cupshelpers                gnupg                       libibverbs.d   openldap                  rdma                    sudo.conf
+dbus-1                     GREP_COLORS                 libnl          opt                       redhat-access-insights  sudoers
+dconf                      groff                       libreport      oracle                    redhat-release          sudoers.24sepbkp
+[soral301@SPDCGLRECONDB01 etc]$ cat redhat-release
+Red Hat Enterprise Linux Server release 7.3 (Maipo)
+[soral301@SPDCGLRECONDB01 etc]$ cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 7.3 (Maipo)
+[soral301@SPDCGLRECONDB01 etc]$

@@ -1,0 +1,112 @@
+---login with ----
+
+grid
+
+-----stop cluster ------
+ps -ef | grep d.bin
+crsctl stop has
+
+ps -ef | grep d.bin
+
+------ after server UP ----
+
+ps -ef | grep d.bin
+crsctl start has
+crsctl stat res -t
+
+ora.cssd
+1 ONLINE OFFLINE jfsbnksrv154
+
+
+
+
+crsctl START RES ora.cssd
+
+
+
+====================================PROD===230==
+ sho parameter state_2
+
+alter system set log_archive_dest_state_2=defer;
+
+
+=======================standby===130
+
+
+take sync status of both databases
+
+
+recover managed standby database cancel;
+
+
+shut immediate;
+
+
+grid
+
+-----stop cluster ------
+ps -ef | grep d.bin
+crsctl stop has
+
+ps -ef | grep d.bin
+
+==================================================130
+
+------ after server UP ----
+
+ps -ef | grep d.bin
+crsctl start has
+crsctl stat res -t
+
+ora.cssd
+1 ONLINE OFFLINE jfsbnksrv154
+
+
+
+
+crsctl START RES ora.cssd
+
+
+
+jfsbip:
+
+startup mount;
+
+recover managed standby database disconnect from session;
+
+=====================prod  230
+
+
+alter system set alter system set log_archive_dest_state_2=enable;
+
+check sync status;
+
+
+
+
+
+
+
+
+
+
+SYS:JFSPPROD > select max(sequence#) from v$archived_log where applied='YES';
+
+MAX(SEQUENCE#)
+--------------
+        183721
+
+
+
+SYS:JFSPPROD > select max(sequence#) from v$archived_log;
+
+MAX(SEQUENCE#)
+--------------
+        183721
+
+
+
+
+
+
+

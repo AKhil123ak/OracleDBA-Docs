@@ -1,0 +1,135 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.02.27 00:00:45 =~=~=~=~=~=~=~=~=~=~=~=
+shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+00:01:15 SYS:JFSIIB > 
+00:01:16 SYS:JFSIIB > 
+00:01:16 SYS:JFSIIB > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=CIBUAT
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 00:01:28 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:CIBUAT > set time on;
+00:01:31 SYS:CIBUAT > 
+00:01:32 SYS:CIBUAT > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+00:01:59 SYS:CIBUAT > 
+00:02:01 SYS:CIBUAT > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=JFSEXPEN
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 00:02:20 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:JFSEXPEN > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=CKYCUAT
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 00:03:00 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:CKYCUAT > set time on;
+00:03:03 SYS:CKYCUAT > 
+00:03:04 SYS:CKYCUAT > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+00:03:30 SYS:CKYCUAT > 
+00:03:31 SYS:CKYCUAT > 
+00:03:31 SYS:CKYCUAT > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLES_DI_SID=EDWPRD
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 00:03:42 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:EDWPRD > set time on;
+00:03:46 SYS:EDWPRD > 
+00:03:47 SYS:EDWPRD > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+00:04:14 SYS:EDWPRD > 
+00:04:49 SYS:EDWPRD > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=JFSNACH
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 00:05:00 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:JFSNACH > 
+SYS:JFSNACH > show parameter audit
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+audit_file_dest                      string      /u01/app/oracle/admin/JFSNACH/
+                                                 adump
+audit_sys_operations                 boolean     TRUE
+audit_syslog_level                   string
+audit_trail                          string      DB
+unified_audit_sga_queue_size         integer     1048576
+SYS:JFSNACH > 
+SYS:JFSNACH > 
+SYS:JFSNACH > set time on;
+00:05:56 SYS:JFSNACH > 
+00:05:57 SYS:JFSNACH > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+00:06:22 SYS:JFSNACH > 
+00:06:23 SYS:JFSNACH > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ ps -ef|grep pmon
+  oracle  2752792        1   0   Feb 14      -  0:17 asm_pmon_+ASM
+$ 
+$ 

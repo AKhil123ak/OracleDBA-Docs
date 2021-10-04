@@ -1,0 +1,11 @@
+SQL> CREATE USER APPSUSER1 IDENTIFIED BY APPSUSER1_123
+  2  DEFAULT TABLESPACE users
+  3  TEMPORARY TABLESPACE temp
+  4  QUOTA unlimited ON users
+  5  PROFILE APPS_PROFILE;
+
+User created.
+
+SQL> grant connect, create session, ROLE_USER_RO  to APPSUSER1;
+
+Grant succeeded.

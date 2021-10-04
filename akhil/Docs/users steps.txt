@@ -1,0 +1,77 @@
+            user creations
+
+create user dbsupport_clo identified by oracle345
+default tablespace USERS 
+temporary tablespace TEMP  
+quota UNLIMITED on USERS;
+
+grant connect, create session, select_catalog_role to dbsupport_clo;
+
+create user dbsupport_clo identified by oracle345
+default tablespace APPS_TS_TX_DATA 
+temporary tablespace TEMP  
+quota UNLIMITED on APPS_TS_TX_DATA;
+
+alter user dbsupport_clo identified by clover123;(only for 31 server)
+
+dba_users
+dba_segments
+dba_roles
+dba_profiles
+
+
+grant CBSRO to CBSREADONLY
+
+              grant permissions :
+
+grant connect, resource to <username>;
+
+            drop user :
+
+drop user <user_name>;
+
+	          Changing Password
+
+alter user <username> identified by <new_passwd>;
+
+
+ alter user test identified by dummy;
+
+        Changing Default Tablespace:
+
+ alter user <username> default tablespace <new_tablespace_name>;
+
+ 
+  alter user test default tablespace user_data;
+
+•	 Changing user quotas:
+
+ alter user <username> quota <integer><KB/MB> on <default_tablespace>;
+
+
+ alter user test quota 20m on user_data;
+ 
+ 
+ dba_users
+ dba_data_files
+ dba_temp_files
+ select sum(bytes)/1024/1024/1024 schema_size_gig from dba_segments where owner='&owner'(to check the schema size)
+ 
+ 
+ 
+ 
+ Creating 	create profile user_profile limit sessions_per_user 5;
+Remove 	
+
+drop profile user_profile cascade;
+
+Note: any users using the dropped profile will be automatically assigned the default profile
+Setting a limit 	alter profile user_profile limit idle_time 30;
+Displaying current resource limits 	select * from user_resource_limits;
+Displaying current password limits 	select * from user_password_limits;
+Displaying profile 	select * from dba_profiles where profile = 'USER_PROFILE';
+Assign a profile 	alter user vallep profile user_profile;
+Useful Views
+USER_RESOURCE_LIMITS 	displays the resource limits for the current user.
+USER_PASSWORD_LIMITS 	describes the password profile parameters that are assigned to the user.
+DBA_PROFILES 	displays all profiles and their limits

@@ -1,0 +1,12 @@
+++++++++++++++++++++++++++
+Data Guard Configuration
+++++++++++++++++++++++++++
+
+-> Install and configure primary server
+-> Create OS groups:oinstall dba
+-> Create oracle user and set password
+-> Change permissions to /u01 and /u02 mount points to oracle user
+-> Entry to /etc/hosts
+-> Disable SELINUX at /etc/sysconfig/selinux and firewall
+-> Bounce the linux server
+-> Login as oracle and install oracle 11g

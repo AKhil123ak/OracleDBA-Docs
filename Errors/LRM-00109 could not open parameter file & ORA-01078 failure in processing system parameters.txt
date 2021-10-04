@@ -1,0 +1,12 @@
+The LRM-00109 often happens:
+
+1.  If the database name, instance name or service name are different . . . 
+
+2.  If you don't specify the pfile location in the startup command: 
+startup pfile=$ORACLE_HOME/admin/xxx/pfile/<pfile_name>
+
+The Oracle documentation has the following to say about LRM-00109:
+
+"LRM-00109: could not open parameter file "string"
+Cause: The parameter file does not exist.
+Action: Create an appropriate parameter file."

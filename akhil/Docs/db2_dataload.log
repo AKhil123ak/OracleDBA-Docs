@@ -1,0 +1,1573 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2018.12.19 14:51:14 =~=~=~=~=~=~=~=~=~=~=~=
+
+$ 
+$ 
+$ sh oracle_loader.sh
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Dec 19 14:51:24 2018
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Last Successful login time: Wed Dec 19 2018 14:46:43 +05:30
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+DB2INST:JFSIIB > DB2INST:JFSIIB > DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > DB2INST:JFSIIB > DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > DB2INST:JFSIIB > Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:25 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.STG_FIS_NEWCARDACCOUNT.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.STG_FIS_NEWCARDACCOUNT:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.STG_FIS_NEWCARDACCOUNT.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:25 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_ACCOUNT_DTL.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_ACCOUNT_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_ACCOUNT_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:25 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO_HIST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO_HIST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO_HIST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:25 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_SUMMARY.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_SUMMARY:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_SUMMARY.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:25 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_BANK_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_BANK_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_BANK_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:25 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_CHAR_MISC_PARAM_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_CHAR_MISC_PARAM_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CHAR_MISC_PARAM_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:26 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:26 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_JFS_LEAD_DTL.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_JFS_LEAD_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_JFS_LEAD_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:26 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_KYC_DOC_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_KYC_DOC_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_KYC_DOC_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:26 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_KYC_DOC_MST_TMP.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_KYC_DOC_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_KYC_DOC_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:26 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_KYC_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_KYC_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_KYC_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:26 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_KYC_MST_TMP.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_KYC_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_KYC_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:26 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:27 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST_TMP.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:27 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_OPTION_DEPENDENCY_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_OPTION_DEPENDENCY_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_OPTION_DEPENDENCY_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:27 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_PARAMETER_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_PARAMETER_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_PARAMETER_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:27 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_SCHEME_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_SCHEME_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_SCHEME_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:27 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-500: Unable to open file (data/FOSLIABSCHEMA.DSAM_COUNTRY_MST.dat)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: No such file or directory
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_COUNTRY_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_COUNTRY_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:27 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_DEVICE_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_DEVICE_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:28 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_QUESTION_ANSWER_MST.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_QUESTION_ANSWER_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_QUESTION_ANSWER_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:28 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_IMG_DOCS_DTL.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_IMG_DOCS_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_IMG_DOCS_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:28 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_IMAGE_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_IMAGE_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:28 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_FTP_SERVICE_REQUEST.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_FTP_SERVICE_REQUEST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_FTP_SERVICE_REQUEST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:28 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_DOC_IMG_INFO.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_DOC_IMG_INFO:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_DOC_IMG_INFO.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:28 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+
+Table FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:28 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_FTP_FILE_UPLOAD_DTL.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_FTP_FILE_UPLOAD_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_FTP_FILE_UPLOAD_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:29 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_TEMPLATE_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_TEMPLATE_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:29 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_INTERFACE_AUDIT_TRAIL.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_INTERFACE_AUDIT_TRAIL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_INTERFACE_AUDIT_TRAIL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:29 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_SECURITYLOG_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_SECURITYLOG_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:29 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_SUPER_SCHEME_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_SUPER_SCHEME_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:29 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+
+Table FOSLIABSCHEMA.DSAM_SUPER_SCHEME_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_SUPER_SCHEME_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:29 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+
+Table FOSLIABSCHEMA.DSAM_TABLE_UPDATE_LOG:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_TABLE_UPDATE_LOG.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:30 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_JANA_BACHAT_LEAD_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_JANA_BACHAT_LEAD_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:30 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_USER_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_USER_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:30 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_USER_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_USER_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:30 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_THREAD_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_THREAD_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:30 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_BRANCH_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_BRANCH_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:30 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_USER_ROLE_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_USER_ROLE_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:31 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_DEVICE_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_DEVICE_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:31 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_TEMPLATE_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_TEMPLATE_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:31 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_PRODUCT_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_PRODUCT_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:31 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_PRODUCT_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_PRODUCT_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:31 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_SCHEME_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_SCHEME_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:31 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_STATE_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_STATE_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:31 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_SUB_PRODUCT_OFFERING_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_SUB_PRODUCT_OFFERING_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:32 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_REQUEST_MST.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_REQUEST_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_REQUEST_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:32 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_CITY_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CITY_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:32 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+
+Table FOSLIABSCHEMA.DSAM_CITY_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CITY_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:32 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_PINCODE_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_PINCODE_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:32 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+
+Table FOSLIABSCHEMA.DSAM_PINCODE_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_PINCODE_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:32 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_CLASS_DOC_TYPE_DMS:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CLASS_DOC_TYPE_DMS.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:33 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.JFS_CASA_RD_PROD_STAGING:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.JFS_CASA_RD_PROD_STAGING.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:33 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_USER_UNIQUEID_DTL.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_USER_UNIQUEID_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_USER_UNIQUEID_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:33 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_CORPORATE_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CORPORATE_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:33 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_CORPORATE_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CORPORATE_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:33 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.JFS_PRODUCT_STAGING:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.JFS_PRODUCT_STAGING.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:33 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.JFS_OTHER_BANK_IFSC_STAGING:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.JFS_OTHER_BANK_IFSC_STAGING.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:33 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.JFS_PRIMECARD_DATA_STAGING:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.JFS_PRIMECARD_DATA_STAGING.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:34 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.TRF_FIS_NEWCARDACCOUNT:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.TRF_FIS_NEWCARDACCOUNT.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:34 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.TRF_FIS_SUCCESSTXNRPT:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.TRF_FIS_SUCCESSTXNRPT.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:34 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.STG_FIS_SUCCESSTXNRPT:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.STG_FIS_SUCCESSTXNRPT.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:34 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_SUB_PRODUCT_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_SUB_PRODUCT_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:34 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:34 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:35 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_KYC_DATA_DTL.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_KYC_DATA_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_KYC_DATA_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:35 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_MENU_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_MENU_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:35 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_ROLE_MENU_MAPPING:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_ROLE_MENU_MAPPING.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:35 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_CUST_OTHER_INFO.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_CUST_OTHER_INFO:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CUST_OTHER_INFO.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:35 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+
+Table FOSLIABSCHEMA.DSAM_SFDC_LEAD_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_SFDC_LEAD_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:35 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+SQL*Loader-510: Physical record in data file (data/FOSLIABSCHEMA.DSAM_CUSTOMER_PRODUCT_DTL.dat) is longer than the maximum(1048576)
+SQL*Loader-2026: the load was aborted because SQL Loader cannot continue.
+
+Table FOSLIABSCHEMA.DSAM_CUSTOMER_PRODUCT_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CUSTOMER_PRODUCT_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:36 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+
+Table FOSLIABSCHEMA.DSAM_COUNTRY_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_COUNTRY_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:36 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_STATE_MST_TMP:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_STATE_MST_TMP.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:36 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_NCOCODE_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_NCOCODE_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:36 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_CUSTOMER_OTP_DTL:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_CUSTOMER_OTP_DTL.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:36 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.JFS_CORPORATECODE_STAGING:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.JFS_CORPORATECODE_STAGING.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:36 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.DSAM_IFSC_MST:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.DSAM_IFSC_MST.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:37 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.JFS_PRIMCARD_STAGING:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.JFS_PRIMCARD_STAGING.log
+for more information about the load.
+
+SQL*Loader: Release 12.2.0.1.0 - Production on Wed Dec 19 14:51:37 2018
+
+Copyright (c) 1982, 2017, Oracle and/or its affiliates.  All rights reserved.
+
+Path used:      Conventional
+Commit point reached - logical record count 1
+
+Table FOSLIABSCHEMA.JFS_PINCODE_STAGING:
+  0 Rows successfully loaded.
+
+Check the log file:
+  log/FOSLIABSCHEMA.JFS_PINCODE_STAGING.log
+for more information about the load.
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Dec 19 14:51:37 2018
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Last Successful login time: Wed Dec 19 2018 14:51:24 +05:30
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+DB2INST:JFSIIB > DB2INST:JFSIIB > DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > 
+Trigger altered.
+
+DB2INST:JFSIIB > DB2INST:JFSIIB > DB2INST:JFSIIB > DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > 
+Table altered.
+
+DB2INST:JFSIIB > DB2INST:JFSIIB > Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ 
+$ 
+$ 
+$ ld -lrt
+ld: 0711-327 WARNING: Entry point not found: __start
+ld: 0711-244 ERROR: No csects or exported symbols have been saved.
+$ ls -lt
+total 360
+-rw-r--r--    1 oracle   oinstall        344 Dec 19 14:53 a.out
+drwxr-xr-x    2 oracle   oinstall      12288 Dec 19 14:51 control
+drwxr-xr-x    2 oracle   oinstall       8192 Dec 19 14:51 log
+drwxr-xr-x    2 oracle   oinstall       4096 Dec 19 14:50 data
+-rwxrwxr-x    1 oracle   oinstall      11067 Dec 19 14:46 oracle_loader.sh
+drwxr-xr-x    2 oracle   oinstall       8192 Dec 19 14:43 external
+-rw-r--r--    1 oracle   oinstall      49351 Dec 18 16:43 DB2_data.bat
+-rw-r--r--    1 oracle   oinstall      49442 Dec 18 16:43 DB2_data.sh
+-rw-r--r--    1 oracle   oinstall       7680 Dec 18 16:43 oracle_external.bat
+-rw-r--r--    1 oracle   oinstall       7661 Dec 18 16:43 oracle_external.sh
+-rw-r--r--    1 oracle   oinstall      11640 Dec 18 16:43 oracle_loader.bat
+$ 
+$ 
+$ 
+$ 
+$ 
+$ cat oracle_loader.bat
+@echo off 
+set tnsname=%1
+set username=%2
+set password=%3
+
+if "%tnsname"=="" goto INPUT_ERROR
+if "%username"=="" goto INPUT_ERROR
+IF '%password%'=='' (
+  set /p password=Enter password for user %2:
+)
+if "%4"=="" (
+   set NLS_DATE_FORMAT=yyyy-mm-dd HH24:mi:ss
+) ELSE set NLS_DATE_FORMAT=%4
+
+REM set NLS_TIMESTAMP_FORMAT=Mon dd YYYY HH:mi:ffAM
+REM set NLS_LANGUAGE=<insert the language of your database here e.g., US7ASCII>
+sqlplus %username%/%password%@%tnsname% < control\pre_load.sql
+
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.STG_FIS_NEWCARDACCOUNT.ctl log=log\FOSLIABSCHEMA.STG_FIS_NEWCARDACCOUNT.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_ACCOUNT_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_ACCOUNT_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO_HIST.ctl log=log\FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO_HIST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_SUMMARY.ctl log=log\FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_SUMMARY.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_BANK_MST.ctl log=log\FOSLIABSCHEMA.DSAM_BANK_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CHAR_MISC_PARAM_MST.ctl log=log\FOSLIABSCHEMA.DSAM_CHAR_MISC_PARAM_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST.ctl log=log\FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_JFS_LEAD_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_JFS_LEAD_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_KYC_DOC_MST.ctl log=log\FOSLIABSCHEMA.DSAM_KYC_DOC_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_KYC_DOC_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_KYC_DOC_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_KYC_MST.ctl log=log\FOSLIABSCHEMA.DSAM_KYC_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_KYC_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_KYC_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST.ctl log=log\FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_MISC_PARAMETER_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_OPTION_DEPENDENCY_MST.ctl log=log\FOSLIABSCHEMA.DSAM_OPTION_DEPENDENCY_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_PARAMETER_MST.ctl log=log\FOSLIABSCHEMA.DSAM_PARAMETER_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_SCHEME_MST.ctl log=log\FOSLIABSCHEMA.DSAM_SCHEME_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_COUNTRY_MST.ctl log=log\FOSLIABSCHEMA.DSAM_COUNTRY_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_DEVICE_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_DEVICE_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_QUESTION_ANSWER_MST.ctl log=log\FOSLIABSCHEMA.DSAM_QUESTION_ANSWER_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_IMG_DOCS_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_IMG_DOCS_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_IMAGE_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_IMAGE_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_FTP_SERVICE_REQUEST.ctl log=log\FOSLIABSCHEMA.DSAM_FTP_SERVICE_REQUEST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_DOC_IMG_INFO.ctl log=log\FOSLIABSCHEMA.DSAM_DOC_IMG_INFO.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_GENERAL_PARAMETER_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_FTP_FILE_UPLOAD_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_FTP_FILE_UPLOAD_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_TEMPLATE_MST.ctl log=log\FOSLIABSCHEMA.DSAM_TEMPLATE_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_INTERFACE_AUDIT_TRAIL.ctl log=log\FOSLIABSCHEMA.DSAM_INTERFACE_AUDIT_TRAIL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_SECURITYLOG_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_SECURITYLOG_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_SUPER_SCHEME_MST.ctl log=log\FOSLIABSCHEMA.DSAM_SUPER_SCHEME_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_SUPER_SCHEME_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_SUPER_SCHEME_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_TABLE_UPDATE_LOG.ctl log=log\FOSLIABSCHEMA.DSAM_TABLE_UPDATE_LOG.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_JANA_BACHAT_LEAD_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_JANA_BACHAT_LEAD_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_USER_MST.ctl log=log\FOSLIABSCHEMA.DSAM_USER_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_USER_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_USER_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_THREAD_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_THREAD_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_BRANCH_MST.ctl log=log\FOSLIABSCHEMA.DSAM_BRANCH_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_USER_ROLE_MST.ctl log=log\FOSLIABSCHEMA.DSAM_USER_ROLE_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_DEVICE_MST.ctl log=log\FOSLIABSCHEMA.DSAM_DEVICE_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_TEMPLATE_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_TEMPLATE_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_PRODUCT_MST.ctl log=log\FOSLIABSCHEMA.DSAM_PRODUCT_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_PRODUCT_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_PRODUCT_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_SCHEME_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_SCHEME_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_STATE_MST.ctl log=log\FOSLIABSCHEMA.DSAM_STATE_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_SUB_PRODUCT_OFFERING_MST.ctl log=log\FOSLIABSCHEMA.DSAM_SUB_PRODUCT_OFFERING_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_REQUEST_MST.ctl log=log\FOSLIABSCHEMA.DSAM_REQUEST_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CITY_MST.ctl log=log\FOSLIABSCHEMA.DSAM_CITY_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CITY_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_CITY_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_PINCODE_MST.ctl log=log\FOSLIABSCHEMA.DSAM_PINCODE_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_PINCODE_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_PINCODE_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CLASS_DOC_TYPE_DMS.ctl log=log\FOSLIABSCHEMA.DSAM_CLASS_DOC_TYPE_DMS.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.JFS_CASA_RD_PROD_STAGING.ctl log=log\FOSLIABSCHEMA.JFS_CASA_RD_PROD_STAGING.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_USER_UNIQUEID_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_USER_UNIQUEID_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CORPORATE_MST.ctl log=log\FOSLIABSCHEMA.DSAM_CORPORATE_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CORPORATE_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_CORPORATE_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.JFS_PRODUCT_STAGING.ctl log=log\FOSLIABSCHEMA.JFS_PRODUCT_STAGING.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.JFS_OTHER_BANK_IFSC_STAGING.ctl log=log\FOSLIABSCHEMA.JFS_OTHER_BANK_IFSC_STAGING.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.JFS_PRIMECARD_DATA_STAGING.ctl log=log\FOSLIABSCHEMA.JFS_PRIMECARD_DATA_STAGING.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.TRF_FIS_NEWCARDACCOUNT.ctl log=log\FOSLIABSCHEMA.TRF_FIS_NEWCARDACCOUNT.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.TRF_FIS_SUCCESSTXNRPT.ctl log=log\FOSLIABSCHEMA.TRF_FIS_SUCCESSTXNRPT.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.STG_FIS_SUCCESSTXNRPT.ctl log=log\FOSLIABSCHEMA.STG_FIS_SUCCESSTXNRPT.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_SUB_PRODUCT_MST.ctl log=log\FOSLIABSCHEMA.DSAM_SUB_PRODUCT_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO.ctl log=log\FOSLIABSCHEMA.DSAM_APP_LOGIN_INFO.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_AUDIT_TRAIL_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_KYC_DATA_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_KYC_DATA_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_MENU_MST.ctl log=log\FOSLIABSCHEMA.DSAM_MENU_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_ROLE_MENU_MAPPING.ctl log=log\FOSLIABSCHEMA.DSAM_ROLE_MENU_MAPPING.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CUST_OTHER_INFO.ctl log=log\FOSLIABSCHEMA.DSAM_CUST_OTHER_INFO.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_SFDC_LEAD_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_SFDC_LEAD_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CUSTOMER_PRODUCT_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_CUSTOMER_PRODUCT_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_COUNTRY_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_COUNTRY_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_STATE_MST_TMP.ctl log=log\FOSLIABSCHEMA.DSAM_STATE_MST_TMP.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_NCOCODE_MST.ctl log=log\FOSLIABSCHEMA.DSAM_NCOCODE_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_CUSTOMER_OTP_DTL.ctl log=log\FOSLIABSCHEMA.DSAM_CUSTOMER_OTP_DTL.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.JFS_CORPORATECODE_STAGING.ctl log=log\FOSLIABSCHEMA.JFS_CORPORATECODE_STAGING.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.DSAM_IFSC_MST.ctl log=log\FOSLIABSCHEMA.DSAM_IFSC_MST.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.JFS_PRIMCARD_STAGING.ctl log=log\FOSLIABSCHEMA.JFS_PRIMCARD_STAGING.log
+sqlldr %username%/%password%@%tnsname% control=control\FOSLIABSCHEMA.JFS_PINCODE_STAGING.ctl log=log\FOSLIABSCHEMA.JFS_PINCODE_STAGING.log
+
+sqlplus %username%/%password%@%tnsname% < control\post_load.sql
+:INPUT_ERROR
+echo "Usage: oracle_loader <servicename> <user> <password> [<nls_date_format>]";
+:EXIT
+$ 
+$ 
+$ 
+$ ls exit
+$ exit

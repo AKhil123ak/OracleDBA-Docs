@@ -1,0 +1,54 @@
+load data
+INFILE '/home/oracle/loaddata/bulkProcessedData.txt'
+INTO TABLE secureVault.VidEncrtMaster
+(
+JanaId "secureVault.JanaId_seq.nextval",
+EncryptMaster POSITION(18:702),
+MasterDate EXPRESSION "systimestamp"
+)
+INTO TABLE secureVault.CRNVidMaster
+(
+JanaId "secureVault.JanaId_seq.currval",
+CRN POSITION(1:16),
+CRNDate EXPRESSION "systimestamp"
+)
+
+
+SELECT JanaId_seq.currval FROM DUAL;
+SELECT JanaId_seq.nextval FROM DUAL;
+
+select sequence_name, 
+   to_char(min_value) min_value,
+   to_char(max_value) max_value, 
+   increment_by,
+   cycle_flag, 
+   order_flag, 
+   cache_size, 
+   to_char(Last_number) last_number
+from user_sequences
+where sequence_name='JanaId_seq.currval'
+
+sqlldr userid=SECUREVAULT/SECUREVAULT_123 control=bulkProcessedData.ctl  log=bulkProcessedData_02-Nov.log
+sqlldr userid=SECUREVAULT/SECUREVAULT_123 control=bulkProcessedData_2.ctl  log=bulkProcessedData_02-Nov_CRNVid.log
+
+
+sqlplus SECUREVAULT/SECUREVAULT_123@ADHR
+
+select count(*) from VidEncrtMaster;
+select count(*) from CRNVidMaster;
+=====================================================================================================
+
+LOAD DATA
+INFILE  '/data/AADHAR_VAULT/Aadhar_secondary.csv'
+insert  INTO  TABLE BULKAADHAARPROCESS
+FIELDS TERMINATED BY "," OPTIONALLY ENCLOSED BY '"' TRAILING NULLCOLS
+(CR_NO,ADHAAR_NO)
+
+
+
+INSERT INTO TABLE secureVault.CRNVidMaster
+(
+JanaId "secureVault.JanaId_seq.currval",
+CRN POSITION(1:16),
+CRNDate EXPRESSION "systimestamp"
+)

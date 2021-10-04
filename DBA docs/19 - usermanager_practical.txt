@@ -1,0 +1,118 @@
+User Management Practicals
++++++++++++++++++++++++++++
+
+> show user
+> select name,open_mode,log_mode from v$database;
+> select instance_name,status from v$instance;
+> set linesize 100;
+
+
+++++++++++++++++++++++++++++++++++++++
+VIEW DEFAULT TABLESPACES IN A DATABASE
+++++++++++++++++++++++++++++++++++++++
+
+> select property_name,property_value from database_properties where property_name like '%TABLESPACE%'
+> select USERNAME,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE,account_status from dba_users where USERNAME='SCOTT'; ---> to know the default tablespaces for an user
+
+++++++++++++++++++++++++++++++++++++++++
+CREATE USER AND GRANT SESSTION PRIVILAGE
+++++++++++++++++++++++++++++++++++++++++
+
+> create user test11 identified by test123
+> create user test11 identified by test123 password expire; ---> user should change the password on first login
+> alter user user01 password expire;
+> grant CREATE SESSION to test11;
+> grant create session to u5 with admin option;
+> conn test11/test123
+
++++++++++++++++++++++++++++++++++++
+CREATE USER WITH DEFAULT TABLESPACE
++++++++++++++++++++++++++++++++++++
+
+> create user villa  identified by villa default tablespace zen;
+> create user raj identified by raj default tablespace zen temporary tablespace temp_ts;
+> create user sam identified by sam default tablespace zen quota 20m on zen;
+> create user user3 identified by user3 default tablespace PROD1 quota 2m on PROD1 temporary tablespace TEMP02;
+
+++++++++++++++++++++++++
+GRANT RESOURCE PRIVILAGE
+++++++++++++++++++++++++
+
+> grant connect,resource to production identified by prod
+> grant select,insert,update on emp to tz;
+
+++++++++++++++++++++++++++++++
+SET DEFAULT TABLESPACE & QUOTA
+++++++++++++++++++++++++++++++
+
+> conn /as sysdba
+> alter user test11 default tablespace testtspace;
+> alter database default tablespace zineeth; ---> for the database
+> alter user test11 quota 10m on testtspace;
+> alter user sam quota unlimited on zen;
+
++++++++++++++++++++++
+VIEW QUOTA ALLOCATION
+++++++++++++++++++++++
+
+> select * from  dba_ts_quotas; -> DBA level
+> select * from user_ts_quotas; -> User level
+> select tablespace_name, username, bytes, max_bytes from dba_ts_quotas;
+
+++++++++++++++++++++++++++++
+GRANT CREATE TABLE PRIVILAGE
+++++++++++++++++++++++++++++
+
+>conn /as sysdba
+> grant create table to test11;
+
++++++++++++++++++++
+find the priviliges
++++++++++++++++++++ 
+
+> select * from dba_sys_privs; 
+> select * from table_privilege_map;
+> select * from dba_sys_privs where GRANTEE='TEST11';
+
++++++++++++++++++++++
+Revoke the priviliges
++++++++++++++++++++++
+
+> revoke CREATE SESSION from TEST11;
+> revoke create table from USER01;
+
++++++++++++++
+Account lock 
+++++++++++++
+
+- connect sysdba 
+> alter user TEST11 account lock;
+
+> select USERNAME,ACCOUNT_STATUS,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE,PROFILE from dba_users where USERNAME='TEST11';
+
+USERNAME                       ACCOUNT_ST DEFAULT_TA TEMPORARY_TABLESPACE PROFILE
+------------------------------ ---------- ---------- -------------------- ------------------------------
+TEST11                         LOCKED     TESTTSPACE TMPGRP16             DEFAULT
+
+> alter user TEST11 account unlock;
+
+SYS ON PROD:22-JUL-17> select USERNAME,ACCOUNT_STATUS,DEFAULT_TABLESPACE,TEMPORARY_TABLESPACE,PROFILE from dba_users where USERNAME='TEST11';
+
+USERNAME                       ACCOUNT_ST DEFAULT_TA TEMPORARY_TABLESPACE PROFILE
+------------------------------ ---------- ---------- -------------------- ------------------------------
+TEST11                         OPEN       TESTTSPACE TMPGRP16             DEFAULT
+
++++++++++++++++++++
+CHANGE THE PASSWORD
++++++++++++++++++++
+
+> alter user test11 identified by test89;
+> conn test11/test89
+
++++++++++
+DROP USER
++++++++++
+
+> drop user USER01;
+
+

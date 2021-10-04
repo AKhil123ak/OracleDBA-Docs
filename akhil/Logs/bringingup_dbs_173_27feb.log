@@ -1,0 +1,1427 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.02.27 01:38:24 =~=~=~=~=~=~=~=~=~=~=~=
+
+$ export ORACLE_SID=JFSIIB
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 01:38:39 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS:JFSIIB > 
+SYS:JFSIIB > startset time on;
+01:38:46 SYS:JFSIIB > 
+01:38:47 SYS:JFSIIB > startup
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  8726016 bytes
+Variable Size            1593838080 bytes
+Database Buffers         3758096384 bytes
+Redo Buffers                8048640 bytes
+Database mounted.
+Database opened.
+01:39:20 SYS:JFSIIB > 
+01:39:22 SYS:JFSIIB > 
+01:39:22 SYS:JFSIIB > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ cd $ORACLE_HOME/OPatch
+$ 
+$ ls -ltr
+total 296
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  jre
+-rw-r-----    1 oracle   oinstall         27 Jun 04 2018  version.txt
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  scripts
+-rw-r-----    1 oracle   oinstall       3177 Jun 04 2018  operr_readme.txt
+-rwxr-x---    1 oracle   oinstall       4218 Jun 04 2018  operr.bat
+-rwxr-x---    1 oracle   oinstall       3159 Jun 04 2018  operr
+-rwxr-x---    1 oracle   oinstall       4290 Jun 04 2018  opatch_env.sh
+-rw-r-----    1 oracle   oinstall       2541 Jun 04 2018  opatch.pl
+-rwxr-x---    1 oracle   oinstall      15596 Jun 04 2018  opatch.bat
+-rwxr-x---    1 oracle   oinstall      46949 Jun 04 2018  opatch
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  ocm
+drwxr-x---    2 oracle   oinstall       4096 Jun 04 2018  jlib
+-rwxr-x---    1 oracle   oinstall      23518 Jun 04 2018  emdpatch.pl
+-rwxr-x---    1 oracle   oinstall        627 Jun 04 2018  datapatch.bat
+-rwxr-x---    1 oracle   oinstall        589 Jun 04 2018  datapatch
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  config
+-rw-r-----    1 oracle   oinstall       2980 Jun 04 2018  README.txt
+drwxr-x---    4 oracle   oinstall        256 Jun 04 2018  opatchprereqs
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  oplan
+-rwxr-x---    1 oracle   oinstall        393 Jun 04 2018  opatchauto.cmd
+drwxr-x---    6 oracle   oinstall        256 Jun 04 2018  auto
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  plugins
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  oracle_common
+-rwxr-x---    1 oracle   oinstall       1442 Jun 04 2018  opatchauto
+drwxr-x---    9 oracle   oinstall       4096 Jun 04 2018  modules
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  docs
+$ 
+$ ./datapatch -verbose
+SQL Patching tool version 12.2.0.1.0 Production on Wed Feb 27 01:39:52 2019
+Copyright (c) 2012, 2018, Oracle.  All rights reserved.
+
+Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_24379628_2019_02_27_01_39_52/sqlpatch_invocation.log
+
+Connecting to database...OK
+Bootstrapping registry and package to current versions...done
+Determining current state...done
+
+Current state of SQL patches:
+Patch 28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651)):
+  Installed in the binary registry only
+Bundle series DBRU:
+  ID 190115 in the binary registry and not installed in the SQL registry
+
+Adding patches to installation queue and performing prereq checks...
+Installation queue:
+  Nothing to roll back
+  The following patches will be applied:
+    28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651))
+    28822515 (DATABASE JAN 2019 RELEASE UPDATE 12.2.0.1.190115)
+
+Installing patches...
+Patch installation complete.  Total patches installed: 2
+
+Validating logfiles...
+Patch 28790651 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28790651/22597346/28790651_apply_JFSIIB_2019Feb27_01_40_27.log (no errors)
+Patch 28822515 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28822515/22637863/28822515_apply_JFSIIB_2019Feb27_01_40_28.log (no errors)
+SQL Patching tool complete on Wed Feb 27 01:40:34 2019
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 01:41:28 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:JFSIIB > 
+SYS:JFSIIB > shuSET LINESIZE 200
+SYS:JFSIIB > COLUMN action_time FORMAT A20
+SYS:JFSIIB > COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+       action,
+       namespace,
+SYS:JFSIIB > SYS:JFSIIB > SYS:JFSIIB > SYS:JFSIIB > SYS:JFSIIB > SYS:JFSIIB >   2    3    4         version,
+  5         id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;  6    7    8    9  
+
+ACTION_TIME          ACTION               NAMESPACE            VERSION                                ID COMMENTS                       BUNDLE_SER
+-------------------- -------------------- -------------------- ------------------------------ ---------- ------------------------------ ----------
+                     BOOTSTRAP            DATAPATCH            12.2.0.1                                  RDBMS_12.2.0.1.0DBJAN2019RU_AI
+                                                                                                         X.PPC64_181203
+
+
+SYS:JFSIIB > COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:JFSIIB > 
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+CDB_TAB_COLS_V$                          VIEW                    INVALID
+CDB_TAB_COLS                             VIEW                    INVALID
+CDB_TAB_COLUMNS                          VIEW                    INVALID
+DBA_VIEWS_AE                             VIEW                    INVALID
+CDB_VIEWS                                VIEW                    INVALID
+CDB_VIEWS_AE                             VIEW                    INVALID
+USER_VIEWS                               VIEW                    INVALID
+USER_VIEWS_AE                            VIEW                    INVALID
+CDB_CONSTRAINTS                          VIEW                    INVALID
+DBA_NESTED_TABLE_COLS                    VIEW                    INVALID
+CDB_NESTED_TABLE_COLS                    VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+DBA_PUBLISHED_COLUMNS                    VIEW                    INVALID
+CDB_PUBLISHED_COLUMNS                    VIEW                    INVALID
+USER_PUBLISHED_COLUMNS                   VIEW                    INVALID
+USER_TAB_COL_STATISTICS                  VIEW                    INVALID
+DBA_TAB_COL_STATISTICS                   VIEW                    INVALID
+CDB_TAB_COL_STATISTICS                   VIEW                    INVALID
+USER_PART_COL_STATISTICS                 VIEW                    INVALID
+ALL_PART_COL_STATISTICS                  VIEW                    INVALID
+DBA_PART_COL_STATISTICS                  VIEW                    INVALID
+CDB_PART_COL_STATISTICS                  VIEW                    INVALID
+USER_SUBPART_COL_STATISTICS              VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+ALL_SUBPART_COL_STATISTICS               VIEW                    INVALID
+DBA_SUBPART_COL_STATISTICS               VIEW                    INVALID
+CDB_SUBPART_COL_STATISTICS               VIEW                    INVALID
+EXU8ASC                                  VIEW                    INVALID
+EXU8ASCU                                 VIEW                    INVALID
+EXU10ASC                                 VIEW                    INVALID
+EXU10ASCU                                VIEW                    INVALID
+EXU8HST                                  VIEW                    INVALID
+EXU8HSTU                                 VIEW                    INVALID
+USER_TSTZ_TAB_COLS                       VIEW                    INVALID
+DBA_TSTZ_TAB_COLS                        VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+CDB_TSTZ_TAB_COLS                        VIEW                    INVALID
+USER_TSTZ_TABLES                         VIEW                    INVALID
+DBA_TSTZ_TABLES                          VIEW                    INVALID
+CDB_TSTZ_TABLES                          VIEW                    INVALID
+SM$INTEGRITY_CONS                        VIEW                    INVALID
+CDB_RULES                                VIEW                    INVALID
+ALL_POLICY_GROUPS                        VIEW                    INVALID
+ALL_POLICY_CONTEXTS                      VIEW                    INVALID
+ALL_SEC_RELEVANT_COLS                    VIEW                    INVALID
+USER_SEC_RELEVANT_COLS                   VIEW                    INVALID
+ALL_POLICY_ATTRIBUTES                    VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+ALL_AUDIT_POLICIES                       VIEW                    INVALID
+ALL_AUDIT_POLICY_COLUMNS                 VIEW                    INVALID
+ALL_QUEUE_TABLES                         VIEW                    INVALID
+CDB_QUEUES                               VIEW                    INVALID
+ALL_DEQUEUE_QUEUES                       VIEW                    INVALID
+DBA_QUEUE_PUBLISHERS                     VIEW                    INVALID
+CDB_QUEUE_PUBLISHERS                     VIEW                    INVALID
+ALL_QUEUE_PUBLISHERS                     VIEW                    INVALID
+USER_QUEUE_PUBLISHERS                    VIEW                    INVALID
+ALL_XS_APPLICABLE_OBJECTS                VIEW                    INVALID
+MDX_ODBO_DIMENSIONS                      VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+MDX_ODBO_FUNCTIONS                       VIEW                    INVALID
+MDX_ODBO_HIERARCHIES                     VIEW                    INVALID
+MDX_ODBO_LEVELS                          VIEW                    INVALID
+MDX_ODBO_MEASURES                        VIEW                    INVALID
+MDX_ODBO_PROPERTIES                      VIEW                    INVALID
+
+60 rows selected.
+
+SYS:JFSIIB > SET LINE 190
+col COMP_NAME FOR A30
+col STATUS FOR A30
+col VERSION FOR A30
+col COMP_ID FOR A30
+select COMP_ID, COMP_NAME, VERSION, STATUS from dba_registry order by STATUS;SYS:JFSIIB > SYS:JFSIIB > SYS:JFSIIB > SYS:JFSIIB > SYS:JFSIIB > 
+
+COMP_ID                        COMP_NAME                      VERSION                        STATUS
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+CATALOG                        Oracle Database Catalog Views  12.2.0.1.0                     INVALID
+CATPROC                        Oracle Database Packages and T 12.2.0.1.0                     INVALID
+                               ypes
+
+XDB                            Oracle XML Database            12.2.0.1.0                     VALID
+
+SYS:JFSIIB > 
+SYS:JFSIIB > utleix!pwd
+/u01/app/oracle/product/12.2.0.1/db_1/OPatch
+
+SYS:JFSIIB > 
+SYS:JFSIIB > ex!cd @?/rdms/admbms/admin/utlrpt.sql
+
+TIMESTAMP
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+COMP_TIMESTAMP UTLRP_BGN              2019-02-27 01:44:59
+
+DOC>   The following PL/SQL block invokes UTL_RECOMP to recompile invalid
+DOC>   objects in the database. Recompilation time is proportional to the
+DOC>   number of invalid objects in the database, so this command may take
+DOC>   a long time to execute on a database with a large number of invalid
+DOC>   objects.
+DOC>
+DOC>   Use the following queries to track recompilation progress:
+DOC>
+DOC>   1. Query returning the number of invalid objects remaining. This
+DOC>      number should decrease with time.
+DOC>         SELECT COUNT(*) FROM obj$ WHERE status IN (4, 5, 6);
+DOC>
+DOC>   2. Query returning the number of objects compiled so far. This number
+DOC>      should increase with time.
+DOC>         SELECT COUNT(*) FROM UTL_RECOMP_COMPILED;
+DOC>
+DOC>   This script automatically chooses serial or parallel recompilation
+DOC>   based on the number of CPUs available (parameter cpu_count) multiplied
+DOC>   by the number of threads per CPU (parameter parallel_threads_per_cpu).
+DOC>   On RAC, this number is added across all RAC nodes.
+DOC>
+DOC>   UTL_RECOMP uses DBMS_SCHEDULER to create jobs for parallel
+DOC>   recompilation. Jobs are created without instance affinity so that they
+DOC>   can migrate across RAC nodes. Use the following queries to verify
+DOC>   whether UTL_RECOMP jobs are being created and run correctly:
+DOC>
+DOC>   1. Query showing jobs created by UTL_RECOMP
+DOC>         SELECT job_name FROM dba_scheduler_jobs
+DOC>            WHERE job_name like 'UTL_RECOMP_SLAVE_%';
+DOC>
+DOC>   2. Query showing UTL_RECOMP jobs that are running
+DOC>         SELECT job_name FROM dba_scheduler_running_jobs
+DOC>            WHERE job_name like 'UTL_RECOMP_SLAVE_%';
+DOC>#
+
+PL/SQL procedure successfully completed.
+
+
+TIMESTAMP
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+COMP_TIMESTAMP UTLRP_END              2019-02-27 01:45:09
+
+DOC> The following query reports the number of invalid objects.
+DOC>
+DOC> If the number is higher than expected, please examine the error
+DOC> messages reported with each object (using SHOW ERRORS) to see if they
+DOC> point to system misconfiguration or resource constraints that must be
+DOC> fixed before attempting to recompile these objects.
+DOC>#
+
+OBJECTS WITH ERRORS
+-------------------
+                  0
+
+DOC> The following query reports the number of exceptions caught during
+DOC> recompilation. If this number is non-zero, please query the error
+DOC> messages in the table UTL_RECOMP_ERRORS to see if any of these errors
+DOC> are due to misconfiguration or resource constraints that must be
+DOC> fixed before objects can compile successfully.
+DOC> Note: Typical compilation errors (due to coding errors) are not
+DOC>       logged into this table: they go into DBA_ERRORS instead.
+DOC>#
+
+ERRORS DURING RECOMPILATION
+---------------------------
+                          0
+
+
+Function created.
+
+
+PL/SQL procedure successfully completed.
+
+
+Function dropped.
+
+
+PL/SQL procedure successfully completed.
+
+SYS:JFSIIB > 
+SYS:JFSIIB > COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:JFSIIB > 
+
+no rows selected
+
+SYS:JFSIIB > 
+SYS:JFSIIB > shut immediateset time on;
+01:45:37 SYS:JFSIIB > 
+01:45:37 SYS:JFSIIB > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+01:46:03 SYS:JFSIIB > 
+01:46:04 SYS:JFSIIB > 
+01:46:04 SYS:JFSIIB > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=CKYCUAT
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 01:46:39 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS:CKYCUAT > set time on;
+01:46:43 SYS:CKYCUAT > 
+01:46:44 SYS:CKYCUAT > startup
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  8726016 bytes
+Variable Size            1593838080 bytes
+Database Buffers         3758096384 bytes
+Redo Buffers                8048640 bytes
+Database mounted.
+Database opened.
+01:47:11 SYS:CKYCUAT > 
+01:47:13 SYS:CKYCUAT > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ cd $ORACLE_HOME/OPatch
+$ 
+$ ls -ltr
+total 296
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  jre
+-rw-r-----    1 oracle   oinstall         27 Jun 04 2018  version.txt
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  scripts
+-rw-r-----    1 oracle   oinstall       3177 Jun 04 2018  operr_readme.txt
+-rwxr-x---    1 oracle   oinstall       4218 Jun 04 2018  operr.bat
+-rwxr-x---    1 oracle   oinstall       3159 Jun 04 2018  operr
+-rwxr-x---    1 oracle   oinstall       4290 Jun 04 2018  opatch_env.sh
+-rw-r-----    1 oracle   oinstall       2541 Jun 04 2018  opatch.pl
+-rwxr-x---    1 oracle   oinstall      15596 Jun 04 2018  opatch.bat
+-rwxr-x---    1 oracle   oinstall      46949 Jun 04 2018  opatch
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  ocm
+drwxr-x---    2 oracle   oinstall       4096 Jun 04 2018  jlib
+-rwxr-x---    1 oracle   oinstall      23518 Jun 04 2018  emdpatch.pl
+-rwxr-x---    1 oracle   oinstall        627 Jun 04 2018  datapatch.bat
+-rwxr-x---    1 oracle   oinstall        589 Jun 04 2018  datapatch
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  config
+-rw-r-----    1 oracle   oinstall       2980 Jun 04 2018  README.txt
+drwxr-x---    4 oracle   oinstall        256 Jun 04 2018  opatchprereqs
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  oplan
+-rwxr-x---    1 oracle   oinstall        393 Jun 04 2018  opatchauto.cmd
+drwxr-x---    6 oracle   oinstall        256 Jun 04 2018  auto
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  plugins
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  oracle_common
+-rwxr-x---    1 oracle   oinstall       1442 Jun 04 2018  opatchauto
+drwxr-x---    9 oracle   oinstall       4096 Jun 04 2018  modules
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  docs
+$ 
+$ ./datapatch -verbose
+
+SQL Patching tool version 12.2.0.1.0 Production on Wed Feb 27 01:47:37 2019
+Copyright (c) 2012, 2018, Oracle.  All rights reserved.
+
+Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_22413496_2019_02_27_01_47_37/sqlpatch_invocation.log
+
+Connecting to database...OK
+Bootstrapping registry and package to current versions...done
+Determining current state...done
+
+Current state of SQL patches:
+Patch 28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651)):
+  Installed in the binary registry only
+Bundle series DBRU:
+  ID 190115 in the binary registry and not installed in the SQL registry
+
+Adding patches to installation queue and performing prereq checks...
+Installation queue:
+  Nothing to roll back
+  The following patches will be applied:
+    28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651))
+    28822515 (DATABASE JAN 2019 RELEASE UPDATE 12.2.0.1.190115)
+
+Installing patches...
+Patch installation complete.  Total patches installed: 2
+
+Validating logfiles...
+Patch 28790651 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28790651/22597346/28790651_apply_CKYCUAT_2019Feb27_01_48_13.log (no errors)
+Patch 28822515 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28822515/22637863/28822515_apply_CKYCUAT_2019Feb27_01_48_13.log (no errors)
+SQL Patching tool complete on Wed Feb 27 01:49:39 2019
+$ $ 
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 01:49:48 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:CKYCUAT > 
+SYS:CKYCUAT > SET LINESIZE 200
+SYS:CKYCUAT > COLUMN action_time FORMAT A20
+SYS:CKYCUAT > COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+SYS:CKYCUAT > SYS:CKYCUAT > SYS:CKYCUAT > SYS:CKYCUAT > SYS:CKYCUAT > SYS:CKYCUAT >   2         action,
+       namespace,
+  3    4         version,
+  5         id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;  6    7    8    9  
+
+ACTION_TIME          ACTION               NAMESPACE            VERSION                                ID COMMENTS                       BUNDLE_SER
+-------------------- -------------------- -------------------- ------------------------------ ---------- ------------------------------ ----------
+                     BOOTSTRAP            DATAPATCH            12.2.0.1                                  RDBMS_12.2.0.1.0DBJAN2019RU_AI
+                                                                                                         X.PPC64_181203
+
+
+SYS:CKYCUAT >   COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:CKYCUAT > 
+
+no rows selected
+
+SYS:CKYCUAT > 
+SYS:CKYCUAT > set time onl;
+01:51:10 SYS:CKYCUAT > 
+01:51:10 SYS:CKYCUAT > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+01:51:38 SYS:CKYCUAT > 
+01:51:40 SYS:CKYCUAT > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SUID=CIBUAT
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 01:51:55 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS:CIBUAT > 
+SYS:CIBUAT > startup
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  8726016 bytes
+Variable Size            1593838080 bytes
+Database Buffers         3758096384 bytes
+Redo Buffers                8048640 bytes
+Database mounted.
+Database opened.
+SYS:CIBUAT > 
+SYS:CIBUAT > 
+SYS:CIBUAT > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ ecd $ORACLE_HOME/OPatch
+$ 
+$ ls -ltr
+total 296
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  jre
+-rw-r-----    1 oracle   oinstall         27 Jun 04 2018  version.txt
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  scripts
+-rw-r-----    1 oracle   oinstall       3177 Jun 04 2018  operr_readme.txt
+-rwxr-x---    1 oracle   oinstall       4218 Jun 04 2018  operr.bat
+-rwxr-x---    1 oracle   oinstall       3159 Jun 04 2018  operr
+-rwxr-x---    1 oracle   oinstall       4290 Jun 04 2018  opatch_env.sh
+-rw-r-----    1 oracle   oinstall       2541 Jun 04 2018  opatch.pl
+-rwxr-x---    1 oracle   oinstall      15596 Jun 04 2018  opatch.bat
+-rwxr-x---    1 oracle   oinstall      46949 Jun 04 2018  opatch
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  ocm
+drwxr-x---    2 oracle   oinstall       4096 Jun 04 2018  jlib
+-rwxr-x---    1 oracle   oinstall      23518 Jun 04 2018  emdpatch.pl
+-rwxr-x---    1 oracle   oinstall        627 Jun 04 2018  datapatch.bat
+-rwxr-x---    1 oracle   oinstall        589 Jun 04 2018  datapatch
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  config
+-rw-r-----    1 oracle   oinstall       2980 Jun 04 2018  README.txt
+drwxr-x---    4 oracle   oinstall        256 Jun 04 2018  opatchprereqs
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  oplan
+-rwxr-x---    1 oracle   oinstall        393 Jun 04 2018  opatchauto.cmd
+drwxr-x---    6 oracle   oinstall        256 Jun 04 2018  auto
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  plugins
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  oracle_common
+-rwxr-x---    1 oracle   oinstall       1442 Jun 04 2018  opatchauto
+drwxr-x---    9 oracle   oinstall       4096 Jun 04 2018  modules
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  docs
+$ ./datapatch -verbose
+SQL Patching tool version 12.2.0.1.0 Production on Wed Feb 27 01:52:56 2019
+Copyright (c) 2012, 2018, Oracle.  All rights reserved.
+
+Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_31785406_2019_02_27_01_52_56/sqlpatch_invocation.log
+
+Connecting to database...OK
+Bootstrapping registry and package to current versions...done
+Determining current state...done
+
+Current state of SQL patches:
+Patch 28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651)):
+  Installed in the binary registry only
+Bundle series DBRU:
+  ID 190115 in the binary registry and not installed in the SQL registry
+
+Adding patches to installation queue and performing prereq checks...
+Installation queue:
+  Nothing to roll back
+  The following patches will be applied:
+    28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651))
+    28822515 (DATABASE JAN 2019 RELEASE UPDATE 12.2.0.1.190115)
+
+Installing patches...
+Patch installation complete.  Total patches installed: 2
+
+Validating logfiles...
+Patch 28790651 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28790651/22597346/28790651_apply_CIBUAT_2019Feb27_01_53_31.log (no errors)
+Patch 28822515 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28822515/22637863/28822515_apply_CIBUAT_2019Feb27_01_53_31.log (no errors)
+SQL Patching tool complete on Wed Feb 27 01:54:55 2019
+$ 
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 01:55:01 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:CIBUAT > 
+SYS:CIBUAT > COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:CIBUAT > 
+
+no rows selected
+
+SYS:CIBUAT > SET LINESIZE 200
+SYS:CIBUAT > COLUMN action_time FORMAT A20
+SYS:CIBUAT > COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+       action,
+       namespace,
+SYS:CIBUAT > SYS:CIBUAT > SYS:CIBUAT > SYS:CIBUAT > SYS:CIBUAT > SYS:CIBUAT >   2    3    4         version,
+  5         id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;  6    7    8    9  
+
+ACTION_TIME          ACTION               NAMESPACE            VERSION                                ID COMMENTS                       BUNDLE_SER
+-------------------- -------------------- -------------------- ------------------------------ ---------- ------------------------------ ----------
+                     BOOTSTRAP            DATAPATCH            12.2.0.1                                  RDBMS_12.2.0.1.0DBJAN2019RU_AI
+                                                                                                         X.PPC64_181203
+
+
+SYS:CIBUAT > 
+SYS:CIBUAT > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SYS:CIBUAT > 
+SYS:CIBUAT > 
+SYS:CIBUAT > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ 
+$ export ORACLE_SID=JFSEXPEN
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 01:56:34 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > startup
+ORACLE instance started.
+
+Total System Global Area 1.6106E+10 bytes
+Fixed Size                 15811600 bytes
+Variable Size            2818575344 bytes
+Database Buffers         1.3254E+10 bytes
+Redo Buffers               17739776 bytes
+Database mounted.
+Database opened.
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ cd $ORACLE_HOME/OPatch
+$ 
+$ ls -ltr
+total 296
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  jre
+-rw-r-----    1 oracle   oinstall         27 Jun 04 2018  version.txt
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  scripts
+-rw-r-----    1 oracle   oinstall       3177 Jun 04 2018  operr_readme.txt
+-rwxr-x---    1 oracle   oinstall       4218 Jun 04 2018  operr.bat
+-rwxr-x---    1 oracle   oinstall       3159 Jun 04 2018  operr
+-rwxr-x---    1 oracle   oinstall       4290 Jun 04 2018  opatch_env.sh
+-rw-r-----    1 oracle   oinstall       2541 Jun 04 2018  opatch.pl
+-rwxr-x---    1 oracle   oinstall      15596 Jun 04 2018  opatch.bat
+-rwxr-x---    1 oracle   oinstall      46949 Jun 04 2018  opatch
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  ocm
+drwxr-x---    2 oracle   oinstall       4096 Jun 04 2018  jlib
+-rwxr-x---    1 oracle   oinstall      23518 Jun 04 2018  emdpatch.pl
+-rwxr-x---    1 oracle   oinstall        627 Jun 04 2018  datapatch.bat
+-rwxr-x---    1 oracle   oinstall        589 Jun 04 2018  datapatch
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  config
+-rw-r-----    1 oracle   oinstall       2980 Jun 04 2018  README.txt
+drwxr-x---    4 oracle   oinstall        256 Jun 04 2018  opatchprereqs
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  oplan
+-rwxr-x---    1 oracle   oinstall        393 Jun 04 2018  opatchauto.cmd
+drwxr-x---    6 oracle   oinstall        256 Jun 04 2018  auto
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  plugins
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  oracle_common
+-rwxr-x---    1 oracle   oinstall       1442 Jun 04 2018  opatchauto
+drwxr-x---    9 oracle   oinstall       4096 Jun 04 2018  modules
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  docs
+$ ./datapatch -verbose
+SQL Patching tool version 12.2.0.1.0 Production on Wed Feb 27 01:57:33 2019
+Copyright (c) 2012, 2018, Oracle.  All rights reserved.
+
+Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_21889140_2019_02_27_01_57_33/sqlpatch_invocation.log
+
+Connecting to database...OK
+Bootstrapping registry and package to current versions...done
+Determining current state...done
+
+Current state of SQL patches:
+Patch 28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651)):
+  Installed in the binary registry only
+Bundle series DBRU:
+  ID 190115 in the binary registry and ID 180717 in the SQL registry
+
+Adding patches to installation queue and performing prereq checks...
+Installation queue:
+  Nothing to roll back
+  The following patches will be applied:
+    28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651))
+    28822515 (DATABASE JAN 2019 RELEASE UPDATE 12.2.0.1.190115)
+
+Installing patches...
+Patch installation complete.  Total patches installed: 2
+
+Validating logfiles...
+Patch 28790651 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28790651/22597346/28790651_apply_JFSEXPEN_2019Feb27_01_58_10.log (no errors)
+Patch 28822515 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28822515/22637863/28822515_apply_JFSEXPEN_2019Feb27_01_59_12.log (no errors)
+SQL Patching tool complete on Wed Feb 27 01:59:48 2019
+$ 
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 01:59:55 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:JFSEXPEN > 
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+ORA12C_VERIFY_FUNCTION                   FUNCTION                INVALID
+
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > SET LINESIZE 200
+SYS:JFSEXPEN > COLUMN action_time FORMAT A20
+COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+       action,
+       namespace,
+SYS:JFSEXPEN > SYS:JFSEXPEN > SYS:JFSEXPEN > SYS:JFSEXPEN > SYS:JFSEXPEN > SYS:JFSEXPEN > SYS:JFSEXPEN >   2    3    4         version,
+  5         id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;  6    7    8    9  
+
+ACTION_TIME          ACTION               NAMESPACE            VERSION                                ID COMMENTS                       BUNDLE_SER
+-------------------- -------------------- -------------------- ------------------------------ ---------- ------------------------------ ----------
+27-FEB-2019 01:59:12 jvmpsu.sql           SERVER               12.2.0.1.190115OJVMRU                   0 RAN jvmpsu.sql
+27-FEB-2019 01:59:12 APPLY                SERVER               12.2.0.1.190115OJVMRU                   0 OJVM PSU post-install
+                     BOOTSTRAP            DATAPATCH            12.2.0.1                                  RDBMS_12.2.0.1.0DBJAN2019RU_AI
+                                                                                                         X.PPC64_181203
+
+
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=SET LINESIZE 200
+ksh: 200: This is not an identifier.
+$ COLUMN action_time FORMAT A20
+COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+       action,
+       namespace,
+       version,
+       id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;ksh: COLUMN:  not found.
+$ ksh: COLUMN:  not found.
+$ ksh: COLUMN:  not found.
+$ ksh: COLUMN:  not found.
+$ ksh: COLUMN:  not found.
+$ ksh: COLUMN:  not found.
+$ $ ksh: 0403-057 Syntax error: `(' is not expected.
+$ ksh: action,:  not found.
+$ ksh: namespace,:  not found.
+$ ksh: version,:  not found.
+$ ksh: id,:  not found.
+$ ksh: comments,:  not found.
+$ ksh: bundle_series:  not found.
+$ ksh: FROM:  not found.
+$ 
+$ 
+$ 
+$ exporty ORACLE_SID=EDWPRD
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 02:01:53 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS:EDWPRD > 
+SYS:EDWPRD > startipup
+ORACLE instance started.
+
+Total System Global Area 3221225472 bytes
+Fixed Size                  8719856 bytes
+Variable Size            1275068944 bytes
+Database Buffers         1929379840 bytes
+Redo Buffers                8056832 bytes
+Database mounted.
+Database opened.
+SYS:EDWPRD > 
+SYS:EDWPRD > 
+SYS:EDWPRD > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ ecd $ORACLE_export ORACLE_SID=JFSNACH
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 02:03:26 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS:JFSNACH > 
+SYS:JFSNACH > startup
+ORACLE instance started.
+
+Total System Global Area 2147483648 bytes
+Fixed Size                  8716776 bytes
+Variable Size            1224740376 bytes
+Database Buffers          905969664 bytes
+Redo Buffers                8056832 bytes
+Database mounted.
+Database opened.
+SYS:JFSNACH > 
+SYS:JFSNACH > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ cd $ORACLE_HOME/OPatch
+$ 
+$ ls -ltr
+total 296
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  jre
+-rw-r-----    1 oracle   oinstall         27 Jun 04 2018  version.txt
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  scripts
+-rw-r-----    1 oracle   oinstall       3177 Jun 04 2018  operr_readme.txt
+-rwxr-x---    1 oracle   oinstall       4218 Jun 04 2018  operr.bat
+-rwxr-x---    1 oracle   oinstall       3159 Jun 04 2018  operr
+-rwxr-x---    1 oracle   oinstall       4290 Jun 04 2018  opatch_env.sh
+-rw-r-----    1 oracle   oinstall       2541 Jun 04 2018  opatch.pl
+-rwxr-x---    1 oracle   oinstall      15596 Jun 04 2018  opatch.bat
+-rwxr-x---    1 oracle   oinstall      46949 Jun 04 2018  opatch
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  ocm
+drwxr-x---    2 oracle   oinstall       4096 Jun 04 2018  jlib
+-rwxr-x---    1 oracle   oinstall      23518 Jun 04 2018  emdpatch.pl
+-rwxr-x---    1 oracle   oinstall        627 Jun 04 2018  datapatch.bat
+-rwxr-x---    1 oracle   oinstall        589 Jun 04 2018  datapatch
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  config
+-rw-r-----    1 oracle   oinstall       2980 Jun 04 2018  README.txt
+drwxr-x---    4 oracle   oinstall        256 Jun 04 2018  opatchprereqs
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  oplan
+-rwxr-x---    1 oracle   oinstall        393 Jun 04 2018  opatchauto.cmd
+drwxr-x---    6 oracle   oinstall        256 Jun 04 2018  auto
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  plugins
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  oracle_common
+-rwxr-x---    1 oracle   oinstall       1442 Jun 04 2018  opatchauto
+drwxr-x---    9 oracle   oinstall       4096 Jun 04 2018  modules
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  docs
+$ ./datapatch -verbose
+SQL Patching tool version 12.2.0.1.0 Production on Wed Feb 27 02:04:34 2019
+Copyright (c) 2012, 2018, Oracle.  All rights reserved.
+
+Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_15728874_2019_02_27_02_04_34/sqlpatch_invocation.log
+
+Connecting to database...OK
+Bootstrapping registry and package to current versions...done
+Determining current state...done
+
+Current state of SQL patches:
+Patch 28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651)):
+  Installed in the binary registry only
+Bundle series DBRU:
+  ID 190115 in the binary registry and not installed in the SQL registry
+
+Adding patches to installation queue and performing prereq checks...
+Installation queue:
+  Nothing to roll back
+  The following patches will be applied:
+    28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651))
+    28822515 (DATABASE JAN 2019 RELEASE UPDATE 12.2.0.1.190115)
+
+Installing patches...
+Patch installation complete.  Total patches installed: 2
+
+Validating logfiles...
+Patch 28790651 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28790651/22597346/28790651_apply_JFSNACH_2019Feb27_02_05_12.log (no errors)
+Patch 28822515 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28822515/22637863/28822515_apply_JFSNACH_2019Feb27_02_05_12.log (no errors)
+SQL Patching tool complete on Wed Feb 27 02:06:48 2019
+$ 
+$ pwd
+/u01/app/oracle/product/12.2.0.1/db_1/OPatch
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 02:07:10 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:JFSNACH > 
+SYS:JFSNACH > exit
+SYS:JFSNACH > SET LINESIZE 200
+SYS:JFSNACH > COLUMN action_time FORMAT A20
+COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+       action,
+       namespace,
+SYS:JFSNACH > SYS:JFSNACH > SYS:JFSNACH > SYS:JFSNACH > SYS:JFSNACH > SYS:JFSNACH > SYS:JFSNACH >   2    3    4         version,
+  5         id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;  6    7    8    9  
+
+ACTION_TIME          ACTION               NAMESPACE            VERSION                                ID COMMENTS                       BUNDLE_SER
+-------------------- -------------------- -------------------- ------------------------------ ---------- ------------------------------ ----------
+                     BOOTSTRAP            DATAPATCH            12.2.0.1                                  RDBMS_12.2.0.1.0DBJAN2019RU_AI
+                                                                                                         X.PPC64_181203
+
+
+SYS:JFSNACH > COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:JFSNACH > 
+
+no rows selected
+
+SYS:JFSNACH > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=EDWPRD
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 02:08:13 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:EDWPRD > 
+SYS:EDWPRD > COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:EDWPRD > 
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+CDB_TAB_COLS_V$                          VIEW                    INVALID
+CDB_TAB_COLS                             VIEW                    INVALID
+CDB_TAB_COLUMNS                          VIEW                    INVALID
+DBA_VIEWS_AE                             VIEW                    INVALID
+CDB_VIEWS                                VIEW                    INVALID
+CDB_VIEWS_AE                             VIEW                    INVALID
+USER_VIEWS                               VIEW                    INVALID
+USER_VIEWS_AE                            VIEW                    INVALID
+CDB_CONSTRAINTS                          VIEW                    INVALID
+DBA_NESTED_TABLE_COLS                    VIEW                    INVALID
+CDB_NESTED_TABLE_COLS                    VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+DBA_PUBLISHED_COLUMNS                    VIEW                    INVALID
+CDB_PUBLISHED_COLUMNS                    VIEW                    INVALID
+USER_PUBLISHED_COLUMNS                   VIEW                    INVALID
+USER_TAB_COL_STATISTICS                  VIEW                    INVALID
+ALL_TAB_COL_STATISTICS                   VIEW                    INVALID
+DBA_TAB_COL_STATISTICS                   VIEW                    INVALID
+CDB_TAB_COL_STATISTICS                   VIEW                    INVALID
+USER_PART_COL_STATISTICS                 VIEW                    INVALID
+ALL_PART_COL_STATISTICS                  VIEW                    INVALID
+DBA_PART_COL_STATISTICS                  VIEW                    INVALID
+CDB_PART_COL_STATISTICS                  VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+USER_SUBPART_COL_STATISTICS              VIEW                    INVALID
+ALL_SUBPART_COL_STATISTICS               VIEW                    INVALID
+DBA_SUBPART_COL_STATISTICS               VIEW                    INVALID
+CDB_SUBPART_COL_STATISTICS               VIEW                    INVALID
+EXU8ASC                                  VIEW                    INVALID
+EXU8ASCU                                 VIEW                    INVALID
+EXU10ASC                                 VIEW                    INVALID
+EXU10ASCU                                VIEW                    INVALID
+EXU8HST                                  VIEW                    INVALID
+EXU8HSTU                                 VIEW                    INVALID
+USER_TSTZ_TAB_COLS                       VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+DBA_TSTZ_TAB_COLS                        VIEW                    INVALID
+CDB_TSTZ_TAB_COLS                        VIEW                    INVALID
+USER_TSTZ_TABLES                         VIEW                    INVALID
+DBA_TSTZ_TABLES                          VIEW                    INVALID
+CDB_TSTZ_TABLES                          VIEW                    INVALID
+SM$INTEGRITY_CONS                        VIEW                    INVALID
+CDB_RULES                                VIEW                    INVALID
+ALL_POLICY_GROUPS                        VIEW                    INVALID
+ALL_POLICY_CONTEXTS                      VIEW                    INVALID
+ALL_SEC_RELEVANT_COLS                    VIEW                    INVALID
+USER_SEC_RELEVANT_COLS                   VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+ALL_POLICY_ATTRIBUTES                    VIEW                    INVALID
+ALL_AUDIT_POLICIES                       VIEW                    INVALID
+ALL_AUDIT_POLICY_COLUMNS                 VIEW                    INVALID
+ALL_QUEUE_TABLES                         VIEW                    INVALID
+CDB_QUEUES                               VIEW                    INVALID
+ALL_DEQUEUE_QUEUES                       VIEW                    INVALID
+DBA_QUEUE_PUBLISHERS                     VIEW                    INVALID
+CDB_QUEUE_PUBLISHERS                     VIEW                    INVALID
+ALL_QUEUE_PUBLISHERS                     VIEW                    INVALID
+USER_QUEUE_PUBLISHERS                    VIEW                    INVALID
+ALL_XS_APPLICABLE_OBJECTS                VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+MDX_ODBO_DIMENSIONS                      VIEW                    INVALID
+MDX_ODBO_FUNCTIONS                       VIEW                    INVALID
+MDX_ODBO_HIERARCHIES                     VIEW                    INVALID
+MDX_ODBO_LEVELS                          VIEW                    INVALID
+MDX_ODBO_MEASURES                        VIEW                    INVALID
+MDX_ODBO_PROPERTIES                      VIEW                    INVALID
+DBMS_IREFSTATS                           PACKAGE BODY            INVALID
+
+62 rows selected.
+
+SYS:EDWPRD > SET LINESIZE 200
+SYS:EDWPRD > COLUMN action_time FORMAT A20
+SYS:EDWPRD > COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+       action,
+       namespace,
+SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD >   2    3    4         version,
+  5         id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;  6    7    8    9  
+
+no rows selected
+
+SYS:EDWPRD > 
+SYS:EDWPRD > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ cd $ORACLE_HOME/OPatch
+$ 
+$ ls -ltr
+total 296
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  jre
+-rw-r-----    1 oracle   oinstall         27 Jun 04 2018  version.txt
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  scripts
+-rw-r-----    1 oracle   oinstall       3177 Jun 04 2018  operr_readme.txt
+-rwxr-x---    1 oracle   oinstall       4218 Jun 04 2018  operr.bat
+-rwxr-x---    1 oracle   oinstall       3159 Jun 04 2018  operr
+-rwxr-x---    1 oracle   oinstall       4290 Jun 04 2018  opatch_env.sh
+-rw-r-----    1 oracle   oinstall       2541 Jun 04 2018  opatch.pl
+-rwxr-x---    1 oracle   oinstall      15596 Jun 04 2018  opatch.bat
+-rwxr-x---    1 oracle   oinstall      46949 Jun 04 2018  opatch
+drwxr-x---    5 oracle   oinstall        256 Jun 04 2018  ocm
+drwxr-x---    2 oracle   oinstall       4096 Jun 04 2018  jlib
+-rwxr-x---    1 oracle   oinstall      23518 Jun 04 2018  emdpatch.pl
+-rwxr-x---    1 oracle   oinstall        627 Jun 04 2018  datapatch.bat
+-rwxr-x---    1 oracle   oinstall        589 Jun 04 2018  datapatch
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  config
+-rw-r-----    1 oracle   oinstall       2980 Jun 04 2018  README.txt
+drwxr-x---    4 oracle   oinstall        256 Jun 04 2018  opatchprereqs
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  oplan
+-rwxr-x---    1 oracle   oinstall        393 Jun 04 2018  opatchauto.cmd
+drwxr-x---    6 oracle   oinstall        256 Jun 04 2018  auto
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  plugins
+drwxr-x---    3 oracle   oinstall        256 Jun 04 2018  oracle_common
+-rwxr-x---    1 oracle   oinstall       1442 Jun 04 2018  opatchauto
+drwxr-x---    9 oracle   oinstall       4096 Jun 04 2018  modules
+drwxr-x---    2 oracle   oinstall        256 Jun 04 2018  docs
+$ 
+$ ./datapatch -verbose
+SQL Patching tool version 12.2.0.1.0 Production on Wed Feb 27 02:09:00 2019
+Copyright (c) 2012, 2018, Oracle.  All rights reserved.
+
+Log file for this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_16449592_2019_02_27_02_09_00/sqlpatch_invocation.log
+
+Connecting to database...OK
+Bootstrapping registry and package to current versions...done
+Determining current state...done
+
+Current state of SQL patches:
+Patch 28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651)):
+  Installed in the binary registry only
+Bundle series DBRU:
+  ID 190115 in the binary registry and not installed in the SQL registry
+
+Adding patches to installation queue and performing prereq checks...
+Installation queue:
+  Nothing to roll back
+  The following patches will be applied:
+    28790651 (OJVM RELEASE UPDATE: 12.2.0.1.190115 (28790651))
+    28822515 (DATABASE JAN 2019 RELEASE UPDATE 12.2.0.1.190115)
+
+Installing patches...
+Patch installation complete.  Total patches installed: 2
+
+Validating logfiles...
+Patch 28790651 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28790651/22597346/28790651_apply_EDWPRD_2019Feb27_02_09_42.log (no errors)
+Patch 28822515 apply: SUCCESS
+  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/28822515/22637863/28822515_apply_EDWPRD_2019Feb27_02_09_42.log (no errors)
+SQL Patching tool complete on Wed Feb 27 02:09:59 2019
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 02:10:04 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:EDWPRD > SET LINESIZE 200
+SYS:EDWPRD > COLUMN action_time FORMAT A20
+SYS:EDWPRD > COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+       action,
+SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD >   2    3         namespace,
+  4         version,
+  5         id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;  6    7    8    9  
+
+ACTION_TIME          ACTION               NAMESPACE            VERSION                                ID COMMENTS                       BUNDLE_SER
+-------------------- -------------------- -------------------- ------------------------------ ---------- ------------------------------ ----------
+                     BOOTSTRAP            DATAPATCH            12.2.0.1                                  RDBMS_12.2.0.1.0DBJAN2019RU_AI
+                                                                                                         X.PPC64_181203
+
+
+SYS:EDWPRD > COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:EDWPRD > 
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+CDB_TAB_COLS_V$                          VIEW                    INVALID
+CDB_TAB_COLS                             VIEW                    INVALID
+CDB_TAB_COLUMNS                          VIEW                    INVALID
+DBA_VIEWS_AE                             VIEW                    INVALID
+CDB_VIEWS                                VIEW                    INVALID
+CDB_VIEWS_AE                             VIEW                    INVALID
+USER_VIEWS                               VIEW                    INVALID
+USER_VIEWS_AE                            VIEW                    INVALID
+CDB_CONSTRAINTS                          VIEW                    INVALID
+DBA_NESTED_TABLE_COLS                    VIEW                    INVALID
+CDB_NESTED_TABLE_COLS                    VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+DBA_PUBLISHED_COLUMNS                    VIEW                    INVALID
+CDB_PUBLISHED_COLUMNS                    VIEW                    INVALID
+USER_PUBLISHED_COLUMNS                   VIEW                    INVALID
+USER_TAB_COL_STATISTICS                  VIEW                    INVALID
+ALL_TAB_COL_STATISTICS                   VIEW                    INVALID
+DBA_TAB_COL_STATISTICS                   VIEW                    INVALID
+CDB_TAB_COL_STATISTICS                   VIEW                    INVALID
+USER_PART_COL_STATISTICS                 VIEW                    INVALID
+ALL_PART_COL_STATISTICS                  VIEW                    INVALID
+DBA_PART_COL_STATISTICS                  VIEW                    INVALID
+CDB_PART_COL_STATISTICS                  VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+USER_SUBPART_COL_STATISTICS              VIEW                    INVALID
+ALL_SUBPART_COL_STATISTICS               VIEW                    INVALID
+DBA_SUBPART_COL_STATISTICS               VIEW                    INVALID
+CDB_SUBPART_COL_STATISTICS               VIEW                    INVALID
+EXU8ASC                                  VIEW                    INVALID
+EXU8ASCU                                 VIEW                    INVALID
+EXU10ASC                                 VIEW                    INVALID
+EXU10ASCU                                VIEW                    INVALID
+EXU8HST                                  VIEW                    INVALID
+EXU8HSTU                                 VIEW                    INVALID
+USER_TSTZ_TAB_COLS                       VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+DBA_TSTZ_TAB_COLS                        VIEW                    INVALID
+CDB_TSTZ_TAB_COLS                        VIEW                    INVALID
+USER_TSTZ_TABLES                         VIEW                    INVALID
+DBA_TSTZ_TABLES                          VIEW                    INVALID
+CDB_TSTZ_TABLES                          VIEW                    INVALID
+SM$INTEGRITY_CONS                        VIEW                    INVALID
+CDB_RULES                                VIEW                    INVALID
+ALL_POLICY_GROUPS                        VIEW                    INVALID
+ALL_POLICY_CONTEXTS                      VIEW                    INVALID
+ALL_SEC_RELEVANT_COLS                    VIEW                    INVALID
+USER_SEC_RELEVANT_COLS                   VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+ALL_POLICY_ATTRIBUTES                    VIEW                    INVALID
+ALL_AUDIT_POLICIES                       VIEW                    INVALID
+ALL_AUDIT_POLICY_COLUMNS                 VIEW                    INVALID
+ALL_QUEUE_TABLES                         VIEW                    INVALID
+CDB_QUEUES                               VIEW                    INVALID
+ALL_DEQUEUE_QUEUES                       VIEW                    INVALID
+DBA_QUEUE_PUBLISHERS                     VIEW                    INVALID
+CDB_QUEUE_PUBLISHERS                     VIEW                    INVALID
+ALL_QUEUE_PUBLISHERS                     VIEW                    INVALID
+USER_QUEUE_PUBLISHERS                    VIEW                    INVALID
+ALL_XS_APPLICABLE_OBJECTS                VIEW                    INVALID
+
+OBJECT_NAME                              OBJECT_TYPE             STATUS
+---------------------------------------- ----------------------- -------
+MDX_ODBO_DIMENSIONS                      VIEW                    INVALID
+MDX_ODBO_FUNCTIONS                       VIEW                    INVALID
+MDX_ODBO_HIERARCHIES                     VIEW                    INVALID
+MDX_ODBO_LEVELS                          VIEW                    INVALID
+MDX_ODBO_MEASURES                        VIEW                    INVALID
+MDX_ODBO_PROPERTIES                      VIEW                    INVALID
+DBMS_IREFSTATS                           PACKAGE BODY            INVALID
+
+62 rows selected.
+
+SYS:EDWPRD > 
+SYS:EDWPRD > @SET LINE 190
+col COMP_NAME FOR A30
+col STATUS FOR A30
+col VERSION FOR A30
+col COMP_ID FOR A30
+select COMP_ID, COMP_NAME, VERSION, STATUS from dba_registry order by STATUS;SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > 
+
+COMP_ID                        COMP_NAME                      VERSION                        STATUS
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+CATALOG                        Oracle Database Catalog Views  12.2.0.1.0                     INVALID
+CATPROC                        Oracle Database Packages and T 12.2.0.1.0                     INVALID
+                               ypes
+
+XDB                            Oracle XML Database            12.2.0.1.0                     VALID
+
+SYS:EDWPRD > @?/rdbms/admin/utlrp.sql
+
+TIMESTAMP
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+COMP_TIMESTAMP UTLRP_BGN              2019-02-27 02:11:03
+
+DOC>   The following PL/SQL block invokes UTL_RECOMP to recompile invalid
+DOC>   objects in the database. Recompilation time is proportional to the
+DOC>   number of invalid objects in the database, so this command may take
+DOC>   a long time to execute on a database with a large number of invalid
+DOC>   objects.
+DOC>
+DOC>   Use the following queries to track recompilation progress:
+DOC>
+DOC>   1. Query returning the number of invalid objects remaining. This
+DOC>      number should decrease with time.
+DOC>         SELECT COUNT(*) FROM obj$ WHERE status IN (4, 5, 6);
+DOC>
+DOC>   2. Query returning the number of objects compiled so far. This number
+DOC>      should increase with time.
+DOC>         SELECT COUNT(*) FROM UTL_RECOMP_COMPILED;
+DOC>
+DOC>   This script automatically chooses serial or parallel recompilation
+DOC>   based on the number of CPUs available (parameter cpu_count) multiplied
+DOC>   by the number of threads per CPU (parameter parallel_threads_per_cpu).
+DOC>   On RAC, this number is added across all RAC nodes.
+DOC>
+DOC>   UTL_RECOMP uses DBMS_SCHEDULER to create jobs for parallel
+DOC>   recompilation. Jobs are created without instance affinity so that they
+DOC>   can migrate across RAC nodes. Use the following queries to verify
+DOC>   whether UTL_RECOMP jobs are being created and run correctly:
+DOC>
+DOC>   1. Query showing jobs created by UTL_RECOMP
+DOC>         SELECT job_name FROM dba_scheduler_jobs
+DOC>            WHERE job_name like 'UTL_RECOMP_SLAVE_%';
+DOC>
+DOC>   2. Query showing UTL_RECOMP jobs that are running
+DOC>         SELECT job_name FROM dba_scheduler_running_jobs
+DOC>            WHERE job_name like 'UTL_RECOMP_SLAVE_%';
+DOC>#
+
+PL/SQL procedure successfully completed.
+
+
+TIMESTAMP
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+COMP_TIMESTAMP UTLRP_END              2019-02-27 02:11:15
+
+DOC> The following query reports the number of invalid objects.
+DOC>
+DOC> If the number is higher than expected, please examine the error
+DOC> messages reported with each object (using SHOW ERRORS) to see if they
+DOC> point to system misconfiguration or resource constraints that must be
+DOC> fixed before attempting to recompile these objects.
+DOC>#
+
+OBJECTS WITH ERRORS
+-------------------
+                  6
+
+DOC> The following query reports the number of exceptions caught during
+DOC> recompilation. If this number is non-zero, please query the error
+DOC> messages in the table UTL_RECOMP_ERRORS to see if any of these errors
+DOC> are due to misconfiguration or resource constraints that must be
+DOC> fixed before objects can compile successfully.
+DOC> Note: Typical compilation errors (due to coding errors) are not
+DOC>       logged into this table: they go into DBA_ERRORS instead.
+DOC>#
+
+ERRORS DURING RECOMPILATION
+---------------------------
+                          0
+
+
+Function created.
+
+
+PL/SQL procedure successfully completed.
+
+
+Function dropped.
+
+
+PL/SQL procedure successfully completed.
+
+SYS:EDWPRD > 
+SYS:EDWPRD > COL OBJECT_NAME FOR A40
+select object_name, object_type, status from dba_objects where status='INVALID' and owner='SYS';SYS:EDWPRD > 
+
+no rows selected
+
+SYS:EDWPRD > 
+SYS:EDWPRD > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 02:12:18 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:EDWPRD > 
+SYS:EDWPRD > SET LINE 190
+col COMP_NAME FOR A30
+col STATUS FOR A30
+col VERSION FOR A30
+col COMP_ID FOR A30
+select COMP_ID, COMP_NAME, VERSION, STATUS from dba_registry order by STATUS;SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > SYS:EDWPRD > 
+
+COMP_ID                        COMP_NAME                      VERSION                        STATUS
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+CATALOG                        Oracle Database Catalog Views  12.2.0.1.0                     VALID
+XDB                            Oracle XML Database            12.2.0.1.0                     VALID
+CATPROC                        Oracle Database Packages and T 12.2.0.1.0                     VALID
+                               ypes
+
+
+SYS:EDWPRD > 
+SYS:EDWPRD > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=JFSIIB
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 27 02:12:36 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SYS:JFSIIB > 
+SYS:JFSIIB > startup
+ORACLE instance started.
+
+Total System Global Area 5368709120 bytes
+Fixed Size                  8726016 bytes
+Variable Size            1593838080 bytes
+Database Buffers         3758096384 bytes
+Redo Buffers                8048640 bytes
+Database mounted.
+Database opened.
+SYS:JFSIIB > 
+SYS:JFSIIB > 

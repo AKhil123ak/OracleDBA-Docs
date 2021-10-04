@@ -1,0 +1,9 @@
+svmon -P $(ps -elf|egrep "JFSMIBDB" | grep -v egrep | awk '{print $4}' ) |grep shmat
+
+ 
+
+svmon -P $(ps -elf|egrep "JFSMIBDB" | grep -v egrep | awk '{print $4}' )
+
+svmon -P $(ps -elf|egrep "ASM" | grep -v egrep | awk '{print $4}' )
+
+ 

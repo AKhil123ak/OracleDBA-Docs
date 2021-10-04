@@ -1,0 +1,52 @@
+nohup 
+
+expdp sqlplus \"/ as sysdba\" DIRECTORY=ANYRECON_PROD_exp DUMPFILE=ANYRECON_PROD_13OCT18_%u.dmp LOGFILE=ANYRECON_PROD_13OCT18.log schemas=ANYRECON_PROD status=120 parallel=2
+
+impdp sqlplus \"/ as sysdba\" Directory=ANYRECON_UAT_IMP DUMPFILE=ANYRECON_PROD_13OCT18_%u.dmp  LOGFILE=ANYRECON_PROD_13OCT18 remap_schema=ANYRECON_PROD:ANYRECON_UAT REMAP_TABLESPACE=ANYRECON_PROD:ANYRECON_UAT TABLE_EXISTS_ACTION=REPLACE status=120 parallel=5
+
+expdp \"/ as sysdba\"  DIRECTORY=FCRARCH_EXP DUMPFILE=JFS_CBS_DUMP_23NOV18_EXP_%u.dmp logfile=JFS_CBS_DUMP_23NOV18_EXP_24NOV18.log TABLES=FCRHOST.JFS_CBS_DUMP_23NOV18 status=120 parallel=8
+  
+impdp \"/ as sysdba\"  DIRECTORY=FCRARCH_EXP DUMPFILE=JFS_CBS_DUMP_23NOV18_EXP_%u.dmp logfile=IMP_JFS_CBS_DUMP_23NOV18_EXP_24NOV18.log remap_schema=FCRHOST:FCRARCH remap_tablespace=FCRDATA1:FCRARCH status=120 parallel=8
+
+
+CREATE OR REPLACE DIRECTORY test_dir AS '/u01/app/oracle/oradata/';
+GRANT READ, WRITE ON DIRECTORY test_dir TO scott;
+
+++++++++++++++++++++++
+Table Exports/Imports
+++++++++++++++++++++++
+
+expdp scott/tiger@db10g tables=EMP,DEPT directory=TEST_DIR dumpfile=EMP_DEPT.dmp logfile=expdpEMP_DEPT.log
+
+impdp scott/tiger@db10g tables=EMP,DEPT directory=TEST_DIR dumpfile=EMP_DEPT.dmp logfile=impdpEMP_DEPT.log
+
++++++++++++++++++++++++
+Schema Exports/Imports
++++++++++++++++++++++++
+
+expdp scott/tiger@db10g schemas=SCOTT directory=TEST_DIR dumpfile=SCOTT.dmp logfile=expdpSCOTT.log
+
+impdp scott/tiger@db10g schemas=SCOTT directory=TEST_DIR dumpfile=SCOTT.dmp logfile=impdpSCOTT.log
+
++++++++++++++++++++++++++
+Database Exports/Imports
++++++++++++++++++++++++++
+
+expdp system/password@db10g full=Y directory=TEST_DIR dumpfile=DB10G.dmp logfile=expdpDB10G.log
+
+impdp system/password@db10g full=Y directory=TEST_DIR dumpfile=DB10G.dmp logfile=impdpDB10G.log
+
++++++++++++++++++++
+INCLUDE and EXCLUDE
++++++++++++++++++++
+
+The INCLUDE and EXCLUDE parameters can be used to limit the export/import to specific objects. When the INCLUDE parameter is used, only those objects specified by it will be included in the export/import. When the EXCLUDE parameter is used, all objects except those specified by it will be included in the export/import. The two parameters are mutually exclusive, so use the parameter that requires the least entries to give you the result you require. The basic syntax for both parameters is the same.
+
+INCLUDE=object_type[:name_clause] [, ...]
+EXCLUDE=object_type[:name_clause] [, ...]
+
+The following code shows how they can be used as command line parameters.
+
+expdp scott/tiger@db10g schemas=SCOTT include=TABLE:"IN ('EMP', 'DEPT')" directory=TEST_DIR dumpfile=SCOTT.dmp logfile=expdpSCOTT.log
+
+expdp scott/tiger@db10g schemas=SCOTT exclude=TABLE:"= 'BONUS'" directory=TEST_DIR dumpfile=SCOTT.dmp logfile=expdpSCOTT.log

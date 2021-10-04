@@ -1,0 +1,37 @@
+ select distinct profile from dba_profiles;
+set lines 300;
+set pages 200; 
+ select * from dba_profiles where profile ='DEFAULT';
+ 
+ 
+ 
+ CUSER=`id |cut -d"(" -f2 | cut -d ")" -f1`
+ ORACLE_USER=oracle
+ 
+ 
+ ==========for startup db===
+ su - oracle -c "sh /u01/db_startup.sh"
+ =========for shutdown db =======
+ su - oracle -c "sh /u01/db_shutdown.sh"
+ 
+ 
+ 
+ su - oracle -c "<< EOF1
+        sqlplus -s "/ as sysdba" << EOF2
+        whenever sqlerror exit sql.sqlcode;
+        set echo off 
+        set heading off
+    
+        shutdown immediate
+        startup mount
+        alter database archivelog;
+        alter database open;
+        
+        exit;
+        EOF2
+    EOF1"
+	
+compat-libcap1-1.10
+
+
+/u01/app/oracle/product/12.2.0/dbhome_1

@@ -1,0 +1,26 @@
+SQL> alter database drop logfile group 5;
+alter database drop logfile group 5
+*
+ERROR at line 1:
+ORA-00350: log 5 of instance PROD (thread 1) needs to be archived
+ORA-00312: online log 5 thread 1: '/u01/app/PROD/oradata/PROD/redo05'
+ORA-00312: online log 5 thread 1: '/u01/app/PROD/oradata/PROD/redo06'
+
+
+SQL> select group#,members,status from v$log;
+
+    GROUP#    MEMBERS STATUS
+---------- ---------- ----------------
+         1          1 INACTIVE
+         2          1 CURRENT
+         3          1 INACTIVE
+         4          1 INACTIVE
+         5          2 INACTIVE
+
+SQL> alter database clear unarchived logfile group 5;
+
+Database altered.
+
+SQL> alter database drop logfile group 5;
+
+Database altered.

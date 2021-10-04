@@ -1,0 +1,44 @@
+3. ----------ASM DISK INFO
+set line 250
+col diskgroup_name for a40
+col disk_name for a40
+col path for a40
+select g.name diskgroup_name, d.name disk_name, d.os_mb/1024 DiskSize_GB , d.path path 
+from v$asm_diskgroup g, v$asm_disk d where g.GROUP_NUMBER=d.GROUP_NUMBER;
+
+
+SET LINESIZE  145
+SET PAGESIZE  9999
+SET VERIFY    off
+COLUMN group_name             FORMAT a20           HEAD 'Disk Group|Name'
+COLUMN sector_size            FORMAT 99,999        HEAD 'Sector|Size'
+COLUMN block_size             FORMAT 99,999        HEAD 'Block|Size'
+COLUMN allocation_unit_size   FORMAT 999,999,999   HEAD 'Allocation|Unit Size'
+COLUMN state                  FORMAT a11           HEAD 'State'
+COLUMN type                   FORMAT a6            HEAD 'Type'
+COLUMN total_mb               FORMAT 999,999,999   HEAD 'Total Size (MB)'
+COLUMN used_mb                FORMAT 999,999,999   HEAD 'Used Size (MB)'
+COLUMN pct_used               FORMAT 999.99        HEAD 'Pct. Used'
+compute sum label "Grand Total: " of total_mb used_mb on report
+SELECT
+    name                                     group_name
+  , sector_size                              sector_size
+  , block_size                               block_size
+  , allocation_unit_size                     allocation_unit_size
+  , state                                    state
+  , type                                     type
+  , total_mb/1024                                total_gb
+  , (total_mb - free_mb)/1024                     used_gb
+  , ROUND(((free_mb / total_mb))*100, 2)  pct_free
+FROM
+    v$asm_diskgroup
+ORDER BY
+    name
+
+
+
+
+
+===========================
+
+select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup_stat order by name;

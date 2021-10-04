@@ -1,0 +1,27 @@
+=======================================
+Killing a job by broking it
+=======================================
+#### By using below u can broke the jobs which r running currently
+
+SQL > select * from dba_jobs_running;
+     
+SQL > exec dbms_job.broken(2696251, TRUE)
+      
+SQL > exec dbms_job.remove(2696251);
+      
+SQL > select * from v$session where sid=3871;
+
+
+================
+
+If You want remove jobs from dba_jobs which r not runnig belongs to specific user, Then u must connect to that user and u need to do the below :
+
+SQL> Conn <Username/Pwd>
+
+SQL> exec dbms_job.remove<JOB_ID>;
+
+after removing all jobs, u need to give commit
+
+SQL> Commit;
+
+===============

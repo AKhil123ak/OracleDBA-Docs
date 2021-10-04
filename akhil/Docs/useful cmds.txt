@@ -1,0 +1,46 @@
+ALTER TABLESPACE  FCRDATA1 ADD DATAFILE '+DATA' SIZE 30G;( adding the datafile)
+ALTER TABLESPACE  FCCDFLT ADD DATAFILE '+DATA' SIZE 30G;
+alter database datafile' ' resize 5g;(resizing)  from this check the datafile by using command called dba_data_files
+
+create tablespace tablespacename  datafile'+JFSSIM' size 25G; (create in asm)
+
+ CREATE USER  FCRBRN IDENTIFIED BY FCRBRN(passwrd shuld not be username)
+DEFAULT TABLESPACE BRNDATA1
+quota unlimited on BRNDATA1
+TEMPORARY TABLESPACE TEMP (users creation)
+
+select sum(bytes)/1024/1024/1024 schema_size_gig from dba_segments where owner='&owner';(TO CHECK THE SCHEMA SIZES IN GB)
+
+select sum(bytes)/1024/1024/1024 as size_in_gb,segment_type from dba_segments group by segment_type;(TO CHECK THE SCHEMA SIZES IN GB ORDERWISE)
+ select sum(BYTES/1024/1024/1024) size_in_gb from dba_data_files where TABLESPACE_NAME='&ENT_TN' (YOU CAN USE THIS ALSO)
+
+
+
+ 
+ 
+ SYS:JFSPPROD > /
+Enter value for owner: FCRHOST
+old   1: select sum(bytes)/1024/1024/1024 schema_size_gig from dba_segments where owner='&owner'
+new   1: select sum(bytes)/1024/1024/1024 schema_size_gig from dba_segments where owner='FCRHOST'
+
+
+
+ALTER TABLESPACE  FCRDATA1 ADD DATAFILE '+JFSSIM' SIZE 30G;
+
+
+ALTER TABLESPACE  FCCDFLT ADD DATAFILE '+JFSSIM' SIZE 30G;
+
+
+
+expdp scott/tiger@db10g schemas=SCOTT directory=TEST_DIR dumpfile=SCOTT.dmp logfile=expdpSCOTT.log
+
+impdp scott/tiger@db10g schemas=SCOTT directory=TEST_DIR dumpfile=SCOTT.dmp logfile=impdpSCOTT.log
+
+ALTER TABLESPACE lmtemp ADD TEMPFILE '/u02/oracle/data/lmtemp02.dbf' SIZE (add a tempfile)
+
+
+
+
+alter database tempfile '+STGDATA/jfspprod/tempfile/temp.335.909154047' resize 30G;
+
+

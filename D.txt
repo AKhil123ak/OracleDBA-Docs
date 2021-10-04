@@ -1,0 +1,45 @@
+============
+Installation
+============
+
+-> what does base & home location contains
+-> why do we need to add hostname,ip address in /etc/hosts and kernal info in sysctl.conf
+-> what are the limits and why do we need to set those
+-> do we need to get in touch with OS team while installing DB
+
+============
+Architecture
+============
+
+-> Result Cache
+-> how to terminate the disconnected users & how to clear DB locks
+-> What is initializatio and dynamic parameters
+-> Meaning of dump
+-> What can we do from our end to clear the space
+
+=============
+Memory Target
+=============
+
+-> Memory target issues
+-> More about it
+
+==========
+Archivelog
+==========
+
+-> How to allocate size to archive destination
+-> what will happen if archive dest got full
+
+about etc folder
+
+what is the data guard that we use in real time
+do we need to monitor all the dbs data guard
+what are the parameters that we need to configure for data guard
+oracle active data guard video
+data guard logical standby
+AWR report
+house keeeping activities
+vinay mails
+OEM
+default password for sysdba

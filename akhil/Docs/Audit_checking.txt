@@ -1,0 +1,37 @@
+SELECT JOB_NAME,state,ENABLED,NEXT_RUN_DATE,LAST_START_DATE FROM DBA_SCHEDULER_JOBS WHERE JOB_NAME like '%AUDIT%';
+
+
+
+
+======== To check Job 
+col JOB_NAME for a20
+col state for a10
+col ENABLED for a10
+col LAST_START_DATE for  a35
+col NEXT_RUN_DATE for a35
+set lines 100
+SELECT JOB_NAME,state,ENABLED,LAST_START_DATE,NEXT_RUN_DATE FROM
+DBA_SCHEDULER_JOBS WHERE JOB_NAME in
+('PURGE_ALL_AUDIT_TRAILS','AUDIT_LAST_ARCHIVE_TIME');
+
+====================To disable job: This disables the job from running
+exec dbms_scheduler.disable('PURGE_ALL_AUDIT_TRAILS');
+exec dbms_scheduler.disable('AUDIT_LAST_ARCHIVE_TIME');
+
+PL/SQL procedure successfully completed.
+
+- check job status
+
+=========================To enable job:
+exec dbms_scheduler.enable('PURGE_ALL_AUDIT_TRAILS');
+exec dbms_scheduler.enable('AUDIT_LAST_ARCHIVE_TIME');
+
+PL/SQL procedure successfully completed.
+
+From: Oracle DB Team [mailto:oracledb.fms@janalakshmi.com] 
+Sent: Thursday, 29 November, 2018 1:18 PM
+To: 'Oracle DB Team'
+Subject: Au
+
+SELECT JOB_NAME,state,ENABLED,NEXT_RUN_DATE,LAST_START_DATE FROM
+DBA_SCHEDULER_JOBS WHERE JOB_NAME

@@ -1,0 +1,100 @@
+1
+==================================================
+$ cat u.sql
+=========================
+set lines 300;
+set pages 200;
+select USERNAME,ACCOUNT_STATUS,PROFILE from dba_users;
+
+
+2
+====================================================
+$ cat ud.sql
+===========================================================
+set lines 300;
+set pages 200;
+select username,profile,account_status from dba_users where username not in ('ANONYMOUS'
+,'APEX_040200'
+,'APEX_PUBLIC_USER'
+,'APPQOSSYS'
+,'AUDSYS'
+,'BI'
+,'CTXSYS'
+,'DBSNMP'
+,'DIP'
+,'DVF'
+,'DVSYS'
+,'EXFSYS'
+,'FLOWS_FILES'
+,'GSMADMIN_INTERNAL'
+,'GSMCATUSER'
+,'GSMUSER'
+,'HR'
+,'IX'
+,'LBACSYS'
+,'MDDATA'
+,'MDSYS'
+,'OE'
+,'ORACLE_OCM'
+,'ORDDATA'
+,'ORDPLUGINS'
+,'ORDSYS'
+,'OUTLN'
+,'PM'
+,'SCOTT'
+,'SH'
+,'SI_INFORMTN_SCHEMA'
+,'SPATIAL_CSW_ADMIN_USR'
+,'SPATIAL_WFS_ADMIN_USR'
+,'SYS'
+,'SYSBACKUP'
+,'SYSDG'
+,'SYSKM'
+,'SYSTEM'
+,'WMSYS'
+,'XDB'
+,'SYSMAN'
+,'RMAN'
+,'RMAN_BACKUP') and ACCOUNT_STATUS='OPEN';
+================================================================================================
+3 
+=========================
+$ cat urp.sql
+=======================================
+select
+lpad(' ', 2*level) || granted_role "User, his roles and privileges"
+from
+(
+/* THE USERS */
+select
+null     grantee,
+username granted_role
+from
+dba_users
+where
+username like upper('%&enter_username%')
+/* THE ROLES TO ROLES RELATIONS */
+union
+select
+grantee,
+granted_role
+from
+dba_role_privs
+/* THE ROLES TO PRIVILEGE RELATIONS */
+union
+select
+grantee,
+privilege
+from
+dba_sys_privs
+)
+start with grantee is null
+connect by grantee = prior granted_role;
+
+
+
+
+
+
+
+

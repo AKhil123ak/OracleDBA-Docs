@@ -1,0 +1,95 @@
+
+$
+$ rm `ls -lrt|grep "May 14"|awk '{print $9}'`
+$ ls -lr
+
+$ df -g
+Filesystem    GB blocks      Free %Used    Iused %Iused Mounted on
+/dev/hd4           4.75      4.46    7%    10785     2% /
+/dev/hd2           3.12      0.81   74%    44967    19% /usr
+/dev/hd9var        2.00      0.62   69%    12144     7% /var
+/dev/hd3          25.00      3.23   88%     5985     1% /tmp
+/dev/hd1           5.00      4.64    8%     1452     1% /home
+/dev/hd11admin      0.12      0.12    1%        5     1% /admin
+/proc                 -         -    -         -     -  /proc
+/dev/hd10opt       0.88      0.61   30%     7032     5% /opt
+/dev/livedump      0.25      0.25    1%        4     1% /var/adm/ras/livedump
+/dev/u01lv        75.00     24.17   68%   407430     7% /u01
+/dev/lvfcrach     89.25     89.24    1%       12     1% /fcrach
+/dev/nmonlv        1.00      0.56   44%      371     1% /var/nmon
+/dev/fslv00     2800.00    177.56   94%     7025     1% /backuptemp
+$
+$
+$
+$
+$
+$
+$
+$
+$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Tue Jun 5 08:32:01 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSPPROD > archive log list;
+Database log mode              Archive Mode
+Automatic archival             Enabled
+Archive destination            /backuptemp/JFSPPROD/ARCH
+Oldest online log sequence     177566
+Next log sequence to archive   0
+Current log sequence           177571
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select max(sequence#) from v$archived_log;
+
+MAX(SEQUENCE#)
+--------------
+        177570
+
+SYS:JFSPPROD > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+$
+$
+$
+$
+$
+$ pwd
+/backuptemp/JFSPPROD/ARCH
+$
+$
+$
+$ rm `ls -lrt|grep "May"|awk '{print $9}'`
+$
+$
+$ ls -ltr
+
+$ df -g
+Filesystem    GB blocks      Free %Used    Iused %Iused Mounted on
+/dev/hd4           4.75      4.46    7%    10785     2% /
+/dev/hd2           3.12      0.81   74%    44967    19% /usr
+/dev/hd9var        2.00      0.62   69%    12144     7% /var
+/dev/hd3          25.00      3.23   88%     5985     1% /tmp
+/dev/hd1           5.00      4.64    8%     1452     1% /home
+/dev/hd11admin      0.12      0.12    1%        5     1% /admin
+/proc                 -         -    -         -     -  /proc
+/dev/hd10opt       0.88      0.61   30%     7032     5% /opt
+/dev/livedump      0.25      0.25    1%        4     1% /var/adm/ras/livedump
+/dev/u01lv        75.00     24.17   68%   407431     7% /u01
+/dev/lvfcrach     89.25     89.24    1%       12     1% /fcrach
+/dev/nmonlv        1.00      0.56   44%      371     1% /var/nmon
+/dev/fslv00     2800.00    800.73   72%     6499     1% /backuptemp
+$
+$
+$
+$
+$

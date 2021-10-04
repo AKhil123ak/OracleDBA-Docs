@@ -1,0 +1,36 @@
+
+select owner  from dba_objects where owner not in ('SYS',
+'SYSTEM','PERFSTAT','WMSYS','ORDSYS','SYSMAN','APEX_030200','XDB','OLAPSYS',
+'APPQOSSYS','PUBLIC','EXFSYS','CTXSYS','ORDPLUGINS','OWBSYS','OUTLN','DBSNMP
+','ORDDATA','MDSYS','OWBSYS_AUDIT','ORACLE_OCM') group by owner order by 1;
+
+select owner, sum(bytes)/1024/1024 from dba_segments where owner not in
+('SYS',
+'SYSTEM','PERFSTAT','WMSYS','ORDSYS','SYSMAN','APEX_030200','XDB','OLAPSYS',
+'APPQOSSYS','PUBLIC','EXFSYS','CTXSYS','ORDPLUGINS','OWBSYS','OUTLN','DBSNMP
+','ORDDATA','MDSYS','OWBSYS_AUDIT','ORACLE_OCM') group by owner order by 1;
+
+
+select OWNER, SEGMENT_NAME,SEGMENT_TYPE from dba_segments where TABLESPACE_NAME='UAT_EDW_SOR_DUP' and SEGMENT_NAME='APPL';
+
+
+select owner, sum(bytes)/1024/1024 from dba_segments group by  owner order by 2;
+select owner, sum(bytes)/1024/1024 from dba_segments  where owner='UAT_EDW_SOR_DUP';
+=====================================================================
+
+Set pages 999;
+
+set long 90000;
+
+SELECT dbms_metadata.get_ddl('USER','FCCHOST') FROM dual;
+=====================================================================
+
+sqlldr UAT_EDW_DM/EDW_prd_123@EDWPRD control=control/UAT_EDW_DM.FCT_CARD_TXN.ctl log=log/UAT_EDW_DM.FCT_CARD_TXN.log
+
+
+/backup/EDWPRD_MIG/UAT_EDW_DM
+sqlplus SYSTEM/AF8kR#p#@EDWPRD  < control/pre_load.sql
+
+sqlldr UAT_EDW_DM/EDW_prd_123@EDWPRD control=control/UAT_EDW_DM.MAP_COLLECTION.ctl log=log/UAT_EDW_DM.MAP_COLLECTION.log
+
+sqlplus SYSTEM/AF8kR#p#@EDWPRD < control/post_load.sql

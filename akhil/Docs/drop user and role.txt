@@ -1,0 +1,26 @@
+role= collection of privileages 
+
+droping the role:
+
+
+
+SYS:JFSSIM > select * from dba_roles where role ='CBSRO';
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+CBSRO                          NO       NONE
+
+SYS:JFSSIM > drop role CBSRO ;
+
+Role dropped.
+
+SYS:JFSSIM > create role CBSRO ;
+
+Role created.
+
+SYS:JFSSIM > select * from dba_roles where role ='CBSRO';
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+CBSRO                          NO       NONE
+

@@ -1,0 +1,11 @@
+
+solution:
+SQL> exit
+sqlplus / as sysdba
+SQL> startup nomount
+SQL> alter database mount;
+SQL> alter database clear unarchived logfile group 1;
+SQL> alter database clear unarchived logfile group 2;
+SQL> alter database clear unarchived logfile group 3
+SQL> shutdown immediate
+SQL> startup;

@@ -1,0 +1,63 @@
+Local & Dictionary Tablespace
+++++++++++++++++++++++++++++++
+
+
+HOW TO VIEW TABLESPACE NAME WITH EXTENT MANAGEMENT
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+>select TABLESPACE_NAME,EXTENT_MANAGEMENT from dba_tablespaces;
+
+
+
+LOGIN MANUAL DATABASE
+++++++++++++++++++++++
+
+>create tablespace finance1 datafile '/u02/app/UAT/oradata/finance1.dbf' size 10m autoextend on maxsize 1g extent management LOCAL;
+
+>create tablespace sales1 datafile '/u02/app/UAT/oradata/sales1.dbf' size 10m autoextend on maxsize 1g extent management DICTIONARY;
+
+
+
+LOGIN DBCA DATABASE
+++++++++++++++++++++
+
+>create tablespace finance1 datafile '/u01/app/PROD/oradata/PROD/finance1.dbf' size 10m autoextend on maxsize 1g extent management LOCAL;
+
+
+
+if system table space is local. it will thorugh the below error
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+create tablespace sales1 datafile '/u01/app/PROD/oradata/PROD/sales1.dbf' size 10m autoextend on maxsize 1g extent management DICTIONARY;
+*
+ERROR at line 1:
+ORA-12913: Cannot create dictionary managed tablespace
+
+
+
+Note :- we can not create dictionary managed tablespace if system tablespace is local
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+Dictionary Managed Tablespace 
+++++++++++++++++++++++++++++++
+
+- Oracle 8i and prior versions used to have table spaces in dictionary managed mode.
+- in dictionary managed tablespace the free blocks information is used to maintain in data dictionary cache.
+- when ever oracle needs a free block it need to get the information from free list and 
+with that information data will be inserted into blocks( which are existing in datafiles) 
+the will continue until oracle does not request free block.
+- the disadvantage of using dictionary managed tablespace is performence degradation because of more I/O
+
+
+
+Local Managed tablespace 
++++++++++++++++++++++++++
+
+- from 9i oracle introduced locally managed tablespace which maintains the free block information 
+in datafile header(instead of DDC) in the form of bitmap blocks.
+- the status of the blok(in bitmap block) is maintained in the form of 0(free blcok) and 1(used block)
+- since the free block information is mainained in datafile header itself. 
+it is not necessary to take information from DDC which will avoid I/O
+

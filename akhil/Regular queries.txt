@@ -1,0 +1,3298 @@
+Model Number 	60058 (P11640)
+Part Number 	60058 (P11640)
+
+
+
+procstack 67043340
+
+Premium Luxury PU Leather Flip Stand Back Case Cover For Nokia X2 Dual Sim Android RM-1013 - Power Blue
+Amzer Pudding TPU Back Case Cover For Nokia X2 | Black
+
+PUDINI Brand Premium Flip Leather Case Cover For NOKIA X2
+
+Premium Luxury PU Leather Flip Stand Back Case Cover For Nokia X2 Dual Sim Android RM-1013 - Power Blue
+
+
+
+
+SELECT * FROM ba_eod_history WHERE dat_process = '29-Sep-2014' AND cod_proc_category = 1 AND cod_eod_process LIKE '%ch_rate%'
+
+
+F
+rtgsread/RTGSREAD_2011
+ibm_joseph/joe_12345@imbprod
+sqlplus sys/password@TNS as sysdba
+amlread_2012
+
+
+
+awk '{ if ( $0 ~ /31-JAN-2014/ ) { ok=1 } if ( ok ) { print } }' list_rtgs.log|tee list_rtgs_1.log 
+
+
+
+FCR -- Extraction details
+
+=====================
+
+SELECT DAT_PROCESS,
+       DAT_LOG,
+       COD_EOD_PROCESS,
+       COD_PROC_CATEGORY,
+       DAT_PROC_START,
+       DAT_PROC_END,
+       FLG_STATUS,
+       ROUND(86400 * (DAT_PROC_END - DAT_PROC_START), 2) "TIME_TAKEN in Sec"
+  FROM FCRUSER.BA_EOD_HISTORY
+ WHERE DAT_PROCESS = (SELECT DAT_PROCESS FROM fcruser.ba_Bank_mast WHERE flg_mnt_status = 'A')
+   AND COD_PROC_CATEGORY = 12
+ ORDER BY DAT_PROC_START
+
+
+
+
+15:03 04-01-2014===================================================================================================================================================
+NDR- flash area checking server Ip's -   FCR,BRN (172.27.97.98 )   & Other NDR dbs are in FCC,FCAT,RTGS (172.27.97.99 )
+
+===================================================================================================================================================
+
+
+===================================================================================================================================================
+oracle meta link : hoditdcm@canarabank.com /Canara@1906
+
+https://support.oracle.com/epmos/faces/DocumentDisplay?_afrLoop=340426341346387&id=1320966.1&_afrWindowMode=0&_adf.ctrl-state=qj2srlgow_133
+
+	
+Click to add to Favorites		Things to Consider Before Upgrading to 11.2.0.2 to Avoid Poor Performance or Wrong Results (Doc ID 1320966.1)
+
+
+http://172.16.46.236/gtsiml/index.htm  ---- dboperations ,locks etc in web
+===================================================================================================================================================
+
+
+
+
+
+
+
+
+alert log location :
+===================================================================================================================================================
+cd /oracle/diag_dest/diag/rdbms/fcr/FCR/trace
+tail -1000f /oracle/diag_dest/diag/rdbms/fcr/FCR/trace/alert_FCR.log
+
+cd /oracle/diag_dest/diag/rdbms/fcrbrn/FCRBRN/trace
+tail -1000f /oracle/diag_dest/diag/rdbms/fcrbrn/FCRBRN/trace/alert_FCRBRN.log
+
+cd /oracle/orabase/diag/diag/rdbms/frsprod1/frsprod1/trace
+tail -1000f /oracle/diag/diag/rdbms/frsprod1/frsprod1/trace/alert_frsprod1.log
+
+cd /oracle/diag_dest/diag/rdbms/fcc/FCC/trace
+tail -1000f /oracle/diag_dest/diag/rdbms/fcc/FCC/trace/alert_FCC.log
+
+ tail -f /oracle/diag_dest/diag/rdbms/fcrarch/FCRARCH/trace/alert_FCRARCH.log
+
+===================================================================================================================================================
+AWR info:
+-------------------
+
+
+Exec dbms_workload_repository.create_snapshot;
+
+Exec dbms_workload_repository.modify_snapshot_settings (retention=>20160, interval=> 15);
+
+
+AWR snap shots:
+exec dbms_workload_repository.create_snapshot;
+@?/rdbms/admin/awrrpt.sql
+
+
+SQL>@$ORACLE_HOME/rdbms/admin/awrrpt.sql
+ SQL>@$ORACLE_HOME/rdbms/admin/addmrpt.sql
+ SQL>@$ORACLE_HOME/rdbms/admin/ashrpt.sql
+
+---- Please get a AWR SQL report for the query(SQL_ID)
+
+@?/rdbms/admin/awrsqrpt.sql
+
+Enter value for report_type: html
+Enter value for num_days: 5
+Enter value for begin_snap: <<<#### BEGINNING AWR SNAPSHOT OF SLOW 18 hour EXECUTION from jul 20
+Enter value for end_snap: <<<##### ENDING AWR SNAPSHOT OF SLOW 18 hour EXECUTION from jul20
+Enter value for sql_id: 9mwnmfb7a7qh4
+Enter value for report_name: <cr> -- just take the default
+
+
+
+Compare 2 awr reports in 11g:
+===============================
+
+SQL> Spool /oracle/file_name. html
+SQL> select * from TABLE(DBMS_WORKLOAD_REPOSITORY.awr_diff_report_html(4101840644,1,4349,4353,4101840644,1,4458,4461));
+SQL> spool off
+
+
+===================================================================================================================================================
+
+
+
+Query to identify TOp wait events in the Database:
+
+
+bash-3.2$ cat swait.sql
+clear
+set lines 300
+set feedback on
+col sid format 9999
+col program format a40
+col module format a30
+col event format a30
+col spid format 99999
+col p1 format 9999999999999
+col p2 format 999999
+col p3 format 999999
+col username format a10
+select s.LOGON_TIME,p.spid, w.sid, s.username,s.sql_id,w.event,s.program,s.module,p.spid,w.p1,w.p2,w.p3 from v$session_wait w, v$session s,v$process p
+where w.sid=s.sid and s.paddr=p.addr and w.state='WAITING' and
+          w.event not in ('pmon timer',
+                'smon timer',
+                'rdbms ipc message',
+                'pipe get',
+                'SQL*Net message from client',
+                'SQL*Net message to client',
+                'SQL*Net break/reset to client',
+                'SQL*Net more data from client',
+                'wakeup time manager',
+                'slave wait',
+                'SQL*Net more data to client') and w.event not like '%slave wait' and s.username not in ('SYSTEM')
+group by w.sid,s.username,w.event,s.sql_id,s.program,s.module,p.spid,w.p1,w.p2,w.p3,s.LOGON_TIME order by 5 desc
+/
+
+
+
+DB level session/process count :
+===================================================================================================================================================
+select count(*),program from v$session where username is NOt null and username !='SYS' group by program
+ union
+ select count(*) ,'** Total sess count **' from v$session ;
+
+
+
+
+===================================================================================================================================================
+********************How Many Executions (from 11g)********************
+
+alter session set nls_date_format ='DD-MON-YYYY HH24:MI:SS';
+
+SELECT /*+LEADING(x h) USE_NL(h)*/ h.program
+, h.sql_id, h.sql_plan_hash_value
+, SUM(10) ash_secs
+, COUNT(DISTINCT h.sql_exec_id) execs
+, COUNT(DISTINCT xid) XIDs
+FROM DBA_HIST_SNAPSHOT x
+, DBA_HIST_ACTIVE_SESS_HISTORY h
+WHERE X.END_INTERVAL_TIME >= '17-OCT-2014 11:00:00'
+AND x.begin_interval_time <= '17-OCT-2014 15:00:00'
+AND h.sample_TIME >= '17-OCT-2014 11:00:00'
+AND h.sample_time <= '17-OCT-2014 15:00:00' 
+AND h.SNAP_id = X.SNAP_id
+AND h.dbid = x.dbid
+AND h.instance_number = x.instance_number
+GROUP BY h.program, h.sql_id, h.sql_plan_hash_value
+ORDER BY ash_secs desc
+
+
+
+or 
+
+
+SELECT h.program
+, h.sql_id, h.sql_plan_hash_value
+, SUM(10) ash_secs
+, COUNT(DISTINCT h.sql_exec_id) execs
+, COUNT(DISTINCT xid) XIDs
+FROM DBA_HIST_SNAPSHOT x
+, DBA_HIST_ACTIVE_SESS_HISTORY h
+WHERE X.END_INTERVAL_TIME >= '17-OCT-2014'
+AND x.begin_interval_time <= '18-OCT-2014'
+AND h.sample_TIME >= '17-OCT-2014'
+AND h.sample_time <= '18-OCT-2014' 
+AND h.SNAP_id = X.SNAP_id
+AND h.dbid = x.dbid
+AND h.instance_number = x.instance_number
+GROUP BY h.program, h.sql_id, h.sql_plan_hash_value
+ORDER BY ash_secs desc
+
+
+
+
+===================================================================================================================================================
+
+
+
+--- Blocking sesssion query :
+
+select /*+ ordered */ a.sid  blocking_sid,a.username blocking_user,a.serial#,a.logon_time,b.type,b.lmode mode_held,b.ctime time_held,
+c.sid waiter_sid,c.request request_mode,c.ctime time_waited from v$lock b, v$enqueue_lock c,v$session a where a.sid= b.sid and b.id1 =c.id1(+)
+and b.id2=c.id2(+) and c.type(+)='TX' and b.type ='TX' and b.block =1 order by time_held,time_waited;
+
+
+select to_char(logon_time,'dd-mon-yyyy hh24:mm:ss'),sql_id,sid,serial#,username,machine,status,program,sql_hash_value,prev_sql_id,prev_hash_value from v$session where sid in (2372,92);
+
+select SQL_TEXT from v$sqltext where SQL_ID= '&a' order by piece
+
+
+
+SELECT DECODE(request,0,'Holder: ','Waiter: ')||sid sess,
+id1, id2, lmode, request, type
+FROM V$LOCK
+WHERE (id1, id2, type) IN
+      (SELECT id1, id2, type FROM V$LOCK WHERE request>0)
+ORDER BY id1, request  ;
+
+
+
+
+$ cat blockinglocks.sql
+------------------------------------------
+set echo off
+column blocker format a16;
+column blockee format a16;
+alter session set optimizer_mode=rule;
+
+select
+           (select /*+ rule */ username from v$session where sid=a.sid) blocker,
+         a.sid,
+       ' is blocking ' "IS BLOCKING",
+         (select /*+ rule */ username from v$session where sid=b.sid) blockee,
+             b.sid
+    from v$lock a, v$lock b
+   where a.block = 1
+     and b.request > 0
+     and a.id1 = b.id1
+     and a.id2 = b.id2
+/
+alter session set optimizer_mode=choose;
+$
+
+
+Blocking session query :
+------------------------------------------
+
+
+SELECT DECODE(request,0,'Holder: ','Waiter: ')||sid sess,
+id1, id2, lmode, request, type FROM V$LOCK
+WHERE (id1, id2, type) IN (SELECT id1, id2, type FROM V$LOCK WHERE request>0)
+ORDER BY id1, request  
+
+
+
+
+===================================================================================================================================================
+
+
+Get plan from the library cache info:
+---------------------------------------
+
+bash-3.2$get_plan.sql
+
+set lines 150
+set pages 200
+select * from table(dbms_xplan.display_cursor('&enter_sql_id'))
+/
+
+
+Get plan from the AWR info:
+---------------------------------------
+
+bash-2.05b$ cat get_plan_historical.sql
+SET PAUSE ON
+SET PAUSE 'Press Return to Continue'
+SET PAGESIZE 60
+SET LINESIZE 300
+
+SELECT * FROM TABLE(dbms_xplan.display_awr('&SQL_ID'))
+
+Get plan ASH history info:
+---------------------------------------
+
+bash-2.05b$ cat get_plan_hist.sql
+set pages 500
+  set lines 145
+  col BEGIN_INTERVAL_TIME format a35
+  select ss.snap_id, ss.instance_number node, begin_interval_time,
+sql_id, plan_hash_value,
+  nvl(executions_delta,0) execs,
+  (elapsed_time_delta/decode(nvl(executions_delta,0),0,1,executions_delta))/1000000 avg_etime,
+  (buffer_gets_delta/decode(nvl(buffer_gets_delta,0),0,1,executions_delta)) avg_lio
+  from DBA_HIST_SQLSTAT S, DBA_HIST_SNAPSHOT SS
+  where sql_id = nvl('&sql_id','4dqs2k5tynk61')
+  and ss.snap_id = S.snap_id
+  and ss.instance_number = S.instance_number
+  and executions_delta > 0 --and plan_hash_value=3099046451
+  order by 1, 2, 3
+  /
+
+
+
+
+
+select SQL_TEXT from v$sqltext where hash_value= '&a' order by piece
+
+select sid,serial#,username,machine,status,program,sql_hash_value,sql_id,prev_sql_id,prev_hash_value from v$session where sid=4553;6919;
+
+
+select sql_id,hash_value from v$sqltext where SQL_TEXT like '%SELECT A.COD_MSG_TYP, A.DAT_POST_STL, A.DAT_VALUE%'
+
+
+select * from v$sqltext_with_newlines where sql_id='149cz7an364qn' order by piece
+
+
+/
+===================================================================================================================================================
+
+
+Session killing  :
+===================================================================================================================================================
+select s.machine,p.spid,s.status, 'alter system kill session ' || '''' || s.sid ||',' || s.serial# || ''' IMMEDIATE; '  FROM v$session s, v$process p WHERE s.paddr = p.addr(+) and s.machine like '%WORKGROUP\EMSRBI2%'
+
+
+
+ select s.machine,p.spid,s.status, 'alter system kill session ' || '''' || s.sid ||',' || s.serial# || ''' IMMEDIATE; '  
+FROM v$session s, v$process p WHERE s.paddr = p.addr(+) and s.machine='DR_BO_NEW' and s.program='/home/BOUSER/BO/bobje/enterprise120//aix_rs6000/'
+/
+
+ASM space infor quries:
+===================================================================================================================================================
+ 
+ 
+ col path format a60
+ set linesize 1000
+ set pagesize 1000
+ 
+ select GROUP_NUMBER,name,state,TOTAL_MB,FREE_MB from v$asm_diskgroup  order by GROUP_NUMBER;
+ select GROUP_NUMBER,name,path,CREATE_DATE,TOTAL_MB,FREE_MB from v$asm_disk order by GROUP_NUMBER;
+ select GROUP_NUMBER,name,path,CREATE_DATE,TOTAL_MB,FREE_MB from v$asm_disk_stat order by GROUP_NUMBER;
+ 
+ 
+  select GROUP_NUMBER,name,path,total_mb,free_mb,CREATE_DATE from v$asm_disk where path like '%&a%'
+
+
+
+select bytes/(1024*1024*1024),tablespace_name from sys.sm$ts_free order by 2;
+select bytes/(1024*1024*1024),tablespace_name from sys.sm$ts_used order by 2;
+
+Tablespace size info query in the batch file :
+======================================================================
+set pages 40
+set lines 1000
+col pct_free for a10
+set trimspool on
+set colsep |
+select to_char(sysdate, 'dd-mon-yyyy hh:mi:ss') from dual;
+select name as "DATABASE NAME" from v$database;
+select t.tablespace_name,round((a.bytes/1024/1024/1024),2) totalGB,round((u.bytes/1024/1024/1024),2) UsedGB, round((f.bytes/1024/1024/1024),2) freeGB,round((f.bytes/1024/1024)) freeMB,round(((100*(f.bytes))/a.bytes))||'%' PCT_FREE from dba_tablespaces t, sys.sm$ts_avail a,sys.sm$ts_used u,sys.sm$ts_free f where t.tablespace_name=a.tablespace_name and t.tablespace_name=u.tablespace_name and t.tablespace_name=f.tablespace_name order by tablespace_name 
+/
+
+
+
+
+
+Temptablespace usage:
+=================================
+set lines 1000
+col file_name for a25
+col tablespace_name for a15
+set trimspool on
+select sysdate from dual;
+select name from v$database;
+select d.file_name,d.tablespace_name,d.bytes/1024/1024 TOTAL_MB,d.file_id, 
+t.bytes_cached/1024/1024 USED_MB ,t.bytes_used/1024/1024 CURRENT_USING_MB  from v$temp_extent_pool t,dba_temp_files d
+where d.file_id=t.file_id(+)
+/
+
+
+
+
+Dynamic database link creation script at the DB level :
+=========================================================
+
+
+SELECT 'CREATE '||DECODE(U.NAME,'PUBLIC','public ')||'DATABASE LINK '||CHR
+(10)
+||DECODE(U.NAME,'PUBLIC',Null, 'SYS','',U.NAME||'.')|| L.NAME||chr(10)
+||'CONNECT TO ' || L.USERID || ' IDENTIFIED BY "'||L.PASSWORD||'" USING
+'''||L.HOST||''''
+||chr(10)||';' TEXT
+FROM SYS.LINK$ L, SYS.USER$ U
+WHERE L.OWNER# = U.USER#;
+
+
+
+
+
+SELECT * FROM FRSPROD.DB_OPERATIONS
+SELECT * FROM FRSPROD.LOCKS_IN_DB
+
+SELECT * FROM V$SESSION WHERE SID IN (SELECT SID  FROM FRSPROD.LOCKS_IN_DB )
+
+
+
+
+11g: Scheduler Maintenance Tasks or Autotasks 
+==========================================================
+select * from Dba_Autotask_Task
+
+select * from Dba_Autotask_Operation
+
+ select * from DBA_AUTOTASK_WINDOW_CLIENTS;
+select * from DBA_SCHEDULER_JOBS
+
+
+ select * from DBA_AUTOTASK_WINDOW_CLIENTS;
+SQL> execute DBMS_AUTO_TASK_ADMIN.DISABLE;
+
+
+select window_name, resource_plan from dba_scheduler_windows;
+EXECUTE DBMS_SCHEDULER.SET_ATTRIBUTE(
+'WEEKNIGHT_WINDOW', 
+'repeat_interval',
+'freq=daily;byday=MON, TUE, WED, THU, FRI;byhour=0;byminute=0;bysecond=0');
+
+
+
+To disable a specific maintenance task, use the DISABLE procedure, as follows:
+SQL> BEGIN
+       dbms_auto_task_admin.disable(
+       client_name => 'sql tuning advisor',
+       operation => NULL,
+       window_name => NULL);
+     END;  
+    /
+
+To enable this specific maintenance task again, use the ENABLE procedure, as follows:
+SQL> BEGIN
+       dbms_auto_task_admin.enable(
+       client_name => 'sql tuning advisor',
+       operation => NULL,
+       window_name => NULL);
+     END;
+     /
+
+
+
+
+
+SQL> exec dbms_scheduler.disable('ORACLE_OCM.MGMT_CONFIG_JOB');
+
+PL/SQL procedure successfully completed.
+
+SQL> exec dbms_scheduler.disable('ORACLE_OCM.MGMT_STATS_CONFIG_JOB');
+
+PL/SQL procedure successfully completed.
+
+
+
+
+ dbms_scehdular job creation example in oralce11g:(every 5 mins frequencey)
+============================================================================
+
+BEGIN
+  SYS.DBMS_SCHEDULER.CREATE_JOB
+    (
+       job_name        => 'TEST_SCHEDULE_HEMANTH'
+      ,start_date      => TO_TIMESTAMP_TZ('2014/02/07 18:31:06.070893 -05:30','yyyy/mm/dd hh24:mi:ss.ff tzh:tzm')
+      ,repeat_interval => 'freq=minutely; interval=5; bysecond=0;'
+      ,end_date        => NULL
+      ,job_class       => 'DEFAULT_JOB_CLASS'
+      ,job_type        => 'STORED_PROCEDURE'
+      ,job_action      => 'session_purge'
+      ,comments        => 'Job defined entirely by the session_purge.'
+    );
+
+
+
+
+
+
+
+Query for Archive log sequence completion time :
+==========================================
+
+select sequence#, archived, deleted, status, to_CHAR(COMPLETION_TIME,'Mon dd yyyy hh24:mi:ss') from
+v$archived_log where sequence# between 822666 and 822669;
+
+
+
+
+
+Sessions running in the db level :
+===================================================================================================================================================
+
+ed a
+col program for a30
+col command for a10
+col LOGON_TIME for a30
+set lines 1000
+col "Client User" for a20
+SELECT  UPPER(DECODE(command,
+        1,'Create Table',2,'Insert',3,'Select',
+        4,'Create Cluster',5,'Alter Cluster',6,'Update',
+        7,'Delete', 8,'Drop Cluster', 9,'Create Index',
+        10,'Drop Index', 11,'Alter Index', 12,'Drop Table',
+        13,'Create Sequencfe', 14,'Alter Sequence', 15,'Alter Table',
+        16,'Drop Sequence', 17,'Grant', 18,'Revoke',
+        19,'Create Synonym', 20,'Drop Synonym', 21,'Create View',
+        22,'Drop View', 23,'Validate Index', 24,'Create Procedure',
+        25,'Alter Procedure', 26,'Lock Table', 27,'No Operation',
+        28,'Rename', 29,'Comment', 30,'Audit',
+        31,'NoAudit', 32,'Create Database Link', 33,'Drop Database Link',
+        34,'Create Database', 35,'Alter Database', 36,'Create Rollback Segment',
+        37,'Alter Rollback Segment', 38,'Drop Rollback Segment', 39,'Create Tablespace',
+        40,'Alter Tablespace', 41,'Drop Tablespace', 42,'Alter Sessions',
+        43,'Alter User', 44,'Commit', 45,'Rollback',
+        46,'Savepoint', 47,'PL/SQL Execute', 48,'Set Transaction',
+        49,'Alter System Switch Log', 50,'Explain Plan', 51,'Create User',
+        52,'Create Role', 53,'Drop User', 54,'Drop Role',
+        55,'Set Role', 56,'Create Schema', 57,'Create Control File',
+        58,'Alter Tracing', 59,'Create Trigger', 60,'Alter Trigger',
+        61,'Drop Trigger', 62,'Analyze Table', 63,'Analyze Index',
+        64,'Analyze Cluster', 65,'Create Profile', 66,'Drop Profile',
+        67,'Alter Profile', 68,'Drop Procedure', 69,'Drop Procedure',
+        70,'Alter Resource Cost', 71,'Create Snapshot Log', 72,'Alter Snapshot Log',
+        73,'Drop Snapshot Log', 74,'Create Snapshot', 75,'Alter Snapshot',
+        76,'Drop Snapshot', 79,'Alter Role', 85,'Truncate Table',
+        86,'Truncate Cluster', 88,'Alter View', 91,'Create Function',
+        92,'Alter Function', 93,'Drop Function', 94,'Create Package',
+        95,'Alter Package', 96,'Drop Package', 97,'Create Package Body',
+        98,'Alter Package Body', 99,'Drop Package Body')) command,
+        s.sid sid,s.serial# "Serial#",p.spid spid, s.status status, s.username "DB User",
+        s.osuser "Client User",
+        to_char(s.logon_time,'dd/mm/yyyy hh24:mi:ss') as logon_time,
+        s.sql_hash_value "Sql Hash",S.PROGRAM,s.terminal terminal,s.machine "machine"
+	FROM v$session s, v$process p WHERE s.paddr = p.addr(+)
+        AND S.TYPE<>'BACKGROUND'  and p.spid in ( 3998482 ,2076900 )
+
+
+
+
+    
+
+ed s
+
+select SQL_TEXT from v$sqltext where hash_value= '&a' order by piece
+
+select sid,serial#,username,machine,status,program,sql_hash_value,sql_id,prev_sqlid,prev_hash_value from v$session where sid=6919;
+
+
+
+select sql_id,hash_value from v$sqltext where SQL_TEXT like '%SELECT A.COD_MSG_TYP, A.DAT_POST_STL, A.DAT_VALUE%'
+select SQL_TEXT from v$sqltext where hash_value= '3091199043' order by piece;
+
+select SQL_TEXT from v$sqltext where sql_id= '&a' order by piece;
+
+select * from v$sqltext_with_newlines where sql_id='149cz7an364qn' order by piece
+
+
+select * from table(dbms_xplan.display_cursor('&enter_sql_id'));
+
+
+bash-2.05b$ cat get_plan.sql
+set lines 150
+set pages 200
+select * from table(dbms_xplan.display_cursor('&enter_sql_id'))
+/
+
+
+
+
++++++++ BELOW QUERY SHOWS THE VERSION COUNT(  SAME SQLID)
+
+SYS>col sql_text for a30 word_wrapped
+SELECT SQL_TEXT , SQL_ID, VERSION_COUNT, HASH_VALUE,PLAN_HASH_VALUE
+FROM V$SQLAREA
+WHERE LOWER(SQL_TEXT) LIKE ‘select count(*) from test%’
+AND LOWER(SQL_TEXT) NOT LIKE ‘%HASH%’;
+SQL_TEXT SQL_ID VERSION_COUNT HASH_VALUE PLAN_HASH_VALUE
+—————————— ————-————-———- —————
+select count(*) from test 3tcujqmqnqs8t 2 3981140249 2432738936
+where id2=:”SYS_B_0?
+
+
+– Note that 2 child cursors have been created and each child has a distinct execution plan
+(PLAN_HASH_VALUE)
+
+
+
++++++++ BELOW QUERY SHOWS THE CHILD#( I.E DEFFERENT EXECUTION PLANS COUNT FOR SAME SQLID)
+
+SYS>col child_number for 99
+SELECT SQL_TEXT, SQL_ID, CHILD_NUMBER CHILD#, HASH_VALUE,
+PLAN_HASH_VALUE
+FROM V$SQL
+WHERE LOWER(SQL_TEXT) LIKE ‘select count(*) from test%’
+AND LOWER(SQL_TEXT) NOT LIKE ‘%HASH%’;
+SQL_TEXT SQL_ID CHILD# HASH_VALUE PLAN_HASH_VALUE
+—————————— ————-———- ———- —————
+select count(*) from test 3tcujqmqnqs8t 0 3981140249 2432738936
+where id2=:”SYS_B_0?
+select count(*) from test 3tcujqmqnqs8t 1 3981140249 1489241381
+where id2=:
+
+
+Get all  plan history for the perticular sql_id:
+=============================================================
+
+
+   col BEGIN_INTERVAL_TIME format a35
+   select ss.snap_id, ss.instance_number node, begin_interval_time,
+ sql_id, plan_hash_value,
+   nvl(executions_delta,0) execs,
+   (elapsed_time_delta/decode(nvl(executions_delta,0),0,1,executions_delta))/1000000 avg_etime,
+   (buffer_gets_delta/decode(nvl(buffer_gets_delta,0),0,1,executions_delta)) avg_lio
+   from DBA_HIST_SQLSTAT S, DBA_HIST_SNAPSHOT SS
+   where sql_id = nvl('&sql_id','8105qhn37k4wn')
+   and ss.snap_id = S.snap_id
+   and ss.instance_number = S.instance_number
+   and executions_delta > 0 --and plan_hash_value=3099046451
+   order by 1, 2, 3
+   /
+
+
+
+Enter value for sql_id: 73zcr39z51rwv
+old   7:   where sql_id = nvl('&sql_id','73zcr39z51rwv')
+new   7:   where sql_id = nvl('73zcr39z51rwv','73zcr39z51rwv')
+
+
+
+
+bash-2.05b$ cat get_plan_historical.sql
+SET PAUSE ON
+SET PAUSE 'Press Return to Continue'
+SET PAGESIZE 60
+SET LINESIZE 300
+
+SELECT * FROM TABLE(dbms_xplan.display_awr('&SQL_ID'))
+/
+
+bash-2.05b$ cat get_plan_hist.sql
+set pages 500
+  set lines 145
+  col BEGIN_INTERVAL_TIME format a35
+  select ss.snap_id, ss.instance_number node, begin_interval_time,
+sql_id, plan_hash_value,
+  nvl(executions_delta,0) execs,
+  (elapsed_time_delta/decode(nvl(executions_delta,0),0,1,executions_delta))/1000000 avg_etime,
+  (buffer_gets_delta/decode(nvl(buffer_gets_delta,0),0,1,executions_delta)) avg_lio
+  from DBA_HIST_SQLSTAT S, DBA_HIST_SNAPSHOT SS
+  where sql_id = nvl('&sql_id','4dqs2k5tynk61')
+  and ss.snap_id = S.snap_id
+  and ss.instance_number = S.instance_number
+  and executions_delta > 0 --and plan_hash_value=3099046451
+  order by 1, 2, 3
+  /
+
+
+
+
+=============================================================
+
+
+
+Find out the value of captured bind variable :
+=============================================================
+
+ select distinct sql_id,  t.sql_text SQL_TEXT,  t.PLAN_HASH_VALUE, b.name BIND_NAME,  b.value_string BIND_STRING, b.LAST_CAPTURED, b.WAS_CAPTURED
+    from  v$sql t  join v$sql_bind_capture b  using (sql_id)
+     where b.value_string is not null and sql_id='6ysdsxmdpqch1';
+
+
+
+-- Index creation progress checking in database
+
+select  
+opname,target,units,totalwork,sofar,start_time,sysdate,
+time_remaining,v$session_longops.ELAPSED_SECONDS,
+v$session.SID,v$session.SERIAL#,v$session.USERNAME,v$session.OSUSER,v$session.MACHINE,v$session.PROGRAM,
+to_char(v$session.logon_time,'DD-MON-YYYY HH24:MI:SS') cmd 
+from 
+v$session_longops,
+v$session
+where 
+v$session_longops.SQL_HASH_VALUE=v$session.SQL_HASH_VALUE
+and
+totalwork<>sofar;
+
+
+
+
+
+
+1) session information by using spid i.e OS level PID:
+
+select s.sid , p.pid , sl.opname , s.osuser , s.username , (sl.sofar/sl.totalwork)*100 "work done" 
+from v$session s , v$process p , v$session_longops sl
+where s.paddr=p.addr and sl.sid=s.sid p.spid=''
+
+2) session information by using sid:
+   
+select A.inst_id "Instance",A.sid "Sid",A.serial# "Serial No.",A.machine "Machine",
+      A.terminal "Terminal",A.process "PROCESS",
+      A.program "Program",B.sql_text "Query",B.users_executing "Users" ,
+      A.username "User",A.status "Status" , sysdate "Time"
+	from   gv$session A,gv$sql B
+	where  A.sql_address = B.address
+	AND  A.SID=''
+3) session information by using machine :
+
+  SELECT  UPPER(DECODE(command,
+          1,'Create Table',2,'Insert',3,'Select',
+          4,'Create Cluster',5,'Alter Cluster',6,'Update',
+          7,'Delete', 8,'Drop Cluster', 9,'Create Index',
+          10,'Drop Index', 11,'Alter Index', 12,'Drop Table',
+          13,'Create Sequencfe', 14,'Alter Sequence', 15,'Alter Table',
+          16,'Drop Sequence', 17,'Grant', 18,'Revoke',
+          19,'Create Synonym', 20,'Drop Synonym', 21,'Create View',
+          22,'Drop View', 23,'Validate Index', 24,'Create Procedure',
+          25,'Alter Procedure', 26,'Lock Table', 27,'No Operation',
+          28,'Rename', 29,'Comment', 30,'Audit',
+          31,'NoAudit', 32,'Create Database Link', 33,'Drop Database Link',
+          34,'Create Database', 35,'Alter Database', 36,'Create Rollback Segment',
+          37,'Alter Rollback Segment', 38,'Drop Rollback Segment', 39,'Create Tablespace',
+          40,'Alter Tablespace', 41,'Drop Tablespace', 42,'Alter Sessions',
+          43,'Alter User', 44,'Commit', 45,'Rollback',
+          46,'Savepoint', 47,'PL/SQL Execute', 48,'Set Transaction',
+          49,'Alter System Switch Log', 50,'Explain Plan', 51,'Create User',
+          52,'Create Role', 53,'Drop User', 54,'Drop Role',
+          55,'Set Role', 56,'Create Schema', 57,'Create Control File',
+          58,'Alter Tracing', 59,'Create Trigger', 60,'Alter Trigger',
+          61,'Drop Trigger', 62,'Analyze Table', 63,'Analyze Index',
+          64,'Analyze Cluster', 65,'Create Profile', 66,'Drop Profile',
+          67,'Alter Profile', 68,'Drop Procedure', 69,'Drop Procedure',
+          70,'Alter Resource Cost', 71,'Create Snapshot Log', 72,'Alter Snapshot Log',
+          73,'Drop Snapshot Log', 74,'Create Snapshot', 75,'Alter Snapshot',
+          76,'Drop Snapshot', 79,'Alter Role', 85,'Truncate Table',
+          86,'Truncate Cluster', 88,'Alter View', 91,'Create Function',
+          92,'Alter Function', 93,'Drop Function', 94,'Create Package',
+          95,'Alter Package', 96,'Drop Package', 97,'Create Package Body',
+          98,'Alter Package Body', 99,'Drop Package Body')) command,
+          s.sid sid,s.serial# "Serial#",p.spid spid, s.status status, s.username "DB User",
+          s.osuser "Client User",
+          to_char(s.logon_time,'dd/mm/yyyy hh24:mi:ss') as logon_time,
+          s.sql_hash_value "Sql Hash",S.PROGRAM,s.terminal terminal,s.machine "machine"
+     FROM v$session s, v$process p WHERE s.paddr = p.addr(+)
+         AND S.TYPE<>'BACKGROUND' and s.machine like '%DC%DBA%';
+
+
+4)Get SID ,Spid by using sid in the dba_jobs_running :
+
+ 
+  SELECT  UPPER(DECODE(command,
+          1,'Create Table',2,'Insert',3,'Select',
+          4,'Create Cluster',5,'Alter Cluster',6,'Update',
+          7,'Delete', 8,'Drop Cluster', 9,'Create Index',
+          10,'Drop Index', 11,'Alter Index', 12,'Drop Table',
+          13,'Create Sequencfe', 14,'Alter Sequence', 15,'Alter Table',
+          16,'Drop Sequence', 17,'Grant', 18,'Revoke',
+          19,'Create Synonym', 20,'Drop Synonym', 21,'Create View',
+          22,'Drop View', 23,'Validate Index', 24,'Create Procedure',
+          25,'Alter Procedure', 26,'Lock Table', 27,'No Operation',
+          28,'Rename', 29,'Comment', 30,'Audit',
+          31,'NoAudit', 32,'Create Database Link', 33,'Drop Database Link',
+          34,'Create Database', 35,'Alter Database', 36,'Create Rollback Segment',
+          37,'Alter Rollback Segment', 38,'Drop Rollback Segment', 39,'Create Tablespace',
+          40,'Alter Tablespace', 41,'Drop Tablespace', 42,'Alter Sessions',
+          43,'Alter User', 44,'Commit', 45,'Rollback',
+          46,'Savepoint', 47,'PL/SQL Execute', 48,'Set Transaction',
+          49,'Alter System Switch Log', 50,'Explain Plan', 51,'Create User',
+          52,'Create Role', 53,'Drop User', 54,'Drop Role',
+          55,'Set Role', 56,'Create Schema', 57,'Create Control File',
+          58,'Alter Tracing', 59,'Create Trigger', 60,'Alter Trigger',
+          61,'Drop Trigger', 62,'Analyze Table', 63,'Analyze Index',
+          64,'Analyze Cluster', 65,'Create Profile', 66,'Drop Profile',
+          67,'Alter Profile', 68,'Drop Procedure', 69,'Drop Procedure',
+          70,'Alter Resource Cost', 71,'Create Snapshot Log', 72,'Alter Snapshot Log',
+          73,'Drop Snapshot Log', 74,'Create Snapshot', 75,'Alter Snapshot',
+          76,'Drop Snapshot', 79,'Alter Role', 85,'Truncate Table',
+          86,'Truncate Cluster', 88,'Alter View', 91,'Create Function',
+          92,'Alter Function', 93,'Drop Function', 94,'Create Package',
+          95,'Alter Package', 96,'Drop Package', 97,'Create Package Body',
+          98,'Alter Package Body', 99,'Drop Package Body')) command,
+          s.sid sid,s.serial# "Serial#",p.spid spid, s.status status, s.username "DB User",
+          s.osuser "Client User",
+          to_char(s.logon_time,'dd/mm/yyyy hh24:mi:ss') as logon_time,
+          s.sql_hash_value "Sql Hash",S.PROGRAM,s.terminal terminal,s.machine "machine"
+     FROM v$session s, v$process p WHERE s.paddr = p.addr(+)
+         AND S.TYPE<>'BACKGROUND' and s.sid in (select sid from  dba_jobs_running)
+
+
+
+$ cat sid.sql
+set verify off
+col sid format 99999
+col machine format a10
+col program format a25 trunc
+col username format a11
+col logontime format a15
+col osuser format a10 trunc
+col proginfo format a30 trunc
+accept trgtsid number default 0 prompt 'What is the SID : '
+select to_char(s.logon_time,'mm/dd hh24:mi:ss') logontime,
+       s.sid,s.serial#,s.status,w.event,s.type,s.username,s.osuser,s.machine,
+       s.module || ' - ' || s.program proginfo,
+       s.process,p.spid, s.sql_hash_value
+from v$session s, v$process p, v$session_wait w
+where s.sid = &trgtsid
+and s.sid=w.sid
+and p.addr = s.paddr;
+
+
+
+
+
+
+=================================================================================
+Session waits.sql
+swait.sql
+=================================================================================
+
+$ cat swait.sql
+clear
+set feedback on
+set linesize 200
+col sid format 9999
+col program format a30
+col module format a20
+col event format a45
+col spid format 99999
+col p1 format 9999999999999
+col p2 format 999999
+col p3 format 999999
+col username format a10
+select w.sid, s.username,w.event,s.program,s.module,s.sql_id,p.spid,w.p1,w.p2,w.p3 from v$session_wait w, v$session s,v$process p
+where w.sid=s.sid and s.paddr=p.addr and w.state='WAITING' and s.username='BRNUSER' and
+          w.event not in ('pmon timer',
+                'smon timer',
+                'rdbms ipc message',
+                'pipe get',
+                'SQL*Net message from client',
+                'SQL*Net message to client',
+                'SQL*Net break/reset to client',
+                'SQL*Net more data from client',
+                'wakeup time manager',
+                'slave wait',
+                'SQL*Net more data to client') and w.event not like '%slave wait'
+group by w.sid,s.username,w.event,s.program,s.module,s.sql_id,p.spid,w.p1,w.p2,w.p3 order by 5 desc
+/
+
+
+=================================================================================
+Explain plan for SQL_ID in AWR reports:
+=================================================================================
+
+$ cat awr_plan.sql - get awr plan with sqlid:
+
+SELECT * FROM TABLE (DBMS_XPLAN.DISPLAY_AWR('&SQL_ID'))
+
+
+
+=================================================================================
+DB details :
+=================================================================================
+
+$ cat db_details.sql
+spool IMB_details.log
+
+set pagesize 2000
+set linesize 100
+set feedback off
+
+ttitle "1. :===== Database Name =====:" skip 2
+prom
+select name as  db from v$database;
+prom
+
+ttitle "2. :===== Control File Name =====:" skip 2
+prom
+column NAME format a50 heading 'Control File name'
+select NAME,BLOCK_SIZE,FILE_SIZE_BLKS from v$controlfile;
+prom
+
+ttitle "3. :===== Redolog File Name =====:" skip 2
+prom
+column MEMBER format a50 heading 'Redolog file name'
+select a.GROUP#,b.MEMBER,a.BYTES/1024/1024 as size_in_mb from v$log a, v$logfile b where a.GROUP#=b.GROUP# order by a.GROUP#;
+prom
+
+ttitle "4. :===== Archive log destination =====:" skip 2
+prom
+select 'Arch_dest_info' from dual;
+archive log list
+prom
+
+ttitle "5. :===== Datafile info =====:" skip 2
+prom
+column TABLESPACE_NAME format a15 heading 'Tablespace|Name'
+column FILE_NAME format a50 heading 'File|Name'
+select TABLESPACE_NAME,FILE_NAME,BYTES/1024/1024/1024 SIZE_IN_GB from dba_data_files order by TABLESPACE_NAME;
+prom
+
+
+
+
+
+
+
+
+
+locks_in_db:
+==========
+Query for locked object sessions.
+
+
+
+SELECT a.inst_id "INST",b.object_name "OBJ_NAME",a.os_user_name "OS_USER",A.oracle_username "ORACLE_USER",
+       c.machine "MACHINE",c.terminal "TERMINAL",c.program "PROGRAM",C.process "PROCESS",NVL(lockwait,'ACTIVE') "LOCKWAIT",
+       INITCAP(DECODE(a.locked_mode,2,'ROW SHARE',3,'ROW EXCLUSIVE',4,'SHARE',5,'SHARE ROW EXCLUSIVE',6,'EXCLUSIVE','UNKNOWN')) "LOCKMODE",
+       b.object_type "OBJECT_TYPE",D.SPID "SERVER_PID",A.SESSION_ID "SESSION_ID",C.SERIAL# "SERIAL_NO",C.SERVER "Server",C.Status "Status",Sysdate
+FROM   SYS.GV_$LOCKED_OBJECT A,   SYS.ALL_OBJECTS B,   SYS.GV_$SESSION c ,SYS.GV_$PROCESS D
+WHERE   A.OBJECT_ID = B.OBJECT_ID
+AND     C.SID = A.SESSION_ID
+AND     C.INST_ID = A.INST_ID
+AND     C.PADDR = D.ADDR
+AND     C.INST_ID = D.INST_ID
+ORDER BY 2
+
+select object_id ,object_name from dba_objects where object_id in (select object_id from v$locked_object);
+
+ select * from v$locked_object where object_id=2441656;
+
+
+identify the Object level lock :
+==========================================================================================
+
+1) select object_id,object_name,owner from dba_objects where object_name=upper('rel_branch')
+
+2)object_id from the above query need to give in the below query .
+
+
+  SELECT  UPPER(DECODE(command,
+         1,'Create Table',2,'Insert',3,'Select',
+         4,'Create Cluster',5,'Alter Cluster',6,'Update',
+         7,'Delete', 8,'Drop Cluster', 9,'Create Index',
+         10,'Drop Index', 11,'Alter Index', 12,'Drop Table',
+         13,'Create Sequencfe', 14,'Alter Sequence', 15,'Alter Table',
+         16,'Drop Sequence', 17,'Grant', 18,'Revoke',
+         19,'Create Synonym', 20,'Drop Synonym', 21,'Create View',
+         22,'Drop View', 23,'Validate Index', 24,'Create Procedure',
+         25,'Alter Procedure', 26,'Lock Table', 27,'No Operation',
+         28,'Rename', 29,'Comment', 30,'Audit',
+         31,'NoAudit', 32,'Create Database Link', 33,'Drop Database Link',
+         34,'Create Database', 35,'Alter Database', 36,'Create Rollback Segment',
+         37,'Alter Rollback Segment', 38,'Drop Rollback Segment', 39,'Create Tablespace',
+         40,'Alter Tablespace', 41,'Drop Tablespace', 42,'Alter Sessions',
+         43,'Alter User', 44,'Commit', 45,'Rollback',
+         46,'Savepoint', 47,'PL/SQL Execute', 48,'Set Transaction',
+         49,'Alter System Switch Log', 50,'Explain Plan', 51,'Create User',
+         52,'Create Role', 53,'Drop User', 54,'Drop Role',
+         55,'Set Role', 56,'Create Schema', 57,'Create Control File',
+         58,'Alter Tracing', 59,'Create Trigger', 60,'Alter Trigger',
+         61,'Drop Trigger', 62,'Analyze Table', 63,'Analyze Index',
+         64,'Analyze Cluster', 65,'Create Profile', 66,'Drop Profile',
+         67,'Alter Profile', 68,'Drop Procedure', 69,'Drop Procedure',
+         70,'Alter Resource Cost', 71,'Create Snapshot Log', 72,'Alter Snapshot Log',
+         73,'Drop Snapshot Log', 74,'Create Snapshot', 75,'Alter Snapshot',
+         76,'Drop Snapshot', 79,'Alter Role', 85,'Truncate Table',
+         86,'Truncate Cluster', 88,'Alter View', 91,'Create Function',
+         92,'Alter Function', 93,'Drop Function', 94,'Create Package',
+         95,'Alter Package', 96,'Drop Package', 97,'Create Package Body',
+         98,'Alter Package Body', 99,'Drop Package Body')) command,
+         s.sid sid,s.serial# "Serial#",p.spid spid, s.status status, s.username "DB User",
+         s.osuser "Client User",
+         to_char(s.logon_time,'dd/mm/yyyy hh24:mi:ss') as logon_time,
+         s.sql_hash_value "Sql Hash",S.PROGRAM,s.terminal terminal,s.machine "machine"
+    FROM v$session s, v$process p WHERE s.paddr = p.addr(+)
+ --        AND S.STATUS='ACTIVE'
+         AND S.TYPE<>'BACKGROUND' and s.SID in (select session_id from v$locked_object where object_id='6354');
+
+
+
+
+INACTIVE SESSION
+===========================
+select B.sql_text "Query",ROWS_PROCESSED,A.inst_id "Instance",A.sid "Sid",A.serial# "Serial No.",A.machine "Machine",A.terminal "Terminal",       A.program "Program",B.users_executing "Users" ,C.opname "Operation",C.target "Target",
+       C.sofar "Till Now",C.totalwork "Total Work",C.Time_Remaining "Remaining Time",C.elapsed_seconds "Time Taken",C.Message "Message",
+       A.username "User",A.status "Status" , LOGON_TIME, sysdate "Time"
+from   gv$session A,gv$sql B,gv$session_longops C
+where  A.sql_address = B.address and    B.users_executing > 0
+--and c.totalwork<>c.sofar
+and    C.inst_id(+) = A.inst_id and    C.sid(+) = A.sid/
+and    C.serial#(+) = A.serial# and    C.sql_address(+) = A.sql_address
+and Status NOT IN ('INACTIVE','KILLED')
+
+
+
+
+db_operations :
+==================
+Query for long running objects sessions.
+==============================================
+
+select A.inst_id "Instance",A.sid "Sid",A.serial# "Serial No.",A.machine "Machine",A.terminal "Terminal",A.process "PROCESS",
+       A.program "Program",B.sql_text "Query",B.users_executing "Users" ,C.opname "Operation",
+C.target "Target",C.sofar "Till Now",C.totalwork "Total Work",
+C.Time_Remaining "Remaining Time",C.elapsed_seconds "Time Taken",C.Message "Message",
+       A.username "User",A.status "Status" , sysdate "Time"
+from   gv$session A,gv$sql B,gv$session_longops C
+where  A.sql_address = B.address
+and    B.users_executing > 0
+and    C.inst_id(+) = A.inst_id
+and    C.sid(+) = A.sid
+and    C.serial#(+) = A.serial#
+and    C.sql_address(+) = A.sql_address
+
+
+
+
+Session killing  :
+===================================================================================================================================================
+select s.machine,p.spid,s.status, 'alter system kill session ' || '''' || s.sid ||',' || s.serial# || ''' IMMEDIATE; '  FROM v$session s, v$process p WHERE s.paddr = p.addr(+) and s.machine like '%WORKGROUP\EMSRBI2%'
+
+
+
+ select s.machine,p.spid,s.status, 'alter system kill session ' || '''' || s.sid ||',' || s.serial# || ''' IMMEDIATE; '  
+FROM v$session s, v$process p WHERE s.paddr = p.addr(+) and s.machine='DR_BO_NEW' and s.program='/home/BOUSER/BO/bobje/enterprise120//aix_rs6000/'
+/
+
+
+DB level session/process count :
+===================================================================================================================================================
+select count(*),program from v$session where username is NOt null and username !='SYS' group by program
+ union
+ select count(*) ,'** Total sess count **' from v$session
+
+
+
+
+ASM space infor quries:
+===================================================================================================================================================
+ 
+ 
+ col path format a60
+ set linesize 1000
+ set pagesize 1000
+ 
+ select GROUP_NUMBER,name,state,TOTAL_MB,FREE_MB from v$asm_diskgroup  order by GROUP_NUMBER;
+ select GROUP_NUMBER,name,path,CREATE_DATE,TOTAL_MB,FREE_MB from v$asm_disk order by GROUP_NUMBER;
+ select GROUP_NUMBER,name,path,CREATE_DATE,TOTAL_MB,FREE_MB from v$asm_disk_stat order by GROUP_NUMBER;
+ 
+ 
+  select GROUP_NUMBER,name,path,total_mb,free_mb,CREATE_DATE from v$asm_disk where path like '%&a%'
+
+
+
+
+
+ BLOCKING session in IMB :
+=================================================================================================================================================== 
+ 
+ select blocking_session, sid, serial#, wait_class, seconds_in_wait from v$session where blocking_session is not NULL order by blocking_session;
+
+
+
+LOB object size in the FCRBRN db:
+=================================================================================================================================================== 
+
+FCRBRN SQL>@/oracle/orabase/orahome/Scripts/get_space_free_lob.sql
+Enter value for segment_owner: BRNUSER
+Enter value for segment_name: SYS_LOB0000131897C00006$$
+Enter value for segment_type: LOB
+old  18:                dbms_space.space_usage ('&SEGMENT_OWNER', '&SEGMENT_NAME', '&SEGMENT_TYPE', v_unformatted_blocks,
+new  18:                dbms_space.space_usage ('BRNUSER', 'SYS_LOB0000131897C00006$$', 'LOB', v_unformatted_blocks,
+
+Unformatted Blocks = 3260104
+FS1 Blocks = 0
+FS2 Blocks = 0
+FS3 Blocks = 0
+FS4 Blocks = 0
+Full Blocks = 21508314
+================================================================================
+Allocated blocks: 24768418  ****** Used blocks: 21508314
+Free space : 25469.56 MB
+================================================================================
+
+
+
+alter table brnuser.REC_TXNXMLLOG modify lob (TXN_XML) (allocate extent(size 500m));
+
+
+
+AML SQL>desc sm$ts_free;
+ Name                                                                     Null?    Type
+ ------------------------------------------------------------------------ -------- -------------------------------------------------
+ TABLESPACE_NAME                                                                   VARCHAR2(30)
+ BYTES                                                                             NUMBER
+
+AML SQL> select TABLESPACE_NAME,BYTES/1024/1024/1024 from sm$ts_free;
+
+
+AML SQL>select * from dba_datapump_jobs;
+
+OWNER_NAME                     JOB_NAME                       OPERATION                      JOB_MODE
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+STATE                              DEGREE ATTACHED_SESSIONS DATAPUMP_SESSIONS
+------------------------------ ---------- ----------------- -----------------
+OMNIUSER                       SYS_IMPORT_FULL_01             IMPORT                         FULL
+EXECUTING                               4                 1                 3
+
+oracle@DCAMLDB/mnt/AML>impdp omniuser attach=SYS_IMPORT_FULL_01
+
+select path ,failgroup,create_date ,name from v$asm_disk;
+
+
+------------------------Explain plan for the query :------------------------------
+
+
+explain plan for <select * from tab where >
+
+select * from table(dbms_xplan.display);
+
+
+explain plan with sqlid
+
+select * from table(dbms_xplan.display_cursor('1y7ddu5zx8grg'));
+
+
+
+SQL> SELECT INDEXEXPLAIN PLAN FOR select /*+ INDEX (C IN_FCT_ALL_FCR_TXNS_MMDD_2) */  * from fcrarch.fct_all_fcr_txns_mmdd C  where V_BRANCH_CODE='1410' and D_TXN_BOOK_DATE='02-apr-2011'
+  2
+SQL>
+SQL> EXPLAIN PLAN FOR select /*+ INDEX (C IN_FCT_ALL_FCR_TXNS_MMDD_2) */  * from fcrarch.fct_all_fcr_txns_mmdd C  where V_BRANCH_CODE='1410' and D_TXN_BOOK_DATE='02-apr-2011'
+  2  ;
+
+Explained.
+
+SQL> select * from table  (dbms_xplan.display);
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Plan hash value: 1290856449
+
+----------------------------------------------------------------------------------------------------------
+| Id  | Operation                   | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT            |                            |     1 |  1239 |   151   (1)| 00:00:02 |
+|   1 |  TABLE ACCESS BY INDEX ROWID| FCT_ALL_FCR_TXNS_MMDD      |     1 |  1239 |   151   (1)| 00:00:02 |
+|*  2 |   INDEX RANGE SCAN          | IN_FCT_ALL_FCR_TXNS_MMDD_2 |     1 |       |     8   (0)| 00:00:01 |
+----------------------------------------------------------------------------------------------------------
+
+Predicate Information (identified by operation id):
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------
+
+   2 - access("V_BRANCH_CODE"='1410' AND "D_TXN_BOOK_DATE"=TO_DATE(' 2011-04-02 00:00:00',
+              'syyyy-mm-dd hh24:mi:ss'))
+
+15 rows selected.
+
+SQL>
+
+
+------------------------End of Explain plan :------------------------------
+
+
+SQL> select * from v$asm_operation;
+
+GROUP_NUMBER OPERA STAT      POWER     ACTUAL      SOFAR   EST_WORK   EST_RATE
+------------ ----- ---- ---------- ---------- ---------- ---------- ----------
+EST_MINUTES ERROR_CODE
+----------- --------------------------------------------
+           1 REBAL RUN           8          8     132019     424877       4853
+         60
+
+
+1)  select * from db_operations
+
+
+select FILE_NAME,TABLESPACE_NAME from dba_temp_files where TABLESPACE_NAME='TEMP';
+
+select * from locks_in_db 
+
+
+$ grep "sm_br_event_log" *.par
+
+======================================================================================
+Elapsed: 00:00:00.02
+16:47:03 AML SQL>alter tablespace FRSPART_IDX_QTR3 add datafile '+FRS_DATA1' size 32766m;
+
+Tablespace altered.
+
+Elapsed: 00:00:00.17
+16:49:39 AML SQL>select FILE_ID,FILE_NAME,bytes/1024/1024/1024 from dba_data_files where TABLESPACE_NAME='SFRSTB';
+
+
+***********alter index TB_TRANSACTIONS_PURGE REBUILD ONLINE; ************
+
+************select handle ,tag from rc_backup_piece where handle like 'FCR_%' order by handle*****************
+
+***************select name ,state from v$asm_diskgroup_stat;************
+
+
+*********** select name,state from v$asm_diskgroup;
+
+/*
+
+
+http://arjudba.blogspot.com/search/label/Controlfiles
+
+http://download.oracle.com/docs/cd/E11882_01/server.112/e10729/ch4datetime.htm#CACFFHCJ
+
+select name,open_mode,log_mode from v$database;
+
+select bytes/(1024*1024*1024),file_name from dba_data_files where FILE_NAME='+FCC_DATA1/fcc/datafile/fccdatalarge.594.7487224
+21';
+
+
+===========================CHECKING OBJECTS===================================
+
+select count(*),object_type from dba_objects where owner='NPAFCGL' group by object_type order by 2;
+
+===============================================================================
+
+
+
+CREATE TABLESPACE NPABRN  DATAFILE '/fcctest/IBMTEST/NPABRN_data_1.dbf' SIZE 32764m  EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+
+
+
+CREATE USER NPABRN IDENTIFIED BY NPABRN  TEMPORARY TABLESPACE temp DEFAULT TABLESPACE NPABRN QUOTA UNLIMITED ON NPABRN;
+
+
+
+
+/fcctest/IBMTEST/NPAFCGL_data_5.db
+
+
+==========SIZE OF SCHEMA ======================
+SELECT s.owner,SUM (s.BYTES) / (1024 * 1024 * 1024) SIZE_IN_GB FROM dba_segments s GROUP BY s.owner;
+
+SELECT s.owner,SUM (s.BYTES) / (1024 * 1024) SIZE_IN_MB FROM dba_segments s GROUP BY s.owner;
+
+
+
+===============GatherStats====================
+
+http://psoug.org/reference/dbms_stats.html
+
+
+
+exec DBMS_STATS.GATHER_TABLE_STATS(OWNNAME =>'FCGL',TABNAME => 'CSTM_PRODUCT_CUSTOMER_ACCESS' , ESTIMATE_PERCENT=> 40,CASCADE=> TRUE, METHOD_OPT=> 'FOR ALL COLUMNS SIZE 1',DEGREE=> 40);
+
+Delete stats
+
+EXEC DBMS_STATS.delete_table_stats('OMNIUSER', 'TB_RULE_RESULT');
+
+exec dbms_stats.delete_index_stats('schema USER','index_name');
+exec dbms_stats.export_index_stats(USER, 'uc_state_city', NULL, 'STAT_TAB');
+
+
+select 'EXEC DBMS_STATS.delete_table_stats('||''''||'OMNIUSER'||''''||', '||''''||table_name||''''||');',
+table_name,owner,last_analyzed from dba_tables where table_name like '%TEMP%' and trunc(LAST_ANALYZED) is not null group by table_name,owner,last_analyzed;
+
+
+ exec dbms_stats.gather_index_stats(OWNNAME =>'FCGL',indname => 'IND_ACNO_TRN_HIST_PAR', ESTIMATE_PERCENT=> DBMS_STATS.AUTO_SAMPLE_SIZE,DEGREE=>30);
+
+
+exec dbms_stats.gather_index_stats(OWNNAME =>'FCGL',indname => 'IND_ACNO_TRN_HIST_PAR_HASH', ESTIMATE_PERCENT=> DBMS_STATS.AUTO_SAMPLE_SIZE,DEGREE=>30)
+
+
+==================OFSS gather table level & column level stats scripts ================================
+
+SELECT * FROM FCRUSER.TABLE_STATS; ---- ofss 
+
+SELECT * FROM DBA_TAB_COL_STATISTICS WHERE OWNER='FCRUSER' and table_name='PM_MSG_DESPATCH_TBL' ; ---- db level view
+
+
+
+histogram --frequency wl shw for colstas n rest wl shw none
+
+
+
+select owner,table_name,column_name,last_analyzed,global_stats,histogram from DBA_TAB_COL_STATISTICS WHERE OWNER='FCRUSER' and table_name in ('PM_MSG_INWARD_TBL','PM_MSG_DESPATCH_TBL','PM_NEFT_N10_DETAILS') order by table_name ;  --- 
+
+
+
+
+
+i) column level stats (ap_gather_table_stats_cols)  in FCR prod db
+
+NOTE : column names for the table will get by using the query (SELECT * FROM FCRUSER.TABLE_STATS) 
+
+ respective column names need to put in the below gather script ( i.e like var_pi_table_name := 'PM_MSG_INWARD_TBL';   &
+                                                                       var_pi_table_cols := 'COD_NETWORK_ID,RCVD_STATUS'; )
+
+   	TABLE_NAME	INDEX_COLS
+1	PM_MSG_INWARD_TBL	COD_NETWORK_ID,RCVD_STATUS
+2	PM_MSG_DESPATCH_TBL	COD_NETWORK_ID,COD_MSG_ID,DESPATCH_STATUS
+3	XF_OL_ST_NWLOG	FLG_STATUS,FLG_IN_OUT,COD_NETWORK_ID
+4	PM_NEFT_N10_DETAILS	FLG_STATUS
+
+
+
+
+Script :
+
+
+DECLARE
+RET NUMBER;
+var_pi_degree NUMBER;
+var_pi_owner VARCHAR2(30);
+var_pi_table_name VARCHAR2(100);
+var_pi_table_cols VARCHAR2(1000);
+var_pi_estimate NUMBER;
+BEGIN
+
+  var_pi_degree := 48;
+  var_pi_owner := 'FCRUSER';
+  var_pi_estimate := 30;
+
+
+  var_pi_table_name := 'PM_MSG_INWARD_TBL';
+  var_pi_table_cols := 'COD_NETWORK_ID,RCVD_STATUS';
+  RET := ap_gather_table_stats_cols(var_pi_table_name,var_pi_degree,var_pi_owner,var_pi_table_cols,var_pi_estimate);
+
+
+EXCEPTION
+WHEN OTHERS THEN
+  dbms_output.put_line(SubStr('Error '||TO_CHAR(SQLCODE)||': '||SQLERRM, 1, 255));
+RAISE;
+END;
+/
+
+
+
+
+ii)table  level stats (ap_gather_table_stats) in FCR prod db 
+ XF_STCAP_GL_TXNS table Gather stats script:
+
+Script :
+
+DECLARE
+RET NUMBER;
+var_pi_table_name VARCHAR2(30);
+var_pi_degree NUMBER;
+var_pi_owner VARCHAR2(30);
+var_pi_estimate NUMBER;
+BEGIN
+  var_pi_degree := 48;
+  var_pi_owner := 'FCRUSER';
+  var_pi_estimate := 30;
+  RET := ap_gather_table_stats('XF_STCAP_GL_TXNS',var_pi_degree,var_pi_owner,var_pi_estimate);
+EXCEPTION
+WHEN OTHERS THEN
+  dbms_output.put_line(SubStr('Error '||TO_CHAR(SQLCODE)||': '||SQLERRM, 1, 255));
+RAISE;
+END;
+/
+
+
+
+
+
+
+
+
+
+TABLE GATHER STATS EXPORT /IMPORT SCRIPTS:
+==============================================================
+
+
+
+
+fcr tables ('XF_OL_ST_COTXN_MMDD','XF_OL_ST_COTXN')stats export taken from dc flash.
+stat tables exported and kept in 38.23 /temp
+ 
+-rw-r--r--    1 oracle   dba             630 Feb 20 10:38 XF_OL_ST_COTXN_tables_stat_export.log
+-rw-r--r--    1 oracle   dba          448000 Feb 20 10:38 XF_OL_ST_COTXN_tables_stat_export.dmp
+ 
+exec dbms_stats.create_stat_table ( ownname => 'FCRUSER' , stattab => 'temp_stat1' ) ;
+exec dbms_stats.export_table_stats ( ownname => 'FCRUSER' , stattab => 'temp_stat1', tabname => 'XF_OL_ST_COTXN_MMDD');
+ 
+exec dbms_stats.create_stat_table ( ownname => 'FCRUSER' , stattab => 'temp_stat2' ) ;
+exec dbms_stats.export_table_stats ( ownname => 'FCRUSER' , stattab => 'temp_stat2', tabname => 'XF_OL_ST_COTXN');
+ 
+exp  filE=XF_OL_ST_COTXN_tables_stat_export.dmp log=XF_OL_ST_COTXN_tables_stat_export.log  statistics=none  recordlength=64000 grants=Y tables=FCRUSER.TEMP_STAT1,FCRUSER.TEMP_STAT2
+ 
+for importing stats:
+imp filE=XF_OL_ST_COTXN_tables_stat_export.dmp log=XF_OL_ST_COTXN_tables_stat_imp_20feb14.log  statistics=none  recordlength=64000 grants=Y tables=TEMP_STAT1,TEMP_STAT2 fromuser=fcruser touser=fcrread
+
+exec dbms_stats.import_table_stats ( ownname => 'FCRUSER' , stattab => 'temp_stat1', tabname => 'XF_OL_ST_COTXN_MMDD');
+exec dbms_stats.import_table_stats ( ownname => 'FCRUSER' , stattab => 'temp_stat2', tabname => 'XF_OL_ST_COTXN');
+ 
+for dropping the stat table:
+execute dbms_stats.drop_stat_table(ownname => 'FCRUSER' , stattab => 'temp_stat1');
+ 
+to restore previous stats:
+exec dbms_stats.restore_table_stats ('FCRUSER','XF_OL_ST_COTXN_MMDD',sysdate-1);
+
+
+
+note :for index stats ----- exec dbms_stats.export_index_stats(USER, 'uc_state_city', NULL, 'STAT_TAB'); 
+
+
+
+
+Incremental Gathere stats:
+===============================================================
+
+Partitioned table incremental gather stats:
+EXEC DBMS_STATS.SET_TABLE_PREFS ('FRSPROD','RPT_MULTISQL_OUTPUT_W2','INCREMENTAL','TRUE');
+select dbms_stats.getprefs('INCREMENTAL','FRSPROD','RPT_MULTISQL_OUTPUT_W2') from dual;
+EXEC DBMS_STATS.GATHER_TABLE_STATS('FRSPROD', 'RPT_MULTISQL_OUTPUT_W2', granularity => 'AUTO', estimate_percent => DBMS_STATS.AUTO_SAMPLE_SIZE,DEGREE=>40);
+
+
+
+
+
+
+http://www.oracle-base.com/articles/11g/statistics-collection-enhancements-11gr1.php#partitioned_objects
+
+EXEC DBMS_STATS.SET_TABLE_PREFS ('FRSPROD','RPT_MULTISQL_OUTPUT_W2','INCREMENTAL','TRUE');
+
+frsprod1 SQL>select dbms_stats.get_prefs('INCREMENTAl','FRSPROD','RPT_MULTISQL_OUTPUT_W2') FROM DUAL;
+
+DBMS_STATS.GET_PREFS('INCREMENTAL','FRSPROD','RPT_MULTISQL_OUTPUT_W2')
+------------------------------------------------------------------------------------------------------------------------------------
+TRUE
+
+
+
+desc dbms_stats
+>exec dbms_stats.gather_table_stats(OWNNAME=>'FRSPROD',TABNAME=>'RPT_MULTISQL_OUTPUT_W2',ESTIMATE_PERCENT=>AUTO_SAMPLE_SIZE,GRANULARITY=>'PARTITION',DEGREE=>40);
+EXEC DBMS_STATS.GATHER_TABLE_STATS('FRSPROD', 'RPT_MULTISQL_OUTPUT_W2', granularity => 'AUTO', estimate_percent => DBMS_STATS.AUTO_SAMPLE_SIZE,DEGREE=>40);
+
+
+Using the AUTO_SAMPLE_SIZE constant in previous versions got a bit of a bad reputation. The selected sample size was sometimes inappropriate, making the resulting statistics questionable.
+In Oracle 11g, the AUTO_SAMPLE_SIZE constant is the preferred (and default) sample size as the mechanism for determining the actual sample size has been improved. In addition, the statistics estimate based on the auto sampling are near to 100% accurate and much faster to gather than in previous versions, as described here.
+
+EXEC DBMS_STATS.gather_table_stats('MYSCHEMA', 'BIG_TABLE', estimate_percent => DBMS_STATS.auto_sample_size);
+
+
+
+===============COlumn level gather stats inthe FCR prod db ===============
+
+
+
+DECLARE
+RET NUMBER;
+var_pi_degree NUMBER;
+var_pi_owner VARCHAR2(30);
+var_pi_table_name VARCHAR2(100);
+var_pi_table_cols VARCHAR2(1000);
+var_pi_estimate NUMBER;
+BEGINandh
+
+	var_pi_degree := 48;
+	var_pi_owner := 'FCRUSER';
+	var_pi_estimate := 30;
+
+	
+	var_pi_table_name := 'XF_OL_ST_NWLOG';
+	var_pi_table_cols := 'BATCH_REF_NO,FLG_STATUS,FLG_IN_OUT,COD_NETWORK_ID';
+	RET := ap_gather_table_stats_cols(var_pi_table_name,var_pi_degree,var_pi_owner,var_pi_table_cols,var_pi_estimate);
+	
+
+EXCEPTION
+WHEN OTHERS THEN
+	dbms_output.put_line(SubStr('Error '||TO_CHAR(SQLCODE)||': '||SQLERRM, 1, 255));
+RAISE;
+END;
+/
+
+
+
+
+SQL> explain plan for UPDATE XF_OL_ST_NWLOG SET FLG_STATUS = 30 WHERE BATCH_REF_NO = :B2 AND FLG_STATUS = '20' AND FLG_IN_OUT = 'I' AND COD_NETWORK_ID = :B1 ;
+
+Explained.
+
+SQL>  select * from table(dbms_xplan.display);
+
+
+
+
+
+
+===============Disabling schedular in oracle:====================
+
+SQL> exec dbms_scheduler.disable('ORACLE_OCM.MGMT_CONFIG_JOB');
+
+PL/SQL procedure successfully completed.
+
+SQL> exec dbms_scheduler.disable('ORACLE_OCM.MGMT_STATS_CONFIG_JOB');
+
+PL/SQL procedure successfully completed.
+
+
+
+
+
+FCR SQL>select NAME,ISSYS_MODIFIABLE from v$parameter;
+
+
+
+ select name from v$controlfile union select name from v$datafile union select name from v$tempfile union select member from v$logfile;
+
+
+Connect as user and execute the query for refreshing Mview  EXEC DBMS_MVIEW.REFRESH('REC_TDEF')
+
+
+
+
+select * from fcrread.locks_in_db where terminal = 'SRJ'
+
+
+=============================== PID =====================================================
+
+
+select   substr(a.spid,1,9) pid, substr(b.sid,1,5) sid, 
+substr(b.serial#,1,5) ser#,substr(b.machine,1,6) box,
+ substr(b.username,1,10) username, substr(b.osuser,1,8) os_user,
+  substr(b.program,1,30) program 
+from   v$session b,   v$process a
+where a.spid=6694054  and   b.paddr = a.addr and   type='USER' 
+order by   spid;
+
+
+==============================================================================
+
+
+spool C:\BasicDocs\dba_schedule_scripts\FCR_DB_ops.log
+set echo on
+set time on
+INSERT INTO DB_OPS (select * from db_operations);
+/
+commit
+/
+spool off
+exit
+
+
+=======================================================================
+
+
+http://www.remote-dba.net/oracle_10g_tuning/t_reading_awr_report_sections.htm
+
+
+http://www.slideshare.net/texasmemorysystems/using-statspack-and-awr-for-memory-monitoring-and-tuning
+
+
+http://www.dba-oracle.com/concepts/shared_pool_tuning.htm
+
+http://www.scribd.com/doc/2713813/Oracle-all-about-shared-pool
+
+
+
+
+======================  SCHEMA SIZE ========================================
+
+
+
+SELECT s.owner,SUM (s.BYTES) / (1024 * 1024 * 1024) SIZE_IN_GB
+FROM dba_segments s
+GROUP BY s.owner;
+
+================================================================================
+
+
+
+
+select bytes/(1024*1024),file_name from dba_data_files where tablespace_name='FCRDATA4'order by bytes;
+
+
+
+select OWNER,bytes/(1024*1024),segment_name from dba_segments where OWNER='FRSPROD' AND segment_name IN ('RPT_XOS_DATA','RPT_REPORT_REFERENCE','RPT_MUTLISQL_STR11_260908','RPT_MULTI_INTERFACE','RPT_MULTISQL_SUMMARY','RPT_MULTISQL_OUTPUT_SPL','RPT_MULTISQL_OUTPUT_SAFE','RPT_MULTISQL_OUTPUT_RET17','RPT_MULTISQL_OUTPUT_PSR33','RPT_MULTISQL_OUTPUT_NEW14','RPT_MULTISQL_OUTPUT_EXE_W2','RPT_MULTISQL_OUTPUT_EXE_TEST','RPT_MULTISQL_OUTPUT_EXE_PSRA','RPT_MULTISQL_OUTPUT_EXE_NEW1','RPT_MULTISQL_OUTPUT_EXE_NEW','RPT_MULTISQL_OUTPUT_EXE_FINAL','RPT_MULTISQL_OUTPUT_EXE_2609','RPT_MULTISQL_OUTPUT_EXE_26','RPT_MULTISQL_OUTPUT_EXE_1','RPT_MULTISQL_OUTPUT_EXE1','RPT_MULTISQL_OUTPUT_EXE','RPT_MULTISQL_OUTPUT_BFFRSON','RPT_MULTISQL_OUTPUT_24102008','RPT_MULTISQL_OUTPUT_1','RPT_MULTISQL_OUTPUT_0409','RPT_MULTISQL_FORMULA_TEMP2');
+
+===============================######################$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%%%%%%%%%%%%%%%%%%%%%%%%%^^^^^^^^^^^^^^^^^^^^^^^^&&&&&&&&&&&&&&&&&&&&&*&&&&&&&&&&&&&&&&******************!!!!!!!!!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+'ALTERTABLE'||TABLE_NAME||'MOVECOMPRESS;'
+--------------------------------------------------------------------------------
+ALTER TABLE RPT_XOS_DATA move compress ;
+ALTER TABLE RPT_REPORT_REFERENCE move compress ;
+ALTER TABLE RPT_MUTLISQL_STR11_260908 move compress ;
+ALTER TABLE RPT_MULTI_INTERFACE move compress ;
+ALTER TABLE RPT_MULTISQL_SUMMARY move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_SPL move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_SAFE move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_RET17 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_PSR33 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_NEW14 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_W2 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_TEST move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_PSRA move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_NEW1 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_NEW move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_FINAL move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_2609 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_26 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE_1 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE1 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_EXE move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_BFFRSON move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_24102008 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_1 move compress ;
+ALTER TABLE RPT_MULTISQL_OUTPUT_0409 move compress ;
+ALTER TABLE RPT_MULTISQL_FORMULA_TEMP2 move compress ;
+
+26 rows selected.
+
+SQL> ;
+  1* select 'ALTER TABLE ' || table_name || ' move compress ; ' from dba_tables where owner='FRSPROD' and table_name like 'RPT%' and partition
+ed='NO'
+
+
+
+
+
+
+
+
+SELECT a.name,b.bytes/1024/1024 "usedmb",c.bytes/1024/1024 freemb,d.bytes/1024/1024 totalmb FROM v$tablespace a,
+sys.SM$TS_USED b,sys.SM$TS_FREE c,sys.SM$TS_AVAIL d WHERE a.name=b.tablespace_name(+) AND a.name=c.TABLESPACE_NAME(+) AND
+a.NAME=d.tablespace_name(+)
+
+
+select owner, segment_name, partition_name, segment_type, tablespace_name, bytes/1024/1024/1024 SIZEMB from dba_segments where owner='FRSPROD' and segment_name='SRI_FCT_ACCOUNT_MIS' and segment_type='INDEX PARTITION' order by segment_name, partition_name desc
+
+
+
+select COUNT(*),object_type from dba_objects where owner='NPAFCR' GROUP  BY object_type;
+
+
+select distinct status ,count(*) from dba_objects  where owner='NPABRN' GROUP BY status;
+
+
+
+
+
+
+ ALTER DATABASE TEMPFILE '+FRS_DATA1/frsprod1/tempfile/temp.704.773190639' drop including datafiles; 
+
+
+
+
+
+
+
+
+
+
+
+ExPDP directory creation:
+====================================
+
+create or replace directory GBMEXP  as '/arch';
+
+grant read,write on directory GBMEXP to CHANNELG,system;
+
+
+
+
+
+Broken & remove oracle jobs
+==================================================
+
+
+
+Symptoms
+Removal of Database jobs using the DBMS_JOB.REMOVE fails with
+
+ORA-23421: job number <job_number> is not a job in the job queue
+Cause
+
+The user trying to delete / remove the job is not the owner of the job.
+
+Only the job's owner can alter the job, force the job to
+run, or remove the job from the queue.
+Solution
+To implement the solution, please execute the following steps:
+
+1. Determine the owner of the job with the query shown below:
+SQL> select job, what, log_user, priv_user from dba_jobs where job=<job_number> ;
+
+2. Connect to the database using SQL*Plus as the owner of the job (value of priv_user from the
+query results obtained in step 1)
+
+3. Execute the job removal procedure and commit the transaction:
+SQL> exec DBMS_JOB.remove(1657208);
+SQL> commit;
+
+
+Note:
+Another workable solution is instead of logging in as the owner of the job, use the package DBMS_IJOB instead of DBMS_JOB.
+
+Example:
+EXEC DBMS_IJOB.BROKEN(2132501,TRUE);
+EXEC DBMS_IJOB.remove(2132501) ;
+
+
+
+
+
+OR :
+
+
+Locks in the DB:
+-----------------------------
+
+
+select * from fcrread.locks_in_db; (connect as fcrread@fcrprod)
+
+select 'exec dbms_job.broken(' ||JOB ||',TRUE);' from dba_jobs;
+
+select 'exec dbms_job.broken(' ||JOB ||',TRUE);' from dba_jobs where LOG_USER='FCCUSER'
+
+
+select 'exec dbms_job.remove(' ||JOB ||');' from dba_jobs where LOG_USER='FCCUSER;
+
+exec dbms_job.RUN(213076);
+
+exec dbms_job.remove(11888);                                                             
+exec dbms_job.remove(11887);                                                             
+exec dbms_job.remove(11889);                                                             
+exec dbms_job.remove(11890);                                                             
+exec dbms_job.remove(11891);                                                                            
+
+
+
+
+
+
+===========================================
+
+Priviliges checking:
+
+
+===========================================
+
+select
+lpad(' ', 2*level) || granted_role "User, his roles and privileges"
+from
+(
+/* THE USERS */
+select
+null     grantee,
+username granted_role
+from
+dba_users
+where
+username like upper('%&enter_username%')
+/* THE ROLES TO ROLES RELATIONS */
+union
+select
+grantee,
+granted_role
+from
+dba_role_privs
+/* THE ROLES TO PRIVILEGE RELATIONS */
+union
+select
+grantee,
+privilege
+from
+dba_sys_privs
+)
+start with grantee is null
+connect by grantee = prior granted_role;---(GIVE THE USERNAME)
+
+
+
+Object prviliges assigend to grantee(i.e  user or role) 
+-----------------------------------------------------------
+
+SELECT 'GRANT ' || PRIVILEGE || ' ON ' || OWNER || '.' || table_name || '  TO TIVOLI_MON_ROLE ;' FROM DBA_TAB_PRIVS WHERE GRANTEE='TIVOLI_MON_ROLE'
+/
+
+
+
+
+
+
+desc system_privilege_map;
+
+
+select
+  lpad(' ', 2*level) || granted_role "User, his roles and privileges"
+from
+  (
+  /* THE USERS */
+    select 
+      null     grantee, 
+      username granted_role
+    from 
+      dba_users
+    where
+      username like upper('%&enter_username%')
+  /* THE ROLES TO ROLES RELATIONS */ 
+  union
+    select 
+      grantee,
+      granted_role
+    from
+      dba_role_privs
+  /* THE ROLES TO PRIVILEGE RELATIONS */ 
+  union
+    select
+      grantee,
+      privilege
+    from
+      dba_sys_privs
+  )
+start with grantee is null
+connect by grantee = prior granted_role; ;---(GIVE THE USERNAME)
+
+
+
+
+System privileges to roles and users
+
+This is also possible the other way round: showing the system privileges in relation to roles that have been granted this privilege and users that have been granted either this privilege or a role:
+
+select
+  lpad(' ', 2*level) || c "Privilege, Roles and Users"
+from
+  (
+  /* THE PRIVILEGES */
+    select 
+      null   p, 
+      name   c
+    from 
+      system_privilege_map
+    where
+      name like upper('%&enter_privliege%')
+  /* THE ROLES TO ROLES RELATIONS */ 
+  union
+    select 
+      granted_role  p,
+      grantee       c
+    from
+      dba_role_privs
+  /* THE ROLES TO PRIVILEGE RELATIONS */ 
+  union
+    select
+      privilege     p,
+      grantee       c
+    from
+      dba_sys_privs
+  )
+start with p is null
+
+
+
+
+Object privileges
+
+select
+  case when level = 1 then own || '.' || obj || ' (' || typ || ')' else
+  lpad (' ', 2*(level-1)) || obj || nvl2 (typ, ' (' || typ || ')', null)
+  end
+from
+  (
+  /* THE OBJECTS */
+    select 
+      null          p1, 
+      null          p2,
+      object_name   obj,
+      owner         own,
+      object_type   typ
+    from 
+      dba_objects
+    where
+       owner not in 
+        ('SYS', 'SYSTEM', 'WMSYS', 'SYSMAN','MDSYS','ORDSYS','XDB', 'WKSYS', 'EXFSYS', 
+         'OLAPSYS', 'DBSNMP', 'DMSYS','CTXSYS','WK_TEST', 'ORDPLUGINS', 'OUTLN')
+      and object_type not in ('SYNONYM', 'INDEX')
+  /* THE OBJECT TO PRIVILEGE RELATIONS */ 
+  union
+    select
+      table_name p1,
+      owner      p2,
+      grantee,
+      grantee,
+      privilege
+    from
+      dba_tab_privs
+  /* THE ROLES TO ROLES/USERS RELATIONS */ 
+  union
+    select 
+      granted_role  p1,
+      granted_role  p2,
+      grantee,
+      grantee,
+      null
+    from
+      dba_role_privs
+  )
+start with p1 is null and p2 is null
+connect by p1 = prior obj and p2 = prior own;
+
+
+
+Number of archvie redo logfiles generated for cretain time period:
+-----------------------------------------------------------------------
+
+select count(DISTINCT b.sequence#) from v$log_history b,v$archived_log a where b.first_time between 
+to_date('09-APR-2013:22:00:00','dd-mon-yyyy:hh24:mi:ss') and to_date('10-APR-2013:06:00:00','dd-mon-yyyy:hh24:mi:ss') and a.sequence#=b.sequence#
+
+
+
+
+AUD$ table movment from system tbs to named tbs in 11g :
+===================================================================
+
+CBRPT SQL>create tablespace AUDIT1 datafile '+CBRPT_DATA1' size 3G;
+
+Tablespace created.
+
+Elapsed: 00:00:04.40
+CBRPT SQL>sho user
+USER is "SYS"
+CBRPT SQL> BEGIN
+ DBMS_AUDIT_MGMT.SET_AUDIT_TRAIL_LOCATION(audit_trail_type => DBMS_AUDIT_MGMT.AUDIT_TRAIL_AUD_STD,
+ audit_trail_location_value => 'AUDIT1');
+ END ;
+ /  2    3    4    5
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:04:09.12
+CBRPT SQL>
+
+
+CBRPT SQL>alter database datafile '+CBRPT_DATA1/cbrpt/datafile/audit1.270.812557943' resize 4G;
+
+Database altered.
+
+
+
+EXPDP & IMPDP commands:
+============================================================================
+
+impdp Directory=FCRARCH DUMPFILE=FCT_ALL_FCR_TXNS_MMDD_21042013_20_40_%U.dmp  LOGFILE=FCT_ALL_FCR_TXNS_MMDD_imp_22apr13.log  status=120 parallel=5  tables=FCRUSER.FCT_ALL_FCR_TXNS_MMDD remap_schema=FCRUSER:FCRARCH remap_tablespace=FCRDEFAULT:FCRDEFAULT EXCLUDE=INDEX:"= 'IN_FCT_ALL_FCR_TXNS_MMDD_2'",INDEX:"= 'IN_FCT_ALL_FCR_TXNS_MMDD_3'"
+
+
+
+expdp DIRECTORY=FCRDATAPUMP
+EXCLUDE=GRANTS,STATISTICS
+DUMPFILE=FCT_ALL_FCR_TXNS_MMDD_%U.dmp
+LOGFILE=FCT_ALL_FCR_TXNS_MMDD_export.log
+PARALLEL=5
+query='WHERE cod_payee_brn <='28-MAR-2010'
+TABLES=(FCRUSER.FCT_ALL_FCR_TXNS_MMDD)
+ feedback=1000000
+
+(from prod)---- expdp FCRUSER  DIRECTORY=FCRDATAPUMP EXCLUDE=STATISTICS,GRANTS  DUMPFILE=FCT_ALL_FCR_TXNS_MMDD_`date +%d%m%Y_%H_%M`_%U.dmp LOGFILE=FCT_ALL_FCR_TXNS_MMDD_`date +%d%m%Y_%H_%M`.log status=120 parallel=20 tables=fcruser.FCT_ALL_FCR_TXNS_MMDD
+
+
+expdp DIRECTORY=FCRDATAPUMP  DUMPFILE=ibmdba_CH_TMP_RCH201_3.dmp LOGFILE=ibmdba_CH_TMP_RCH201_3.log status=120 tables=ibmdba.CH_TMP_RCH201_2 grants=no statistics=none 
+impdp DIRECTORY=FCRDATAPUMP  DUMPFILE=ibmdba_CH_TMP_RCH201_3.dmp LOGFILE=ibmdba_CH_TMP_RCH201_3_imp.log status=120 tables=ibmdba.CH_TMP_RCH201_2 remap_schema=ibmdba:ibmdba2 table_exists_action=append
+
+
+
+
+DB link recreation script :
+=============================================================================================================================================
+
+SELECT 'CREATE '||DECODE(U.NAME,'PUBLIC','public ')||'DATABASE LINK '||CHR(10) ||DECODE(U.NAME,'PUBLIC',Null, 'SYS','',U.NAME||'.')|| L.NAME||chr(10) ||'CONNECT TO ' || L.USERID || ' IDENTIFIED BY "'||L.PASSWORD||'" USING '''||L.HOST||'''' ||chr(10)||';' TEXT FROM SYS.LINK$ L, SYS.USER$ U WHERE L.OWNER# = U.USER# order by u.name;
+
+
+
+
+
+Rman backup status check :
+=============================================================================================================================================
+
+set lines 200
+set pages 2000
+col opname format a30
+alter session set nls_date_format='dd-mon-yy hh24:mi:ss';
+
+select sid, opname, round(time_remaining/60) as tim_rem_in_min, sofar,
+  totalwork, start_time,units from v$session_longops
+  where time_remaining > 0 order by start_time;
+
+select max(trunc(CHECKPOINT_TIME) ) from v$backup_datafile ;
+
+
+select file# || ' , ' from v$datafile where file# not in (select file# from v$backup_datafile where trunc(CHECKPOINT_TIME) ='15-DEC-2013' );
+
+
+select count(*) from  v$backup_datafile where trunc(CHECKPOINT_TIME) ='15-DEC-2013';
+select count(*) from v$datafile;
+
+set lines 200
+set pages 2000
+col opname format a30
+select sid, opname, round(time_remaining/60) as tim_rem_in_min, sofar,
+  totalwork, start_time,units from v$session_longops
+  where time_remaining > 0 order by start_time;
+
+
+
+
+
+RMAN retention change for already complted/old backup sets:
+================================================================
+
+
+For KEEP 180 days retention:
+
+ change backupset 19969638 keep until time 'sysdate+180';
+
+ change backup tag 'TAG20130321T204008' keep until time 'sysdate+180';
+
+
+RMAN>  change backupset 19969638 keep until time 'sysdate+180';
+
+allocated channel: ORA_SBT_TAPE_1
+channel ORA_SBT_TAPE_1: SID=757 device type=SBT_TAPE
+channel ORA_SBT_TAPE_1: Data Protection for Oracle: version 5.5.1.0
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=784 device type=DISK
+keep attributes for the backup are changed
+backup will be obsolete on date 18-NOV-13
+backup set key=19969638 RECID=2 STAMP=814446821
+
+
+
+For nokeep :
+
+RMAN> change backupset 19969638 nokeep;
+
+allocated channel: ORA_SBT_TAPE_1
+channel ORA_SBT_TAPE_1: SID=757 device type=SBT_TAPE
+channel ORA_SBT_TAPE_1: Data Protection for Oracle: version 5.5.1.0
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: SID=784 device type=DISK
+keep attributes for the backup are deleted
+backup set key=19969638 RECID=2 STAMP=814446821
+
+
+
+RMAN  configured such that it backups up the archives to tape and deletes only those archives that have been applied at the standby site:
+==============================================================================================================================================
+
+Recommendations:
+It is highly recommended to use RMAN to backup the archives into the tape, the RMAN can be configured such that it backups up the archives to tape and deletes only those archives that have been applied at the standby site, With RMAN the recovery of archives also is easier in case of any recovery scenario
+ Please refer to (Doc ID 728053.1) : Configure RMAN to purge archivelogs after applied on standby
+ As mentioned there is only 1 Local archive destination, considering the criticality of the database and the dependency of the business on it, it is recommended to have 1 more local archive destination for easier recovery in case of any archive corruption, disk full, disk crash issues
+
+
+
+
+
+
+
+
+Create index with parallel:
+=================================
+
+
+1) if we create index with session parllal option then degree will show  default.
+select index_name,DEGREE from dba_indexes where index_name like '%IN_FCT_ALL_FCR_TXNS_MMDD%'
+
+INDEX_NAME                     DEGREE
+------------------------------ ---------
+IN_FCT_ALL_FCR_TXNS_MMDD_1     DEFAULT
+IN_FCT_ALL_FCR_TXNS_MMDD_2     1
+IN_FCT_ALL_FCR_TXNS_MMDD_3     DEFAULT
+
+alter index FCRUSER.IN_FCT_ALL_FCR_TXNS_MMDD_3 NOPARALLEL ; by issuing the command it will change the degree from default to 1;
+
+
+
+
+
+
+Query to find  fragmentation (Table & INdex) in the DB level:
+===============================================================
+
+
+
+select table_name,owner, round(((blocks*8)/1024/1024),2)||' GB' "table_size",round((num_rows*avg_row_len/1024/1024/1024),2)||' GB' 
+"Used_size", (round(((blocks*8/1024/1024)),2)-round((num_rows*avg_row_len/1024/1024/1024),2))|| ' GB' "fragmented_size" from dba_tables
+where owner not in ('SYS','SYSTEM','PERFSTAT') and last_analyzed is not null and num_rows>0 and blocks >0 order by 5 desc
+
+Alternate Query 
+===============
+select table_name,owner, round(((blocks*8)/1024/1024),2) "table_size in GB ",round((num_rows*avg_row_len/1024/1024/1024),2) "Used_size in GB ", (round(((blocks*8/1024/1024)),2)-round((num_rows*avg_row_len/1024/1024/1024),2)) "fragmented_size in GB" from dba_tables
+where owner not in ('SYS','SYSTEM','PERFSTAT') and last_analyzed is not null and num_rows>0 and blocks >0 order by 5  desc
+
+=============================================================================================================================================
+hot_objects using during between snap ids :
+=============================================================================================================================================
+Need to give input begin sceham user(fcruser),snapid & end snap id  after executing the BELOW query 
+
+sCRIPT :
+
+bash-2.05b$ cat hot_objects_awr.sql |pg
+rem ***********************************************************
+rem
+rem     File: Hot_Objects_AWR.sql
+rem     Description: Output of the script lists hot database objects sorted by read and writes
+rem
+rem     From 'Oracle Center of Competency' by Deepak
+rem
+rem
+rem
+rem *********************************************************
+
+set lines 200
+set pages 5000
+col object_name format a30
+col object_type format a30
+
+select oth.*, round(seg.bytes/1024/1024/1024,2) size_in_gb
+from
+dba_segments seg,
+(
+select /*+ opt_param('_hash_join_enabled','TRUE') */
+obj.object_name as object_name,
+obj.object_type as object_type,
+sum(dat.PHY_RDS+dat.PHY_RDS_DIR) tot_phy_rd,
+sum(dat.PHY_WTS + dat.PHY_WTS_DIR) tot_phy_wrt
+from
+(
+select a.obj#, a.PHY_RDS,a.PHY_WTS,a.PHY_RDS_DIR,a.PHY_WTS_DIR,b.SNAP_TIME from
+        (select TS# , obj#,
+        snap_id,
+        sum(PHYSICAL_READS_DELTA) "PHY_RDS",
+        sum(PHYSICAL_WRITES_DELTA) "PHY_WTS",
+        sum(PHYSICAL_READS_DIRECT_DELTA) "PHY_RDS_DIR",
+        sum(PHYSICAL_WRITES_DIRECT_DELTA) "PHY_WTS_DIR"
+        from
+        DBA_HIST_SEG_STAT
+        group by obj#, snap_id, TS#) a,
+        (select distinct SNAP_ID,
+                                to_char(END_INTERVAL_TIME,'DD-Mon-YYYY HH24:Mi') SNAP_TIME
+                        from DBA_HIST_SNAPSHOT) b
+where a.snap_id = b.snap_id
+and b.snap_id between &&BEGIN_SNAP_ID and &&END_SNAP_ID
+) dat,
+dba_objects obj
+where dat.obj# = obj.object_id
+and obj.owner in ('&&owner')
+group by obj.object_name, obj.object_type
+) oth
+where oth.object_name=seg.segment_name
+and oth.object_type=seg.segment_type
+and seg.owner='&&owner'
+order by oth.tot_phy_rd desc,tot_phy_wrt desc
+/
+
+
+
+
+
+
+
+
+
+
+
+
+ASM disk dropping :
+=================================
+
+ ALTER DISKGROUP FCRARCH_DATA1  drop DISK FCRARCH_DATA1_0008,FCRARCH_DATA1_0007,FCRARCH_DATA1_0006,FCRARCH_DATA1_0053 REBALANCE POWER 10;
+ ALTER diskgroup FCRARCH_DATA1  add  disk '/dev/rhdisk24','/dev/rhdisk25'  REBALANCE POWER 10;
+Note : if rebalcing not completing even after estimated completion time comes to 0 then we need to bounce ASM instance after getting approval.
+
+
+Oracle Query hints:
+==================================
+select /*+ parallel (a,20) */  count(*)   from brnuser.SM_BR_EVENT_LOG_MMDD a;
+select /*+ index (tab_alias_name index_name) */  count(*)   from brnuser.SM_BR_EVENT_LOG_MMDD a where date<=sysdate-12;
+
+
+
+INDEX hint :
+=====================================
+
+
+
+
+
+
+Question:  I added an index hint in my query, but the hint is being ignored.  What is the correct syntax for an index hint and how do I force the index hint to be used in my query?
+
+Answer:  Oracle index hint syntax is tricky because of the index hint syntax is incorrect it is treated as a comment and not implemented.  Here is an example of the correct syntax for an index hint:
+
+select /*+ index(customer cust_primary_key_idx) */ * from customer;
+
+Also note that of you alias the table, you must use the alias in the index hint:
+
+select /*+ index(c cust_primary_key_idx) */ * from customer c;
+
+Also, be vary of issuing hints that conflict with an index hint.  In this index hint example, the full hint is not consistent with an index hint:
+
+select /*+ full(c) index(c cust_primary_key_idx) */ * from customer c;
+
+
+
+
+Constraint Child & parent :
+=====================================
+
+SELECT p.table_name "Parent Table", c.table_name "Child Table",
+p.constraint_name "Parent Constraint", c.constraint_name "Child Constraint"
+FROM user_constraints p
+JOIN user_constraints c ON(p.constraint_name=c.r_constraint_name)
+WHERE (p.constraint_type = 'P' OR p.constraint_type = 'U')
+AND c.constraint_type = 'R'
+AND p.table_name = UPPER('&table_name');
+Enter value for table_name: AUDITLOG_HISTORY
+old   7:        AND p.table_name = UPPER('&table_name')
+new   7:        AND p.table_name = UPPER('AUDITLOG_HISTORY')
+
+
+
+Parent Table                   Child Table                    Parent Constraint              Child Constraint
+------------------------------ ------------------------------ ------------------------------ ------------------------------
+AUDITLOG_HISTORY               AUDITLOGDETAIL                 PK_AUDLOGHEADER_1              SYS_C006385
+
+
+alter table fcatr.AUDITLOGDETAIL disable CONSTRAINT SYS_C006385;
+alter table fcatr.AUDITLOG_HISTORY disable CONSTRAINT  PK_AUDLOGHEADER_1;
+
+alter table fcatr.AUDITLOG_HISTORY enable CONSTRAINT  PK_AUDLOGHEADER_1;
+alter table fcatr.AUDITLOGDETAIL enable CONSTRAINT SYS_C006385;
+
+
+
+
+
+
+
+
+VI editor commands:
+========================================================
+
+vi Find And Replace Text Command
+
+:%s/FindMe/ReplaceME/g
+
+
+last_analyed tables list:
+========================================================
+
+select count(*) from (
+SELECT '*' ||TABLE_NAME||'*'   FROM DBA_TABLES where owner='FCGL'
+  MINUS
+ select '*' ||TABLE_NAME||'*'  from dba_tables where owner='FCGL' AND TRUNC(LAST_ANALYZED) IN ('02-JUN-13','03-JUN-13') )
+
+
+
+Oracle hang analysis  :
+==========================================================
+
+
+
+Hi CanIBM ,
+As we do not have issue to get the current hang analysis to identify the cause, if this happens in future, please collect the hang analysis
+
+Execute the following steps to take a hang analyze dump and a system state dump:
+
+(a) Non-RAC
+$ sqlplus '/ as sysdba'
+oradebug setmypid
+oradebug unlimit
+oradebug hanganalyze 4
+oradebug dump systemstate 266
+quit
+
+
+
+
+(b) RAC
+$ sqlplus '/ as sysdba'
+oradebug setmypid
+oradebug unlimit
+oradebug setinst all
+oradebug -g all hanganalyze 4
+oradebug -g all dump systemstate 266
+quit
+
+grep -in "HANG ANALYSIS" asm_tracefilename.trc
+oradebug tracefile_name ---> Upload this trace file.
+Please upload trace produced in <user_dump_dest> directory
+
+Hope I had given the required information to get hang analysis if the issue reproduces, let us know if we can close this SR
+Thanks
+Naagraju
+
+==============
+a) 2 sets of hang analyze and 2 sets of system state traces 
+(Re:- How to Collect Diagnostics for Database Hanging Issues (Doc ID 452358.1))
+===============
+
+For NON-RAC Database
+==================>
+Using SQL*Plus connect as SYSDBA using the following command:
+
+sqlplus " / as sysdba"
+
+If there are problems making this connection then in 10gR2 and above, the sqlplus "preliminary connection" can be used :
+
+sqlplus -prelim " / as sysdba"
+
+Do this 2 times in 2 separate windows, creating 2 sqlplus sessions (SQL1 and SQL2)
+In SQL1 gather the hanganalyze by executing the following:
+
+SQL1> oradebug setmypid
+SQL1> oradebug unlimit;
+SQL1> oradebug hanganalyze 3
+
+In SQL2 gather the systemstates by executing the following:
+
+SQL2> oradebug setmypid
+SQL2> oradebug unlimit;
+SQL2> oradebug dump systemstate 266
+
+Gather a second hang analyze having waited at least 1 minute to give time to identify process state changes. In SQL1 execute the following:
+
+SQL1> oradebug hanganalyze 3
+
+In SQL2 execute the following to collect a second systemstate dump:
+
+SQL2> oradebug setmypid
+SQL2> oradebug unlimit;
+SQL2> oradebug dump systemstate 266
+
+
+================
+
+
+By using adrci package creation in oracle11g:
+======================================================================================
+
+$ adrci
+
+ADRCI: Release 11.2.0.2.0 - Production on Fri Jun 21 10:54:51 2013
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+ADR base = "/oracle/diag_dest"
+adrci> show home
+ADR Homes:
+diag/rdbms/fcr/FCR
+diag/rdbms/fcrbrn/FCRBRN
+adrci> set home diag/rdbms/fcr/FCR
+adrci> show homepath
+ADR Homes:
+diag/rdbms/fcr/FCR
+adrci> show problem
+
+ADR Home = /oracle/diag_dest/diag/rdbms/fcr/FCR:
+*************************************************************************
+PROBLEM_ID           PROBLEM_KEY                                                 LAST_INCIDENT        LASTINC_TIME
+-------------------- ----------------------------------------------------------- -------------------- ----------------------------------------
+1                    ORA 3137 [12333]                                            1774597              2013-03-28 13:54:41.747000 -05:30
+2                    ORA 600 [smboPut:fixedlen2]                                 1842260              2013-05-03 16:59:20.784000 -05:30
+3                    ORA 600                                                     1842261              2013-05-03 17:00:10.188000 -05:30
+4                    ORA 600 [15570]                                             3072449              2013-06-19 01:45:21.930000 -05:30
+5                    ORA 7445 [PC:0xF488]                                        3197466              2013-06-21 10:20:08.688000 -05:30
+6                    ORA 7445 [PC:0x101208704]                                   3201242              2013-06-21 10:20:10.072000 -05:30
+7                    ORA 7445 [kgxCleanup()+736]                                 3168042              2013-06-21 10:20:49.314000 -05:30
+7 rows fetched
+
+adrci> show incident -p "problem_key='ORA 7445 [PC:0xF488]'"
+
+ADR Home = /oracle/diag_dest/diag/rdbms/fcr/FCR:
+*************************************************************************
+INCIDENT_ID          PROBLEM_KEY                                                 CREATE_TIME
+-------------------- ----------------------------------------------------------- ----------------------------------------
+3201594              ORA 7445 [PC:0xF488]                                        2013-06-21 10:20:08.141000 -05:30
+3197466              ORA 7445 [PC:0xF488]                                        2013-06-21 10:20:08.688000 -05:30
+2 rows fetched
+
+adrci> ips pack incident 3201594 in /backupvg
+
+Generated package 4 in file /backupvg/ORA7445PC_20130621105643_COM_1.zip, mode complete
+adrci> adrci> adrci> adrci>
+adrci>
+adrci> show incident -p "problem_key='ORA 7445 [PC:0x101208704]'"
+
+ADR Home = /oracle/diag_dest/diag/rdbms/fcr/FCR:
+*************************************************************************
+INCIDENT_ID          PROBLEM_KEY                                                 CREATE_TIME
+-------------------- ----------------------------------------------------------- ----------------------------------------
+3191258              ORA 7445 [PC:0x101208704]                                   2013-06-21 10:20:08.003000 -05:30
+3192938              ORA 7445 [PC:0x101208704]                                   2013-06-21 10:20:08.046000 -05:30
+3198802              ORA 7445 [PC:0x101208704]                                   2013-06-21 10:20:08.130000 -05:30
+3180962              ORA 7445 [PC:0x101208704]                                   2013-06-21 10:20:08.142000 -05:30
+3192778              ORA 7445 [PC:0x101208704]                                   2013-06-21 10:20:08.142000 -05:30
+5 rows fetched
+
+adrci> ips pack incident 3191258 in /backupvg
+
+Generated package 5 in file /backupvg/ORA7445PC_20130621111022_COM_1.zip, mode complete
+
+
+
+
+
+MATERIALIZED VIEW creation script:
+=================================================
+
+CREATE TABLE MV_MSTUSERALERTS ( IDUSER VARCHAR2(60 BYTE) NOT NULL, IDALERT
+VARCHAR2(60 BYTE) NOT NULL, ACTIVE CHAR(3 BYTE) NOT NULL, ACCT_NO
+VARCHAR2(60 BYTE) NOT NULL, PARAM_ADTNL VARCHAR2(60 BYTE), CHANNEL_XML_DATA
+VARCHAR2(765 BYTE), JVMID NUMBER, STREAMID NUMBER ) TABLESPACE FCRDEFAULT
+LOGGING NOCOMPRESS NOCACHE MONITORING;
+
+
+CREATE UNIQUE INDEX ALERT_KEY ON MV_MSTUSERALERTS (IDUSER, IDALERT, ACCT_NO)
+LOGGING TABLESPACE FCRDEFAULT;
+
+
+ALTER TABLE MV_MSTUSERALERTS ADD (  CONSTRAINT ALERT_KEY PRIMARY KEY
+(IDUSER, IDALERT, ACCT_NO) USING INDEX TABLESPACE FCRDEFAULT);
+
+
+
+CREATE MATERIALIZED VIEW MV_MSTUSERALERTS TABLESPACE FCRDEFAULT NOCACHE
+LOGGING NOCOMPRESS BUILD IMMEDIATE USING INDEX TABLESPACE FCRDEFAULT REFRESH
+FAST START WITH TO_DATE('23-Jun-2013 04:00:00','dd-mon-yyyy hh24:mi:ss')
+NEXT trunc(sysdate+1) + interval '4' hour WITH PRIMARY KEY AS
+/* Formatted on 2013/06/22 17:59 (Formatter Plus v4.8.8) */
+SELECT iduser, idalert, active, acct_no, param_adtnl, channel_xml_data,
+jvmid,
+       streamid
+  FROM mstuseralerts@fcdblink;
+
+COMMENT ON MATERIALIZED VIEW MV_MSTUSERALERTS IS 'snapshot table for
+snapshot FCRUSER.MV_MSTUSERALERTS';
+
+CREATE UNIQUE INDEX ALERT_KEY ON MV_MSTUSERALERTS (IDUSER, IDALERT, ACCT_NO)
+LOGGING TABLESPACE FCRDEFAULT;
+
+
+
+ATM transaction count query 
+==========================================
+
+select count(*) from fcruser.xf_ol_st_txnlog_current;
+
+analyze table :
+===========================================
+analyze table xf_ol_st_postxn_cutoff delete statistics;
+
+
+
+
+
+Recovery count finding query in the BRN db :
+brnread:
+
+SELECT COD_BS_SERVER,COUNT(1)
+FROM BRNUSER.BS_TXN_RECOVERY_LOG
+GROUP BY CUBE(COD_BS_SERVER);
+
+
+Total number of transaction for the particular day:
+=======================================================
+
+select COUNT(*) from actb_daily_log where ac_branch IN (SELECT BRANCH_CODE FROM STTM_BRANCH WHERE RECORD_STAT='O')
+AND TRN_DT='16-SEP-2014'
+
+
+
+
+========================================================================================
+Debug privilize to the user :
+========================================================================================
+
+
+
+GRANT DEBUG CONNECT SESSION TO ARUN_OFSS;
+GRANT DEBUG ANY PROCEDURE TO ARUN_OFSS;
+GRANT EXECUTE ANY PROCEDURE TO ARUN_OFSS;
+
+
+
+
+GRANT DEBUG CONNECT SESSION TO ARUN_OFSS;
+GRANT DEBUG ANY PROCEDURE TO ARUN_OFSS;
+GRANT EXECUTE ANY PROCEDURE TO ARUN_OFSS;
+GRANT ALTER ANY PROCEDURE  TO ARUN_OFSS;
+
+
+
+
+
+ CREATE USER "FCR_IFLEX"  PROFILE "DBAPROFILE"
+IDENTIFIED BY FCR_IFLEX2008 DEFAULT TABLESPACE "FCRDEFAULT"
+TEMPORARY TABLESPACE "TEMP"
+ACCOUNT UNLOCK  quota 0 on system
+
+grant connect,resource,cansysdba to FCR_IFLEX;
+
+
+POST restore scripts :
+====================
+
+startup mount
+alter database activate standby database;
+shutdown immediate;
+startup mount;
+alter database open;
+
+CREATE USER "FCR_IFLEX" PROFILE "DBAPROFILE"
+IDENTIFIED BY FCR_IFLEX2008 DEFAULT TABLESPACE "FCRDEFAULT"
+TEMPORARY TABLESPACE "TEMP"
+ACCOUNT UNLOCK quota 0 on system;
+
+grant connect,resource,cansysdba to FCR_IFLEX;
+
+alter tablespace temp add tempfile '+FCR_DATA1' size 32764m;
+alter tablespace temp add tempfile '+FCR_DATA1' size 32764m;
+alter tablespace temp add tempfile '+FCR_DATA1' size 32764m;
+alter tablespace temp add tempfile '+FCR_DATA1' size 32764m;
+alter tablespace temp add tempfile '+FCR_DATA1' size 32764m;
+alter tablespace temp add tempfile '+FCR_DATA1' size 32764m;
+
+
+alter profile DBAPROFILE limit sessions_per_user 50;
+
+
+
+
+======================================================
+
+
+select SAMPLE_ID,SESSION_ID,SESSION_SERIAL#,USER_ID,SQL_ID,WAIT_TIME,MODULE,SAMPLE_TIME,MACHINE from DBA_HIST_ACTIVE_SESS_HISTORY where sql_id='cg53qzd6b7p69';
+
+
+select username from dba_users where user_id=24;
+
+Function code might be changed. please check the below alert log and object details which is showing function is compiled .
+Application/plsql team can aware purpose of this function .
+
+object details:
+ 
+ 
+SYS@FCR SQL>select owner,object_name,object_type,status,timestamp,last_ddl_time,created from dba_objects where object_name='AP_AC_WRITEOFF';
+ 
+OWNER                          OBJECT_NAME                         OBJECT_TYPE         STATUS  TIMESTAMP           LAST_DDL_ CREATED
+------------------------------ ----------------------------------- ------------------- ------- ------------------- --------- ---------
+FCRUSER                        AP_AC_WRITEOFF                      FUNCTION            VALID   2013-08-29:01:45:45 29-AUG-13 05-JAN-06
+FCRINT                         AP_AC_WRITEOFF                      SYNONYM             INVALID 2013-07-01:21:24:22 01-JUL-13 30-JAN-10
+ 
+alert log details.
+ 
+Thu Aug 29 01:45:45 2013
+ALTER FUNCTION AP_AC_WRITEOFF COMPILE
+ 
+Wed Sep 25 12:37:19 2013
+Immediate Kill Session#: 13803, Serial#: 39743
+Immediate Kill Session: sess: 7000047d64da1a0  OS pid: 44106722
+
+
+=================================================================
+
+
+
+
+
+
+how to recover the deleeted rows for the perticular table : by using (AS OF TIMESTAMP TO_TIMESTAMP('2013-09-27 15:30:00', 'YYYY-MM-DD HH24:MI:SS'))
+
+
+>create table brnpath.rec_txnlog_bkp_27sep as SELECT * FROM brnuser.rec_txnlog AS OF TIMESTAMP TO_TIMESTAMP('2013-09-27 15:30:00', 'YYYY-MM-DD HH24:MI:SS')
+>WHERE cod_brn IN (507,911) AND dat_post = '27-Sep-2013'
+>
+>create table brnpath.rec_bctl_bkp_27sep as SELECT * FROM brnuser.rec_bctl AS OF TIMESTAMP TO_TIMESTAMP('2013-09-27 15:30:00', 'YYYY-MM-DD HH24:MI:SS')
+>WHERE cod_brn IN (507,911) AND dat_post = '27-Sep-2013'
+=============
+fcr created bt brn nt created .arun send some other scripts tat are created .wheather thease brn are needed
+
+
+
+
+
+
+TDP config for RMAN oracle backups :
+=================================================================
+ln –s  /usr/tivoli/tsm/client/oracle/bin64/libobk64.a $ORACLE_HOME/lib/libobk.a
+
+
+
+
+
+
+
+
+
+RMAN commands:
+====================================
+
+list backup of database tag='MTHLY_DB_L0_MAY_31_2013_17_25';
+list backupset summary;
+
+
+
+
+find Duplicate indexes by using snapshot information:
+=======================================================
+
+select to_char(sn.begin_interval_time,'yy-mm-dd hh24') c1, p.search_columns c2, count(*) c3 from dba_hist_snapshot sn, dba_hist_sql_plan p, dba_hist_sqlstat st
+  where st.sql_id = p.sql_id and sn.snap_id = st.snap_id and p.object_name = 'IND_ACTB_HISTORY' group by begin_interval_time,search_columns;
+
+
+Add space to the mount point level:
+=========================================
+
+chfs -a size=+10G </mount point name>
+
+
+
+UNDO usage:
+=======================
+
+
+set lines 200 pages 200
+
+SELECT
+r.name roll_name
+, s.osuser || '/' || s.username userID
+, s.sid || '/' || s.serial# usercode
+, s.program program
+, s.status status
+, s.machine machine
+FROM
+v$lock l
+, v$rollname r
+, v$session s
+WHERE
+s.sid = l.sid
+AND TRUNC (l.id1(+)/65536) = r.usn
+AND l.type(+) = 'TX'
+AND l.lmode(+) = 6
+ORDER BY r.name
+/
+
+
+
+
+UNDO used by session
+=======================
+
+ col sid_serial for a30
+col undoseg for a30
+col undo for a10
+col SID_SERIAL for a10
+SELECT TO_CHAR (s.SID) || ',' || TO_CHAR (s.serial#) sid_serial,
+NVL (s.username, 'None') orauser,t.used_ublk * TO_NUMBER (x.VALUE) / 1024 || 'K' "Undo", s.status
+FROM SYS.v_$rollname r,
+SYS.v_$session s,
+SYS.v_$transaction t,
+SYS.v_$parameter x
+WHERE s.taddr = t.addr
+AND r.usn = t.xidusn(+) 
+AND x.NAME = 'db_block_size'; 
+
+
+
+-----plan status valid or invalid----
+
+select PLAN_HASH_VALUE,SQL_ID, OBJECT_STATUS from gv$sqlarea where sql_id='&sqlID';
+
+
+select sql_id , address, hash_value, executions, loads, version_count, invalidations, parse_calls from gv$sqlarea where  SQL_ID in ('&respective_sqlid' );
+select SQL_TEXT from v$sqltext where hash_value= '&a' order by piece;
+
+
+-----purge ------
+
+
+select sql_id , address, hash_value, executions, loads, version_count, invalidations, parse_calls
+from gv$sqlarea
+where  SQL_ID in ('&respective_sqlid' );
+
+sqlid=c5axhhq1wqvny
+
+SQL_ID        ADDRESS          HASH_VALUE EXECUTIONS      LOADS VERSION_COUNT INVALIDATIONS PARSE_CALLS
+------------- ---------------- ---------- ---------- ---------- ------------- ------------- -----------
+c5axhhq1wqvny 0000000EDC5EB128 2211147422          8          2             2             2           8
+
+
+exec sys.dbms_shared_pool.purge ('0000000EDC5EB128,2211147422','C');
+
+
+
+
+
+OLD SQL execution plan for different hashvalue for the pertivular sql_id:
+==========================================================================
+
+
+bash-3.2$ cd /oracle/Scripts
+bash-3.2$ ls -lrt *plan*
+-rwxr-xr-x    1 oracle   oinstall         96 May 17 2013  get_plan.sql
+-rw-r--r--    1 oracle   oinstall        144 May 18 2013  get_old_plan.sql
+-rw-r--r--    1 oracle   oinstall        625 May 18 2013  get_plan_hist.sql
+-rw-r--r--    1 oracle   oinstall        143 Nov 14 23:07 get_plan_historical.sql
+bash-3.2$ cat get_plan_hist.sql
+set pages 500
+  set lines 145
+  col BEGIN_INTERVAL_TIME format a35
+  select ss.snap_id, ss.instance_number node, begin_interval_time,
+sql_id, plan_hash_value,
+  nvl(executions_delta,0) execs,
+  (elapsed_time_delta/decode(nvl(executions_delta,0),0,1,executions_delta))/1000000 avg_etime,
+  (buffer_gets_delta/decode(nvl(buffer_gets_delta,0),0,1,executions_delta)) avg_lio
+  from DBA_HIST_SQLSTAT S, DBA_HIST_SNAPSHOT SS
+  where sql_id = nvl('&sql_id','d248tphgb4kq7')
+  and ss.snap_id = S.snap_id
+  and ss.instance_number = S.instance_number
+  and executions_delta > 0 --and plan_hash_value=3099046451
+  order by 1, 2, 3
+  /
+bash-3.2$
+bash-3.2$ cat get_old_plan.sql
+SET PAUSE ON
+SET PAUSE 'Press Return to Continue'
+SET PAGESIZE 60
+SET LINESIZE 300
+
+ SELECT * FROM TABLE(dbms_xplan.display_awr('&SQL_ID'))
+  /
+
+
+==================================================================================================================================================================
+Below information requried while installation for Oracle & ASM  .
+===================================================================
+
+note :  groups will ask while installatin for grid (asmdba,asmoper,asmadmin)
+        groups will ask while installatin for oracle/rdbms (oinstall,oinstall)
+
+
+
+
+Below information requried while applying patch in  ASM Home(grid) .
+===================================================================
+
+for the below error :
+# id
+uid=0(root) gid=0(system) groups=2(bin),3(sys),7(security),8(cron),10(audit),11(lp)
+# ./roothas.pl -patch
+Using configuration parameter file: ./crsconfig_params
+Undefined subroutine &main::read_file called at crspatch.pm line 86.
+
+
+workaround for the above error is:
+
+
+connect as root
+
+cd /asm/grid/asmbase/AsmHome1/crs/install
+
+vi crsconfig_lib.pm (need to search the below and add "read_file" in the file crsconfig_lib.pm)
+
+
+ my @exp_func = qw(check_CRSConfig validate_olrconfig validateOCR read_file
+
+
+==================================================================================================================================================================
+
+HOT objects finding query :
+
+==================================================================================================================================================================
+
+This script takes 3 inputs.
+
+BEGIN SNAP ID
+END SNAP ID
+DB USER NAME
+
+Output of the script will not be sorted. We can put the output in a Excel file and sort based on reads/writes. 
+If you want to know the tables used during CEOD/CBOD, give the snap IDs corresponding to EOD/BOD start and end time. 
+Same way you can get the list of tables used during OLTP load.
+
+Note: Please run the script when the load on the database is less
+
+=====================================================================================================================
+
+set lines 200
+set pages 5000
+col object_name format a30
+col object_type format a30
+
+select oth.*, round(seg.bytes/1024/1024/1024,2) size_in_gb
+from
+dba_segments seg,
+(
+select /*+ opt_param('_hash_join_enabled','TRUE') */
+obj.object_name as object_name,
+obj.object_type as object_type,
+sum(dat.PHY_RDS+dat.PHY_RDS_DIR) tot_phy_rd,
+sum(dat.PHY_WTS + dat.PHY_WTS_DIR) tot_phy_wrt
+from
+(
+select a.obj#, a.PHY_RDS,a.PHY_WTS,a.PHY_RDS_DIR,a.PHY_WTS_DIR,b.SNAP_TIME from
+        (select TS# , obj#, 
+        snap_id,
+        sum(PHYSICAL_READS_DELTA) "PHY_RDS",
+        sum(PHYSICAL_WRITES_DELTA) "PHY_WTS",
+        sum(PHYSICAL_READS_DIRECT_DELTA) "PHY_RDS_DIR",
+        sum(PHYSICAL_WRITES_DIRECT_DELTA) "PHY_WTS_DIR"
+        from
+        DBA_HIST_SEG_STAT
+        group by obj#, snap_id, TS#) a,
+        (select distinct SNAP_ID,
+                                to_char(END_INTERVAL_TIME,'DD-Mon-YYYY HH24:Mi') SNAP_TIME
+                        from DBA_HIST_SNAPSHOT) b
+where a.snap_id = b.snap_id
+and b.snap_id between <BEGIN SNAP ID> and <END SNAP ID>
+-- and to_date(b.snap_time,'DD-Mon-YYYY HH24:Mi') between to_date('24-Feb-2011 10:30','DD-Mon-YYYY HH24:Mi') and to_date('24-Feb-2011 20:30','DD-Mon-YYYY HH24:Mi')
+--order by 1,2,3 desc
+) dat,
+dba_objects obj
+where dat.obj# = obj.object_id
+and obj.owner in ('<DB USER NAME>')
+group by obj.object_name, obj.object_type
+) oth
+where oth.object_name=seg.segment_name
+and oth.object_type=seg.segment_type
+and seg.owner='<DB USER NAME>'
+order by oth.tot_phy_rd
+/
+
+
+
+==================================================================================================================================================================
+
+EOD process monitor with time"
+==================================================================================================================================================================
+
+
+SELECT DAT_PROCESS,
+       TXT_PROCESS_UNSTREAMED,
+       TRIM(TRANSLATE(TRIM(COD_EOD_PROCESS), '_0123456789', ' ')) "Process",
+       COUNT(1) "No. of Streams",
+       TRUNC(MAX((DAT_PROC_END - DAT_PROC_START) * 24 * 60)) "Max Time(mins)"
+  FROM (SELECT A.DAT_PROCESS DAT_PROCESS,
+               A.DAT_LOG DAT_LOG,
+               A.COD_EOD_PROCESS COD_EOD_PROCESS,
+               A.COD_PROC_CATEGORY COD_PROC_CATEGORY,
+               A.DAT_PROC_START DAT_PROC_START,
+               A.DAT_PROC_END DAT_PROC_END,
+               UPPER(TRIM(B.TXT_PROCESS_UNSTREAMED)) TXT_PROCESS_UNSTREAMED
+          FROM BA_EOD_HISTORY A, BA_EOD_CTRL_PARAM B
+         WHERE A.COD_PROC_CATEGORY = 1
+           AND A.COD_PROC_CATEGORY = B.COD_PROC_CATEGORY
+           AND A.FLG_STATUS = 'C'
+           AND A.COD_EOD_PROCESS = B.COD_EOD_PROCESS
+           AND DAT_PROCESS = (select dat_last_process from ba_bank_mast)
+           AND FLG_MNT_STATUS = 'A')
+ GROUP BY DAT_PROCESS,
+          TXT_PROCESS_UNSTREAMED,
+          TRIM(TRANSLATE(TRIM(COD_EOD_PROCESS), '_0123456789', ' '))
+ ORDER BY 3
+
+
+
+
+OR
+
+
+
+
+SELECT DAT_PROCESS,
+       TXT_PROCESS_UNSTREAMED,
+       TRIM(TRANSLATE(TRIM(COD_EOD_PROCESS), '_0123456789', ' ')) "Process",
+       COUNT(1) "No. of Streams",
+       TRUNC(MAX((DAT_PROC_END - DAT_PROC_START) * 24 * 60)) "Max Time(mins)"
+  FROM (SELECT A.DAT_PROCESS DAT_PROCESS,
+               A.DAT_LOG DAT_LOG,
+               A.COD_EOD_PROCESS COD_EOD_PROCESS,
+               A.COD_PROC_CATEGORY COD_PROC_CATEGORY,
+               A.DAT_PROC_START DAT_PROC_START,
+               A.DAT_PROC_END DAT_PROC_END,
+               UPPER(TRIM(B.TXT_PROCESS_UNSTREAMED)) TXT_PROCESS_UNSTREAMED
+          FROM BA_EOD_HISTORY A, BA_EOD_CTRL_PARAM B
+         WHERE A.COD_PROC_CATEGORY = 1
+           AND A.COD_PROC_CATEGORY = B.COD_PROC_CATEGORY
+           AND A.FLG_STATUS = 'C'
+           AND A.COD_EOD_PROCESS = B.COD_EOD_PROCESS
+           AND DAT_PROCESS = '20-MAY-2013'
+           AND FLG_MNT_STATUS = 'A')
+ GROUP BY DAT_PROCESS,
+          TXT_PROCESS_UNSTREAMED,
+          TRIM(TRANSLATE(TRIM(COD_EOD_PROCESS), '_0123456789', ' '))
+ ORDER BY 3
+
+
+
+
+FILE handoff process status :
+========================================
+
+
+"select a.*,datediff('MI',a.dat_proc_start,a.dat_proc_end) time_Taken from
+ba_eod_history a where cod_proc_category = 11
+and dat_process = '30-JUL-2013' order by dat_proc_start,dat_proc_end"
+
+
+
+
+
+
+
+Steps to Create controlfile script after DRC-db restoration from tape:
+===========================================================================
+
+>
+>controfile='+FCR_DATA1'
+>Need to Mount the database in nomount 
+>
+>create controfile manually.
+>
+>shu down the database.
+>
+>vi initFCR.ora
+>controlfile ='FCR_DAT1/fcr/controlfile/curent
+>
+>alter database open reseetlogs;
+>
+===
+imran u can use this one,
+
+alter database backup controlfile to trace as '/oracle/log/tttt_contl.txt' resetlogs ; 
+
+
+
+
+
+INSERT INTO EXT_AML_GLOB_ACCT (BRANCHCODE, ACCTNO, CUSTCD, PRDCD
+, OPENDATE, CLOSEDATE, MATURITY_DATE, STATUS, CURRCD, BALANCE, A
+VAILBALANCE, TYPEOFOPRN, LASTUPDATE, LIMITAPPROVED, LIMITUSED, P
+LAN_TYPE, ACCT_TITLE1, ACCT_TITLE2, CREATEDBY, CLOSING_BALANCE, 
+NPA_ACCOUNT) (SELECT /*+parallel(A)*/ (CASE WHEN A.COD_CC_BRN = 
+D.DP_CODE AND A.COD_CC_BRN > '8000' AND REGIONAL_DPCODE <> '9999
+' THEN TO_NUMBER(D.REGIONAL_DPCODE) ELSE A.COD_CC_BRN END) BRANC
+HCODE, A.COD_ACCT_NO ACCTNO, A.COD_CUST CUSTCD, A.COD_PROD PRDCD
+, A.DAT_ACCT_OPEN OPENDT, CASE WHEN A.COD_ACCT_STAT IN ('1', '5'
+) THEN A.DAT_LAST_MNT END CLOSEDATE, A.DAT_MATURITY MATURITY_DT,
+ A.COD_ACCT_STAT STATUS, (SELECT NAM_CCY_SHORT FROM BA_CCY_CODE 
+WHERE COD_CCY = A.COD_CCY AND FLG_MNT_STATUS = 'A') CURRCD, A.BA
+L_AVAILABLE BALANCE, A.BAL_AVAILABLE AVAILBALANCE, B.COD_ACCT_CU
+ST_REL TYPEOFOPRN, A.DAT_LAST_MNT LASTUPDATE, TO_CHAR(A.AMT_OD_L
+IMIT) LIMITAPPROVED, '' LIMITUSED, 1 PLAN_TYPE, TRIM(A.COD_ACCT_
+TITLE) ACCT_TITLE1, '' ACCT_TITLE2, A.COD_OFFICR_ID CREATEDBY, A
+.BAL_AVAILABLE CLOSING_BALANCE, DECODE(A.FLG_ACCR_STATUS, 'S', '
+Y', 'N') NPA_ACCOUNT FROM CH_ACCT_MAST A, CH_ACCT_CUST_XREF B, A
+C_ACCT_CRR_CODE C, BOVW_BRANCH_TREE D WHERE A.FLG_MNT_STATUS = '
+A' AND A.COD_CUST = B.COD_CUST AND A.COD_ACCT_NO = B.COD_ACCT_NO
+ AND A.COD_CC_BRN = D.DP_CODE AND A.COD_ACCT_NO = C.COD_ACCT_NO(
++) AND C.FLG_MNT_STATUS(+) = 'A' AND ((TRUNC(A.DAT_LAST_MNT) >= 
+:B2 AND TRUNC(A.DAT_LAST_MNT) < :B1 ) OR (A.COD_CC_BRN IN (SELEC
+T COD_CC_BRN FROM CO_BRANCH_DETAILS WHERE DAT_PROCESS >= :B2 AND
+ DAT_PROCESS < :B1 )) OR (A.DAT_ACCT_OPEN >= :B2 AND A.DAT_ACCT_
+OPEN < :B1 ) OR (C.DAT_PROCESS >= :B2 AND C.DAT_PROCESS < :B1 ))
+ UNION ALL SELECT /*+parallel(A)*/ (CASE WHEN A.COD_CC_BRN = D.D
+P_CODE AND A.COD_CC_BRN > '8000' AND REGIONAL_DPCODE <> '9999' T
+HEN TO_NUMBER(D.REGIONAL_DPCODE) ELSE A.COD_CC_BRN END) BRANCHCO
+DE, TRIM(B.COD_ACCT_NO) || B.COD_DEP_NO ACCTNO, B.COD_CUST CUSTC
+D, B.COD_PROD PRDCD, B.DAT_DEP_DATE OPENDT, CASE WHEN A.COD_ACCT
+_STAT IN ('1', '5') THEN A.DAT_LAST_MNT END CLOSEDATE, B.DAT_MAT
+URITY MATURITY_DATE, A.COD_ACCT_STAT STATUS, (SELECT NAM_CCY_SHO
+RT FROM BA_CCY_CODE WHERE COD_CCY = B.COD_CCY AND FLG_MNT_STATUS
+ = 'A') CURRCD, B.BAL_PRINCIPAL BALANCE, B.BAL_PRINCIPAL AVAILBA
+LANCE, C.COD_ACCT_CUST_REL TYPEOFOPRN, B.DAT_LAST_MNT LASTUPDATE
+, '' LIMITAPPROVED, '' LIMITUSED, 1 PLAN_TYPE, TRIM(A.COD_ACCT_T
+ITLE) ACCT_TITLE1, '' COD_ACCT_TITLE2, A.COD_OFFICR_ID CREATEDBY
+, B.BAL_PRINCIPAL CLOSING_BALANCE, 'N' NPA_ACCOUNT FROM TD_ACCT_
+MAST A, TD_DEP_MAST B, CH_ACCT_CUST_XREF C, BOVW_BRANCH_TREE D W
+HERE A.COD_ACCT_NO = B.COD_ACCT_NO AND A.COD_ACCT_NO = C.COD_ACC
+T_NO AND A.COD_CUST = C.COD_CUST AND A.COD_CC_BRN = D.DP_CODE AN
+D ((TRUNC(B.DAT_LAST_MNT) >= :B2 AND TRUNC(B.DAT_LAST_MNT) < :B1
+ ) OR (B.DAT_DEP_DATE >= :B2 AND B.DAT_DEP_DATE < :B1 ) OR (B.CO
+D_CC_BRN IN (SELECT COD_CC_BRN FROM CO_BRANCH_DETAILS WHERE DAT_
+PROCESS >= :B2 AND DAT_PROCESS < :B1 ))) AND A.FLG_MNT_STATUS = 
+'A' AND B.FLG_MNT_STATUS = 'A' AND C.FLG_MNT_STATUS = 'A' UNION 
+ALL SELECT /*+parallel(A)*/ (CASE WHEN A.COD_CC_BRN = D.DP_CODE 
+AND A.COD_CC_BRN > '8000' AND REGIONAL_DPCODE <> '9999' THEN TO_
+NUMBER(D.REGIONAL_DPCODE) ELSE A.COD_CC_BRN END) BRANCHCODE, A.C
+OD_ACCT_NO ACCTNO, A.COD_CUST_ID CUSTCD, A.COD_PROD PRDCD, A.DAT
+_ACCT_OPEN OPENDATE, A.DAT_ACCT_CLOSE CLOSEDATE, A.DAT_OF_MATURI
+TY MATURITY_DATE, A.COD_ACCT_STAT STATUS, (SELECT NAM_CCY_SHORT 
+FROM BA_CCY_CODE WHERE COD_CCY = A.COD_CCY AND FLG_MNT_STATUS = 
+'A') CURRCD, B.BAL_BOOK BALANCE, B.AMT_PRINC_BALANCE AVAILBALANC
+E, E.COD_ACCT_CUST_REL TYPEOFOPRN, A.DAT_LAST_MNT LASTUPDATE, TO
+_CHAR(A.AMT_FACE_VALUE) LIMITAPPROVED, TO_CHAR(B.AMT_DISBURSED) 
+LIMITUSED, 2 PLAN_TYPE, TRIM(A.NAM_CUST_SHRT) ACCT_TITLE1, '' AC
+CT_TITLE2, A.COD_LAST_MNT_CHKRID CREATEDBY, B.BAL_BOOK CLOSING_B
+ALANCE, DECODE(A.FLG_ACCR_STATUS, 'S', 'Y', 'N') NPA_ACCOUNT FRO
+M LN_ACCT_DTLS A, LN_ACCT_MAST B, AC_ACCT_CRR_CODE C, CH_ACCT_CU
+ST_XREF E, BOVW_BRANCH_TREE D WHERE A.COD_ACCT_NO = B.COD_ACCT_N
+O AND A.COD_CUST_ID = C.COD_CUST_ID AND A.COD_CUST_ID = E.COD_CU
+ST AND A.COD_ACCT_NO = E.COD_ACCT_NO AND A.COD_CC_BRN = D.DP_COD
+E AND ((TRUNC(A.DAT_LAST_MNT) >= :B2 AND TRUNC(A.DAT_LAST_MNT) <
+ :B1 ) OR (A.DAT_ACCT_OPEN >= :B2 AND A.DAT_ACCT_OPEN < :B1 ) OR
+ (A.COD_CC_BRN IN (SELECT COD_CC_BRN FROM CO_BRANCH_DETAILS WHER
+E DAT_PROCESS >= :B2 AND DAT_PROCESS < :B1 )) OR (C.DAT_PROCESS 
+>= :B2 AND C.DAT_PROCESS < :B1 )) AND A.FLG_MNT_STATUS = 'A' AND
+ B.FLG_MNT_STATUS = 'A' AND A.COD_ACCT_NO = C.COD_ACCT_NO(+) AND
+ C.FLG_MNT_STATUS(+) = 'A')
+
+
+
+
+
+
+SELECT /*+parallel(A)*/ (CASE WHEN A.COD_CC_BRN = D.DP_CODE AND A.COD_CC_BRN > '8000' AND REGIONAL_DPCODE <> '9999' THEN TO_NUMBER(D.REGIONAL_DPCODE) ELSE A.COD_CC_BRN END) BRANCHCODE, A.COD_ACCT_NO ACCTNO, A.COD_CUST CUSTCD, A.COD_PROD PRDCD, A.DAT_ACCT_OPEN OPENDT, CASE WHEN A.COD_ACCT_STAT IN ('1', '5') THEN A.DAT_LAST_MNT END CLOSEDATE, A.DAT_MATURITY MATURITY_DT, A.COD_ACCT_STAT STATUS, (SELECT NAM_CCY_SHORT FROM BA_CCY_CODE WHERE COD_CCY = A.COD_CCY AND FLG_MNT_STATUS = 'A') CURRCD, A.BAL_AVAILABLE BALANCE, A.BAL_AVAILABLE AVAILBALANCE, B.COD_ACCT_CUST_REL TYPEOFOPRN, A.DAT_LAST_MNT LASTUPDATE, TO_CHAR(A.AMT_OD_LIMIT) LIMITAPPROVED, '' LIMITUSED, 1 PLAN_TYPE, TRIM(A.COD_ACCT_TITLE) ACCT_TITLE1, '' ACCT_TITLE2, A.COD_OFFICR_ID CREATEDBY, A.BAL_AVAILABLE CLOSING_BALANCE, DECODE(A.FLG_ACCR_STATUS, 'S', 'Y', 'N') NPA_ACCOUNT FROM CH_ACCT_MAST A, CH_ACCT_CUST_XREF B, AC_ACCT_CRR_CODE C, BOVW_BRANCH_TREE D WHERE A.FLG_MNT_STATUS = 'A' AND A.COD_CUST = B.COD_CUST AND A.COD_ACCT_NO = B.COD_ACCT_NO AND A.COD_CC_BRN = D.DP_CODE AND A.COD_ACCT_NO = C.COD_ACCT_NO(+) AND C.FLG_MNT_STATUS(+) = 'A' AND ((TRUNC(A.DAT_LAST_MNT) >= B2 AND TRUNC(A.DAT_LAST_MNT) < :B1 ) OR (A.COD_CC_BRN IN (SELECT COD_CC_BRN FROM CO_BRANCH_DETAILS WHERE DAT_PROCESS >= :B2 AND DAT_PROCESS < :B1 )) OR (A.DAT_ACCT_OPEN >= :B2 AND A.DAT_ACCT_OPEN < :B1 ) OR (C.DAT_PROCESS >= :B2 AND C.DAT_PROCESS < :B1 )) UNION ALL SELECT /*+parallel(A)*/ (CASE WHEN A.COD_CC_BRN = D.DP_CODE AND A.COD_CC_BRN > '8000' AND REGIONAL_DPCODE <> '9999' THEN TO_NUMBER(D.REGIONAL_DPCODE) ELSE A.COD_CC_BRN END) BRANCHCODE, TRIM(B.COD_ACCT_NO) || B.COD_DEP_NO ACCTNO, B.COD_CUST CUSTCD, B.COD_PROD PRDCD, B.DAT_DEP_DATE OPENDT, CASE WHEN A.COD_ACCT_STAT IN ('1', '5') THEN A.DAT_LAST_MNT END CLOSEDATE, B.DAT_MATURITY MATURITY_DATE, A.COD_ACCT_STAT STATUS, (SELECT NAM_CCY_SHORT FROM BA_CCY_CODE WHERE COD_CCY = B.COD_CCY AND FLG_MNT_STATUS = 'A') CURRCD, B.BAL_PRINCIPAL BALANCE, B.BAL_PRINCIPAL AVAILBALANCE, C.COD_ACCT_CUST_REL TYPEOFOPRN, B.DAT_LAST_MNT LASTUPDATE, '' LIMITAPPROVED, '' LIMITUSED, 1 PLAN_TYPE, TRIM(A.COD_ACCT_TITLE) ACCT_TITLE1, '' COD_ACCT_TITLE2, A.COD_OFFICR_ID CREATEDBY, B.BAL_PRINCIPAL CLOSING_BALANCE, 'N' NPA_ACCOUNT FROM TD_ACCT_MAST A, TD_DEP_MAST B, CH_ACCT_CUST_XREF C, BOVW_BRANCH_TREE D WHERE A.COD_ACCT_NO = B.COD_ACCT_NO AND A.COD_ACCT_NO = C.COD_ACCT_NO AND A.COD_CUST = C.COD_CUST AND A.COD_CC_BRN = D.DP_CODE AND ((TRUNC(B.DAT_LAST_MNT) >= :B2 AND TRUNC(B.DAT_LAST_MNT) < :B1 ) OR (B.DAT_DEP_DATE >= :B2 AND B.DAT_DEP_DATE < :B1 ) OR (B.COD_CC_BRN IN (SELECT COD_CC_BRN FROM CO_BRANCH_DETAILS WHERE DAT_PROCESS >= :B2 AND DAT_PROCESS < :B1 ))) AND A.FLG_MNT_STATUS = 'A' AND B.FLG_MNT_STATUS = 'A' AND C.FLG_MNT_STATUS = 'A' UNION ALL SELECT /*+parallel(A)*/ (CASE WHEN A.COD_CC_BRN = D.DP_CODE AND A.COD_CC_BRN > '8000' AND REGIONAL_DPCODE <> '9999' THEN TO_NUMBER(D.REGIONAL_DPCODE) ELSE A.COD_CC_BRN END) BRANCHCODE, A.COD_ACCT_NO ACCTNO, A.COD_CUST_ID CUSTCD, A.COD_PROD PRDCD, A.DAT_ACCT_OPEN OPENDATE, A.DAT_ACCT_CLOSE CLOSEDATE, A.DAT_OF_MATURITY MATURITY_DATE, A.COD_ACCT_STAT STATUS, (SELECT NAM_CCY_SHORT FROM BA_CCY_CODE WHERE COD_CCY = A.COD_CCY AND FLG_MNT_STATUS = 'A') CURRCD, B.BAL_BOOK BALANCE, B.AMT_PRINC_BALANCE AVAILBALANCE, E.COD_ACCT_CUST_REL TYPEOFOPRN, A.DAT_LAST_MNT LASTUPDATE, TO_CHAR(A.AMT_FACE_VALUE) LIMITAPPROVED, TO_CHAR(B.AMT_DISBURSED) LIMITUSED, 2 PLAN_TYPE, TRIM(A.NAM_CUST_SHRT) ACCT_TITLE1, '' ACCT_TITLE2, A.COD_LAST_MNT_CHKRID CREATEDBY, B.BAL_BOOK CLOSING_BALANCE, DECODE(A.FLG_ACCR_STATUS, 'S', 'Y', 'N') NPA_ACCOUNT FROM LN_ACCT_DTLS A, LN_ACCT_MAST B, AC_ACCT_CRR_CODE C, CH_ACCT_CUST_XREF E, BOVW_BRANCH_TREE D WHERE A.COD_ACCT_NO = B.COD_ACCT_NO AND A.COD_CUST_ID = C.COD_CUST_ID AND A.COD_CUST_ID = E.COD_CUST AND A.COD_ACCT_NO = E.COD_ACCT_NO AND A.COD_CC_BRN = D.DP_CODE AND ((TRUNC(A.DAT_LAST_MNT) >= :B2 AND TRUNC(A.DAT_LAST_MNT) < :B1 ) OR (A.DAT_ACCT_OPEN >= :B2 AND A.DAT_ACCT_OPEN < :B1 ) OR (A.COD_CC_BRN IN (SELECT COD_CC_BRN FROM CO_BRANCH_DETAILS WHERE DAT_PROCESS >= :B2 AND DAT_PROCESS < :B1 )) OR (C.DAT_PROCESS >= :B2 AND C.DAT_PROCESS < :B1 )) AND A.FLG_MNT_STATUS = 'A' AND B.FLG_MNT_STATUS = 'A' AND A.COD_ACCT_NO = C.COD_ACCT_NO(+) AND C.FLG_MNT_STATUS(+) = 'A')
+
+
+
+
+SELECT NAM_CCY_SHORT FROM BA_CCY_CODE WHERE COD_CCY = A.COD_CCY AND FLG_MNT_STATUS = 'A') CURRCD, B.BAL_BOOK BALANCE, B.AMT_PRINC_BALANCE AVAILBALANCE, E.COD_ACCT_CUST_REL TYPEOFOPRN, A.DAT_LAST_MNT LASTUPDATE, TO_CHAR(A.AMT_FACE_VALUE) LIMITAPPROVED, TO_CHAR(B.AMT_DISBURSED) LIMITUSED, 2 PLAN_TYPE, TRIM(A.NAM_CUST_SHRT) ACCT_TITLE1, '' ACCT_TITLE2, A.COD_LAST_MNT_CHKRID CREATEDBY, B.BAL_BOOK CLOSING_BALANCE, DECODE(A.FLG_ACCR_STATUS, 'S', 'Y', 'N') NPA_ACCOUNT FROM LN_ACCT_DTLS A, LN_ACCT_MAST B, AC_ACCT_CRR_CODE C, CH_ACCT_CUST_XREF E, BOVW_BRANCH_TREE D WHERE A.COD_ACCT_NO = B.COD_ACCT_NO AND A.COD_CUST_ID = C.COD_CUST_ID AND A.COD_CUST_ID = E.COD_CUST AND A.COD_ACCT_NO = E.COD_ACCT_NO AND A.COD_CC_BRN = D.DP_CODE AND ((TRUNC(A.DAT_LAST_MNT) >= :B2 AND TRUNC(A.DAT_LAST_MNT) < :B1 ) OR (A.DAT_ACCT_OPEN >= :B2 AND A.DAT_ACCT_OPEN < :B1 
+
+
+=================================
+adrci (see Note 443529.1) 
+=================================
+
+show home
+set homepath database_home
+
+show problem
+
+ips pack incident 289787 in /backupvg
+
+
+
+Oracle Password file creation script:
+=======================================
+
+PAsswd file:
+
+orapwd FILE=$ORACLE_HOME/dbs/orapwCANJON ENTRIES=7
+
+
+
+XDB Steps.
+=======================================
+
+spool /oracle/log/xdb_install_CANJON.log
+set echo on;
+set timi on;
+connect / as sysdba
+@?/rdbms/admin/catqm.sql XDB CANJON TEMP NO
+@?/rdbms/admin/utlrp.sql
+spool off;
+
+
+
+
+FRS daily compression tables list for FRS_DATA tbs:
+==============================================================================
+
+select  tablespace_name,segment_name,bytes/1024/1024/1024 from dba_Segments where segment_name in (
+select table_name from dba_tables where compression !='ENABLED' and  table_name in (
+select object_name from dba_objects where trunc(created) >'10-jul-2013' and object_type='TABLE')) and bytes/1024/1024/1024 >1
+
+
+DBA_SCHEDULER_JOBS --- change value :
+=============================================
+
+begin
+dbms_scheduler.set_attribute (
+name               =>  'run_load_sales',
+attribute          =>  'repeat_interval',
+value              =>  'freq=daily; byhour=3');
+end;
+/
+
+SYS@IMBFCDB SQL>begin
+  2  dbms_scheduler.set_attribute (
+  3  name               =>  'FCDBADMIN_PRD.JB_ADM_PURGE_TIMEOUT_USERSESN',
+  4  attribute          =>  'repeat_interval',
+  5  value              =>  'FREQ=MINUTELY; INTERVAL=20');
+  6  end;
+  7  /
+
+PL/SQL procedure successfully completed.
+
+Elapsed: 00:00:00.08
+SYS@IMBFCDB SQL>JB_ADM_PURGE_TIMEOUT_USERSESN;
+SP2-0734: unknown command beginning "JB_ADM_PUR..." - rest of line ignored.
+SYS@IMBFCDB SQL>   SELECT JOB_NAME, REPEAT_INTERVAL FROM DBA_SCHEDULER_JOBS
+  2  WHERE JOB_NAME ='JB_ADM_PURGE_TIMEOUT_USERSESN';
+
+JOB_NAME
+------------------------------
+REPEAT_INTERVAL
+------------------------------------------------------------------------------------------------------------------------------------
+JB_ADM_PURGE_TIMEOUT_USERSESN
+FREQ=MINUTELY; INTERVAL=20
+
+
+Elapsed: 00:00:00.39
+
+
+
+
+
+
+
+====================================================
+
+Sample query to find unindexed foreign key constraints
+====================================================
+
+
+
+SELECT * FROM (
+SELECT c.table_name, cc.column_name, cc.position column_position
+FROM   user_constraints c, user_cons_columns cc
+WHERE  c.constraint_name = cc.constraint_name
+AND    c.constraint_type = 'R'
+MINUS
+SELECT i.table_name, ic.column_name, ic.column_position
+FROM   user_indexes i, user_ind_columns ic
+WHERE  i.index_name = ic.index_name
+)
+ORDER BY table_name, column_position;
+
+
+
+
+
+
+
+explain plan for SELECT /*+ index(C,IDX2_DB_CTL) */ 
+C.BRANCH_CODE, C.ALT_BRANCH_CODE,L_TODAY,MAIN_HEAD_SEQ_NO,MAIN_HEAD_DESC,SUB_HEAD_SEQ_NO,SUB_HEAD_DESC, (SUM(CR_bal_LCY)-SUM(DR_bal_LCY)) CLOSE_BAL
+FROM GLTB_GL_BAL A, BOTB_DAYBOOK B, daybook_ctl c
+WHERE A.GL_CODE = B.LEAF AND A.CATEGORY IN ('3','4') AND A.CCY_CODE = 'INR'
+AND a.BRANCH_CODE  =  C.BRANCH_CODE and
+a.FIN_YEAR = (select CURRENT_CYCLE  from fcgl.sttm_branch where branch_code ='000') and
+a.PERIOD_CODE = (select CURRENT_PERIOD from fcgl.sttm_branch where branch_code ='000')
+AND c.thread_no=p_thread_no
+GROUP BY c.branch_code, c.alt_branch_code, MAIN_HEAD_SEQ_NO,MAIN_HEAD_DESC,SUB_HEAD_SEQ_NO,SUB_HEAD_DESC;
+
+
+
+
+
+Aepkss_Aeod_Stream.Pr_Glupld
+
+
+
+select owner,table_name,blocks,num_rows,avg_row_len,round(((blocks*8/(1024*1024))),2) "TOTAL_SIZE in GB", 
+round((num_rows*avg_row_len/(1024*1024*1024)),2) "ACTUAL_SIZE in GB", 
+round(((blocks*8/(1024*1024))-(num_rows*avg_row_len/(1024*1024*1024))),2) "FRAGMENTED_SPACE in GB" ,
+ROUND((round(((blocks*8/(1024*1024))-(num_rows*avg_row_len/(1024*1024*1024))),2)/round(((blocks*8/(1024*1024))),2) * 100),2)
+FROM  dba_tables 
+where round(((blocks*8/(1024*1024))-(num_rows*avg_row_len/(1024*1024*1024))),2)> 1 
+---AND tablespace_name = 'FCRDEFAULT'
+and table_name in ('GLTB_GL_BAL','ACTB_DAILY_LOG')
+order by 9 desc;
+
+
+
+
+exp   file=FCT_ALL_FCR_TXNS_CONSOL.dmp log=FCT_ALL_FCR_TXNS_CONSOL.log tables=FCGL.FCT_ALL_FCR_TXNS_CONSOL statistics=none grants=y buffer=1000000 feedback=1000000 direct=y 
+
+
+
+
+explain plan for SELECT COUNT(*) FROM FCGL.ACTB_DAILY_LOG A WHERE A.AC_BRANCH =
+:B2 AND A.TRN_CODE = :B1 AND A.MODULE = 'DE' AND A.EVENT = 'INIT' AND
+A.AC_ENTRY_SR_NO IN(SELECT AC_ENTRY_SR_NO FROM GLUPLOAD_DAILY_LOG WHERE
+AC_BRANCH = :B2 ) AND NVL(DELETE_STAT, 'X') <> 'D'
+
+
+
+
+select sql_id, count(*) DBTime, round(count(*)*100/sum(count(*)) over (),2) pctload
+from v$active_session_history
+where sample_time between sysdate - 90/24/60 and 
+and session_type <> 'BACKGROUND'
+and rownum < 50 
+group by sql_id 
+order by count(*) desc;
+
+
+
+
+set long 10000000
+set pages 3000
+select dbms_metadata.get_ddl('PACKAGE','&tab_name','&owner') from dual;
+
+
+ select dbms_metadata.get_ddl('VIEW','CI_CUST_NPA_CONSOLIDATED_FCC','FCRUSER') from dual
+
+
+
+
+
+
+ SELECT COUNT(*)
+      INTO L_Pend_Count
+      FROM fcgl.Eitbs_Pending_Programs
+     WHERE Branch_Code = P_Branch AND Eoc_Group = P_Eoc AND Run_Stat = 'T';
+
+
+
+UPDATE fcgl.Aetbs_Aeod_Status
+         SET Run_Stat = 'C'
+       WHERE Operator_Branch = P_Branch AND Eoc_Group = P_Eoc;
+       
+       UPDATE fcgl.Aetb_Branch_Schedules
+           SET Posteoti = 'N'
+         WHERE Branch_Code = P_Branch;
+         
+         UPDATE fcgl.Aetb_Branch_Schedules
+           SET Posteofi = 'N'
+         WHERE Branch_Code = P_Branch;
+
+
+
+
+explain plan for  UPDATE fcgl.Aetbs_Aeod_Status
+         SET Run_Stat = 'C'
+       WHERE Operator_Branch = :B2 AND Eoc_Group = :B1
+       
+explain plan for        UPDATE fcgl.Aetb_Branch_Schedules
+           SET Posteoti = 'N'
+         WHERE Branch_Code = :B2 ;
+         
+explain plan for          UPDATE fcgl.Aetb_Branch_Schedules
+           SET Posteofi = 'N'
+         WHERE Branch_Code = :B2 
+
+
+
+
+  SELECT End_Of_Input
+      INTO Eoti_Stat
+      FROM Sttms_Branch
+     WHERE Branch_Code = P_Branch;
+
+
+
+
+  SELECT DISTINCT A.Branch_Code
+        FROM Aetms_Process_Defn_Streams A, Sttms_Branch B , Sttm_Dates C --To be
+ changed for date check
+       WHERE Stream_Code = P_Stream AND A.Record_Stat = 'O' AND
+             A.Auth_Stat = 'A' AND A.Branch_Code = B.Branch_Code AND
+             B.Record_Stat = 'O' AND NVL(A.Stream_Code, 'N') <> 'XR' AND
+             A.Branch_Code = C.Branch_Code AND C.Today = P_Dt
+

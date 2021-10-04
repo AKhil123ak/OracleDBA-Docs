@@ -1,0 +1,5 @@
+SQL> DESC BULKAADHAARPROCESS
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ADHAAR_NO                                 NOT NULL VARCHAR2(15)
+ CR_NO                                     NOT NULL VARCHAR2(18)

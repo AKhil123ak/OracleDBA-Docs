@@ -1,0 +1,50 @@
+SYS_LOB0000088629C00007$$	36303
+XMLP_SCHED_JOB	1472
+XMLP_SCHED_DATA	848
+XMLP_SCHED_DELIVERY	200
+XMLP_SCHED_OUTPUT	128
+SYS_IL0000088629C00007$$	72
+
+OCTOBER  	43516	10761954758
+
+XMLP_SCHED_DATA
+
+
+                                            Total      Available       Used     Pct  Pct
+               Tablespace                    (MB)         MB)          (MB)     Used Free MSG
+---------------------------------------- ------------ ------------ ------------ ---- ---- --------------------------
+PRD_IAS_TEMP                                      300          300            0    0  100 Free Space Available
+TEMP                                               29           29            0    0  100 Free Space Available
+PRD_MDS                                           100           94            6    6   94 Free Space Available
+USERS                                               5            4            1   26   74 Free Space Available
+UNDOTBS1                                          615          293          322   52   48 Free Space Available
+SYSTEM                                          1,024          179          845   82   18 Free Space Available
+SYSAUX                                            860           45          815   95    5 Warning (<10% free)
+PRD_BIPLATFORM                                 40,960        1,559       39,401   96    4 Critical (<5% free)
+                                         ------------ ------------
+sum                                            43,893        2,503
+
+
+ALTER TABLE PRD_BIPLATFORM.XMLP_SCHED_DATA ENABLE ROW MOVEMENT;
+
+
+ALTER TABLE PRD_BIPLATFORM.XMLP_SCHED_DATA MODIFY LOB (DATA) (SHRINK SPACE);
+
+
+
+ALTER TABLE XMLP_SCHED_DATA SHRINK SPACE CASCADE;
+
+
+                                            Total      Available       Used     Pct  Pct
+               Tablespace                    (MB)         MB)          (MB)     Used Free MSG
+---------------------------------------- ------------ ------------ ------------ ---- ---- --------------------------
+PRD_IAS_TEMP                                      300          300            0    0  100 Free Space Available
+TEMP                                               29           29            0    0  100 Free Space Available
+PRD_MDS                                           100           94            6    6   94 Free Space Available
+USERS                                               5            4            1   26   74 Free Space Available
+PRD_BIPLATFORM                                 40,960        8,894       32,066   78   22 Free Space Available
+SYSTEM                                          1,024          179          845   82   18 Free Space Available
+UNDOTBS1                                          615           65          550   90   10 Free Space Available
+SYSAUX                                            860           39          821   95    5 Critical (<5% free)
+                                         ------------ ------------
+sum                                            43,893        9,604

@@ -1,0 +1,172 @@
+spool FCR_3_TABLES_REORG_06MAR16.log
+set time on;
+set time on timing on
+set feed on
+set echo on
+select * from v$instance;
+
+select TABLESPACE_NAME,BYTES/1024/1024/1024 from sys.sm$ts_free order by 1;
+
+select count(*),object_type from dba_objects where  status='INVALID' group by object_type;
+
+select count(*) from dba_objects where  status='INVALID';
+
+col OBJECT_NAME for a30
+set feed on ;
+set echo on;
+SET LINESIZE 300
+SET PAGESIZE 1500
+
+select owner,object_type,object_name from dba_objects where status='INVALID' order by 3;
+
+select count(*) from dba_objects where  status='INVALID' and owner='FCRUSER';
+
+select count(*),object_type from dba_objects where  status='INVALID' and owner='FCRUSER' group by object_type;
+
+select owner,object_type,object_name from dba_objects where owner='FCRINT' and status='INVALID' order by 3;
+
+select count(*),object_type from dba_objects where  status='INVALID' and owner='FCRINT' group by object_type;
+
+ select owner,object_name,object_type from dba_objects where owner='FCRUSER' and status='INVALID' ORDER BY OWNER,OBJECT_TYPE;
+ 
+ select ' ALTER index '||OWNER|| '.'||index_NAME || ' Noparallel ' ||' ; ' from dba_indexes where DEGREE  like '%DEFAULT%';
+ 
+ select' ALTER TABLE '||OWNER||'.'||TABLE_NAME ||'   noparallel;' from dba_tables where degree  like '%DEFAULT%' order by table_name;
+ 
+ conn fcruser
+ 
+ select TABLESPACE_NAME,BYTES/1024/1024/1024 from sys.sm$ts_free order by 1;
+ 
+ ALTER SESSION ENABLE RESUMABLE TIMEOUT 3600;
+ 
+ alter session force parallel dml;
+ 
+ alter session force parallel ddl;
+ 
+ alter session force parallel query;
+ 
+ ================================================XF_ST_CAP_INPUT_TXN==================================================================no need gather
+ 
+ set lines 300;
+ set pagesize 300;
+ 
+ SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('XF_ST_CAP_INPUT_TXN') and owner='FCRUSER';
+ 
+ select INDEX_NAME,OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,DEGREE from dba_INDEXES WHERE TABLE_NAME='XF_ST_CAP_INPUT_TXN';
+ 
+ select owner,table_name,column_name,segment_name,tablespace_name,index_name,securefile from dba_lobs where table_name='XF_ST_CAP_INPUT_TXN';
+ 
+ col SEGMENT_NAME for a50;
+ 
+ select segment_type,segment_name,owner,bytes/1024/1024/1024,tablespace_name from dba_segments where segment_name='XF_ST_CAP_INPUT_TXN';
+ 
+ 
+ alter table XF_ST_CAP_INPUT_TXN move;
+ 
+ select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild   ;' from dba_INDEXES where STATUS='UNUSABLE';
+ 
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild   ;' from dba_INDEXES where STATUS='UNUSABLE';
+
+select' ALTER index '||OWNER||'.'||INDEX_NAME ||'   noparallel;' from dba_indexes where degree='DEFAULT' order by index_name;
+
+
+select segment_type,segment_name,owner,bytes/1024/1024/1024,tablespace_name from dba_segments where segment_name='XF_ST_CAP_INPUT_TXN';
+
+SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('XF_ST_CAP_INPUT_TXN');
+
+select INDEX_NAME,OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,DEGREE from dba_INDEXES WHERE TABLE_NAME='XF_ST_CAP_INPUT_TXN';
+
+
+=======================GL_TMP_XF_STCAP_TXNS=========================================
+
+select segment_type,segment_name,owner,bytes/1024/1024/1024,tablespace_name from dba_segments where segment_name='GL_TMP_XF_STCAP_TXNS';
+
+SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('GL_TMP_XF_STCAP_TXNS');
+
+select INDEX_NAME,OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,DEGREE from dba_INDEXES WHERE TABLE_NAME='GL_TMP_XF_STCAP_TXNS';
+
+select owner,table_name,column_name,segment_name,tablespace_name,index_name,securefile from dba_lobs where table_name='GL_TMP_XF_STCAP_TXNS';
+
+alter table GL_TMP_XF_STCAP_TXNS move;
+
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild   ;' from dba_INDEXES where STATUS='UNUSABLE';
+
+
+  select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild   ;' from dba_INDEXES where STATUS='UNUSABLE';
+  
+select' ALTER index '||OWNER||'.'||INDEX_NAME ||'   noparallel;' from dba_indexes where degree='DEFAULT' order by index_name;
+
+select segment_type,segment_name,owner,bytes/1024/1024/1024,tablespace_name from dba_segments where segment_name='GL_TMP_XF_STCAP_TXNS';
+
+select INDEX_NAME,OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,DEGREE from dba_INDEXES WHERE TABLE_NAME='GL_TMP_XF_STCAP_TXNS';
+
+select segment_type,segment_name,owner,bytes/1024/1024/1024,tablespace_name from dba_segments where segment_name='GL_TMP_XF_STCAP_TXNS';
+
+select INDEX_NAME,OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,DEGREE from dba_INDEXES WHERE TABLE_NAME='GL_TMP_XF_STCAP_TXNS';
+
+
+===========================================XF_STCAP_GL_TXNS=============================================================================
+  
+ select segment_type,segment_name,owner,bytes/1024/1024/1024,tablespace_name from dba_segments where segment_name='XF_STCAP_GL_TXNS';
+ 
+SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('XF_STCAP_GL_TXNS') and owner='FCRUSER';
+
+select owner,table_name,column_name,segment_name,tablespace_name,index_name,securefile from dba_lobs where table_name='XF_STCAP_GL_TXNS';
+
+select INDEX_NAME,OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,DEGREE from dba_INDEXES WHERE TABLE_NAME='XF_STCAP_GL_TXNS';
+
+alter table XF_STCAP_GL_TXNS move;
+
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild   ;' from dba_INDEXES where STATUS='UNUSABLE';
+
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild   ;' from dba_INDEXES where STATUS='UNUSABLE';
+
+select' ALTER index '||OWNER||'.'||INDEX_NAME ||'   noparallel;' from dba_indexes where degree='DEFAULT' order by index_name;
+
+select segment_type,segment_name,owner,bytes/1024/1024/1024,tablespace_name from dba_segments where segment_name='XF_STCAP_GL_TXNS' and owner='FCRUSER';
+
+SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('XF_STCAP_GL_TXNS') and owner='FCRUSER';
+
+select INDEX_NAME,OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,DEGREE from dba_INDEXES WHERE TABLE_NAME='XF_STCAP_GL_TXNS';
+
+select' ALTER index '||OWNER||'.'||INDEX_NAME ||'   noparallel;' from dba_indexes where degree='DEFAULT' order by index_name;
+
+select count(*) from dba_objects where  status='INVALID' and owner='FCRUSER';
+
+
+
+select TABLESPACE_NAME,BYTES/1024/1024/1024 from sys.sm$ts_free order by 1;
+
+select ' ALTER index '||OWNER|| '.'||index_NAME || ' Noparallel ' ||' ; ' from dba_indexes where DEGREE  like '%DEFAULT%';
+
+select' ALTER TABLE '||OWNER||'.'||TABLE_NAME ||'   noparallel;' from dba_tables where degree  like '%DEFAULT%' order by table_name;
+
+SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('XF_STCAP_GL_TXNS') and owner='FCRUSER';
+
+EXEC DBMS_STATS.GATHER_TABLE_STATS(OWNNAME=>'FCRUSER',TABNAME=>'XF_STCAP_GL_TXNS',ESTIMATE_PERCENT=>40,METHOD_OPT=>'FOR ALL COLUMNS SIZE 1',DEGREE=>40);
+
+SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('XF_STCAP_GL_TXNS')and owner='FCRUSER';
+
+SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('GL_TMP_XF_STCAP_TXNS');
+
+EXEC DBMS_STATS.GATHER_TABLE_STATS(OWNNAME=>'FCRUSER',TABNAME=>'GL_TMP_XF_STCAP_TXNS',ESTIMATE_PERCENT=>40,METHOD_OPT=>'FOR ALL COLUMNS SIZE 1',DEGREE=>40);
+
+SELECT OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS,PARTITIONED,COMPRESSION,LAST_ANALYZED,ROW_MOVEMENT FROM DBA_TABLES WHERE TABLE_NAME in  ('GL_TMP_XF_STCAP_TXNS');
+
+select' ALTER index '||OWNER||'.'||INDEX_NAME ||'   noparallel;' from dba_indexes where degree='DEFAULT' order by index_name;
+
+select' ALTER TABLE '||OWNER||'.'||TABLE_NAME ||'   noparallel;' from dba_tables where degree='DEFAULT' order by table_name;
+
+select count(*) from dba_objects where  status='INVALID' and owner='FCRUSER';
+
+select count(*) from dba_objects where  status='INVALID';
+
+select' ALTER TABLE '||OWNER||'.'||TABLE_NAME ||'   noparallel;' from dba_tables where degree  like '%DEFAULT%' order by table_name;
+
+select ' ALTER index '||OWNER|| '.'||index_NAME || ' Noparallel ' ||' ; ' from dba_indexes where DEGREE  like '%DEFAULT%';
+
+
+select TABLESPACE_NAME,BYTES/1024/1024/1024 from sys.sm$ts_free order by 1;
+
+spool off;
+

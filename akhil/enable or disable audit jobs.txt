@@ -1,0 +1,9 @@
+select * from db_operations;
+
+alter system kill session '3017,1351' immediate;
+
+select * from dba_scheduler_jobs where job_name like '%AUDIT%';
+SELECT JOB_NAME,state,ENABLED,LAST_START_DATE,NEXT_RUN_DATE FROM DBA_SCHEDULER_JOBS WHERE JOB_NAME in ('PURGE_ALL_AUDIT_TRAILS','AUDIT_LAST_ARCHIVE_TIME');
+
+exec dbms_scheduler.disable('AUDIT_LAST_ARCHIVE_TIME');
+exec dbms_scheduler.disable('PURGE_ALL_AUDIT_TRAILS');

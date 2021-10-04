@@ -1,0 +1,104 @@
+SYS:JFSMIBDB > select * from v$instance;
+
+INSTANCE_NUMBER INSTANCE_NAME                                                   
+--------------- ----------------                                                
+HOST_NAME                                                                       
+----------------------------------------------------------------                
+VERSION           STARTUP_T STATUS       PAR    THREAD# ARCHIVE LOG_SWITCH_WAIT 
+----------------- --------- ------------ --- ---------- ------- --------------- 
+LOGINS     SHU DATABASE_STATUS   INSTANCE_ROLE      ACTIVE_ST BLO               
+---------- --- ----------------- ------------------ --------- ---               
+              1 JFSMIBDB                                                        
+JFSBNKSRV208                                                                    
+11.2.0.4.0        20-NOV-18 OPEN         NO           1 STARTED                 
+ALLOWED    NO  ACTIVE            PRIMARY_INSTANCE   NORMAL    NO                
+                                                                                
+
+SYS:JFSMIBDB > set lines 190 pages 400
+SYS:JFSMIBDB > select sysdate from dual;
+
+SYSDATE                                                                                                                                                                                       
+---------                                                                                                                                                                                     
+24-NOV-18                                                                                                                                                                                     
+
+SYS:JFSMIBDB > set ime on;
+SP2-0158: unknown SET option "ime"
+SYS:JFSMIBDB > set time on;
+18:43:52 SYS:JFSMIBDB > select index_name from dba_indexes where index_name like '%USER_LOGIN_PROFILE_IDX1%';
+
+no rows selected
+
+18:45:00 SYS:JFSMIBDB > CREATE INDEX APP_BASE.USER_LOGIN_PROFILE_IDX1 ON USER_LOGIN_PROFILE(PROFILE_ID);
+CREATE INDEX APP_BASE.USER_LOGIN_PROFILE_IDX1 ON USER_LOGIN_PROFILE(PROFILE_ID)
+                                                 *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+18:45:10 SYS:JFSMIBDB > CREATE INDEX APP_BASE.USER_LOGIN_PROFILE_IDX1 ON APP_BASE.USER_LOGIN_PROFILE(PROFILE_ID);
+
+Index created.
+
+18:45:32 SYS:JFSMIBDB > select index_name from dba_indexes where index_name like '%USER_LOGIN_PROFILE_IDX1%';
+
+INDEX_NAME                                                                                                                                                                                    
+------------------------------                                                                                                                                                                
+USER_LOGIN_PROFILE_IDX1                                                                                                                                                                       
+
+18:45:41 SYS:JFSMIBDB > select index_name from dba_indexes where index_name like '%CUSTOMER_DIMENSION_IDX1%';
+
+no rows selected
+
+18:46:26 SYS:JFSMIBDB > CREATE INDEX EXPENSE_MANAGER.CUSTOMER_DIMENSION_IDX1 ON EXPENSE_MANAGER.CUSTOMER_DIMENSION(CUSTOMER_URN_NO);
+
+Index created.
+
+18:46:34 SYS:JFSMIBDB >  select index_name,owner from dba_indexes where index_name like '%CUSTOMER_DIMENSION_IDX1%';
+
+INDEX_NAME                     OWNER                                                                                                                                                          
+------------------------------ ------------------------------                                                                                                                                 
+CUSTOMER_DIMENSION_IDX1        EXPENSE_MANAGER                                                                                                                                                
+
+18:46:53 SYS:JFSMIBDB > 
+18:46:54 SYS:JFSMIBDB > select index_name,owner from dba_indexes where index_name like '%USER_OTP_SESSION_PRELOGIN_IDX1%';
+
+no rows selected
+
+18:47:08 SYS:JFSMIBDB > CREATE INDEX APP_BASE.USER_OTP_SESSION_PRELOGIN_IDX1 ON APP_BASE.USER_OTP_SESSION_PRELOGIN(UUID);
+
+Index created.
+
+18:47:15 SYS:JFSMIBDB > select index_name,owner from dba_indexes where index_name like '%USER_OTP_SESSION_PRELOGIN_IDX1%';
+
+INDEX_NAME                     OWNER                                                                                                                                                          
+------------------------------ ------------------------------                                                                                                                                 
+USER_OTP_SESSION_PRELOGIN_IDX1 APP_BASE                                                                                                                                                       
+
+18:47:21 SYS:JFSMIBDB > 
+18:47:21 SYS:JFSMIBDB > select index_name,owner from dba_indexes where index_name like '%PAY_BENE_INSTRUCTION_IDX1%';
+
+no rows selected
+
+18:47:38 SYS:JFSMIBDB > CREATE INDEX APP_IB.PAY_BENE_INSTRUCTION_IDX1 ON APP_IB.PAY_BENE_INSTRUCTION(STATUS_ID);
+
+Index created.
+
+18:47:49 SYS:JFSMIBDB > select index_name,owner from dba_indexes where index_name like '%PAY_BENE_INSTRUCTION_IDX1%';
+
+INDEX_NAME                     OWNER                                                                                                                                                          
+------------------------------ ------------------------------                                                                                                                                 
+PAY_BENE_INSTRUCTION_IDX1      APP_IB                                                                                                                                                         
+
+18:47:56 SYS:JFSMIBDB > 
+18:47:56 SYS:JFSMIBDB > select index_name,owner from dba_indexes where index_name in ('PAY_BENE_INSTRUCTION_IDX1','USER_OTP_SESSION_PRELOGIN_IDX1','CUSTOMER_DIMENSION_IDX1','USER_LOGIN_PROFILE_IDX1');
+
+INDEX_NAME                     OWNER                                                                                                                                                          
+------------------------------ ------------------------------                                                                                                                                 
+USER_LOGIN_PROFILE_IDX1        APP_BASE                                                                                                                                                       
+USER_OTP_SESSION_PRELOGIN_IDX1 APP_BASE                                                                                                                                                       
+PAY_BENE_INSTRUCTION_IDX1      APP_IB                                                                                                                                                         
+CUSTOMER_DIMENSION_IDX1        EXPENSE_MANAGER                                                                                                                                                
+
+18:48:39 SYS:JFSMIBDB > 
+18:48:40 SYS:JFSMIBDB > 
+18:48:40 SYS:JFSMIBDB > spool off;

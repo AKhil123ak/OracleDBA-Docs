@@ -1,0 +1,18 @@
+
+
+ksh -o vi
+stty intr ^c 
+stty erase ^?
+PS1=`uname -n`':$PWD# '
+export SSH_CLIENT=127.0.0.1
+export SSH2_CLIENT=127.0.0.1
+export TERM=vt100
+export EDITOR=vi 
+export TMOUT=70000
+export ODMDIR=/etc/objrepos
+export PATH=/usr/bin:/usr/sbin:/sbin:/usr/local/ssl/bin:/usr/local/bin:/usr/contrib/bin:/bin:/sbin
+export PATH=$PATH:/opt/VRTSvcs/bin:/opt/FXboks/bin :/opt/Dynprods/bin
+export MANPATH=/usr/share/man:/opt/VRTS/man:/opt/FXboks/man:/PPAK/man:/opt/pb/man
+while true; do echo " "; sleep 500; done & 
+cd /tmp
+

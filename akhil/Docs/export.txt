@@ -1,0 +1,787 @@
+exp userid=FCRUSER@FCR_FLASH filE=FCRUSER_FCT_AGREE_CONTRACTS_tables_exp.dmp log=FCRUSER_FCT_AGREE_CONTRACTS_tables_exp.log  statistics=none  recordlength=64000 grants=Y tables=FCRUSER.FCT_AGREE_CONTRACTS
+
+exp userid=fcruser@FCR filE=fcrPreCutEODHost_`date +%d%m%Y_%H_%M`.dmp log=fcrPreCutEODHost_`date +%d%m%Y_%H_%M`.log  statistics=none recordlen
+gth=64000 grants=Y parfile=fcrtables.par
+
+
+
+
+
+exp userid=FCATAPI  file=FCATAPI_fullschemaexport_29DEC.dmp log=FCATAPI_fullschemaexport_29DEC.log statistics=none recordlength=64000 direct=Y grants=Y owner=FCATAPI buffer=6400000
+
+
+exp userid=FCRPATCH  file=FCATOLTPROD_fullschemaexport_29DEC.dmp log=FCATOLTPROD_fullschemaexport_29DEC.log  parfile=fcrpatch.par statistics=none recordlength=64000 direct=Y grants=Y owner=FCRPATCH buffer=6400000
+
+
+
+
+exp frsprod@frsprod1 file=FRS_BKPTABLE_JUN2010_exp.dmp log=FRS_BKPTABLE_JUN_exp.log  statistics=none  recordlength=64000 grants=Y direct=y parfile=frs_bkptables_JUN2010.par
+
+
+
+
+DIRECTORY=FCRPATCH EXCLUDE=STATISTICS,GRANTS PARALLEL=10 status=120 parfile=fcrpatch.par  FCRPATCH
+
+
+
+
+
+exp userid=FCRUSER  file=FCRPATCH_export_12-jan-2012.dmp log=FCRPATCH_export_12-jan-2012.log  parfile=fcrpatch.par statistics=none recordlength=64000 direct=Y  grants=Y   buffer=6400000
+
+
+
+
+
+exec dbms_stats.gather_table_stats(OWNNAME=>'FCRUSER',TABNAME=>'FCT_AGREE_CONTRACTS',ESTIMATE_PERCENT=>40,METHOD_OPT=>'FOR ALL COLUMNS SIZE  1',DEGREE=>40);
+
+
+
+exec DBMS_STATS.LOCK_TABLE_STATS ('FCRUSER','FCT_AGREE_CONTRACTS');
+
+
+
+truncate table FCRUSER.FCT_AGREE_CONTRACTS;
+
+
+ FCRUSER.FCT_AGREE_CONTRACTS 
+ 
+ 
+ 
+ 
+ exp userid=FCRUSER@FCR_FLASH filE=FCRUSER_10MAR_tables_exp.dmp log=FCRUSER_10MAR_tables_exp.log  statistics=none  recordlength=64000 grants=Y tables=FCRUSER.diff_int_sep11_11_12_gl,fcruser.diff_int_sep11_11_12_nongl,fcruser.diff_int_sep11_11_12_gl_CR,fcruser.diff_int_sep11_11_12_NONgl_CR
+ 
+ 
+ 
+ 
+  exp userid=BRNUSER@BRN_FLASH1 filE=BRNUSER_REC_TXNXMLLOG_4Mar_exp.dmp log=BRNUSER_REC_TXNXMLLOG_4Mar_exp.log  statistics=none  recordlength=64000 grants=Y tables=brnuser.REC_TXNXMLLOG feedback=100000 
+  
+  
+  
+  
+  exp userid=BRNUSER  file=BRNUSER_fullschemaexport_29Apr.dmp log=BRNUSER_fullschemaexport_29Apr.dmp statistics=none recordlength=64000 direct=Y grants=Y owner=BRNUSER buffer=640000
+  
+  
+  
+  exp frsexport/frsexport@FRSPROD1 file=frs_bkptables_11_OCT_FULL_Nov_exp.dmp log=frs_bkptables_11_OCT_FULL_Nov_exp.log  statistics=none  recordlength=64000 direct=Y grants=Y parfile=frs_bkptables_partial_OCT_FULL_Nov.par
+  
+  
+  
+  
+  
+  
+   exp userid=FXGFCC@FCC  file=FCC_schema_full_25mar_exp.dmp log=FCC_schema_full_25mar_exp.log statistics=none recordlength=64000 direct=Y grants=Y owner=FXGFCC buffer=640000
+   
+   
+   
+   
+   exp userid=frsprod@frsprod1 filE=FRS_unused_tables_04apr12_exp.dmp log=FRS_unused_tables_04apr12_exp.log  statistics=none  recordlength=64000 grants=Y parfile=FRS_unused_tables_04apr.par
+   
+   
+   
+   
+   
+   
+    exp userid=RTGSDEFAULT@RTGS  file=RTGSDEFAULT_FULL_schema_01052012.dmp log=RTGSDEFAULT_FULL_schema_01052012.log statistics=none recordlength=64000 direct=Y grants=Y owner=RTGSDEFAULT buffer=640000
+    
+    
+    
+    exp userid=RTGSDEFAULT@RTGS file=audit_partial1.dmp tables= RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log= audit_partial1.log parfile=audit_partial1.par statistics=none recordlength=64000 grants=Y
+    
+    
+    
+    
+    
+    exp userid=RTGSDEFAULT@RTGS file=audit_partial2.dmp tables=RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log=audit_partial2.log parfile=auditpartial_2.par statistics=none  grants=Y 
+    
+    
+    
+    
+    
+    
+    
+    exp userid=RTGSDEFAULT@RTGS file=Txn_partial1.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial1.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial1.par
+    
+    
+    exp  file=Txn_partial2.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial2.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial2.par
+    
+    
+    
+    
+    =========================
+    
+    
+    15/07/2012
+    
+    
+    exp userid=RTGSDEFAULT@RTGS  file=RTGSDEFAULT_FULL_schema_15072012.dmp log=RTGSDEFAULT_FULL_schema_15072012.log statistics=none recordlength=64000 direct=Y grants=Y owner=RTGSDEFAULT buffer=640000
+    
+    
+    exp userid=RTGSDEFAULT@RTGS file=audit_partial1.dmp tables= RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log= audit_partial1.log parfile=audit_partial1.par statistics=none recordlength=64000 grants=Y
+    
+    
+    exp userid=RTGSDEFAULT@RTGS file=audit_partial2.dmp tables=RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log=audit_partial2.log parfile=audit_partial2.par statistics=none  grants=Y 
+    
+    exp userid=RTGSDEFAULT@RTGS file=Txn_partial1.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial1.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial1.par
+    
+    exp userid=RTGSDEFAULT@RTGS file=Txn_partial2.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial2.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial2.par
+    
+    
+    
+    --------------------------------
+    
+    
+    exp userid=FCATCRMUAT  file=FCATCMRUAT_schema_full_04sept_exp.dmp log=FCATCRMUAT_schema_full_04sept_exp.log statistics=none recordlength=64000 grants=Y owner=FCATCMRUAT buffer=640000
+    
+    
+    
+    added 62G for FCCDEFAULT for import
+    imp userid=fccread/fccread@FCC_FLASH file=fcrPreCutEODHost_3_04072011_19_33.dmp log=fcrPreCutEODHost_3_04072011_19_33_imp_020912.log fromuser=fcruser touser=fccread tables=TD_ACCT_MAST,TS_INCOME_TAX_LOG ignore=Y statistics=none buffer=1000000 feedback=100000
+    imp userid=fccread/fccread@FCC_FLASH file=fcrPreCutEODHost_1_04072011_19_33.dmp log=fcrPreCutEODHost_1_04072011_19_33_imp_020912.log fromuser=fcruser touser=fccread tables=CI_CUSTMAST ignore=Y statistics=none buffer=1000000 feedback=100000
+    imp userid=fccread/fccread@FCC_FLASH file=fcrPreCutEODHost_4_04072011_19_33.dmp log=fcrPreCutEODHost_4_04072011_19_33_imp_020912.log fromuser=fcruser touser=fccread tables=TD_DEP_MAST,TS_TAX_WAIVER ignore=Y statistics=none buffer=1000000 feedback=100000
+    
+    
+    select bytes/(1024*1024*1024) from dba_segments where segment_name='CI_CUSTMAST' and owner='FCRUSER';  - -fcrtables_part1.par
+    
+    TD_ACCT_MAST  --fcrtables_part3.par
+    select bytes/(1024*1024*1024) from dba_segments where segment_name='TD_ACCT_MAST' and owner='FCRUSER';
+    
+    TD_DEP_MAST--   fcrtables_part4.par
+    select bytes/(1024*1024*1024) from dba_segments where segment_name='TD_DEP_MAST' and owner='FCRUSER';
+    
+    TS_INCOME_TAX_LOG  --------fcrtables_part3.par
+    select bytes/(1024*1024*1024) from dba_segments where segment_name='TS_INCOME_TAX_LOG' and owner='FCRUSER';
+    
+    TS_TDS_LOG     --not there
+    select bytes/(1024*1024*1024) from dba_segments where segment_name='TS_TDS_LOG' and owner='FCRUSER';
+    
+    TS_TAX_WAIVER  ---fcrtables_part4.par
+    select bytes/(1024*1024*1024) from dba_segments where segment_name='TS_TAX_WAIVER' and owner='FCRUSER';
+
+
+
+select bytes/(1024*1024*1024) from dba_segments where SEGMENT_NAME='FCATCRMUAT'
+
+
+exp userid=FCATCRMUAT  file=FCATCMRUAT_schema_full_04sept_exp.dmp log=FCATCRMUAT_schema_full_25sept_exp.log statistics=none recordlength=64000 grants=Y owner=FCATCRMUAT buffer=640000
+
+
+sum(bytes)/1024/1024/1024
+
+select sum(bytes)/1024/1024/1024 from dba_segments where OWNER='FCATCRMUAT'
+
+
+exp userid=FCRUSER  file=archival_tables_CH_TMP_RCH_INTEREST_MMDD.dmp log=archival_tables_CH_TMP_RCH_INTEREST_MMDD.log statistics=none recordlength=64000 grants=Y buffer=640000 feedback=100000 tables=FCRUSER.CH_TMP_RCH_INTEREST_MMDD
+
+fcruser.gl_recon_master
+fcruser.gl_recon_details
+
+
+exp userid=FCRUSER@FCR_FLASH  file=FCR_gl_recon_master_details.dmp log=FCR_gl_recon_master_details.log statistics=none recordlength=64000 grants=Y buffer=640000 feedback=100000 tables=FCRUSER.GL_RECON_MASTER,FCRUSER.GL_RECON_DETAILS
+
+
+
+exp frsprod@frsprod1 file=FRS_PURGE_TABLE_APR2011_exp.dmp log=FRS_PURGE_TABLE_APR2011_exp.log  statistics=none  recordlength=64000 grants=Y direct=y parfile=frs_bkptables.par
+
+
+CBTRAIN_DC1
+
+
+select segment_name,sum(bytes)/(1024*1024*1024) from dba_segments where SEGMENT_NAME in ('AUD$') and owner='SYS' group by segment_name;
+
+
+exp sys@CBTRAIN_38.19 file=CBRPT_AUD_TABLE_24MAY2013_exp.dmp log=CBRPT_AUD_TABLE_24MAY2013_exp.log  statistics=none recordlength=64000 grants=Y  tables='AUD$' feedback=10000
+
+CBTRAIN_38.19
+
+
+CBTRAIN =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.35.51)(PORT = 1581))
+    )
+    (CONNECT_DATA =
+      (SID = FCCDB )
+      (SERVER = DEDICATED)
+    )
+  )
+
+
+
+
+CBTRAIN =
+  (DESCRIPTION =
+    (ADDRESS_LIST =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 172.16.38.19)(PORT = 1523))
+    )
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = CBRPT)
+    )
+  )
+
+
+exp file=CBRPT_AUD_TABLE_25MAY2013_exp.dmp log=CBRPT_AUD_TABLE_25MAY2013_exp.log  statistics=none recordlength=64000 grants=Y  tables=AUD$ feedback=100000
+
+
+
+exp userid=FCATR@FCATR  file=IMB_AUDITLOG_HISTORY_TABLE_25052013.dmp log=IMB_AUDITLOG_HISTORY_TABLE_25052013.log statistics=none recordlength=64000 tables=AUDITLOG_HISTORY grants=Y buffer=640000 feedback=10000
+
+
+
+$ ps -ef | grep lsnr
+  oracle  270548       1   0   May 05      - 343:01 /oracle/orabase11202/OraHome3/bin/tnslsnr CBTRAIN_CBRPT -inherit
+  oracle  274650       1   0   May 05      -  0:27 /oracle/orabase11202/OraHome3/bin/tnslsnr BO -inherit
+  oracle  278764       1   0   May 05      -  0:53 /oracle/orabase11202/OraHome3/bin/tnslsnr LISTENER_FRS_REP -inherit
+  oracle  528952 1037688   0 02:07:29  pts/3  0:00 grep lsnr
+  oracle  209846       1   0   May 05      - 31:46 /oracle/orabase11202/OraHome3/bin/tnslsnr LISTENER -inherit
+  oracle  316330       1   0   May 05      -  0:26 /oracle/orabase11202/OraHome3/bin/tnslsnr CBTRAIN_REP -inherit
+    grid  161208       1   0   May 05      -  2:53 /asm/grid/asmbase/AsmHome1/bin/tnslsnr LISTENER -inherit
+$
+
+
+
+truncate table sys.AUD$ drop storage ;
+
+
+exp frsprod@frsprod1 file=FRS_PURGE_TABLE_JUNE2011_exp.dmp log=FRS_PURGE_TABLE_JUNE2011_exp.log  statistics=none  recordlength=64000 grants=Y direct=y parfile=frs_bkptables.par
+
+
+
+nohup exp frsprod/frsprod@frsprod1 file=FRS_Purge_tables_export_JUNE2011.dmp log=FRS_Purge_tables_export_JUNE2011.log parfile=frs_bkptables.par FEEDBACK=1000000 STATISTICS=none
+
+
+exp userid=FCATR file=IMB_AUDITLOG_HISTORY_TABLE_26052013.dmp log=IMB_AUDITLOG_HISTORY_TABLE_26052013.log statistics=none recordlength=64000 tables=AUDITLOG_HISTORY grants=Y buffer=640000 feedback=10000
+
+
+
+exp frsprod@frsprod1 file=FRS_DROP_TABLE_30MAY13_exp.dmp log=FRS_DROP_TABLE_30MAY13_exp.log  statistics=none  recordlength=64000 grants=Y parfile=FRS_DROP_TABLE.par
+
+
+
+
+impdp fcrarch DIRECTORY=FCRARCH DUMPFILE=FCATC_IMB_AUDITLOG_HISTORY_TABLE_30MAY13.dmp LOGFILE=FCATC_IMB_AUDITLOG_HISTORY_TABLE_30MAY13.dmp.log status=120 parallel=1 remap_schema=fcruser:fcrarch remap_tablespace=FCRARCH2:FCRDEFAULT
+
+
+
+ imp file=FCATC_IMB_AUDITLOG_HISTORY_TABLE_30MAY13.dmp log=FCATC_IMB_AUDITLOG_HISTORY_TABLE_30_MAY_13.log COMMIT=y FEEDBACK=1000000 STATISTICS=none  GRANTS=n FROMUSER=FCATCARCH TOUSER=
+ 
+ 
+ 
+  imp userid=fccread/fccread@FCC_FLASH file=fcrPreCutEODHost_1_04072011_19_33.dmp log=fcrPreCutEODHost_1_04072011_19_33_imp_020912.log fromuser=fcruser touser=fccread tables=CI_CUSTMAST ignore=Y statistics=none buffer=1000000 feedback=100000
+  
+  
+ exp FCRUSER@FCR_FLASH file=FCR_GL_RECON_TABLES_29JUN13_exp.dmp log=FCR_GL_RECON_TABLES_29JUN13_exp.log  statistics=none  recordlength=64000 grants=Y tables=FCRUSER.GL_RECON_MASTER,FCRUSER.GL_RECON_DETAILS
+
+
+
+exp CBTRAIN@CBTRAIN_DC1 file=BA_TMP_R_EXT_HOFF_ST_150_03AUG13_exp.dmp log=BA_TMP_R_EXT_HOFF_ST_150_03AUG13exp.log  statistics=none  recordlength=64000 grants=Y tables=CBTRAIN.BA_TMP_R_EXT_HOFF_ST_150
+
+
+
+exp frsprod@frsprod1 file=FRS_PURGE_TABLE_APR_MAY_2011_exp.dmp log=FRS_PURGE_TABLE_APR_MAY_2011_exp.log  statistics=none  recordlength=64000 grants=Y direct=y parfile=frs_bkptables.par
+
+
+==============
+
+exp userid=RTGSDEFAULT@RTGS  file=RTGSDEFAULT_FULL_schema_01082013.dmp log=RTGSDEFAULT_FULL_schema_01082013.log statistics=none recordlength=64000  grants=Y owner=RTGSDEFAULT buffer=640000
+    
+  
+  
+  
+exp userid=RTGSDEFAULT@RTGS file=audit_partial1.dmp tables= RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log= audit_partial1.log parfile=audit_partial1.par statistics=none recordlength=64000 grants=Y
+    
+    
+exp userid=RTGSDEFAULT@RTGS file=audit_partial2.dmp tables=RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log=audit_partial2.log parfile=audit_partial2.par statistics=none recordlength=64000 grants=Y 
+    
+exp userid=RTGSDEFAULT@RTGS file=Txn_partial1.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial1.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial1.par
+    
+
+exp userid=RTGSDEFAULT@RTGS file=Txn_partial2.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial2.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial2.par
+
+
+====================
+RTGSDEFAULT    
+    
+imp userid=RTGSDEFAULT@RTGS file=audit_partial2.dmp log=IMP_audit_partial2.log fromuser=RTGSDEFAULT touser=RTGSDEFAULT statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y
+   
+imp userid=RTGSDEFAULT@RTGS file=Txn_partial2.dmp log=IMP_Txn_partial2.log fromuser=RTGSDEFAULT touser=RTGSDEFAULT statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y   
+   
+RTGSPUGRE
+
+imp userid=RTGSPUGRE@RTGS file=audit_partial1.dmp log=IMP_audit_partial1.log fromuser=RTGSDEFAULT touser=RTGSDEFAULT statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y
+
+imp userid=RTGSPUGRE@RTGS file=Txn_partial1.dmp log=IMP_Txn_partial1.log fromuser=RTGSDEFAULT touser=RTGSDEFAULT statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y   
+   
+   
+   
+   
+   
+   
+ QUERY="WHERE DATTXN < TO_DATE ('01-06-2013', 'DD-MM-YYYY')"
+ 
+ 
+ 
+ 
+ 
+ exp userid=FCATR  file=MLOG$_MSTUSERALERTS_12AUG_15082013.dmp log=MLOG$_MSTUSERALERTS_12AUG_18082013.log statistics=none recordlength=64000 tables='MLOG$_MSTUSERALERTS_12AUG' grants=Y buffer=640000 feedback=10000
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ XF_OL_ST_SCLOG_MMDD_HIST_14AUG:XF_OL_ST_SCLOG_MMDD_HIST,XF_OL_ST_TXNLOG_MMDD_HIST_1408:XF_OL_ST_TXNLOG_MMDD_HIST,XF_OL_ST_COTXN_MMDD_HIST_14AUG:XF_OL_ST_COTXN_MMDD_HIST
+ 
+ 
+ 
+ 
+ 
+"FCRARCH"."XF_OL_ST_COTXN_MMDD_HIST_14AUG"
+
+
+exp userid=FCRUSER file=GL_RECON_MASTER_01SEPT13.dmp log=GL_RECON_MASTER_01SEPT13.log tables=GL_RECON_MASTER statistics=none recordlength=64000 grants=Y 
+
+
+
+expdp OMNIUSER  parfile=AML_TEMPTABLE_DROP.par DIRECTORY=AMLEXPDP EXCLUDE=STATISTICS,GRANTS  DUMPFILE=AML_TEMPTABLE_DROP_`date +%d%m%Y_%H_%M`_%U.dmp LOGFILE=AML_TEMPTABLE_DROP_`date +%d%m%Y_%H_%M`.log  status=120  parallel=5
+
+
+
+exp frsprod/frsprod@frsprod1  file=BA_EXT_SCH_GEFU_PATCH_091013_11OCT13_16_30.dmp log=BA_EXT_SCH_GEFU_PATCH_091013_11OCT13_16_30.log statistics=none recordlength=64000 tables=BA_EXT_SCH_GEFU_PATCH_091013 grants=Y buffer=640000 feedback=10000
+
+
+imp fcruser file=BA_EXT_SCH_GEFU_PATCH_091013_11OCT13_16_30.dmp log=BA_EXT_SCH_GEFU_PATCH_091013_11OCT13_16_30_imp.log fromuser=frsprod touser=fcruser recordlength=64000 tables=BA_EXT_SCH_GEFU_PATCH_091013 feedback=10000
+
+
+exp userid=GBM file=GBM_structure_12OCT13.dmp log=GBM_structure_12OCT13.log statistics=none  recordlength=64000 direct=Y grants=Y rows=n owner=GBM
+
+
+
+
+
+exp file=can_commission_apr2013_can_commission_may2013.dmp log=can_commission_apr2013_can_commission_may2013.log tables=cb75163.can_commission_apr2013,cb75163.can_commission_may2013 statistics=none recordlength=64000 grants=n
+
+
+
+
+
+exp file=cbtrain_aud_exp_13SEP13.dmp log=cbtrain_aud_exp_13SEP13.log tables=aud$ statistics=none FEEDBACK=1000000  
+
+
+
+exp CBTRAIN/CBTRAIN file=CAN_TD_MATURED_270913_FDR_151013.dmp log=CAN_TD_MATURED_270913_FDR_151013.log statistics=none recordlength=64000 tables=CAN_TD_MATURED_270913_FDR grants=Y buffer=640000 feedback=10000
+
+
+imp fcruser file=BA_EXT_SCH_GEFU_PATCH_091013_11OCT13_16_30.dmp log=BA_EXT_SCH_GEFU_PATCH_091013_11OCT13_16_30_imp.log fromuser=frsprod touser=fcruser recordlength=64000 tables=BA_EXT_SCH_GEFU_PATCH_091013 feedback=10000
+
+
+
+exp file=EXP_CB75163_FI_TXNS_30OCT13.dmp log=EXP_CB75163_FI_TXNS_30OCT13.log statistics=none recordlength=64000 tables=CB75163.FI_TXNS grants=Y buffer=640000 feedback=10000
+
+imp file=EXP_CB75163_FI_TXNS_30OCT13.dmp log=IMP_CB75163_FI_TXNS_30OCT13.log fromuser=CB75163 touser=CB75163 recordlength=64000 tables=FI_TXNS feedback=10000
+
+
+
+
+exp CBTRAIN@CBTRAIN_DC1 file=CAN_TD_STUB_STAT8ACS_2_111113.dmp log=CAN_TD_STUB_STAT8ACS_2_111113.log statistics=none recordlength=64000 tables=CBTRAIN.CAN_TD_STUB_STAT8ACS_2 grants=Y buffer=640000 feedback=10000
+
+imp file=CAN_TD_STUB_STAT8ACS_2_111113.dmp log=IMP_CAN_TD_STUB_STAT8ACS_2_111113_1.log fromuser=CBTRAIN touser=FCRPATCH recordlength=64000 tables=CAN_TD_STUB_STAT8ACS_2 feedback=10000
+
+
+
+exp CBTRAIN@CBTRAIN_DC1 file=CAN_TD_MATURED_DORM_151113.dmp log=EXP_CAN_TD_MATURED_DORM_151113.log statistics=none recordlength=64000 tables=CBTRAIN.CAN_TD_MATURED_DORM_FDR,CBTRAIN.CAN_TD_MATURED_DORM_KDR grants=Y buffer=640000 feedback=10000
+
+imp FCRUSER@FCR_FLASH file=CAN_TD_MATURED_DORM_151113.dmp log=IMPFLASH_CAN_TD_MATURED_DORM_151113_1.log fromuser=CBTRAIN touser=FCRPATCH recordlength=64000 tables=CAN_TD_MATURED_DORM_FDR,CAN_TD_MATURED_DORM_KDR feedback=10000
+
+
+
+exp file=EXP_CB75163_FI_TXNS_30OCT13.dmp log=EXP_CB75163_FI_TXNS_30OCT13.log statistics=none recordlength=64000 tables=CB75163.FI_TXNS grants=Y buffer=640000 feedback=10000
+
+
+
+
+
+exp frsprod/frsprod@frsprod1  file=CAN_RISK_RATE_DUMP_04NOV13_22_NOV13.dmp log=CAN_RISK_RATE_DUMP_04NOV13_export_22NOV13.log statistics=none recordlength=64000 tables=CAN_RISK_RATE_DUMP_04NOV13  grants=Y buffer=640000 feedback=10000
+
+imp file=CAN_RISK_RATE_DUMP_04NOV13_22_NOV13.dmp log=CAN_RISK_RATE_DUMP_04NOV13_import_22NOV13.log statistics=none recordlength=64000 tables=CAN_RISK_RATE_DUMP_04NOV13 fromuser=frsprod touser=fcrpatch buffer=640000 feedback=10000 
+
+
+
+
+create index fcrpatch.CAN_RISK_RATE_DUMP_04NOV13 on fcrpatch.CAN_RISK_RATE_DUMP_04NOV13 (cod_home_branch, cod_cust)
+
+
+
+
+connect target /
+  connect catalog RMANUSR/RMANUSR@RCATDR
+ run {
+ allocate channel T1 type 'sbt_tape' parms 'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo_CBRPT_DLY_ASM.opt)';
+ backup as backupset
+   tag 'CBRPT_DLY_23_NOV_2013_00_35AM'
+   database format 'CBRPT_%t_%s_%p' keep until time 'sysdate + 16' LOGS;
+ release channel T1;
+  }
+
+
+
+SYS@FCR SQL>select segment_name,owner,tablespace_name from dba_segments where segment_name='CAN_RISK_RATE_DUMP_04NOV13';
+
+SEGMENT_NAME                                                                      OWNER
+--------------------------------------------------------------------------------- ------------------------------
+TABLESPACE_NAME
+------------------------------
+CAN_RISK_RATE_DUMP_04NOV13                                                        FCRPATCH
+FCRDEFAULT
+
+
+Elapsed: 00:00:00.32
+SYS@FCR SQL>create index fcrpatch.CAN_RISK_RATE_DUMP_04NOV13 on fcrpatch.CAN_RISK_RATE_DUMP_04NOV13 (cod_home_branch, cod_cust);
+
+Index created.
+
+Elapsed: 00:00:00.06
+SYS@FCR SQL>select index_name,status,degree from dba_indexes where table_name='CAN_RISK_RATE_DUMP_04NOV13';
+
+INDEX_NAME                     STATUS   DEGREE
+------------------------------ -------- ----------------------------------------
+CAN_RISK_RATE_DUMP_04NOV13     VALID    1
+
+Elapsed: 00:00:00.07
+SYS@FCR SQL>select index_name,status,degree,owner from dba_indexes where table_name='CAN_RISK_RATE_DUMP_04NOV13';
+
+INDEX_NAME                     STATUS   DEGREE                                   OWNER
+------------------------------ -------- ---------------------------------------- ------------------------------
+CAN_RISK_RATE_DUMP_04NOV13     VALID    1                                        FCRPATCH
+
+Elapsed: 00:00:00.05
+SYS@FCR SQL>exit
+Disconnected from Oracle Database 11g Enterprise Edition Rel
+
+
+=================
+
+08-DEC-13
+
+exp userid=RTGSDEFAULT@RTGS  file=RTGSDEFAULT_FULL_schema_08122013.dmp log=RTGSDEFAULT_FULL_schema_08122013.log statistics=none recordlength=64000  grants=Y owner=RTGSDEFAULT buffer=640000
+    
+  
+  
+  
+exp userid=RTGSDEFAULT@RTGS file=audit_partial1.dmp tables= RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log= audit_partial1.log parfile=audit_partial1.par statistics=none recordlength=64000 grants=Y
+    
+    
+exp userid=RTGSDEFAULT@RTGS file=audit_partial2.dmp tables=RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log=audit_partial2.log parfile=audit_partial2.par statistics=none recordlength=64000 grants=Y 
+    
+exp userid=RTGSDEFAULT@RTGS file=Txn_partial1.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial1.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial1.par
+    
+
+exp userid=RTGSDEFAULT@RTGS file=Txn_partial2.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial2.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial2.par
+
+
+====================
+RTGSDEFAULT    
+    
+imp userid=RTGSDEFAULT@RTGS file=audit_partial2.dmp log=IMP_audit_partial2.log fromuser=RTGSDEFAULT touser=RTGSDEFAULT statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y
+   
+imp userid=RTGSDEFAULT@RTGS file=Txn_partial2.dmp log=IMP_Txn_partial2.log fromuser=RTGSDEFAULT touser=RTGSDEFAULT statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y   
+   
+RTGSPUGRE
+
+imp userid=RTGS_PURGE@RTGS file=audit_partial1.dmp log=IMP_audit_partial1.log fromuser=RTGSDEFAULT tables=AUDITLOG touser=RTGS_PURGE statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y
+
+imp userid=RTGS_PURGE@RTGS file=Txn_partial1.dmp log=IMP_Txn_partial1.log fromuser=RTGSDEFAULT touser=RTGS_PURGE statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y   
+   
+   
+exp file=AUDITLOG_08_12_2013.dmp log=AUDITLOG_08_12_2013_exp.log statistics=none recordlength=64000 tables=RTGS_PURGE.AUDITLOG grants=Y buffer=640000 feedback=10000 
+   
+   
+   
+ QUERY="WHERE DATTXN < TO_DATE ('01-11-2013', 'DD-MM-YYYY')"
+ 
+ 
+----- imp userid=RTGS_PURGE@RTGS file=AUDITLOG_08_12_2013.dmp log=IMP_AUDITLOG_08_12_2013.log fromuser=RTGS_PURGE touser=RTGS_PURGE statistics=none feedback=1000000 recordlength=65535  grants=no buffer=10000000 
+
+imp userid=RTGS_PURGE@RTGS file=audit_partial1.dmp log=IMP_audit_partial1.log tables=AUDITLOG fromuser=RTGSDEFAULT  touser=RTGS_PURGE statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y
+
+
+
+
+exp file=FCT_LOAN_CONTRACTS.dmp log=FCT_LOAN_CONTRACTS.log statistics=none recordlength=64000 tables=FCRUSER.FCT_LOAN_CONTRACTS grants=Y buffer=640000 feedback=10000
+
+................................................................................
+.....................................................................................
+
+
+
+
+exp sys file=AUD_TABLE_24MAY2013_exp.dmp log=AUD_TABLE_30DEC2013_exp.log  statistics=none recordlength=64000 grants=Y  tables='AUD$' feedback=10000
+
+
+MITB_CLASS_MAPPING_ARCHIVE3012
+
+CSTB_ADDL_TEXT_ARCHIVE_30DEC
+
+ACTB_HISTORY_ARCHIVE_30DEC
+
+IFTB_DAILY_LOG_ARCHIVE_30DEC
+
+
+
+MITB_CLASS_MAPPING_ARCHIVE3012
+CSTB_ADDL_TEXT_ARCHIVE_30DEC
+ACTB_HISTORY_ARCHIVE_30DEC
+IFTB_DAILY_LOG_ARCHIVE_30DEC
+
+
+
+exp frsprod/frsprod file=CAN_CUST_ID_DTLS_`date +%d%m%Y_%H_%M`.dmp log=CAN_CUST_ID_DTLS_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=FRSPROD.CAN_CUST_ID_DTLS grants=Y buffer=640000 feedback=10000
+
+
+imp FCRUSER@FCR_FLASH file=CAN_CUST_ID_DTLS_04012014_07_31.dmp log=CAN_CUST_ID_DTLS_import_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000  fromuser=frsprod touser=FCRPATCH  grants=Y buffer=640000 feedback=10000
+
+
+impdp DIRECTORY=FCGLARCH DUMPFILE=FCGL_ARCHICAL_part2_05JAN13_%U.dmp LOGFILE=imp_FCGL_ARCHICAL_part2_05JAN13_15_48.log status=120 parallel=8 REMAP_SCHEMA=fcgl:FCCARCH TABLE_EXISTS_ACTION=APPEND remap_table=MITB_CLASS_MAPPING_ARCHIVE3012:MITB_CLASS_MAPPING_ARCHIVE,IFTB_DAILY_LOG_ARCHIVE_30DEC:IFTB_DAILY_LOG_ARCHIVE
+
+
+
+
+exp frsprod/frsprod file=BA_EXT_SCH_GEFU_PATCH_06JAN14_`date +%d%m%Y_%H_%M`.dmp log=BA_EXT_SCH_GEFU_PATCH_06JAN14_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=FRSPROD.BA_EXT_SCH_GEFU_PATCH_06JAN14 grants=Y buffer=640000 feedback=100000
+
+
+
+imp fcruser@FCR_FLASH file=BA_EXT_SCH_GEFU_PATCH_06JAN14_08012014_10_49.dmp log=BA_EXT_SCH_GEFU_PATCH_06JAN14_IMPORT_`date +%d%m%Y_%H_%M`.log fromuser=FRSPROD touser=FCRUSER  grants=Y buffer=640000 feedback=100000
+
+
+
+imp file=BA_EXT_SCH_GEFU_PATCH_06JAN14_08012014_10_49.dmp log=BA_EXT_SCH_GEFU_PATCH_06JAN14_IMPORT_`date +%d%m%Y_%H_%M`.log fromuser=FRSPROD touser=FCRPATCH  grants=Y buffer=640000 feedback=100000
+
+
+==================
+
+11JAN14
+
+exp userid=RTGSDEFAULT file=RTGSDEFAULT_FULL_schema_12012014.dmp log=RTGSDEFAULT_FULL_schema_12012014.log statistics=none recordlength=64000  grants=Y owner=RTGSDEFAULT buffer=640000
+    
+  
+  
+  
+exp userid=RTGSDEFAULT file=audit_partial1.dmp tables= RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log= audit_partial1.log parfile=audit_partial1.par statistics=none recordlength=64000 grants=Y
+    
+    
+exp userid=RTGSDEFAULT file=audit_partial2.dmp tables=RTGSDEFAULT.AUDITLOG,RTGSDEFAULT.RTGSHOSTRESPONSE log=audit_partial2.log parfile=audit_partial2.par statistics=none recordlength=64000 grants=Y 
+    
+exp userid=RTGSDEFAULT file=Txn_partial1.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial1.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial1.par
+    
+
+exp userid=RTGSDEFAULT file=Txn_partial2.dmp tables=RTGSDEFAULT.ADMINTXNUNAUTHDATA,RTGSDEFAULT.ADMINTXNUNAUTHDATA_HISTORY,RTGSDEFAULT.TXNPAY log=Txn_partial2.log  statistics=none recordlength=64000 grants=Y parfile=Txn_partial2.par
+
+
+====================
+RTGSDEFAULT    
+    
+imp userid=RTGSDEFAULT file=audit_partial2.dmp log=IMP_audit_partial2.log fromuser=RTGSDEFAULT touser=RTGSDEFAULT statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y
+   
+imp userid=RTGSDEFAULT file=Txn_partial2.dmp log=IMP_Txn_partial2.log fromuser=RTGSDEFAULT touser=RTGSDEFAULT statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y   
+   
+RTGSPUGRE
+
+imp userid=RTGS_PURGE file=audit_partial1.dmp log=IMP_audit_partial1.log fromuser=RTGSDEFAULT touser=RTGS_PURGE statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y
+
+imp userid=RTGS_PURGE file=Txn_partial1.dmp log=IMP_Txn_partial1.log fromuser=RTGSDEFAULT touser=RTGS_PURGE statistics=none feedback=1000000 recordlength=65535 commit=y grants=no buffer=10000000 ignore=y   
+
+
+
+
+bash-2.05b$ cat audit_partial1.par
+QUERY="WHERE DATTXN < TO_DATE ('01-12-2013', 'DD-MM-YYYY')"
+bash-2.05b$
+bash-2.05b$
+bash-2.05b$ cat audit_partial2.par
+QUERY="WHERE DATTXN >= TO_DATE('01-12-2013', 'DD-MM-YYYY')"
+
+bash-2.05b$
+bash-2.05b$
+bash-2.05b$ cat Txn_partial1.par
+QUERY="WHERE DATINITIATION < TO_DATE('01-12-2013', 'DD-MM-YYYY')"
+bash-2.05b$
+bash-2.05b$
+bash-2.05b$ cat Txn_partial2.par
+QUERY="WHERE DATINITIATION >= TO_DATE('01-12-2013', 'DD-MM-YYYY')"
+   
+   
+   exp file=CAN_CASA_19112013_REGULAR_`date +%d%m%Y_%H_%M`.dmp log=CAN_CASA_19112013_REGULAR_export_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=CB75163.CAN_CASA_19112013_REGULAR grants=Y buffer=640000 feedback=100000
+   
+  imp file=CAN_CASA_19112013_REGULAR_25012014_01_09.dmp log=CAN_CASA_19112013_REGULAR_import_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 fromuser=CB75163 touser=CB75163 tables=CAN_CASA_19112013_REGULAR grants=Y buffer=640000 feedback=100000
+  
+  exp file=CAN_CASA_19112013_REG_`date +%d%m%Y_%H_%M`.dmp log=CAN_CASA_19112013_REG_export_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=CB75163.CAN_CASA_19112013_REG grants=Y buffer=640000 feedback=100000
+  
+  
+  imp file=CAN_CASA_19112013_REG_25012014_01_18.dmp log=CAN_CASA_19112013_REG_import_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 fromuser=CB75163 touser=CB75163 tables=CAN_CASA_19112013_REG grants=Y buffer=640000 feedback=100000
+  
+  
+  can_cl1 
+  can_cl 
+  cb75548
+fcr_flash(dc)
+  
+  
+   exp file=CAN_CL_`date +%d%m%Y_%H_%M`.dmp log=CAN_CL_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 parfile=CAN_CL.par  grants=Y buffer=640000 feedback=100000
+   
+   imp file=CAN_CL_05022014_01_57.dmp log=CAN_CL_import_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 fromuser=cb75548 touser=cb75548 parfile=IMP_TABLES.par grants=Y buffer=640000 feedback=100000
+   
+   tables=CAN_CL1,
+   CAN_CL
+   
+   
+   exp FCRUSER@FCR_FLASH file=CAN_APBS_REV_`date +%d%m%Y_%H_%M`.dmp log=CAN_APBS_REV_export_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=FCRUSER.CAN_APBS_REV grants=Y buffer=640000 feedback=100000
+   
+   
+   imp file=cstb_contract_drfcrflash_22dec14.dmp log=cstb_contract_drfcrflash_22dec14_import_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 fromuser=FCCUSER touser=FCCREAD  tables=CSTB_CONTRACT grants=Y buffer=640000 feedback=100000 ignore=y
+   
+   
+   
+   
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   
+   
+  expdp frsprod/frsprod DIRECTORY=FRSIMP EXCLUDE=STATISTICS,GRANTS DUMPFILE=CAN_HRISK_AND_CAN_MRISK_14022014_12_58_%U.dmp LOGFILE=CAN_HRISK_AND_CAN_MRISK_export_14022014_12_58.log tables=FRSPROD.CAN_HRISK,FRSPROD.CAN_MRISK status=120 parallel=2
+   
+   
+   select * from v$instance;
+   
+   select sysdate from dual;
+   
+   select OWNER,TABLE_NAME,TABLESPACE_NAME from dba_tables where TABLE_NAME='CAN_HRISK';
+   
+   select OWNER,TABLE_NAME,TABLESPACE_NAME from dba_tables where TABLE_NAME='CAN_MRISK';
+   
+   select count(*) from FCRPATCH.CAN_HRISK;
+   
+   
+   select count(*) from FCRPATCH.CAN_MRISK;
+   
+   
+   drop table FCRPATCH.CAN_HRISK;
+   
+   drop table FCRPATCH.CAN_MRISK;
+   
+   
+   
+   
+   
+   
+  impdp  DIRECTORY=FRSIMP DUMPFILE=CAN_HRISK_AND_CAN_MRISK_14022014_12_58_%U.dmp LOGFILE=imp_CAN_HRISK_AND_CAN_MRISK_import_14022014_12_58.log remap_schema=FRSPROD:FCRPATCH status=120 remap_tablespace=FRS_DATA:FCRDEFAULT
+  
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  
+  
+  exp file=CTS_DATA_`date +%d%m%Y_%H_%M`.dmp log=CTS_DATA_export_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 parfile=CTS.par grants=Y buffer=640000 feedback=100000
+  
+  tables=V_CI_CUSTMAST,
+  V_CH_ACCT_MAST,
+  V_CH_ACCT_CUST_XREF,
+  V_CH_CHQBK_ISSUE,
+  V_CS_HO_CUST_IMAGEMAST,
+  V_CH_ACCT_MAST_TEMP
+  
+  
+ imp FCRUSER@FCRADC file=CTS_DATA_19022014_03_09.dmp log=CTS_DATA_import_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000  fromuser=FCRUSER touser=FCRUSER parfile=CTS_import.par grants=Y buffer=640000 feedback=100000 DATA_ONLY=Y
+ 
+ 
+ 
+ 
+  exp FCRUSER file=AC_ACCOUNT_REASON_24FEB14_`date +%d%m%Y_%H_%M`.dmp log=AC_ACCOUNT_REASON_24FEB14_export_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=FCRUSER.AC_ACCOUNT_REASON_24FEB14 grants=Y buffer=640000 feedback=100000
+  
+  
+  
+  
+  exp file=RTGS_AUD_TABLE_18MAY2014_EXP.dmp log=RTGS_AUD_TABLE_18MAY2014_EXP.log  statistics=none recordlength=64000 tables=FCRUSER.AC_ACCOUNT_REASON_24FEB14 grants=Y buffer=640000 feedback=100000
+  
+  
+  
+  exp  file=CANSHAPRD_FULL_schema_13102014.dmp log=CANSHAPRD_FULL_schema_13102014.log statistics=none recordlength=64000  grants=Y owner=CANSHAPRD buffer=640000
+  
+  
+  
+ expdp CANSHAPRD DIRECTORY=CANSHA DUMPFILE=CANSHAPRD_SCHEMA_DATA_ONLY_14OCT14_%U.dmp LOGFILE=CANSHAPRD_SCHEMA_DATA_ONLY_14OCT14_1.log status=120 SCHEMAS=CANSHAPRD parallel=4 CONTENT=DATA_ONLY
+ 
+ 
+ 
+ DIFF_INT_SEP14_13_14_NONGL_CR 
+ DIFF_INT_SEP14_14_15_NONGL_CR 
+ DIFF_INT_SEP14_13_14_NONGL    
+DIFF_INT_SEP14_14_15_NONGL    
+
+
+
+expdp fcruser  DIRECTORY=FCRFLASHEXP EXCLUDE=STATISTICS,GRANTS DUMPFILE=FCT_OD_ACCOUNTS_DC_22DEC2014.dmp LOGFILE=FCT_OD_ACCOUNTS_DC_22DEC14.log status=120 tables=FCRUSER.FCT_OD_ACCOUNTS
+
+
+
+
+
+  exp FCCUSER file=ALM_TABLES_EXPORT_`date +%d%m%Y_%H_%M`.dmp log=ALM_TABLES_EXPORT_export_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=FCCUSER.IFCT_EXT_ACCT_DET,FCCUSER.ifct_ext_schedule_det,FCCUSER.ifct_ext_slab_det grants=Y buffer=640000 feedback=100000
+  
+  
+  
+  imp fccuser file=ALM_TABLES_EXPORT_03012015_09_07.dmp log=ALM_TABLES_EXPORT_03012015_import_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 fromuser=FCCUSER touser=FCCUSER  tables=IFCT_EXT_ACCT_DET,IFCT_EXT_SCHEDULE_DET,IFCT_EXT_SLAB_DET grants=Y buffer=640000 feedback=100000 ignore=y
+  
+exp FCATR file=RR_TP_BENEFICIARY_export_`date +%d%m%Y_%H_%M`.dmp log=RR_TP_BENEFICIARY_export_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=FCATR.RR_TP_BENEFICIARY grants=Y buffer=640000 feedback=100000  
+
+
+exp file=LN_ARREARS_TABLE_`date +%d%m%Y_%H_%M`.dmp log=LN_ARREARS_TABLE_export_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 tables=FCCUSER.IFCT_EXT_ACCT_DET,FCCUSER.ifct_ext_schedule_det,FCCUSER.ifct_ext_slab_det grants=Y buffer=640000 feedback=100000
+
+
+
+imp file=ln_arrears_table_23may14.dmp log=LN_ARREARS_TABLE_23may14_import_`date +%d%m%Y_%H_%M`.log statistics=none recordlength=64000 fromuser=FCRUSER touser=FCRPATCH  tables=LN_ARREARS_TABLE grants=N CONSTRAINTS=N buffer=640000 feedback=1000000 ignore=y
+
+statistics=none recordlength=64000 grants=N  tables=LN_ARREARS_TABLE feedback=1000000 ignore=y
+
+
+
+imp IBMTEST file=FRS_Purge_APR_selected_2008_exp.dmp log=IMP_FRS_Purge_APR_selected_2008_exp.log fromuser=frsprod touser=IBMTEST recordlength=64000 tables=FCT_TD_CONTRACTS_BKP grants=N CONSTRAINTS=N feedback=100000
+
+
+FRS_PURGE_MAY_selected_dates_MAY2008.dmp
+
+imp IBMTEST file=FRS_PURGE_MAY_selected_dates_MAY2008.dmp log=IMP_FRS_PURGE_MAY_selected_dates_MAY2008.log fromuser=frsprod touser=IBMTEST recordlength=64000 tables=FCT_TD_CONTRACTS_BKP grants=N CONSTRAINTS=N feedback=100000
+
+fcdbadmin_prd/******** parfile=appldata_7mar15.ora status=120 parallel=6
+
+exp file=FCC_AUD_Till_18JAN_TABLE_19MAR15_exp.dmp log=FCC_AUD_Till_18JAN_TABLE_19MAR15_exp.log  statistics=none recordlength=64000 grants=Y feedback=10000 tables='AUD_BKP_19MAR15' parfile=FCC_AUD_TILL_JAN15.par 
+
+QUERY="where trunc(NTIMESTAMP#)<'18-JAN-2015'"
+
+
+
+imp file=appldata_exp1_27mar15.dmp log=appldata_exp1_27mar15_IMP.log fromuser=FCDBADMIN_PRD touser=FCDBADMIN_PRD tables=APPLDATA ignore=Y statistics=none buffer=1000000 feedback=100000 GRANTS=N
+
+imp file=appldata_exp2_27mar15.dmp log=appldata_exp2_27mar15_IMP.log fromuser=FCDBADMIN_PRD touser=FCDBADMIN_PRD tables=APPLDATA ignore=Y statistics=none buffer=1000000 feedback=100000 GRANTS=N
+
+imp file=appldata_exp3_27mar15.dmp log=appldata_exp3_27mar15_IMP.log fromuser=FCDBADMIN_PRD touser=FCDBADMIN_PRD tables=APPLDATA ignore=Y statistics=none buffer=1000000 feedback=100000 GRANTS=N
+
+
+
+
+9144710
+
+
+exp file=AUDITLOG_OFN_01JUN15_to_31AUG15_export_10SEP15.dmp log=AUDITLOG_OFN_01JUN15_to_31AUG15_export_10SEP15.log  tables=FCDBADMIN_PRD.AUDITLOG_OFN statistics=none recordlength=64000 grants=Y buffer=6400000 parfile=IMBFCDB_AUDITLOG_OFN_Export_Test_01JUN15_TO_31AUG15.par feedback=100000
+
+
+QUERY="where trunc(DATTXN)>='01-JUL-2015' and trunc(DATTXN) <='31-AUG-2015'"
+
+
+Query=" where dattxn >='01-JUN-15'  and dattxn<='31-AUG-15' "
+
+
+alter tablespace temp add tempfile '+IMBFCDB_DATA1' size 32764m;
+
+exp file=AUDITLOG_OFN_FULL_export_10SEP15.dmp log=AUDITLOG_OFN_FULL_export_10SEP15.log tables=FCDBADMIN_PRD.AUDITLOG_OFN statistics=none recordlength=64000 grants=Y buffer=6400000 feedback=100000
+
+
+/mnt/OMNIUSER_08SEP_15/OMNIUSER_PROD
+
+exp file=AUDITLOG_OFN_export_14OCT15TO31DEC15_`date +%d%m%Y_%H_%M`.dmp log=AUDITLOG_OFN_export_14OCT15TO31DEC15_`date +%d%m%Y_%H_%M`.log tables=FCDBADMIN_PRD.AUDITLOG_OFN statistics=none recordlength=64000 grants=Y buffer=6400000 feedback=100000 parfile=AUDITLOG_OFN_14OCT15TO31DEC15.par

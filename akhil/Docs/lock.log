@@ -1,0 +1,69 @@
+SQL> sho user
+USER is "SYS"
+SQL> "select nvl(S.USERNAME,'Internal') username, "
+SP2-0734: unknown command beginning ""select	nv..." - rest of line ignored.
+SQL> "		     nvl(s.OSUSER,'OSUSER') OSUSER ,"
+SP2-0734: unknown command beginning ""		nvl(s.O..." - rest of line ignored.
+SQL> "	     nvl(S.TERMINAL,'None') terminal,"
+SP2-0734: unknown command beginning ""	nvl(S.TE..." - rest of line ignored.
+SQL> "		     L.SID||','||S.SERIAL# Kill, "
+SP2-0734: unknown command beginning ""         ..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> "	     U1.NAME||'.'||substr(T1.NAME,1,20) tab, "
+SP2-0734: unknown command beginning ""	U1.NAME|..." - rest of line ignored.
+SQL> "	     decode(L.LMODE,1,'No Lock', "
+SP2-0734: unknown command beginning ""	decode(L..." - rest of line ignored.
+SQL> "		     2,'Row Share', "
+SP2-0734: unknown command beginning ""		2,'Row ..." - rest of line ignored.
+SQL> "		     3,'Row Exclusive', "
+SP2-0734: unknown command beginning ""		3,'Row ..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> "		     4,'Share', "
+SP2-0734: unknown command beginning ""		4,'Shar..." - rest of line ignored.
+SQL> "		     5,'Share Row Exclusive', "
+SP2-0734: unknown command beginning ""		5,'Shar..." - rest of line ignored.
+SQL> "		     6,'Exclusive',null) lmode, "
+SP2-0734: unknown command beginning ""		6,'Excl..." - rest of line ignored.
+SQL> "	     decode(L.REQUEST,1,'No Lock', "
+SP2-0734: unknown command beginning ""	decode(L..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> "		     2,'Row Share', "
+SP2-0734: unknown command beginning ""		2,'Row ..." - rest of line ignored.
+SQL> "		     3,'Row Exclusive', "
+SP2-0734: unknown command beginning ""		3,'Row ..." - rest of line ignored.
+SQL> "		     4,'Share', "
+SP2-0734: unknown command beginning ""		4,'Shar..." - rest of line ignored.
+SQL> "		     5,'Share Row Exclusive', "
+SP2-0734: unknown command beginning ""		5,'Shar..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> "		     6,'Exclusive',null) request "
+SP2-0734: unknown command beginning ""		6,'Excl..." - rest of line ignored.
+SQL> "from   V$LOCK L,	"
+SP2-0734: unknown command beginning ""from	V$LO..." - rest of line ignored.
+SQL> "	     V$SESSION S, "
+SP2-0734: unknown command beginning ""	V$SESSIO..." - rest of line ignored.
+SQL> "	     SYS.USER$ U1, "
+SP2-0734: unknown command beginning ""	SYS.USER..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> "	     SYS.OBJ$ T1 "
+SP2-0734: unknown command beginning ""	SYS.OBJ$..." - rest of line ignored.
+SQL> "where  L.SID = S.SID  "
+SP2-0734: unknown command beginning ""where	L.S..." - rest of line ignored.
+SQL> "and    T1.OBJ# = decode(L.ID2,0,L.ID1,L.ID2)  "
+SP2-0734: unknown command beginning ""and	T1.OB..." - rest of line ignored.
+SQL> "and    U1.USER# = T1.OWNER# "
+SP2-0734: unknown command beginning ""and	U1.US..." - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> "and    S.TYPE != 'BACKGROUND' "
+SP2-0734: unknown command beginning ""and	S.TYP..." - rest of line ignored.
+SQL> order by 1,2,5
+SP2-0734: unknown command beginning "order by 1..." - rest of line ignored.
+SQL> /
+SP2-0103: Nothing in SQL buffer to run.
+SQL> spool off

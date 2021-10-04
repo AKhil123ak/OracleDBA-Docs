@@ -1,0 +1,15 @@
+$ cat rman_arc_del.rcv
+
+run {
+crosscheck archivelog all;
+delete noprompt archivelog until time 'sysdate - 1';
+}
+
+
+DRJFSCIB 
+
+/u01/app/oracle/product/12.2.0.1/db_1
+
++DATA/DRJFSCIB/PARAMETERFILE/spfile.262.1004270699
+
+

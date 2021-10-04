@@ -1,0 +1,66 @@
+function log_rotate {
+export SQLP="sqlplus -s / as sysdba"
+export SET="set pages 0 trims on lines 2000 echo off ver off head off feed off"
+ 
+ 
+export ASM_RUNNING=$(ps -ef |grep -i asm_pmon |awk {'print $8'} |sed "s/asm_pmon_//g" |egrep -v "sed|grep")
+[ "$ASM_RUNNING" != "" ] && ASM_INSTANCE=$(echo $ASM_RUNNING |sed '$s/.$//')
+ 
+LISTENER_LOG=$ORACLE_BASE/diag/tnslsnr/$(hostname -s)/listener/trace/listener.log
+ 
+function diag {
+export DIAG_DEST=$(
+echo "
+$SET
+select value from v\$diag_info where name='Diag Trace';" |$SQLP )
+}
+ 
+# -- Determine ASM Log
+export ORACLE_SID=$ASM_RUNNING
+export ORAENV_ASK=NO
+. oraenv -s
+export GRID_HOME=$ORACLE_HOME
+diag;
+ 
+ASM_LOG=$DIAG_DEST/alert_${ORACLE_SID}.log
+ 
+ls -l  $ASM_LOG
+ls -l  $LISTENER_LOG
+ 
+function rotate {
+export LOGFILE=$1
+export CONFIG_FILE=$2
+export PATH=$PATH:/usr/sbin
+export CONF_DIR=$SH/logrotate
+[ ! -d "$CONF_DIR" ] && ( echo $CONF_DIR does not exist .. issuing mkdir; mkdir -p $CONF_DIR )
+ 
+export CONF=$CONF_DIR/$CONFIG_FILE
+ 
+cat <<!! >$CONF
+$LOGFILE {
+weekly
+copytruncate
+rotate 2
+compress
+}
+!!
+ 
+echo logrotate -s $CONF_DIR/log_rotate_status.$CONFIG_FILE -f $CONF
+}
+ 
+for DATABASES in $(ps -ef |grep -i pmon |grep -v ASM |awk {'print $8'} |sed "s/ora_pmon_//g" |egrep -v "sed|grep")
+do
+  export DB=$(echo $DATABASES |sed '$s/.$//')
+  export ORACLE_SID=$DATABASES
+  export ORAENV_ASK=NO
+  . oraenv -s
+  diag;
+  export DB_LOG=$DIAG_DEST/alert_${ORACLE_SID}.log
+  ls -l $DB_LOG
+ 
+  rotate $DB_LOG $DATABASES
+done
+ 
+rotate $LISTENER_LOG listener
+rotate $ASM_LOG $ASM_RUNNING
+}

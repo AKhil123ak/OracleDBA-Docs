@@ -1,0 +1,218 @@
+Server side CPU ///Server side memory
+
+==================================
+
+prtconf | grep -i "Processor Type" >> procinfo.log
+prtconf | grep -i "Firmware Version" >> procinfo.log
+prtconf | grep -i "Number Of Processors" >> procinfo.log
+prtconf | grep -i "Processor Clock Speed" >> procinfo.log
+prtconf | grep -i "Memory Size" >> procinfo.log
+cat procinfo.log
+rm procinfo.log
+
+
+Server Disk Space Details  ///1.ASM  FREE SPACE ////2.ALLOCATED FILE SYSTEM (IN GB)
+=============================================
+select name,state ,free_mb/1024,total_mb/1024 from v$asm_diskgroup order by name;
+Spool Database_KAP_ASM_Details_Script_Output.csv
+Set linesize 300;
+Set pagesize 1000;
+set colsep ',';
+Prompt "*****Script Output Date in MM-DD-YYYY format*****"
+SELECT TO_CHAR (SYSDATE, 'MM-DD-YYYY HH24:MI:SS') AS "Script output Date" FROM DUAL;
+prompt "*****Instance Name*****"
+SELECT instance_name from v$instance;
+prompt "*****Host Name*****"
+SELECT host_name from v$instance;
+prompt "*****ASM parameter*****"
+show parameter asm_power_limit;
+show parameter instance_type;
+show parameter large_pool_size;
+show parameter remote_login_passwordfile;
+show parameter asm_diskstring;
+show parameter asm_diskgroups;
+prompt "*****ASM DISKGROUP*****"
+select * from v$asm_diskgroup;
+
+select * from V$ASM_DISK;
+
+SELECT * FROM V$ASM_DISK_STAT;
+
+Spool off;
+
+Spool Database_KAP_ASM_Details_Script_ParaOutput.csv
+
+Set linesize 300;
+Set pagesize 1000;
+Set colsep ",";
+
+Prompt "*****ASM Parameter Details*****"
+show parameter;
+
+Spool Off;
+
+
+ df -gt        count all the file system and mention in gb
+ 
+ 
+ 
+ Database Size(USED SPACE)
+=============================
+Select sum(bytes/1024/1024) AS "Used Database Size (MB)"
+from sys.sm$ts_used;
+
+
+Database Space/ Tablespace Available(USED SPACE )IN GB  (COUNT ALL THE TABLESPACES EXCEPT USERS,TEMP,SYSTEM,SYSAUX,UNDO)
+========================
+column 'Tablespace Name' format a20
+column 'Tablespace Status' format a20
+column 'Tablespace Contents' format a20
+column 'Tablespace Logging' format a20
+column 'Extent Management' format a20
+column 'Segment Space Management' format a25
+spool tablespace.log
+Select tablespace_name AS "Tablespace Name",
+status AS "Tablespace Status",
+contents AS "Tablespace Contents",
+logging AS "Tablespace Logging",
+extent_management AS "Extent Management",
+segment_space_management AS "Segment Space Management"
+from DBA_tablespaces;
+
+column 'Tablespace Name' format a20
+Select Total.name "Tablespace Name",
+       nvl(Free_space, 0) "Free Space (MB)",
+       nvl(total_space-Free_space, 0) "Used Space (MB)", 
+       total_space "Total Space (MB)",
+       round((nvl(total_space-Free_space, 0)/nvl(total_space, 0)*100),2) "% Used "
+FROM
+  (select tablespace_name, sum(bytes/1024/1024) Free_Space
+     from sys.dba_free_space
+    group by tablespace_name
+  ) Free,
+  (select b.name,  sum(bytes/1024/1024) TOTAL_SPACE
+     from sys.v_$datafile a, sys.v_$tablespace B
+    where a.ts# = b.ts#
+    group by b.name
+  ) Total
+WHERE Free.Tablespace_name(+) = Total.name
+ORDER BY 5 desc ;
+spool off
+
+Backup Status:
+===================
+select sid, row_type, operation, status, to_char(start_time,'dd-mm-yyyyhh24:mi:ss') start_time, to_char(end_time,'dd-mm-yyyy hh24:mi:ss')end_time from v$rman_status;
+
+
+Backup Type
+========================
+
+RMAN
+
+
+Replication / DR Sync Status
+=============================
+
+select max(sequence#) from v$archived_log where applied='YES';
+
+
+Index status
+=======================
+
+select status from dba_indexes;
+
+
+invalid objects
+=================
+select OWNER, count(*) from dba_objects where status = 'INVALID' and OWNER NOT IN ('SYS', 'SYSTEM') group by OWNER;
+
+invalid objects;
+=========================
+SELECT owner, object_type, object_name FROM dba_objects WHERE status = 'INVALID';
+
+
+invalid objects count:
+===========================
+
+select count(*) from dba_objects where status ='INVALID' order by status;
+
+
+
+Table and index statistics/ fragmentation
+=====================================
+
+select OWNER,max(last_analyzed) from dba_tab_statistics where owner in('FCRHOST','FCRBRN','FCCHOST') group by OWNER order by 2;
+
+Partition Management
+=======================================(MENTION INTHE SAME WAY)				
+Partition Creation - Manual/ Automatic	Manual	Manual	Manual	Manual
+
+Partition Index status	Usable	Usable	Usable	Usable
+
+select PARTITION_NAME,STATUS from DBA_IND_PARTITIONS;
+
+
+
+
+partition size (MB)
+==================
+set line 200
+col segment_name for a40
+col partition_name for a40
+spool partitiontop10.log
+ select owner,segment_name,partition_name,segment_type,bytes/1024/1024 "MB" from dba_segments where segment_type = 'TABLE PARTITION' and owner not in('SYSTEM','SYS') order by 5;
+spool off
+
+
+(THESE ALL PUT IT IN A SAME WAY DON'T CHANGE IT IF YOU CAN FIND OUT THESE ALL YOU CAN FILL IT OTHERWISE LEAVE EMPTY):
+=================================================
+Schedule Partition Purge	NO	NO	NO	NO
+Maintenance activity				
+Database de-fragmentation/ re-org	NO PLAN	NO PLAN	NO PLAN	NO PLAN
+Index rebuild	NO PLAN	NO PLAN	NO PLAN	NO PLAN
+Purge DB logs	DAILY	NO PLAN	NO PLAN	NO PLAN
+Purge Network logs	NO PLAN	NO PLAN	NO PLAN	NO PLAN
+Any other activity	NO PLAN	NO PLAN	NO PLAN	NO PLAN
+
+Oracle database automated maintenance				
+Maintenance Window			NA	archive logs house keeping
+mon	(Morning 10AM) DUR:4hurs			scheldur
+tue				
+wed				
+thur				
+fri				
+sat				
+sun				
+Maintenance job status	Every 4 hrs	Every 4 hrs	NO	Every day once
+Purge status of snapshots				
+=============================================================
+
+Performance Monitoring
+=========================
+
+
+TOP 5 QUERIES USING SQL AREA:
+=================================
+spool  QUERIES5.log
+SELECT * FROM   (SELECT Substr(a.sql_text,1,50) sql_text,a.sql_id,Trunc(a.disk_reads/Decode(a.executions,0,1,a.executions)) READ_PER_EXEC,a.buffer_gets "BUFFER_GETS", a.disk_reads "DISK_READS", a.executions "EXE", a.sorts "SORTS", a.address "ADDRESS" FROM v$sqlarea a ORDER BY 2 DESC)
+WHERE  rownum <= 5;
+spool off
+
+
+SQL STATMENTS USING MOST RESOURCES:
+=====================================
+set line 200;
+spool most.log
+SELECT * FROM   (SELECT Substr(a.sql_text,1,50) sql_text,a.sql_id,Trunc(a.disk_reads/Decode(a.executions,0,1,a.executions)) reads_per_execution, a.buffer_gets, a.disk_reads, a.executions, a.sorts, a.address FROM   v$sqlarea a ORDER BY 2 DESC) WHERE  rownum <= 8;
+spool off
+
+
+TO FIND OUT Large Objects (top 10):
+========================================
+set lines 300;
+set pages 200;
+select owner,SEGMENT_NAME,SEGMENT_TYPE, bytes/1024/1024 AS "SIZE IN MB" ,TABLESPACE_NAME  from dba_segments where owner!='SYS' and segment_type='TABLE' order by bytes;
+
+
+
+

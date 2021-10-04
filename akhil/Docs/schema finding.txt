@@ -1,0 +1,27 @@
+Example 1: Displaying Schema Objects By Type
+The following query lists all of the objects owned by the user issuing the query:
+
+SELECT OBJECT_NAME, OBJECT_TYPE 
+    FROM USER_OBJECTS;
+The following is the query output:
+
+OBJECT_NAME                OBJECT_TYPE
+-------------------------  -------------------
+EMP_DEPT                   CLUSTER
+EMP                        TABLE
+DEPT                       TABLE
+EMP_DEPT_INDEX             INDEX
+PUBLIC_EMP                 SYNONYM
+EMP_MGR                    VIEW
+Example 2: Displaying Dependencies of Views and Synonyms
+When you create a view or a synonym, the view or synonym is based on its underlying base object. The ALL_DEPENDENCIES, USER_DEPENDENCIES, and DBA_DEPENDENCIES data dictionary views can be used to reveal the dependencies for a view. The ALL_SYNONYMS, USER_SYNONYMS, and DBA_SYNONYMS data dictionary views can be used to list the base object of a synonym. For example, the following query lists the base objects for the synonyms created by user jward:
+
+SELECT TABLE_OWNER, TABLE_NAME, SYNONYM_NAME
+    FROM DBA_SYNONYMS
+    WHERE OWNER = 'JWARD';
+The following is the query output:
+
+TABLE_OWNER             TABLE_NAME   SYNONYM_NAME
+----------------------  -----------  -----------------
+SCOTT                   DEPT         DEPT
+SCOTT                   EMP          EMP

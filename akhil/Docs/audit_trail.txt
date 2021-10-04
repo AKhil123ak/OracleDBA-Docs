@@ -1,0 +1,27 @@
+col OS_USERNAME for A20
+col USERNAME for A20
+col OWNER for A20
+col OBJ_NAME for A20
+col ACTION_NAME for A20
+select OS_USERNAME, USERNAME, OWNER, OBJ_NAME, ACTION_NAME, TIMESTAMP from DBA_AUDIT_TRAIL WHERE timestamp BETWEEN TO_DATE ('2019-01-06T11:07:14', 'YYYY-MM-DD"T"HH24:MI:SS') AND TO_DATE('2019-01-06T11:08:16', 'YYYY-MM-DD"T"HH24:MI:SS');
+
+\\\\\\\\\\\\\\\\\to see audit_trail is enable or not////////////////////
+
+show parameter audit_trail
+
+2018-11-16T11:07:15
+
+SELECT table_name AS 'Name',TABLE_ROWS ,round(((data_length + index_length) / 1024 / 1024), 2) 'Size' FROM information_schema.TABLES WHERE table_schema = 'gallop' order by Size desc;
+
+
+FND_USER
+
+
+
+
+col OS_USERNAME for A20
+col USERNAME for A20
+col OWNER for A20
+col OBJ_NAME for A20
+col ACTION_NAME for A20
+select OS_USERNAME, USERNAME, OWNER, OBJ_NAME, ACTION_NAME, TIMESTAMP,SQL_TEXT from DBA_AUDIT_TRAIL WHERE timestamp BETWEEN TO_DATE ('2018-12-01T00:00:00', 'YYYY-MM-DD"T"HH24:MI:SS') AND TO_DATE('2018-12-30T00:00:00', 'YYYY-MM-DD"T"HH24:MI:SS') AND ACTION_NAME NOT IN('SELECT','LOGON','LOGOFF') ;

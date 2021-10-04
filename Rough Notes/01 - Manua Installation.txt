@@ -1,0 +1,120 @@
+login as: root
+root@192.168.43.155's password:
+Last login: Thu Jul  6 07:33:00 2017 from 192.168.43.161
+[root@linux ~]# su - oracle
+[oracle@linux ~]$ ls -ltr
+total 16
+-rw-r--r--. 1 oracle oinstall 185 Jul  2 08:19 orcl.env
+-rw-r--r--. 1 oracle oinstall 189 Jul  6 15:39 PROD.env
+-rw-r--r--. 1 oracle oinstall 185 Jul  8 20:17 UAT
+-rw-r--r--. 1 oracle oinstall 186 Jul  8 20:50 SIT
+[oracle@linux ~]$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/sda3              12G  5.8G  5.2G  53% /
+tmpfs                 1.5G  100K  1.5G   1% /dev/shm
+/dev/sda7              34G  6.2G   26G  20% /stage
+/dev/sda5             3.9G  1.4G  2.4G  37% /tmp
+/dev/sda1              49G   25G   22G  54% /u01
+/dev/sda2              49G  180M   46G   1% /u02
+Softwares             867G  491G  377G  57% /media/sf_Softwares
+df: `/root/.gvfs': Permission denied
+/dev/sr0               57M   57M     0 100% /media/VBOXADDITIONS_5.1.22_115126
+[oracle@linux ~]$ cd /u01
+[oracle@linux u01]$ ls -ltr
+total 24
+drwxrwxr-x.  2 oracle oinstall 16384 Jun 27 11:30 lost+found
+drwxrwxr-x.  4 oracle oinstall  4096 Jul  5 10:13 june
+drwxrwxr-x. 11 oracle oinstall  4096 Jul  8 20:53 app
+[oracle@linux u01]$ cd app/
+[oracle@linux app]$ ls -ltr
+total 36
+drwxrwxr-x. 5 oracle oinstall 4096 Jul  1 19:19 oraInventory
+drwxrwxr-x. 9 oracle oinstall 4096 Jul  1 19:20 orcl
+drwxrwxr-x. 3 oracle oinstall 4096 Jul  6 15:56 preprod
+drwxrwxr-x. 5 oracle oinstall 4096 Jul  6 19:45 oraInventory1
+drwxrwxr-x. 3 oracle oinstall 4096 Jul  8 20:15 UAT
+drwxrwxr-x. 5 oracle oinstall 4096 Jul  8 20:30 oralInventoryUAT
+drwxrwxr-x. 3 oracle oinstall 4096 Jul  8 20:49 SIT
+drwxrwxr-x. 9 oracle oinstall 4096 Jul  8 20:54 oracle
+drwxrwx---. 5 oracle oinstall 4096 Jul  8 21:09 oralInventorySIT
+[oracle@linux app]$ cd
+[oracle@linux ~]$ ls -ltr
+total 16
+-rw-r--r--. 1 oracle oinstall 185 Jul  2 08:19 orcl.env
+-rw-r--r--. 1 oracle oinstall 189 Jul  6 15:39 PROD.env
+-rw-r--r--. 1 oracle oinstall 185 Jul  8 20:17 UAT
+-rw-r--r--. 1 oracle oinstall 186 Jul  8 20:50 SIT
+[oracle@linux ~]$ vi DEV.env
+[oracle@linux ~]$ mkdir -p /u01/app/DEV/product/11.2.0.4
+[oracle@linux ~]$ ls -ltr
+total 20
+-rw-r--r--. 1 oracle oinstall 185 Jul  2 08:19 orcl.env
+-rw-r--r--. 1 oracle oinstall 189 Jul  6 15:39 PROD.env
+-rw-r--r--. 1 oracle oinstall 185 Jul  8 20:17 UAT
+-rw-r--r--. 1 oracle oinstall 186 Jul  8 20:50 SIT
+-rw-r--r--. 1 oracle oinstall 186 Jul  9 08:00 DEV.env
+[oracle@linux ~]$ vi DEV.sql
+[oracle@linux ~]$ . DEV.env
+[oracle@linux ~]$ cd /u01/app/DEV/product/11.2.0.4/dbs/
+[oracle@linux dbs]$ s -ltr
+-bash: s: command not found
+[oracle@linux dbs]$ ls -ltr
+total 4
+-rw-r--r--. 1 oracle oinstall 2851 May 15  2009 init.ora
+[oracle@linux dbs]$ vi initDEV.ora
+[oracle@linux dbs]$ cat initDEV.ora
+DEV.__db_cache_size=247463936
+DEV.__java_pool_size=4194304
+DEV.__large_pool_size=8388608
+DEV.__oracle_base='/u01/app/DEV'#ORACLE_BASE set from environment
+DEV.__pga_aggregate_target=251658240
+DEV.__sga_target=373293056
+DEV.__shared_io_pool_size=0
+DEV.__shared_pool_size=104857600
+DEV.__streams_pool_size=0
+*.audit_file_dest='/u01/app/DEV/admin/DEV/adump'
+*.audit_trail='db'
+*.compatible='11.2.0.4.0'
+*.control_files='/u01/app/DEV/oradata/DEV/control01.ctl','/u01/app/DEV/fast_recovery_area/DEV/control02.ctl'
+*.db_block_size=8192
+*.db_domain=''
+*.db_name='DEV'
+*.db_recovery_file_dest='/u01/app/DEV/fast_recovery_area'
+*.db_recovery_file_dest_size=4385144832
+*.diagnostic_dest='/u01/app/DEV'
+*.dispatchers='(PROTOCOL=TCP) (SERVICE=DEVXDB)'
+#*.local_listener='LISTENER_DEV'
+*.memory_target=624951296
+*.open_cursors=300
+*.processes=150
+*.remote_login_passwordfile='EXCLUSIVE'
+*.undo_tablespace='UNDOTBS1'
+[oracle@linux dbs]$ mkdir -p /u01/app/DEV/admin/DEV/adump
+[oracle@linux dbs]$ mkdir -p /u01/app/DEV/oradata/DEV
+[oracle@linux dbs]$ mkdir -p /u01/app/DEV/fast_recovery_area/DEV
+[oracle@linux dbs]$ ls -ltr
+total 8
+-rw-r--r--. 1 oracle oinstall 2851 May 15  2009 init.ora
+-rw-r--r--. 1 oracle oinstall  903 Jul  9 08:19 initDEV.ora
+[oracle@linux dbs]$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sun Jul 9 08:22:53 2017
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> startup nomount pfile='initDEV.ora';
+ORACLE instance started.
+
+Total System Global Area  622149632 bytes
+Fixed Size                  2255792 bytes
+Variable Size             423625808 bytes
+Database Buffers          192937984 bytes
+Redo Buffers                3330048 bytes
+SQL> @/home/oracle/DEV.sql;
+ 17  /
+
+Database created.
+
+SQL>

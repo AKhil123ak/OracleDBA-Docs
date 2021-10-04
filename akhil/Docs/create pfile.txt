@@ -1,0 +1,29 @@
+ 
+
+Find the plan
+
+ 
+
+ 
+
+1)  1)  create pfile='$ORACLE_HOME/dbs/initORACLE_SID_date.ora' from spfile;
+
+ 
+
+2) alter system set memory_max_target=17G scope=spfile;
+
+3) alter system set memory_target=17G scope=spfile;
+
+4) alter system set sga_target=15G scope=spfile;
+
+ 
+
+bounce the db
+
+shut immediate
+
+startup
+
+ 
+
+---> cross  verify 

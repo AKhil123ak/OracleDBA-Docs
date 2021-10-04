@@ -1,0 +1,245 @@
+Using username "soral301".
+Last login: Thu Aug 23 10:08:17 IST 2018 on ssh from 172.17.73.151
+***************************************************************************
+*                                                                         *
+*      Welcome to Janalakshmi Financial Services.                         *
+*                                                                         *
+*                                                                         *
+* If you are not authorized to use this system, log off now.              *
+* The Access to this system is for Authorized Use only.                   *
+* Use this system is subject to audit at any time by request of           *
+* Janalakshmi Financial Services or IBM management only.                  *
+*                                                                         *
+* This system contains information proprietary to Janalakshmi Financial   *
+* Services                                                                *
+*                                                                         *
+* Any unauthorized user or use of such information may result in          *
+* civil and or criminal penalties. Use of this system equipment           *
+* is subject to monitoring and be controlled at all times by or on behalf *
+* of Janalakshmi Financial Services                                       *
+*                                                                         *
+***************************************************************************
+
+soral301@JFSBNKSRV208:/home/soral301 $
+soral301@JFSBNKSRV208:/home/soral301 $ sudo su - oracle
+soral301_passwd:
+[YOU HAVE NEW MAIL]
+oracle@JFSBNKSRV208:/home/oracle $ pwd
+/home/oracle
+oracle@JFSBNKSRV208:/home/oracle $ ls
+1_PACKAGE_SPEC.sql                                        awrddrpt.sql
+2_PACKAGE_BODY.sql                                        awrinfo.log
+3_JOB_PACKAGE_BODY.sql                                    awrinfo.txt
+APPUSER1_create_11JUL18.log                               awrrpt.sql
+Database_KAP_Extra_Details_Script_JFSMIBDB_Output.csv     awrrpt_1_1430_1530.html
+Database_KAP_Script_JFSMIBDB_Output.csv                   awrrpt_1_7_30_8_30.html
+Database_KAP_Script_Output_15APR18.csv                    backup_log
+Database_KAP_Script_ParaOutput_15APR18.csv                control_rman.bck
+Database_KAP_Script_ParaOutput_CATDB.csv                  controlfile_13Jul.ctl
+Deposit_Txsvr_FD_removal_Schema_Updated_12JUL18.log       deleting_21_aug_18.log
+Disk_utilization.html                                     df.txt
+Health_Check                                              dropsyn.sql
+Health_Check.html                                         iNSERT_FND_TENANT_REMITTER_12JUL18.log
+INF_ALERT_TEMPLATE_Customer_careno_update_11JUL18.log     nohup.out
+INF_ALERT_TEMPLATE_Customer_careno_update_11JUL18_01.log  on.lst
+JFSMIBDB_control_2018_04_22.bkp                           oradiag_oracle
+JFS_OTHER_BANK_IFSC_STAGING.ctl                           scripts
+JFS_OTHER_BANK_IFSC_STAGING.log                           sheet_1.csv
+JFS_OTHER_BANK_IFSC_STAGING.sh                            sheet_1_n.csv
+Off;exit.lst                                              sheet_2.csv
+Oracle-Database_KAP_Script.sql                            sheet_2_n_csv
+RIB_CITY_STATE_UPDATE                                     sheet_3.csv
+RIB_login.html                                            sheet_3_n.csv
+SCRIPT                                                    sheet_4.csv
+SYS_Grant.sql                                             sheet_4_n.csv
+Update_Cust_TPT_11JUL18.log                               user_details_JFSMIBDB.txt
+Update___Cust_Others_11JUL18.log                          version_update_09AUG18.log
+audit_log_purge_job_enable.log
+oracle@JFSBNKSRV208:/home/oracle $ vi test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+ksh: ./test.sh: 0403-006 Execute permission denied.
+oracle@JFSBNKSRV208:/home/oracle $ chmod 750 test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ls -ltr
+total 94480
+drwxr-xr-x    2 oracle   oinstall        256 Mar 01 18:19 SCRIPT
+-rwxr--r--    1 oracle   oinstall       3338 Mar 05 13:20 user_details_JFSMIBDB.txt
+-rw-r-----    1 oracle   oinstall       4863 Mar 20 19:44 SYS_Grant.sql
+-rw-r-----    1 oracle   oinstall       5647 Apr 15 08:53 Oracle-Database_KAP_Script.sql
+-rw-r-----    1 oracle   oinstall    7716864 Apr 22 13:14 JFSMIBDB_control_2018_04_22.bkp
+-rw-r-----    1 oracle   oinstall      44765 Apr 28 08:29 Database_KAP_Script_Output_15APR18.csv
+-rw-r-----    1 oracle   oinstall      55901 Apr 28 08:29 Database_KAP_Script_ParaOutput_15APR18.csv
+-rw-------    1 oracle   oinstall    5480843 May 01 10:15 sheet_2.csv
+-rw-------    1 oracle   oinstall    5278205 May 01 10:15 sheet_1.csv
+-rw-------    1 oracle   oinstall    4202433 May 01 10:15 sheet_4.csv
+-rw-------    1 oracle   oinstall    5912930 May 01 10:15 sheet_3.csv
+-rwxrwxr-x    1 oracle   oinstall        116 May 02 15:44 JFS_OTHER_BANK_IFSC_STAGING.sh
+-rw-r-----    1 oracle   oinstall      13260 May 02 15:49 sheet_1_n.csv
+-rw-r-----    1 oracle   oinstall      13172 May 02 15:57 sheet_2_n_csv
+-rw-r-----    1 oracle   oinstall       5672 May 02 15:58 sheet_3_n.csv
+-rw-r-----    1 oracle   oinstall        269 May 02 15:59 JFS_OTHER_BANK_IFSC_STAGING.ctl
+-rw-r-----    1 oracle   oinstall      12854 May 02 15:59 sheet_4_n.csv
+-rw-r-----    1 oracle   oinstall      13344 May 02 15:59 JFS_OTHER_BANK_IFSC_STAGING.log
+-rw-r-----    1 oracle   oinstall     107813 May 08 13:12 Database_KAP_Extra_Details_Script_JFSMIBDB_Output.csv
+-rw-r-----    1 oracle   oinstall      52079 May 08 13:14 Database_KAP_Script_JFSMIBDB_Output.csv
+-rw-r-----    1 oracle   oinstall      56006 May 08 13:15 Database_KAP_Script_ParaOutput_CATDB.csv
+-rw-r-----    1 oracle   oinstall         36 Jun 25 21:52 on.lst
+-rw-r-----    1 oracle   oinstall       2005 Jun 26 10:56 awrddrpt.sql
+-rw-r-----    1 oracle   oinstall       2053 Jun 26 14:39 awrrpt.sql
+-rw-r-----    1 oracle   oinstall         20 Jun 27 09:49 Off;exit.lst
+-rw-r-----    1 oracle   oinstall       7012 Jul 05 17:19 audit_log_purge_job_enable.log
+drwxr-x---    3 oracle   oinstall       4096 Jul 05 18:01 RIB_CITY_STATE_UPDATE
+-rw-r-----    1 oracle   oinstall       5288 Jul 11 13:38 INF_ALERT_TEMPLATE_Customer_careno_update_11JUL18.log
+-rw-r-----    1 oracle   oinstall       4235 Jul 11 13:44 INF_ALERT_TEMPLATE_Customer_careno_update_11JUL18_01.log
+-rw-r-----    1 oracle   oinstall       2289 Jul 11 15:17 Update_Cust_TPT_11JUL18.log
+-rw-r-----    1 oracle   oinstall       5995 Jul 11 16:45 APPUSER1_create_11JUL18.log
+-rw-r-----    1 oracle   oinstall       5387 Jul 11 16:47 Update___Cust_Others_11JUL18.log
+drwx------    3 oracle   oinstall        256 Jul 12 08:00 oradiag_oracle
+-rw-r-----    1 oracle   oinstall       1601 Jul 12 13:36 Deposit_Txsvr_FD_removal_Schema_Updated_12JUL18.log
+-rw-r-----    1 oracle   oinstall        632 Jul 12 14:40 awrinfo.log
+-rw-r-----    1 oracle   oinstall      37655 Jul 12 14:40 awrinfo.txt
+-rw-r-----    1 oracle   oinstall      62597 Jul 12 20:41 iNSERT_FND_TENANT_REMITTER_12JUL18.log
+-rw-r-----    1 oracle   oinstall        141 Jul 13 12:28 dropsyn.sql
+-rw-r-----    1 oracle   asmadmin    7716864 Jul 13 20:20 controlfile_13Jul.ctl
+-rw-r-----    1 oracle   oinstall    7766016 Jul 13 22:30 control_rman.bck
+-rw-r-----    1 oracle   oinstall      28377 Jul 16 11:08 Health_Check.html
+-rw-------    1 oracle   oinstall        258 Jul 17 15:45 nohup.out
+drwxrwxr-x    2 oracle   oinstall       4096 Jul 17 16:15 scripts
+-rw-r-----    1 oracle   oinstall       1559 Jul 20 16:11 Disk_utilization.html
+-rw-r-----    1 oracle   oinstall         36 Jul 20 16:24 df.txt
+-rw-r-----    1 oracle   oinstall    1817341 Jul 27 09:16 awrrpt_1_7_30_8_30.html
+-rw-r-----    1 oracle   oinstall        836 Jul 30 13:03 1_PACKAGE_SPEC.sql
+-rw-r-----    1 oracle   oinstall      52426 Jul 30 13:03 2_PACKAGE_BODY.sql
+-rw-r-----    1 oracle   oinstall      23901 Jul 30 20:26 3_JOB_PACKAGE_BODY.sql
+-rw-r-----    1 oracle   oinstall    1692988 Aug 06 16:31 awrrpt_1_1430_1530.html
+-rw-r-----    1 oracle   oinstall       2253 Aug 09 13:38 version_update_09AUG18.log
+-rw-r-----    1 oracle   oinstall       4619 Aug 10 17:50 RIB_login.html
+-rw-r-----    1 oracle   oinstall       2564 Aug 21 16:03 deleting_21_aug_18.log
+drwxrwxr-x    2 oracle   oinstall       8192 Aug 22 10:28 backup_log
+drwxr-x---    2 oracle   oinstall       8192 Aug 23 08:00 Health_Check
+-rwxr-x---    1 oracle   oinstall        241 Aug 23 10:10 test.sh
+-rw-r-----    1 oracle   oinstall       1521 Aug 23 10:11 Health_Check_test.html
+oracle@JFSBNKSRV208:/home/oracle $ cat Health_Check_test.html
+<H2>FILE SYSTEM STATUS </H2></br><table>
+<tr><td> Filesystem </td><td>GB </td><td>blocks </td><td> Used </td><td> Free </td><td> %Used</td><td> Mounted</td></tr>
+<tr><td> /dev/hd4 </td><td>4.25 </td><td>0.42 </td><td> 3.83 </td><td> 10% </td><td> /</td><td> </td></tr>
+<tr><td> /dev/hd2 </td><td>9.25 </td><td>7.05 </td><td> 2.20 </td><td> 77% </td><td> /usr</td><td> </td></tr>
+<tr><td> /dev/hd9var </td><td>4.50 </td><td>1.52 </td><td> 2.98 </td><td> 34% </td><td> /var</td><td> </td></tr>
+<tr><td> /dev/hd3 </td><td>9.12 </td><td>4.68 </td><td> 4.44 </td><td> 52% </td><td> /tmp</td><td> </td></tr>
+<tr><td> /dev/hd1 </td><td>2.12 </td><td>0.21 </td><td> 1.91 </td><td> 10% </td><td> /home</td><td> </td></tr>
+<tr><td> /dev/hd11admin </td><td>0.12 </td><td>0.00 </td><td> 0.12 </td><td> 1% </td><td> /admin</td><td> </td></tr>
+<tr><td> /proc </td><td>- </td><td>- </td><td> - </td><td> - </td><td> /proc</td><td> </td></tr>
+<tr><td> /dev/hd10opt </td><td>1.50 </td><td>0.47 </td><td> 1.03 </td><td> 32% </td><td> /opt</td><td> </td></tr>
+<tr><td> /dev/livedump </td><td>0.25 </td><td>0.00 </td><td> 0.25 </td><td> 1% </td><td> /var/adm/ras/livedump</td><td> </td></tr>
+<tr><td> /aha </td><td>- </td><td>- </td><td> - </td><td> - </td><td> /aha</td><td> </td></tr>
+<tr><td> /dev/arch_lv </td><td>45.00 </td><td>31.49 </td><td> 13.51 </td><td> 70% </td><td> /archlog</td><td> </td></tr>
+<tr><td> /dev/oracle_lv </td><td>199.00 </td><td>88.72 </td><td> 110.28 </td><td> 45% </td><td> /oracle</td><td> </td></tr>
+</table>
+oracle@JFSBNKSRV208:/home/oracle $ vi test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+oracle@JFSBNKSRV208:/home/oracle $ rm -rf Health_Check_test.html
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+oracle@JFSBNKSRV208:/home/oracle $ cat Health_Check_test.html
+<H2>FILE SYSTEM STATUS </H2></br><table>
+<tr><td> Filesystem </td><td>$2,blocks </td><td></td><td> Used </td><td> Free </td><td> %Used</td><td> Mounted</td></tr>
+<tr><td> /dev/hd4 </td><td>$2,0.42 </td><td></td><td> 3.83 </td><td> 10% </td><td> /</td><td> </td></tr>
+<tr><td> /dev/hd2 </td><td>$2,7.05 </td><td></td><td> 2.20 </td><td> 77% </td><td> /usr</td><td> </td></tr>
+<tr><td> /dev/hd9var </td><td>$2,1.52 </td><td></td><td> 2.98 </td><td> 34% </td><td> /var</td><td> </td></tr>
+<tr><td> /dev/hd3 </td><td>$2,4.68 </td><td></td><td> 4.44 </td><td> 52% </td><td> /tmp</td><td> </td></tr>
+<tr><td> /dev/hd1 </td><td>$2,0.21 </td><td></td><td> 1.91 </td><td> 10% </td><td> /home</td><td> </td></tr>
+<tr><td> /dev/hd11admin </td><td>$2,0.00 </td><td></td><td> 0.12 </td><td> 1% </td><td> /admin</td><td> </td></tr>
+<tr><td> /proc </td><td>$2,- </td><td></td><td> - </td><td> - </td><td> /proc</td><td> </td></tr>
+<tr><td> /dev/hd10opt </td><td>$2,0.47 </td><td></td><td> 1.03 </td><td> 32% </td><td> /opt</td><td> </td></tr>
+<tr><td> /dev/livedump </td><td>$2,0.00 </td><td></td><td> 0.25 </td><td> 1% </td><td> /var/adm/ras/livedump</td><td> </td></tr>
+<tr><td> /aha </td><td>$2,- </td><td></td><td> - </td><td> - </td><td> /aha</td><td> </td></tr>
+<tr><td> /dev/arch_lv </td><td>$2,31.49 </td><td></td><td> 13.51 </td><td> 70% </td><td> /archlog</td><td> </td></tr>
+<tr><td> /dev/oracle_lv </td><td>$2,88.72 </td><td></td><td> 110.28 </td><td> 45% </td><td> /oracle</td><td> </td></tr>
+</table>
+oracle@JFSBNKSRV208:/home/oracle $ rm -rf Health_Check_test.html
+oracle@JFSBNKSRV208:/home/oracle $
+oracle@JFSBNKSRV208:/home/oracle $ vi test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+./test.sh: wk:  not found.
+oracle@JFSBNKSRV208:/home/oracle $ vi test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+ Syntax Error The source line is 1.
+ The error context is
+                BEGIN{print("<H2>FILE SYSTEM STATUS >>>  </H2></br><table>")}{print("<tr><td>",$1,"</td><td>",$2,"$3,"</td><td>""</td> <<< <td>",$4,"</td><td>",$5,"</td><td>",$6"</td><td>",$7"</td></tr>")}END{print("</table>")}
+ awk: 0602-502 The statement cannot be correctly parsed. The source line is 1.
+oracle@JFSBNKSRV208:/home/oracle $
+oracle@JFSBNKSRV208:/home/oracle $ vi test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+oracle@JFSBNKSRV208:/home/oracle $ cat Health_Check_test.html
+<H2>FILE SYSTEM STATUS </H2></br><table>
+<tr><td> Filesystem </td><td> GB blocks </td><td></td><td> Used </td><td> Free </td><td> %Used </td><td> Mounted</td></tr>
+<tr><td> /dev/hd4 </td><td> 4.25 0.42 </td><td></td><td> 3.83 </td><td> 10% </td><td> / </td><td> </td></tr>
+<tr><td> /dev/hd2 </td><td> 9.25 7.05 </td><td></td><td> 2.20 </td><td> 77% </td><td> /usr </td><td> </td></tr>
+<tr><td> /dev/hd9var </td><td> 4.50 1.52 </td><td></td><td> 2.98 </td><td> 34% </td><td> /var </td><td> </td></tr>
+<tr><td> /dev/hd3 </td><td> 9.12 4.68 </td><td></td><td> 4.44 </td><td> 52% </td><td> /tmp </td><td> </td></tr>
+<tr><td> /dev/hd1 </td><td> 2.12 0.21 </td><td></td><td> 1.91 </td><td> 10% </td><td> /home </td><td> </td></tr>
+<tr><td> /dev/hd11admin </td><td> 0.12 0.00 </td><td></td><td> 0.12 </td><td> 1% </td><td> /admin </td><td> </td></tr>
+<tr><td> /proc </td><td> - - </td><td></td><td> - </td><td> - </td><td> /proc </td><td> </td></tr>
+<tr><td> /dev/hd10opt </td><td> 1.50 0.47 </td><td></td><td> 1.03 </td><td> 32% </td><td> /opt </td><td> </td></tr>
+<tr><td> /dev/livedump </td><td> 0.25 0.00 </td><td></td><td> 0.25 </td><td> 1% </td><td> /var/adm/ras/livedump </td><td> </td></tr>
+<tr><td> /aha </td><td> - - </td><td></td><td> - </td><td> - </td><td> /aha </td><td> </td></tr>
+<tr><td> /dev/arch_lv </td><td> 45.00 31.49 </td><td></td><td> 13.51 </td><td> 70% </td><td> /archlog </td><td> </td></tr>
+<tr><td> /dev/oracle_lv </td><td> 199.00 88.72 </td><td></td><td> 110.28 </td><td> 45% </td><td> /oracle </td><td> </td></tr>
+</table>
+oracle@JFSBNKSRV208:/home/oracle $ rm -rf Health_Check_test.html
+oracle@JFSBNKSRV208:/home/oracle $ vi test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+oracle@JFSBNKSRV208:/home/oracle $ cat Health_Check_test.html
+<H2>FILE SYSTEM STATUS </H2></br><table>
+<tr><td> Filesystem </td><td> GB </td><td> blocks </td><td> Used </td><td> Free </td><td> %Used </td><td> Mounted</td></tr>
+<tr><td> /dev/hd4 </td><td> 4.25 </td><td> 0.42 </td><td> 3.83 </td><td> 10% </td><td> / </td><td> </td></tr>
+<tr><td> /dev/hd2 </td><td> 9.25 </td><td> 7.05 </td><td> 2.20 </td><td> 77% </td><td> /usr </td><td> </td></tr>
+<tr><td> /dev/hd9var </td><td> 4.50 </td><td> 1.52 </td><td> 2.98 </td><td> 34% </td><td> /var </td><td> </td></tr>
+<tr><td> /dev/hd3 </td><td> 9.12 </td><td> 4.68 </td><td> 4.44 </td><td> 52% </td><td> /tmp </td><td> </td></tr>
+<tr><td> /dev/hd1 </td><td> 2.12 </td><td> 0.21 </td><td> 1.91 </td><td> 10% </td><td> /home </td><td> </td></tr>
+<tr><td> /dev/hd11admin </td><td> 0.12 </td><td> 0.00 </td><td> 0.12 </td><td> 1% </td><td> /admin </td><td> </td></tr>
+<tr><td> /proc </td><td> - </td><td> - </td><td> - </td><td> - </td><td> /proc </td><td> </td></tr>
+<tr><td> /dev/hd10opt </td><td> 1.50 </td><td> 0.47 </td><td> 1.03 </td><td> 32% </td><td> /opt </td><td> </td></tr>
+<tr><td> /dev/livedump </td><td> 0.25 </td><td> 0.00 </td><td> 0.25 </td><td> 1% </td><td> /var/adm/ras/livedump </td><td> </td></tr>
+<tr><td> /aha </td><td> - </td><td> - </td><td> - </td><td> - </td><td> /aha </td><td> </td></tr>
+<tr><td> /dev/arch_lv </td><td> 45.00 </td><td> 31.49 </td><td> 13.51 </td><td> 70% </td><td> /archlog </td><td> </td></tr>
+<tr><td> /dev/oracle_lv </td><td> 199.00 </td><td> 88.72 </td><td> 110.28 </td><td> 45% </td><td> /oracle </td><td> </td></tr>
+</table>
+oracle@JFSBNKSRV208:/home/oracle $ rm -rf Health_Check_test.html
+oracle@JFSBNKSRV208:/home/oracle $ vi test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+oracle@JFSBNKSRV208:/home/oracle $ cat Health_Check_test.html
+<H2>FILE SYSTEM STATUS </H2></br><table>
+<tr><td> Filesystem </td><td> GB </td><td> Used </td><td> Free </td><td> %Used </td><td> Mounted</td></tr>
+<tr><td> /dev/hd4 </td><td> 4.25 </td><td> 3.83 </td><td> 10% </td><td> / </td><td> </td></tr>
+<tr><td> /dev/hd2 </td><td> 9.25 </td><td> 2.20 </td><td> 77% </td><td> /usr </td><td> </td></tr>
+<tr><td> /dev/hd9var </td><td> 4.50 </td><td> 2.99 </td><td> 34% </td><td> /var </td><td> </td></tr>
+<tr><td> /dev/hd3 </td><td> 9.12 </td><td> 4.44 </td><td> 52% </td><td> /tmp </td><td> </td></tr>
+<tr><td> /dev/hd1 </td><td> 2.12 </td><td> 1.91 </td><td> 10% </td><td> /home </td><td> </td></tr>
+<tr><td> /dev/hd11admin </td><td> 0.12 </td><td> 0.12 </td><td> 1% </td><td> /admin </td><td> </td></tr>
+<tr><td> /proc </td><td> - </td><td> - </td><td> - </td><td> /proc </td><td> </td></tr>
+<tr><td> /dev/hd10opt </td><td> 1.50 </td><td> 1.03 </td><td> 32% </td><td> /opt </td><td> </td></tr>
+<tr><td> /dev/livedump </td><td> 0.25 </td><td> 0.25 </td><td> 1% </td><td> /var/adm/ras/livedump </td><td> </td></tr>
+<tr><td> /aha </td><td> - </td><td> - </td><td> - </td><td> /aha </td><td> </td></tr>
+<tr><td> /dev/arch_lv </td><td> 45.00 </td><td> 13.51 </td><td> 70% </td><td> /archlog </td><td> </td></tr>
+<tr><td> /dev/oracle_lv </td><td> 199.00 </td><td> 110.28 </td><td> 45% </td><td> /oracle </td><td> </td></tr>
+</table>
+oracle@JFSBNKSRV208:/home/oracle $ rm -rf Health_Check_test.html
+oracle@JFSBNKSRV208:/home/oracle $ vi test.sh
+oracle@JFSBNKSRV208:/home/oracle $ ./test.sh
+oracle@JFSBNKSRV208:/home/oracle $ cat Health_Check_test.html
+<H2>FILE SYSTEM STATUS </H2></br><table>
+<tr><td> Filesystem </td><td> GB </td><td> blocks </td><td> Used </td><td> Free </td><td> %Used </td><td> Mounted</td></tr>
+<tr><td> /dev/hd4 </td><td> 4.25 </td><td> 0.42 </td><td> 3.83 </td><td> 10% </td><td> / </td><td> </td></tr>
+<tr><td> /dev/hd2 </td><td> 9.25 </td><td> 7.05 </td><td> 2.20 </td><td> 77% </td><td> /usr </td><td> </td></tr>
+<tr><td> /dev/hd9var </td><td> 4.50 </td><td> 1.51 </td><td> 2.99 </td><td> 34% </td><td> /var </td><td> </td></tr>
+<tr><td> /dev/hd3 </td><td> 9.12 </td><td> 4.68 </td><td> 4.44 </td><td> 52% </td><td> /tmp </td><td> </td></tr>
+<tr><td> /dev/hd1 </td><td> 2.12 </td><td> 0.21 </td><td> 1.91 </td><td> 10% </td><td> /home </td><td> </td></tr>
+<tr><td> /dev/hd11admin </td><td> 0.12 </td><td> 0.00 </td><td> 0.12 </td><td> 1% </td><td> /admin </td><td> </td></tr>
+<tr><td> /proc </td><td> - </td><td> - </td><td> - </td><td> - </td><td> /proc </td><td> </td></tr>
+<tr><td> /dev/hd10opt </td><td> 1.50 </td><td> 0.47 </td><td> 1.03 </td><td> 32% </td><td> /opt </td><td> </td></tr>
+<tr><td> /dev/livedump </td><td> 0.25 </td><td> 0.00 </td><td> 0.25 </td><td> 1% </td><td> /var/adm/ras/livedump </td><td> </td></tr>
+<tr><td> /aha </td><td> - </td><td> - </td><td> - </td><td> - </td><td> /aha </td><td> </td></tr>
+<tr><td> /dev/arch_lv </td><td> 45.00 </td><td> 31.49 </td><td> 13.51 </td><td> 70% </td><td> /archlog </td><td> </td></tr>
+<tr><td> /dev/oracle_lv </td><td> 199.00 </td><td> 88.72 </td><td> 110.28 </td><td> 45% </td><td> /oracle </td><td> </td></tr>
+</table>
+oracle@JFSBNKSRV208:/home/oracle $

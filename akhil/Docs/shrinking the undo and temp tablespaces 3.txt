@@ -1,0 +1,193 @@
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning and Automatic Storage Management options
+
+SYS:JFSFOS > set pagesize 1000
+SYS:JFSFOS > set linesize 150  pau off
+SYS:JFSFOS > col tsname  format         a40 justify c heading 'Tablespace'
+col totsize format 999,999,990 justify c heading 'Total|(MB)'
+col avasize format 999,999,990 justify c heading 'Available|MB)'
+col usedsize format 999,999,990 justify c heading 'Used|(MB)'
+col pctusd  format         990 justify c heading 'Pct|Used'
+col pf      format         990 justify c heading 'Pct|Free'
+
+break on report
+compute sum of "totsize" "avasize" on report
+select
+  total.tsname, totsize, avasize,
+SYS:JFSFOS > SYS:JFSFOS > SYS:JFSFOS > SYS:JFSFOS > SYS:JFSFOS >   (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+     (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+SYS:JFSFOS > SYS:JFSFOS > SYS:JFSFOS > SYS:JFSFOS >   2    3    4    5    6    7    8    9   10   11   12    (select tablespace_name tsname,
+ 13            sum(bytes/1024/1024) totsize
+          from dba_data_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(bytes)/1024/1024,0) avasize,
+            nvl(sum(bytes),0)      totfree
+       from dba_free_space  free group by tablespace_name) free
+where
+ 14   15   16   17   18   19   20  total.tsname = free.tsname(+)
+UNION
+ 21   22  select
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+    (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_temp_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(BYTES_USED)/1024/1024,0) avasize,
+            nvl(sum(BYTES_FREE),0)      totfree
+       from V$TEMP_SPACE_HEADER  free group by tablespace_name) free,
+       dba_temp_files dbf
+where
+  total.tsname = dbf.tablespace_name
+  and total.tsname = free.tsname(+)
+order by 6 desc;set pagesize 1000
+set linesize 150  pau off
+col tsname  format         a40 justify c heading 'Tablespace'
+col totsize format 999,999,990 justify c heading 'Total|(MB)'
+col avasize format 999,999,990 justify c heading 'Available|MB)'
+col usedsize format 999,999,990 justify c heading 'Used|(MB)'
+col pctusd  format         990 justify c heading 'Pct|Used'
+col pf      format         990 justify c heading 'Pct|Free'
+
+break on report
+compute sum of "totsize" "avasize" on report
+select
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+     (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+ 23   24   25   26   27   28   29   30   31   32   33   34   35   36   37   38   39   40   41   42   43   44   45   46   47   48   49   50   51   52  SYS:JFSFOS > SYS:JFSFOS > SYS:JFSFOS >   2    3    4    5    6    7    8    9              else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_data_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(bytes)/1024/1024,0) avasize,
+            nvl(sum(bytes),0)      totfree
+       from dba_free_space  free group by tablespace_name) free
+where
+total.tsname = free.tsname(+)
+UNION
+select
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+    (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_temp_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(BYTES_USED)/1024/1024,0) avasize,
+            nvl(sum(BYTES_FREE),0)      totfree
+       from V$TEMP_SPACE_HEADER  free group by tablespace_name) free,
+       dba_temp_files dbf
+where
+  total.tsname = dbf.tablespace_name
+  and total.tsname = free.tsname(+)
+order by 6 desc; 10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   32   33   34   35   36   37   38   39   40   41   42   43   44
+
+                                            Total      Available       Used     Pct  Pct
+               Tablespace                    (MB)         MB)          (MB)     Used Free MSG
+---------------------------------------- ------------ ------------ ------------ ---- ---- --------------------------
+TEMP                                            4,773        4,773            0    0  100 Free Space Available
+FCRHOST                                        15,360       15,359            1    0  100 Free Space Available
+FCCHOST                                        10,240       10,239            1    0  100 Free Space Available
+FCRBRN                                         10,240       10,239            1    0  100 Free Space Available
+UNDOTBS1                                       35,175       33,099        2,076    6   94 Free Space Available
+FCRBRNTRN                                      35,730       30,663        5,067   14   86 Free Space Available
+USERS                                               5            4            1   26   74 Free Space Available
+PERFSTAT                                        2,048        1,387          661   32   68 Free Space Available
+FCRHOSTTRN                                    191,487       96,074       95,413   50   50 Free Space Available
+SYSAUX                                            990          126          864   87   13 Free Space Available
+FCCHOSTTRN                                     10,724          511       10,213   95    5 Critical (<5% free)
+SYSTEM                                          5,720           10        5,710  100    0 Critical (<5% free)
+                                         ------------ ------------
+sum                                           322,492      202,484
+
+12 rows selected.
+
+SYS:JFSFOS > col FILE_NAME for a60
+SYS:JFSFOS > set line 200
+select
+SYS:JFSFOS >   2        file_name,
+        tablespace_name,
+        round(bytes/1024/1024 ,2) "Current Size (MB)",
+        autoextensible "Autoextend",
+        round(increment_by*8192/1024/1024 ,2) "Autoextend Size (MB)",
+        round(maxbytes/1024/1024 ,2) "Max Size (MB)"
+from dba_data_files
+where tablespace_name='UNDOTBS1';  3    4    5    6    7    8    9
+
+FILE_NAME                                                    TABLESPACE_NAME                Current Size (MB) Aut Autoextend Size (MB) Max Size (MB)
+------------------------------------------------------------ ------------------------------ ----------------- --- -------------------- -------------
++JFSUAT11/jfsfos/datafile/undotbs1.377.909588105             UNDOTBS1                                    4455 NO                     0             0
++DATA/jfsfos/datafile/undotbs1.427.920637187                 UNDOTBS1                                   30720 NO                     0             0
+
+SYS:JFSFOS > select name,state ,free_mb/1024,total_mb/1024 from v$asm_diskgroup order by name;
+
+NAME                           STATE       FREE_MB/1024 TOTAL_MB/1024
+------------------------------ ----------- ------------ -------------
+DATA                           CONNECTED     367.238281          1300
+JFSUAT11                       CONNECTED     403.689453          1500
+
+SYS:JFSFOS > create undo tablespace  UNDOTBS2 datafile'+DATA' size 25G;
+
+Tablespace created.
+
+SYS:JFSFOS > show parameter undo
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+undo_management                      string                           AUTO
+undo_retention                       integer                          1800
+undo_tablespace                      string                           UNDOTBS1
+SYS:JFSFOS > alter system set undo_tablespace=UNDOTBS2 scope = both;
+
+System altered.
+
+SYS:JFSFOS > select status,segment_name  from dba_rollback_segs where status not in ('OFFLINE') and tablespace_name ='UNDOTBS1';
+
+no rows selected
+
+SYS:JFSFOS > drop tablespace UNDOTBS1 including contents and datafiles;
+
+Tablespace dropped.
+
+SYS:JFSFOS > show parameter undo
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+undo_management                      string                           AUTO
+undo_retention                       integer                          1800
+undo_tablespace                      string                           UNDOTBS2
+SYS:JFSFOS >

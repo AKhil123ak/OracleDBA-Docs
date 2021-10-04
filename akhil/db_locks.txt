@@ -1,0 +1,31 @@
+select
+   c.owner,
+   c.object_name,
+   c.object_type,
+   b.sid,
+   b.serial#,
+   b.status,
+   b.osuser,
+   b.machine
+from
+   v$locked_object a ,
+   v$session b,
+   dba_objects c
+where
+   b.sid = a.session_id
+and
+   a.object_id = c.object_id;
+
+
+SELECT * FROM DBA_DML_LOCKS;
+
+select a.object_id, c.object_name, l.mode_held, s.sql_text, a.session_id, b.serial#, a.oracle_username, a.os_user_name, a.process, a.locked_mode, b.username, b.command, b.lockwait 
+from v$locked_object a, v$session b, dba_objects c, dba_locks l, v$sqlarea s 
+where a.session_id = b.sid 
+and a.object_id = c.object_id 
+and l.lock_id1 = c.object_id 
+and l.session_id = b.sid 
+and s.address = b.sql_address 
+and s.hash_value = b.sql_hash_value
+
+

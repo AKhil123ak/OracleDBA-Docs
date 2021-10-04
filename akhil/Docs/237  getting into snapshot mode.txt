@@ -1,0 +1,768 @@
+Using username "soral301".
+Last unsuccessful login: Thu Nov  2 15:06:46 IST 2017 on ssh from 158.98.123.116
+Last login: Sat Aug 11 10:17:58 IST 2018 on ssh from 172.17.73.151
+***************************************************************************
+*                                                                         *
+*      Welcome to Janalakshmi Financial Services.                         *
+*                                                                         *
+*                                                                         *
+* If you are not authorized to use this system, log off now.              *
+* The Access to this system is for Authorized Use only.                   *
+* Use this system is subject to audit at any time by request of           *
+* Janalakshmi Financial Services or IBM management only.                  *
+*                                                                         *
+* This system contains information proprietary to Janalakshmi Financial   *
+* Services                                                                *
+*                                                                         *
+* Any unauthorized user or use of such information may result in          *
+* civil and or criminal penalties. Use of this system equipment           *
+* is subject to monitoring and be controlled at all times by or on behalf *
+* of Janalakshmi Financial Services                                       *
+*                                                                         *
+***************************************************************************
+
+soral301@JFSBNKSRV128:/home/soral301 $
+soral301@JFSBNKSRV128:/home/soral301 $ sudo su - oracle
+soral301_passwd:
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Aug 11 10:50:41 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > show parameter archive
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+archive_lag_target                   integer
+1800
+log_archive_config                   string
+
+log_archive_dest                     string
+
+log_archive_dest_1                   string
+LOCATION=/fcarch/JFSPPROD
+log_archive_dest_10                  string
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+
+log_archive_dest_11                  string
+
+log_archive_dest_12                  string
+
+log_archive_dest_13                  string
+
+log_archive_dest_14                  string
+
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+log_archive_dest_15                  string
+
+log_archive_dest_16                  string
+
+log_archive_dest_17                  string
+
+log_archive_dest_18                  string
+
+log_archive_dest_19                  string
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+
+log_archive_dest_2                   string
+
+log_archive_dest_20                  string
+
+log_archive_dest_21                  string
+
+log_archive_dest_22                  string
+
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+log_archive_dest_23                  string
+
+log_archive_dest_24                  string
+
+log_archive_dest_25                  string
+
+log_archive_dest_26                  string
+
+log_archive_dest_27                  string
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+
+log_archive_dest_28                  string
+
+log_archive_dest_29                  string
+
+log_archive_dest_3                   string
+
+log_archive_dest_30                  string
+
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+log_archive_dest_31                  string
+
+log_archive_dest_4                   string
+
+log_archive_dest_5                   string
+
+log_archive_dest_6                   string
+
+log_archive_dest_7                   string
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+
+log_archive_dest_8                   string
+
+log_archive_dest_9                   string
+
+log_archive_dest_state_1             string
+ENABLE
+log_archive_dest_state_10            string
+enable
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+log_archive_dest_state_11            string
+enable
+log_archive_dest_state_12            string
+enable
+log_archive_dest_state_13            string
+enable
+log_archive_dest_state_14            string
+enable
+log_archive_dest_state_15            string
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+enable
+log_archive_dest_state_16            string
+enable
+log_archive_dest_state_17            string
+enable
+log_archive_dest_state_18            string
+enable
+log_archive_dest_state_19            string
+enable
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+log_archive_dest_state_2             string
+DEFER
+log_archive_dest_state_20            string
+enable
+log_archive_dest_state_21            string
+enable
+log_archive_dest_state_22            string
+enable
+log_archive_dest_state_23            string
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+enable
+log_archive_dest_state_24            string
+enable
+log_archive_dest_state_25            string
+enable
+log_archive_dest_state_26            string
+enable
+log_archive_dest_state_27            string
+enable
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+log_archive_dest_state_28            string
+enable
+log_archive_dest_state_29            string
+enable
+log_archive_dest_state_3             string
+enable
+log_archive_dest_state_30            string
+enable
+log_archive_dest_state_31            string
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+enable
+log_archive_dest_state_4             string
+enable
+log_archive_dest_state_5             string
+enable
+log_archive_dest_state_6             string
+enable
+log_archive_dest_state_7             string
+enable
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+log_archive_dest_state_8             string
+enable
+log_archive_dest_state_9             string
+enable
+log_archive_duplex_dest              string
+
+log_archive_format                   string
+%t_%s_%r.dbf
+log_archive_local_first              boolean
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+TRUE
+log_archive_max_processes            integer
+6
+log_archive_min_succeed_dest         integer
+1
+log_archive_start                    boolean
+FALSE
+log_archive_trace                    integer
+0
+
+NAME                                 TYPE
+------------------------------------ --------------------------------
+VALUE
+------------------------------
+standby_archive_dest                 string
+?/dbs/arch
+SYS:JFSPPROD > set line 200
+SYS:JFSPPROD > show parameter log_archive_
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+log_archive_config                   string
+log_archive_dest                     string
+log_archive_dest_1                   string                           LOCATION=/fcarch/JFSPPROD
+log_archive_dest_10                  string
+log_archive_dest_11                  string
+log_archive_dest_12                  string
+log_archive_dest_13                  string
+log_archive_dest_14                  string
+log_archive_dest_15                  string
+log_archive_dest_16                  string
+log_archive_dest_17                  string
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+log_archive_dest_18                  string
+log_archive_dest_19                  string
+log_archive_dest_2                   string
+log_archive_dest_20                  string
+log_archive_dest_21                  string
+log_archive_dest_22                  string
+log_archive_dest_23                  string
+log_archive_dest_24                  string
+log_archive_dest_25                  string
+log_archive_dest_26                  string
+log_archive_dest_27                  string
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+log_archive_dest_28                  string
+log_archive_dest_29                  string
+log_archive_dest_3                   string
+log_archive_dest_30                  string
+log_archive_dest_31                  string
+log_archive_dest_4                   string
+log_archive_dest_5                   string
+log_archive_dest_6                   string
+log_archive_dest_7                   string
+log_archive_dest_8                   string
+log_archive_dest_9                   string
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+log_archive_dest_state_1             string                           ENABLE
+log_archive_dest_state_10            string                           enable
+log_archive_dest_state_11            string                           enable
+log_archive_dest_state_12            string                           enable
+log_archive_dest_state_13            string                           enable
+log_archive_dest_state_14            string                           enable
+log_archive_dest_state_15            string                           enable
+log_archive_dest_state_16            string                           enable
+log_archive_dest_state_17            string                           enable
+log_archive_dest_state_18            string                           enable
+log_archive_dest_state_19            string                           enable
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+log_archive_dest_state_2             string                           DEFER
+log_archive_dest_state_20            string                           enable
+log_archive_dest_state_21            string                           enable
+log_archive_dest_state_22            string                           enable
+log_archive_dest_state_23            string                           enable
+log_archive_dest_state_24            string                           enable
+log_archive_dest_state_25            string                           enable
+log_archive_dest_state_26            string                           enable
+log_archive_dest_state_27            string                           enable
+log_archive_dest_state_28            string                           enable
+log_archive_dest_state_29            string                           enable
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+log_archive_dest_state_3             string                           enable
+log_archive_dest_state_30            string                           enable
+log_archive_dest_state_31            string                           enable
+log_archive_dest_state_4             string                           enable
+log_archive_dest_state_5             string                           enable
+log_archive_dest_state_6             string                           enable
+log_archive_dest_state_7             string                           enable
+log_archive_dest_state_8             string                           enable
+log_archive_dest_state_9             string                           enable
+log_archive_duplex_dest              string
+log_archive_format                   string                           %t_%s_%r.dbf
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+log_archive_local_first              boolean                          TRUE
+log_archive_max_processes            integer                          6
+log_archive_min_succeed_dest         integer                          1
+log_archive_start                    boolean                          FALSE
+log_archive_trace                    integer                          0
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > ! mkdir -p /backup/JFSPPROD/ARCH
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > show parameter spfile;
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+spfile                               string                           /u01/app/oracle/11.2.0/dbs/spf
+                                                                      ileJFSPPROD.ora
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > ALTER SYSTEM SET log_archive_dest_1='LOCATION=/backup/JFSPPROD/ARCH SCOPE=BOTH;
+ALTER SYSTEM SET log_archive_dest_1='LOCATION=/backup/JFSPPROD/ARCH SCOPE=BOTH
+                                    *
+ERROR at line 1:
+ORA-01756: quoted string not properly terminated
+
+
+SYS:JFSPPROD > ALTER SYSTEM SET log_archive_dest_1='LOCATION=/backup/JFSPPROD/ARCH' SCOPE=BOTH;
+
+System altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > db_recovery_file_dest_size big integer 20G;
+SP2-0734: unknown command beginning "db_recover..." - rest of line ignored.
+SYS:JFSPPROD > alter system set db_recovery_file_dest_size=20g;
+
+System altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > alter system set db_recovery_file_dest='/backup/JFSPPROD/RECO';
+
+System altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select flashback_on from v$database;
+
+FLASHBACK_ON
+------------------
+NO
+
+SYS:JFSPPROD > alter database flashback on;
+
+Database altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > show parameter db_recovery_file
+
+NAME                                 TYPE                             VALUE
+------------------------------------ -------------------------------- ------------------------------
+db_recovery_file_dest                string                           /backup/JFSPPROD/RECO
+db_recovery_file_dest_size           big integer                      20G
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > alter database convert to snapshot standby;
+
+Database altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > alter database open;
+
+Database altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Aug 11 10:59:23 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $
+oracle@JFSBNKSRV128:/home/oracle $ df -gt
+Filesystem    GB blocks      Used      Free %Used Mounted on
+/dev/hd4           8.00      5.70      2.30   72% /
+/dev/hd2          14.12      7.13      7.00   51% /usr
+/dev/hd9var       17.00      5.55     11.45   33% /var
+/dev/hd3          18.00     10.28      7.72   58% /tmp
+/dev/hd1           7.00      0.24      6.76    4% /home
+/dev/hd11admin      2.00      0.00      2.00    1% /admin
+/proc                 -         -         -    -  /proc
+/dev/hd10opt       7.00      0.71      6.29   11% /opt
+/dev/livedump      0.25      0.00      0.25    1% /var/adm/ras/livedump
+/dev/osbackup_lv     20.00     16.60      3.40   84% /osbackup
+/dev/backup_lv   1000.00    278.80    721.20   28% /backup
+/dev/u01_lv      199.50     68.16    131.34   35% /u01
+172.17.70.35:/nfs_fs   3195.50   3095.47    100.03   97% /nfs_fs
+oracle@JFSBNKSRV128:/home/oracle $ cd /backup
+oracle@JFSBNKSRV128:/backup $ ls -lrt
+total 15952
+drwxr-xr-x    2 root     system          256 Jun 19 2016  lost+found
+-rw-------    1 oracle   oinstall    8159232 Dec 21 2017  JFSBIP_control.ctl
+drwxrwxrwx    2 oracle   oinstall       4096 Feb 14 17:42 recover
+drwxr-x---    2 oracle   oinstall        256 Feb 26 16:56 exp
+drwxr-x---    2 oracle   oinstall       4096 Apr 03 22:25 rmanbkp
+drwxr-x---    4 oracle   oinstall        256 Aug 11 10:53 JFSPPROD
+oracle@JFSBNKSRV128:/backup $
+oracle@JFSBNKSRV128:/backup $
+oracle@JFSBNKSRV128:/backup $
+oracle@JFSBNKSRV128:/backup $ cd exp
+oracle@JFSBNKSRV128:/backup/exp $ ls
+exp.par                         export_gl_data_11th_backup.dmp  export_gl_data_11th_backup.log
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Aug 11 11:02:44 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSPPROD > CREATE OR REPLACE DIRECTORY FCRHOST_TEMP AS '/backup/exp';
+
+Directory created.
+
+SYS:JFSPPROD > GRANT READ, WRITE ON DIRECTORY FCRHOST_TEMP TO FCRHOST;
+
+Grant succeeded.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+oracle@JFSBNKSRV128:/backup/exp $ mpfile=FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.dmp logfile=FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.log                                         <
+
+Export: Release 11.2.0.4.0 - Production on Sat Aug 11 11:03:34 2018
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+
+Username: / as sysdba
+
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+Starting "SYS"."SYS_EXPORT_TABLE_01":  /******** AS SYSDBA tables=FCRHOST.TEMP_GL_BATCH_SUSP directory=FCRHOST_TEMP dumpfile=FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.dmp logfile=FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.log
+Estimate in progress using BLOCKS method...
+Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+Total estimation using BLOCKS method: 2 MB
+Processing object type TABLE_EXPORT/TABLE/TABLE
+Processing object type TABLE_EXPORT/TABLE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type TABLE_EXPORT/TABLE/COMMENT
+Processing object type TABLE_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+. . exported "FCRHOST"."TEMP_GL_BATCH_SUSP"              1.322 MB   52312 rows
+Master table "SYS"."SYS_EXPORT_TABLE_01" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_TABLE_01 is:
+  /backup/exp/FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.dmp
+Job "SYS"."SYS_EXPORT_TABLE_01" successfully completed at Sat Aug 11 11:03:58 2018 elapsed 0 00:00:10
+
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $ ls -lrt
+total 1260872
+-rwxr-xr-x    1 oracle   oinstall        128 Jan 29 2018  exp.par
+-rwxr-xr-x    1 oracle   oinstall  644059136 Feb 26 16:50 export_gl_data_11th_backup.dmp
+-rwxr-xr-x    1 oracle   oinstall       2039 Feb 26 16:57 export_gl_data_11th_backup.log
+-rw-r-----    1 oracle   oinstall       1375 Aug 11 11:03 FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.log
+-rw-r-----    1 oracle   oinstall    1495040 Aug 11 11:03 FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.dmp
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $ cat FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.log
+;;;
+Export: Release 11.2.0.4.0 - Production on Sat Aug 11 11:03:34 2018
+
+Copyright (c) 1982, 2011, Oracle and/or its affiliates.  All rights reserved.
+;;;
+Connected to: Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+Starting "SYS"."SYS_EXPORT_TABLE_01":  /******** AS SYSDBA tables=FCRHOST.TEMP_GL_BATCH_SUSP directory=FCRHOST_TEMP dumpfile=FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.dmp logfile=FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.log
+Estimate in progress using BLOCKS method...
+Processing object type TABLE_EXPORT/TABLE/TABLE_DATA
+Total estimation using BLOCKS method: 2 MB
+Processing object type TABLE_EXPORT/TABLE/TABLE
+Processing object type TABLE_EXPORT/TABLE/GRANT/OWNER_GRANT/OBJECT_GRANT
+Processing object type TABLE_EXPORT/TABLE/COMMENT
+Processing object type TABLE_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
+. . exported "FCRHOST"."TEMP_GL_BATCH_SUSP"              1.322 MB   52312 rows
+Master table "SYS"."SYS_EXPORT_TABLE_01" successfully loaded/unloaded
+******************************************************************************
+Dump file set for SYS.SYS_EXPORT_TABLE_01 is:
+  /backup/exp/FCRHOST_TEMP_GL_BATCH_SUSP_11_AUG.dmp
+Job "SYS"."SYS_EXPORT_TABLE_01" successfully completed at Sat Aug 11 11:03:58 2018 elapsed 0 00:00:10
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $
+oracle@JFSBNKSRV128:/backup/exp $ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sat Aug 11 11:14:04 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select open_mode, database_role from v$database;
+
+OPEN_MODE            DATABASE_ROLE
+-------------------- ----------------
+READ WRITE           SNAPSHOT STANDBY
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select NAME,GUARANTEE_FLASHBACK_DATABASE from v$restore_point;
+
+NAME
+--------------------------------------------------------------------------------
+GUA
+---
+SNAPSHOT_STANDBY_REQUIRED_08/11/2018 10:57:39
+YES
+
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > shut immediate
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SYS:JFSPPROD > startup mount
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 1.0476E+11 bytes
+Fixed Size                  2258672 bytes
+Variable Size            2.4159E+10 bytes
+Database Buffers         8.0531E+10 bytes
+Redo Buffers               64835584 bytes
+Database mounted.
+SYS:JFSPPROD > alter database convert to physical standby;
+
+Database altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select status from v$instance;
+
+STATUS
+------------
+STARTED
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > shut immediate
+ORA-01507: database not mounted
+
+
+ORACLE instance shut down.
+SYS:JFSPPROD > startup nomount;
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 1.0476E+11 bytes
+Fixed Size                  2258672 bytes
+Variable Size            2.4159E+10 bytes
+Database Buffers         8.0531E+10 bytes
+Redo Buffers               64835584 bytes
+SYS:JFSPPROD > alter database mount standby database;
+
+Database altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select NAME, OPEN_MODE, GUARD_STATUS, DATABASE_ROLE from v$database;
+
+NAME      OPEN_MODE            GUARD_S DATABASE_ROLE
+--------- -------------------- ------- ----------------
+JFSPPROD  MOUNTED              NONE    PHYSICAL STANDBY
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > alter database flashback off;
+
+Database altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > alter database open readonly;
+alter database open readonly
+                    *
+ERROR at line 1:
+ORA-02288: invalid OPEN mode
+
+
+SYS:JFSPPROD > ALTER DATABASE OPEN READ ONLY;
+
+Database altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >

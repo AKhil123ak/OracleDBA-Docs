@@ -1,0 +1,22 @@
+
+
+spool /oracle/log/BRNLEXTENTS_CHK_23MAR16.log
+
+set lines 400
+select * from v$instance;
+
+
+select sysdate from dual;
+select bytes/(1024*1024*1024),tablespace_name from sys.sm$ts_free order by 2;
+
+
+select name,state,total_mb,free_mb from v$asm_diskgroup;
+
+@/oracle/Scripts/get_space_free_lob.sql
+BRNUSER
+SYS_LOB0000131897C00006$$
+LOB
+
+
+spool off
+

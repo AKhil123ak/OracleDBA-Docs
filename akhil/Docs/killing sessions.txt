@@ -1,0 +1,22 @@
+set pages 5000
+set heading off
+spool kill_session.sql
+SELECT 'ALTER SYSTEM KILL SESSION '''||sid||','||serial#||''' immediate;' FROM v$session where username='FCRHOST' AND status='INACTIVE';
+spool off
+
+
+set pages 5000
+set heading off
+spool kill_session.sql
+SELECT 'ALTER SYSTEM KILL SESSION '''||sid||','||serial#||''' immediate;' FROM v$session where status='INACTIVE';
+spool off
+
+
+select count(*), status from v$session where username='FCRHOST' group by status;
+
+
+ select count(*), status from v$session group by status;
+ 
+ 
+
+find /home/oracle/backup_log -type f -name "*.out" -mtime +120 -delete 

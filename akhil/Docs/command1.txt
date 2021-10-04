@@ -1,0 +1,306 @@
+AUDIT logs location
++++++++++++++++++++
+/u01/app/oracle/admin/JFSPPROD/adump
+
+
+++++++++++++++
+DB level cmds
++++++++++++++
+
+select sum(bytes/1024/1024/1024) database_size from v$datafile; (to know the database size)and  v can use dba_data_files also 
+select instance_name,status from v$instance;
+select dbid,name,open_mode,log_mode,database_role from v$database;
+set lines 300;
+sho parameter dump 
+select * from v$controlfile;
+sho parameter pfile;
+sho parameter spfile;                                                               
+select name,state ,free_mb/1024,total_mb/1024 from v$asm_diskgroup order by name;
+select tablespace_name,bytes/1024/1024 from sys.sm$ts_free order by 1;
+select * from v$log;
+select BYTES/1024/1024,  GROUP# from v$log;
+SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') "DATE" FROM DUAL;
+select max(sequence#) from v$archived_log;(See this in DC servers how many archives are applied)
+select max(sequence#) from v$archived_log where applied='YES';(To know if DR and DC are in sync use it )
+
+++++++++++++++++++
+tablespace command
+++++++++++++++++++
+
+prompt////////////////////////////////////////////////////
+
+select tablespace_name,bytes/1024/1024 from sys.sm$ts_free order by 1;
+///////////////////////////////////////////////////////////////
+
+set pagesize 1000
+set linesize 150  pau off
+col tsname  format         a40 justify c heading 'Tablespace'
+col totsize format 999,999,990 justify c heading 'Total|(MB)'
+col avasize format 999,999,990 justify c heading 'Available|MB)'
+col usedsize format 999,999,990 justify c heading 'Used|(MB)'
+col pctusd  format         990 justify c heading 'Pct|Used'
+col pf      format         990 justify c heading 'Pct|Free'
+ 
+break on report
+compute sum of "totsize" "avasize" on report
+select 
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+     (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_data_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(bytes)/1024/1024,0) avasize,
+            nvl(sum(bytes),0)      totfree
+       from dba_free_space  free group by tablespace_name) free
+where
+total.tsname = free.tsname(+) 
+UNION
+select 
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+    (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_temp_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(BYTES_USED)/1024/1024,0) avasize,
+            nvl(sum(BYTES_FREE),0)      totfree
+       from V$TEMP_SPACE_HEADER  free group by tablespace_name) free,
+       dba_temp_files dbf
+where
+  total.tsname = dbf.tablespace_name
+  and total.tsname = free.tsname(+)
+order by 6 desc;
+
+++++++++++++
+temp spaces
+++++++++++++
+
+SET PAGESIZE 60
+SET LINESIZE 300
+COL TABLESPACE_SIZE_GB FOR 999,999,999,999
+COL ALLOCATED_SPACE_GB FOR 999,999,999,999
+COL FREE_SPACE_GB FOR 999,999,999,999
+SELECT TABLESPACE_NAME,
+TABLESPACE_SIZE/1024/1024/1024 TABLESPACE_SIZE_GB,
+ALLOCATED_SPACE/1024/1024/1024 ALLOCATED_SPACE_GB,
+FREE_SPACE/1024/1024/1024 FREE_SPACE_GB
+FROM   dba_temp_free_space;
+
++++++++++++++++++++++++++++++++++++
+To check the sessions and kill them
++++++++++++++++++++++++++++++++++++
+
+select status, count(*) from v$session group by status;
+SELECT 'ALTER SYSTEM KILL SESSION '''||sid||','||serial#||''' immediate;' FROM v$session where status='INACTIVE';
+
+
+SELECT SEQUENCE#, to_char(FIRST_TIME,'hh24:mi:ss dd/mm/yyyy'), to_char(NEXT_TIME,'hh24:mi:ss dd/mm/yyyy'),APPLIED FROM V$ARCHIVED_LOG where next_time>sysdate-1 ORDER 
+
+BY SEQUENCE# ;
+
+check whether backup is running or not in 237 server :
+
+select sid,opname,round(time_remaining/60) as tim_rem_in_min,sofar,totalwork,start_time,units from v$session_longops where time_remaining > 0 order by start_time;
+
++++++++++++++++++
+Archivelog format
++++++++++++++++++
+	
+LOG_ARCHIVE_FORMAT = 'log%t_%s_%r.arc'
+
+%t_%s_%r.dbf
+
+Archive log file names must contain each of the elements %s (sequence), %t (thread), and %r (resetlogs ID) to ensure that all archive log file names are unique. 
+If the LOG_ARCHIVE_FORMAT initialization parameter is set in the parameter file, then make sure the parameter value contains the %s, %t, and %r elements. 
+Otherwise, the following error is displayed at the time of instance startup:
+
+ORA-19905: log_archive_format must contain %s, %t and %r
+
+
+
+select sid, row_type, operation, status, to_char(start_time,'dd-mm-yyyyhh24:mi:ss') start_time, to_char(end_time,'dd-mm-yyyy hh24:mi:ss')end_time from v$rman_status;
+
+select path from v$asm_disk;
+
+show parameter asm_diskstring;
+
+env|grep -i ORACLE_HOME
+
+ls -l /proc/10944660/cwd
+
+
+
+
+Commands For password unlock
+---------------------------------------
+
+SELECT username, account_status FROM dba_users WHERE ACCOUNT_STATUS LIKE '%EXPIRED%';(check with this )
+
+alter user READONLY(USERNAME) IDENTIFIED by readonly_1234(PASSWORD) ACCOUNT UNLOCK;
+
+
+
+
+ Client address: (ADDRESS=(PROTOCOL=tcp)(HOST=172.17.70.254)(PORT=48775))
+
+
+
+
+
+OPATCH To see
+-----------------------------
+
+cd $ORACLE_HOME
+
+cd OPatch
+
+./opatch lsinventory
+
+
+
+/opt/IBM/InformationServer/Server/app/oracle/product/12.2.0/client
+
+
+/opt/IBM/InformationServer/Server/app/oracle
+
+registry$history  (to know the latest patch details)
+
+
+drop the user(schema):
+
+drop schema schema_name cascade;
+
+ select username,default_tablespace from dba_users where username in ('FCRPREPROD','FCCPREPROD','BRNPREPROD');
+
+019403:oraerror comes when ur droping the user .
+('FCRPREPROD','FCCPREPROD','BRNPREPROD');
+
+ 
+Priviliges checking:
+===========================================
+
+select
+lpad(' ', 2*level) || granted_role "User, his roles and privileges"
+from
+(
+/* THE USERS */
+select
+null     grantee,
+username granted_role
+from
+dba_users
+where
+username like upper('%&enter_username%')
+/* THE ROLES TO ROLES RELATIONS */
+union
+select
+grantee,
+granted_role
+from
+dba_role_privs
+/* THE ROLES TO PRIVILEGE RELATIONS */
+union
+select
+grantee,
+privilege
+from
+dba_sys_privs
+)
+start with grantee is null
+connect by grantee = prior granted_role;---(GIVE THE USERNAME)
+
+To check schema size
+++++++++++++++++++++
+
+select sum(bytes)/1024/1024 as size_in_mega,segment_type from dba_segments group by segment_type;
+
+select owner,sum(bytes)/1024/1024 schema_size_gig from dba_segments group by owner;
+
+select sum(bytes)/1024/1024 as size_in_gig,segment_type from dba_segments where owner like '%HOST%' group by segment_type;
+////////////////////////////////////////////////////////////////////////
+
+select tablespace_name,bytes/1024/1024/1024 from dba_free_space;(in gb)
+select tablespace_name,bytes/1024/1024 from dba_temp_free_space;(in mb)
+dba_temp_free_space
+dba_free_space
+dba_users (for users)
+//////////////////////////////////////////////////////////
+
+////////user related query///////(create a script for users )
+
+SELECT dbms_metadata.get_ddl('USER','FCRHOST') FROM dual;
+
+SELECT DBMS_METADATA.GET_GRANTED_DDL('ROLE_GRANT','SCOTT') from dual;
+
+SELECT DBMS_METADATA.GET_GRANTED_DDL('OBJECT_GRANT','SCOTT') from dual;
+
+SELECT DBMS_METADATA.GET_GRANTED_DDL('SYSTEM_GRANT','SCOTT') from dual;
+
+SELECT dbms_metadata.get_ddl('ROLE','RESOURCE') from dual;
+
+SELECT DBMS_METADATA.GET_GRANTED_DDL('SYSTEM_GRANT','RESOURCE') from dual;
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+If Any table segment related error comes then we need to ask L1/L2 wether we can  run the  script or not and then  we need to run the below script.
+
+alter table sys.AUD$ storage(next 50m);
+
+To check the free space for particular table 
+
+select SEGMENT_NAME, SEGMENT_TYPE, bytes/1024/1024 MB from dba_segments where segment_type='TABLE' and segment_name='AUD$_BU<Your Table_Name>';
+
+To check the audit deatils :
+............................
+SELECT * FROM DBA_STMT_AUDIT_OPTS where rownum<2;
+
+SELECT * FROM DBA_PRIV_AUDIT_OPTS;
+
+SELECT * FROM DBA_OBJ_AUDIT_OPTS where rownum<2;
+
+col JOB_NAME FOR a30
+
+col JOB_FREQUENCY FOR a40
+
+SELECT JOB_NAME,JOB_STATUS,AUDIT_TRAIL,JOB_FREQUENCY FROM DBA_AUDIT_MGMT_CLEANUP_JOBS;
+
+/////////////////////////////////////////////////
+•	Changing Password
+
+SQL> alter user <username> identified by <new_passwd>;
+
+Example:
+  SQL>alter user test identified by dummy;
+
+•	Changing Default Tablespace
+
+SQL> alter user <username> default tablespace <new_tablespace_name>;
+
+Example:
+  SQL>alter user test default tablespace user_data;
+
+•	Changing user quotas
+
+SQL> alter user <username> quota <integer><KB/MB> on <default_tablespace>;
+
+Example:
+ SQL>alter user test quota 20m on user_data;

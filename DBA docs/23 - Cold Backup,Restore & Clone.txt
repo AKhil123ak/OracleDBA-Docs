@@ -1,0 +1,208 @@
+
++++++++++++
+COLD BACKUP
++++++++++++
+
+Find the files locations and database name
+===========================================
+
+> select name from v$database;
+> select file_name from dba_data_files;
+> select name from v$controlfile;
+> select member from v$logfile;
+
+create backup directory
+========================
+
+$ mkdir -p /u02/cold_02aug
+
+Control file backup
+===================
+
+> alter database backup controlfile to trace as '/u02/cold_02aug/pprodctl.txt';
+
+shutdown the database
+=====================
+ 
+> shutdown immediate
+
+copy the files to backup directory location 
+===========================================
+note:copy the parameter files also
+
+$cd /u01/app/PPROD/oradata/
+$cp -r * /u02/cold_02aug
+$ cp -r /u01/app/PPROD/fast_recovery_area/PPROD/control02.ctl /u02/cold_02aug
+
+startup the database 
+====================
+
+> startup
+
+++++++++++++++++++++++
+Loss of fulldatase 
+++++++++++++++++++++++
+
+remove the files 
+================
+
+$ cd /u01/app/PPROD/oradata/
+$ rm -rf *
+$ rm -rf /u01/app/PPROD/fast_recovery_area/PPROD/control02.ctl
+
+shutdown abort
+===================================
+note:if we can not able to connect sqlplus need to kill the process 
+
+$ps -ef|grep smon
+$kill -9 6754
+
++++++++++++++++++++++++++++++++++++
+restore the files from cold backup 
+++++++++++++++++++++++++++++++++++
+note: copy parameter files and go to no mount state
+      copy cotrol file and get the database to mount state
+      copy datafiles to open the database
+
+$ cd /u02/cold_02aug
+$ cp -r * /u01/app/PPROD/oradata/
+$ cd /u01/app/PPROD/oradata/
+$ mv control02.ctl /u01/app/PPROD/fast_recovery_area/PPROD/
+
++++++++++++++++++
+startup database 
+++++++++++++++++
+note:no mount state
+     Mount state
+     Open the database
+
+> startup
+> select status from v$instance;
+> select name from v$database;
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Usring coldbackup Refresh the environment (from PPROD to TEST)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Copy the files one server to another server 
+scp -r <filename> oracle@192.168.0.10:/u02/app/TEST1/product/11.2.0.4
+
+- create directoy structure 
+$mkdir -p /u02/app/TEST1/product/11.2.0.4
+
+- create env file 
+[oracle@linux ~]$ cat TEST1.env
+ORACLE_BASE=/u02/app/TEST1; export ORACLE_BASE
+ORACLE_HOME=$ORACLE_BASE/product/11.2.0.4; export ORACLE_HOME
+ORACLE_SID=TEST1; export ORACLE_SID
+PATH=$ORACLE_HOME/bin:$PATH; export PATH
+
+[oracle@linux ~]$
+
+-->>Oracle Home clone---
+- copy the oracle home (from source(PPORD) to target (TEST1)
+$cd /u01/app/PPROD/product/11.2.0.4
+$ cp -r * /u02/app/TEST1/product/11.2.0.4
+
+$ cd /u02/app/TEST1/product/11.2.0.4/oui/bin/
+$ ./runInstaller -silent -clone ORACLE_BASE="/u02/app/TEST1" ORACLE_HOME="/u02/app/TEST1/product/11.2.0.4" ORACLE_HOME_NAME="OraHome2"
+
+- create pfile 
+as per environment need to change the values
+$ORACLE_HOME/dbs
+[oracle@linux dbs]$ cat initTEST1.ora
+TEST1.__db_cache_size=247463936
+TEST1.__java_pool_size=4194304
+TEST1.__large_pool_size=8388608
+TEST1.__oracle_base='/u02/app/TEST1'#ORACLE_BASE set from environment
+TEST1.__pga_aggregate_target=251658240
+TEST1.__sga_target=373293056
+TEST1.__shared_io_pool_size=0
+TEST1.__shared_pool_size=104857600
+TEST1.__streams_pool_size=0
+*.audit_file_dest='/u02/app/TEST1/admin/TEST1/adump'
+*.audit_trail='db'
+*.compatible='11.2.0.4.0'
+*.control_files='/u02/app/TEST1/oradata/TEST1/control01.ctl','/u02/app/TEST1/fast_recovery_area/TEST1/control02.ctl'
+*.db_block_size=8192
+*.db_domain=''
+*.db_name='TEST1'
+*.db_recovery_file_dest='/u02/app/TEST1/fast_recovery_area'
+*.db_recovery_file_dest_size=4385144832
+*.diagnostic_dest='/u02/app/TEST1'
+*.dispatchers='(PROTOCOL=TCP) (SERVICE=TEST1XDB)'
+#*.local_listener='LISTENER_TEST1'
+*.memory_target=624951296
+*.open_cursors=300
+*.processes=150
+*.remote_login_passwordfile='EXCLUSIVE'
+*.undo_tablespace='UNDOTBS1'
+
+[oracle@linux dbs]$
+
+- create directory structure 
+
+$ mkdir -p /u02/app/TEST1/admin/TEST1/adump
+$ mkdir -p /u01/app/TEST1/oradata/TEST1/
+$ mkdir -p /u01/app/TEST1/fast_recovery_area/TEST1
+
+- we have taken the source backup - /u02/cold_02aug/pprodctl.txt'
+need to use this file for create control file script 
+
+$cd /u02/app/TEST1/oradata/
+$ cp -r pprodctl.txt test1.sql
+as per environment need to change the values
+
+[oracle@linux oradata]$ cat test1.sql
+CREATE CONTROLFILE SET DATABASE "TEST1" RESETLOGS  NOARCHIVELOG
+    MAXLOGFILES 5
+    MAXLOGMEMBERS 5
+    MAXDATAFILES 100
+    MAXINSTANCES 1
+    MAXLOGHISTORY 292
+LOGFILE
+  GROUP 1 '/u02/app/TEST1/oradata/redo1.log'  SIZE 100M BLOCKSIZE 512,
+  GROUP 2 '/u02/app/TEST1/oradata/redo2.log'  SIZE 100M BLOCKSIZE 512,
+  GROUP 3 '/u02/app/TEST1/oradata/redo3.log'  SIZE 100M BLOCKSIZE 512
+-- STANDBY LOGFILE
+DATAFILE
+  '/u02/app/TEST1/oradata/system.dbf',
+  '/u02/app/TEST1/oradata/usr04.dbf',
+  '/u02/app/TEST1/oradata/sysaux.dbf',
+  '/u02/app/TEST1/oradata/undo.dbf'
+CHARACTER SET US7ASCII
+;
+
+[oracle@linux oradata]$
+
+- startup database with nomount 
+
+SQL> startup nomount pfile='initTEST1.ora';
+
+SQL> @/u02/app/TEST1/oradata/test1.sql;
+
+Control file created.
+
+SQL> alter database open resetlogs;
+
+Database altered.
+
+SQL> select name from v$database;
+
+NAME
+---------
+TEST1
+
+SQL> select status from v$instance;
+
+STATUS
+------------
+OPEN
+
+SQL>
+
+
+
+
+

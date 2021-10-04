@@ -1,0 +1,391 @@
+Consider full database export with only tables & views to be exported with the help of include parameter:
+
+
+expdp system/manager directory=data_pump_bkup dumpfile=full_include.dmp logfile=full_include.log full=y include=table,view
+===========================
+compression = ALL, parallel=2,
+=====================
+find table in user
+========================
+select object_name,owner from dba_objects where object_name='DEPT';
+
+change owner ship of tables;
+=================================
+remap_schema=scott:system
+remap_table=DEPT:DEPT_TMP
+
+table_exists_action=replace/append/trancate
+=================================================
+
+PARALLEL
+=============
+
+expdp system/manager directory=data_pump_bkup dumpfile=full_db_export%U.dmp logfile=Parallel_export.log full=y PARALLEL=4
+
+tablespaces
+=================
+
+expdp system/manager directory=data_pump_bkup dumpfile=user_tbs.dmp logfile=user_tbs.log tablespaces=users
+
+refresh table in same db and import to different db
+==================================
+scp dumfile oracle@192.168.128.20:/home/oracle/
+
+
+expdp help=y
+we can see all commands
+
+content=all,data_only,metadata_only,
+by default content=all
+
+monitoring data pump jobs;
+=============================
+
+select job_name,state from dba_datapump_jobs;
+how to find jobname
+directory go to log file,
+more logfile
+expdp / as sysdba attache=jobname
+
+
+
+========================================================
+To perforn a full database backup use:
+
+RMAN> BACKUP DATABASE;
+====================================================================
+
+To backup all archive logs use:
+
+RMAN> BACKUP ARCHIVELOG ALL;
+======================================================================
+To backup the database and all archive log files use:
+
+RMAN> BACKUP DATABASE PLUS ARCHIVELOG;
+
+Note that the PLUS ARCHIVELOG clause performs the following:
+
+    Runs the ALTER SYSTEM ARCHIVE LOG CURRENT command
+    Runs the BACKUP ARCHIVELOG ALL command. If backup optimization is enabled only backs up logs that have not already been backed up.
+    Backs up files specified in the BACKUP command
+    Runs the ALTER SYSTEM ARCHIVE LOG CURRENT command
+    Backs up any remaining archived logs including those generated during the backup
+========================================================================================
+The current controlfile can be automatically backed up by the BACKUP command by configuring the CONTROLFILE AUTOBACKUP parameters
+
+To backup the current controlfile explicitly use:
+
+RMAN> BACKUP CURRENT CONTROLFILE;
+==================================================================================
+
+The SPFILE can be automatically backed up with the control file during database backups by configuring the CONTROLFILE AUTOBACKUP parameters
+
+To backup up the SPFILE explicitly use:
+
+RMAN> BACKUP SPFILE;
+=========================================
+To backup a specific data file use BACKUP DATAFILE. For example:
+
+RMAN> BACKUP DATAFILE '/u01/app/oradata/TEST/users01.dbf';
+===================================================================
+To backup a tablespace use the BACKUP TABLESPACE command. For example:
+
+RMAN> BACKUP TABLESPACE USERS;
+==========================================================
+To compress the backup use:
+
+RMAN> BACKUP AS COMPRESSED BACKUPSET DATABASE;
+=================================================================
+BACKUP FORMAT '/backup2/TEST/TEST_df_%t_s%s_p%p' DATABASE;
+
+In the above example %t is the backup set timestamp, %s is the backup set number and %p is the piece number within the backup set. 
+=========================================================================
+To run a diffential incremental backup use:
+
+RMAN> BACKUP INCREMENTAL LEVEL 1 DATABASE;
+
+To run a cumulative incremental backup use:
+
+RMAN> BACKUP INCREMENTAL LEVEL 1 CUMULATIVE DATABASE;
+===============================================================================
+
+
+
+
+
+
+
+
+
+
+
+I’m setting the retention period as 7 days, which will keep the DB backup for a week.
+
+RMAN> CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 7 DAYS;
+======================================================================================
+If you want to clear a parameter and set its value to default, use CLEAR at the end of the configuration as shown below.
+
+RMAN> CONFIGURE RETENTION POLICY CLEAR;
+
+In this example, since we cleared the retention policy’s value, it was set to the default value, which is 1. So, the retention policy is set to 1 day as shown below.
+
+RMAN> SHOW ALL;
+CONFIGURE RETENTION POLICY TO REDUNDANCY 1; # default
+=================================================================================
+The following example take a compressed backup of the tablepsace PRD01.
+
+RMAN> BACKUP AS COMPRESSED BACKUPSET database;
+=================================================================================
+
+
+
+
+
+
+ i)CONFIGURE RETENTION POLICY TO REDUNDANCY 1; # default
+
+It means that RMAN retains only one set of backup copies.
+
+ii)CONFIGURE BACKUP OPTIMIZATION OFF; # default
+
+It means that by default RMAN won’t skip the backing up of unchanged data blocks in the datafiles OR in other words, It will NOT allow Oracle to skip backups of files that already have identical backups on the device being backed up to.
+
+iii)CONFIGURE DEFAULT DEVICE TYPE TO DISK; # default
+
+It means that by default RMAN sends backup output to a disk drive.
+Disk device, disk is the default device type for all automatic channels.
+
+iv)CONFIGURE CONTROLFILE AUTOBACKUP OFF; # default
+
+It means that by default RMAN doesn’t automatically back up the control files when it performs a backup task.
+If you set this parameter to ON, SPFILE will also be automatically included in the control file backup piece. You should keep it ON and specially it is highly recommended to enable the control file autobackup feature ON if you aren’t using a recovery catalog.
+
+Once you make it ON, RMAN will automatically back up your target database control file, as well as the current server parameter file, during any following events occurs:
+
+• Successful completion of backup/copy command
+• After create catalog command.
+• Any structural changes (adding/dropping tablespace/datafiles etc) to the database that modify the contents of the control file
+
+Note: Even when the autobackup feature is disabled, RMAN will back up the current control file and the server parameter file whenever any backup command includes datafile 1 (system tablespace,) from the datafiles that belong to the target database.
+
+v)CONFIGURE CONTROLFILE AUTOBACKUP FORMAT FOR DEVICE TYPE DISK TO ‘%F’; # default
+
+%F means the database ID, day, month, year, and sequence
+If you haven’t enabled a flashback area, RMAN will create the autobackups in an operating system–specific location ($ORACLE_HOME/dbs on Unix)
+
+vi)CONFIGURE DEVICE TYPE DISK PARALLELISM 1 BACKUP TYPE TO BACKUPSET; # default
+
+It means that the default RMAN backup type is a backup set (and not an image copy) and the degree of parallelism is 1. It is best to allocate only one channel for each physical device on the server.
+
+vii) CONFIGURE DATAFILE BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default
+
+It means that by default RMAN doesn’t make multiple copies of a backup file. Generally this parameter is used if you want to place one copy of a backup set in two different locations on disk:
+
+viii) CONFIGURE ARCHIVELOG BACKUP COPIES FOR DEVICE TYPE DISK TO 1; # default
+
+It means that by default RMAN doesn’t make multiple copies of archivelog file.
+
+ix) CONFIGURE MAXSETSIZE TO UNLIMITED; # default
+
+It means that there’s no limit on the size of a backup set by default.
+
+x) CONFIGURE ENCRYPTION FOR DATABASE OFF; # default
+
+
+
+dataguard
+================================
+ LNS (Log Writer Network Server) process, which ships the redo directly to the remote file server (RFS) process on the standby database. 
+LGWR waits for confirmation from the LNS process before acknowledging the commit. 
+For asynchronous (ASYNC) standby databases, independent LNS 
+ Managed recovery (MRP): 
+=======================
+ Logical standby (LSP): For logical standby databases only, LSP controls the application of archived redo log information to the logical standby database.  
+===========================
+
+
+
+ Keep standby database in recovery mode.
+
+SQL> ALTER DATABASE RECOVER MANAGED STANDBY DATABASE USING CURRENT LOGFILE DISCONNECT FROM SESSION;
+
+Database altered.
+
+8. Set initialization parameter STANDBY_FILE_MANAGEMENT value back to AUTO.
+
+On Primary :
+
+SQL> ALTER SYSTEM SET STANDBY_FILE_MANAGEMENT=AUTO;
+
+System altered.
+
+On Standby :
+
+SQL> ALTER SYSTEM SET STANDBY_FILE_MANAGEMENT=AUTO;
+
+System altered.
+
+sql>show parameter fal
+sql>alter system set fal_server='DGDB2' scope=spfile;
+
+create static listeners
+
+
+standby how to recovery or redo apply
+=======================================
+sql>alter database recover managed standby database disconnect from session;
+realtime apply
+=======================
+sql>alter database recover managed standby database using current logfile disconnect from session;
+
+
+Background process status in DG: 
+================================ 
+standby or primary
+> select process,status,client_process,sequence#,block#,active_agents,known_agents from v$managed_standby;  
+
+snapshot standby database;
+==============================
+no background process MRP,LSP,
+Converting a Physical Standby Database to a Snapshot Standby Database 
+========================================================================
+primary
+============
+SQL> alter database flashback on;
+standby
+==============
+alter database recover managed standby database cancel; 
+ 
+alter database flashback on;   
+shutdown immediate; 
+ 
+startup mount;  
+
+alter database convert to snapshot standby;  
+
+   
+SQL> alter database open;  
+Database altered.  
+SQL> select status,instance_name,database_role,open_mode from v$database,v$Instance;  
+STATUS       INSTANCE_NAME    DATABASE_ROLE     OPEN_MODE 
+OPEN         DGDB2            SNAPSHOT STANDBY  READ WRITE   
+
+
+Converting a Snapshot Standby Database to a Physical Standby
+============================================================
+ Database Convert the snapshot standby database back to a physical standby database: 
+SQL> shutdown immediate; 
+
+SQL> startup mount; 
+
+SQL> alter database convert to physical standby;  
+
+Database altered. 
+SQL> shutdown immediate; 
+SQL> startup mount; 
+
+physical standby to active dataguard
+===============================================
+SQL> alter database recover managed standby database cancel;  
+Database altered.  
+SQL> alter database open;  
+Database altered.  
+
+SQL> select status,instance_name,database_role,open_mode from v$database,v$Instance;  
+STATUS       INSTANCE_NAME    DATABASE_ROLE    OPEN_MODE  
+OPEN         DGDB2            PHYSICAL STANDBY READ ONLY WITH APPLY 
+
+========================================
+switch over
+==========================================
+
+verify primary:
+================= 
+ SQL> select switchover_status from v$database;  
+               SWITCHOVER_STATUS 
+TO STANDBY 
+=============  
+convert primary to standby:  
+
+Primary
+========= 
+SQL> select database_role from v$database;  
+                PRIMARY  
+
+SQL> alter database commit to switchover to physical standby with session shutdown; 
+
+SQL> shutdown immediate;
+ SQL> startup mount 
+
+
+verify standby: stbdy- 
+======================= 
+SQL> select switchover_status from v$database;  
+             SWITCHOVER_STATUS 
+TO PRIMARY  
+SQL> alter database recover managed standby database cancel;  
+Database altered.  
+
+switch standby to primary:
+===================================
+ 
+SQL> alter database commit to switchover to primary with session shutdown;  
+  
+SQL> shutdown immediate; 
+
+SQL> startup; 
+  
+                              
+Check if switch over is success: 
+DGDB1 - Stndby 
+SQL> select database_role from v$database;  
+ DATABASE_ROLE 
+ PHYSICAL STANDBY  
+DGDB2- Primary 
+SQL> select database_role from v$database;  
+DATABASE_ROLE 
+PRIMARY  
+
+DGDB1- SQL> select database_role from v$database;  
+DATABASE_ROLE 
+PHYSICAL STANDBY  
+SQL> alter database recover managed standby database using current logfile disconnect from session;  
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

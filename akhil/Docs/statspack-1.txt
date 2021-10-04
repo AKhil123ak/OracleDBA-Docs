@@ -1,0 +1,71 @@
+SYS:JFSUAT > CREATE TABLESPACE perfstat DATAFILE '+DATA' size 1g reuse extent management local uniform size 1M segment space management auto;
+
+Tablespace created.
+
+SYS:JFSUAT > @$ORACLE_HOME/rdbms/admin/spcreate
+
+Choose the PERFSTAT user's password
+-----------------------------------
+Not specifying a password will result in the installation FAILING
+
+Enter value for perfstat_password: oracle123
+oracle123
+
+
+Choose the Default tablespace for the PERFSTAT user
+---------------------------------------------------
+Below is the list of online tablespaces in this database which can
+store user data.  Specifying the SYSTEM tablespace for the user's
+default tablespace will result in the installation FAILING, as
+using SYSTEM for performance data is not supported.
+
+Choose the PERFSTAT users's default tablespace.  This is the tablespace
+in which the STATSPACK tables and indexes will be created.
+
+TABLESPACE_NAME                CONTENTS  STATSPACK DEFAULT TABLESPACE
+------------------------------ --------- ----------------------------
+FCCUAT                         PERMANENT
+FCRDATA2                       PERMANENT
+PERFSTAT                       PERMANENT
+STATSPACK_DATA                 PERMANENT
+SYSAUX                         PERMANENT *
+UAT_BIPLATFORM                 PERMANENT
+UAT_MDS                        PERMANENT
+USERS                          PERMANENT
+
+Pressing <return> will result in STATSPACK's recommended default
+tablespace (identified by *) being used.
+
+Enter value for default_tablespace: PERFSTAT
+
+Using tablespace PERFSTAT as PERFSTAT default tablespace.
+
+
+Choose the Temporary tablespace for the PERFSTAT user
+-----------------------------------------------------
+Below is the list of online tablespaces in this database which can
+store temporary data (e.g. for sort workareas).  Specifying the SYSTEM
+tablespace for the user's temporary tablespace will result in the
+installation FAILING, as using SYSTEM for workareas is not supported.
+
+Choose the PERFSTAT user's Temporary tablespace.
+
+TABLESPACE_NAME                CONTENTS  DB DEFAULT TEMP TABLESPACE
+------------------------------ --------- --------------------------
+TEMP                           TEMPORARY *
+UAT_IAS_TEMP                   TEMPORARY
+
+Pressing <return> will result in the database's default Temporary
+tablespace (identified by *) being used.
+
+Enter value for temporary_tablespace: TEMP
+
+Using tablespace TEMP as PERFSTAT temporary tablespace.
+
+
+... Creating PERFSTAT user
+create user perfstat
+            *
+ERROR at line 1:
+ORA-01920: user name 'PERFSTAT' conflicts with another user or role name
+

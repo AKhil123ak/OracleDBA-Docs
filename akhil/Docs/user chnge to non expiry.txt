@@ -1,0 +1,552 @@
+
+SYS:JFSPPROD > select profile from dba_profiles;
+
+PROFILE
+------------------------------
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+
+PROFILE
+------------------------------
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+
+PROFILE
+------------------------------
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+
+PROFILE
+------------------------------
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+
+PROFILE
+------------------------------
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+
+PROFILE
+------------------------------
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+
+64 rows selected.
+
+SYS:JFSPPROD > set lines 180 pages 400
+SYS:JFSPPROD > /
+
+PROFILE
+------------------------------
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+JFS_NOEXPIRE
+APPS_PROFILE_PNE
+MONITORING_PROFILE
+DEFAULT
+
+64 rows selected.
+
+
+SYS:JFSPPROD > select * from dba_profiles where profile='JFS_NOEXPIRE';
+
+PROFILE                        RESOURCE_NAME                    RESOURCE LIMIT
+------------------------------ -------------------------------- -------- ----------------------------------------
+JFS_NOEXPIRE                   COMPOSITE_LIMIT                  KERNEL   DEFAULT
+JFS_NOEXPIRE                   SESSIONS_PER_USER                KERNEL   DEFAULT
+JFS_NOEXPIRE                   CPU_PER_SESSION                  KERNEL   DEFAULT
+JFS_NOEXPIRE                   CPU_PER_CALL                     KERNEL   DEFAULT
+JFS_NOEXPIRE                   LOGICAL_READS_PER_SESSION        KERNEL   DEFAULT
+JFS_NOEXPIRE                   LOGICAL_READS_PER_CALL           KERNEL   DEFAULT
+JFS_NOEXPIRE                   IDLE_TIME                        KERNEL   DEFAULT
+JFS_NOEXPIRE                   CONNECT_TIME                     KERNEL   DEFAULT
+JFS_NOEXPIRE                   PRIVATE_SGA                      KERNEL   DEFAULT
+JFS_NOEXPIRE                   FAILED_LOGIN_ATTEMPTS            PASSWORD DEFAULT
+JFS_NOEXPIRE                   PASSWORD_LIFE_TIME               PASSWORD UNLIMITED
+JFS_NOEXPIRE                   PASSWORD_REUSE_TIME              PASSWORD DEFAULT
+JFS_NOEXPIRE                   PASSWORD_REUSE_MAX               PASSWORD DEFAULT
+JFS_NOEXPIRE                   PASSWORD_VERIFY_FUNCTION         PASSWORD DEFAULT
+JFS_NOEXPIRE                   PASSWORD_LOCK_TIME               PASSWORD DEFAULT
+JFS_NOEXPIRE                   PASSWORD_GRACE_TIME              PASSWORD DEFAULT
+
+16 rows selected.
+
+
+
+
+SYS:JFSPPROD > select username,profile from dba_users;
+
+USERNAME                       PROFILE
+------------------------------ ------------------------------
+ODSSM                          DEFAULT
+JFSDAMORA                      APPS_PROFILE_PNE
+SDBAL302                       DEFAULT
+READONLY                       DEFAULT
+FCCHOST                        DEFAULT
+IN08248F                       DEFAULT
+FCRMIG                         DEFAULT
+FCRHOST                        DEFAULT
+DBSUPPORT_CLO                  DEFAULT
+FCRBRN                         DEFAULT
+jfsdam_ora                     DEFAULT
+SDBAL301                       DEFAULT
+ODS                            DEFAULT
+AVH8V7                         DEFAULT
+DBPROD2                        DEFAULT
+DBPROD1                        DEFAULT
+SYS                            DEFAULT
+dcbsl101                       DEFAULT
+SYSMON                         DEFAULT
+dcbsl301                       DEFAULT
+dcbsl201                       DEFAULT
+SYSMAN                         DEFAULT
+SYSTEM                         DEFAULT
+FCRARCH                        DEFAULT
+FLOWS_FILES                    DEFAULT
+MDSYS                          DEFAULT
+DBSNMP                         MONITORING_PROFILE
+SCOTT                          DEFAULT
+WMSYS                          DEFAULT
+XS$NULL                        DEFAULT
+ORDDATA                        DEFAULT
+CTXSYS                         DEFAULT
+ANONYMOUS                      DEFAULT
+OUTLN                          DEFAULT
+APEX_PUBLIC_USER               DEFAULT
+SPATIAL_CSW_ADMIN_USR          DEFAULT
+MGMT_VIEW                      DEFAULT
+SI_INFORMTN_SCHEMA             DEFAULT
+ORDSYS                         DEFAULT
+EXFSYS                         DEFAULT
+ORACLE_OCM                     DEFAULT
+APPQOSSYS                      DEFAULT
+APEX_030200                    DEFAULT
+OWBSYS_AUDIT                   DEFAULT
+MDDATA                         DEFAULT
+DIP                            DEFAULT
+XDB                            DEFAULT
+SPATIAL_WFS_ADMIN_USR          DEFAULT
+ORDPLUGINS                     DEFAULT
+OWBSYS                         DEFAULT
+OLAPSYS                        DEFAULT
+
+51 rows selected.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select * from dba_profiles where profile='MONITORING_PROFILE';
+
+PROFILE                        RESOURCE_NAME                    RESOURCE LIMIT
+------------------------------ -------------------------------- -------- ----------------------------------------
+MONITORING_PROFILE             COMPOSITE_LIMIT                  KERNEL   DEFAULT
+MONITORING_PROFILE             SESSIONS_PER_USER                KERNEL   DEFAULT
+MONITORING_PROFILE             CPU_PER_SESSION                  KERNEL   DEFAULT
+MONITORING_PROFILE             CPU_PER_CALL                     KERNEL   DEFAULT
+MONITORING_PROFILE             LOGICAL_READS_PER_SESSION        KERNEL   DEFAULT
+MONITORING_PROFILE             LOGICAL_READS_PER_CALL           KERNEL   DEFAULT
+MONITORING_PROFILE             IDLE_TIME                        KERNEL   DEFAULT
+MONITORING_PROFILE             CONNECT_TIME                     KERNEL   DEFAULT
+MONITORING_PROFILE             PRIVATE_SGA                      KERNEL   DEFAULT
+MONITORING_PROFILE             FAILED_LOGIN_ATTEMPTS            PASSWORD UNLIMITED
+MONITORING_PROFILE             PASSWORD_LIFE_TIME               PASSWORD DEFAULT
+MONITORING_PROFILE             PASSWORD_REUSE_TIME              PASSWORD DEFAULT
+MONITORING_PROFILE             PASSWORD_REUSE_MAX               PASSWORD DEFAULT
+MONITORING_PROFILE             PASSWORD_VERIFY_FUNCTION         PASSWORD DEFAULT
+MONITORING_PROFILE             PASSWORD_LOCK_TIME               PASSWORD DEFAULT
+MONITORING_PROFILE             PASSWORD_GRACE_TIME              PASSWORD DEFAULT
+
+16 rows selected.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select username,account_status,profile from dba_users;
+
+USERNAME                       ACCOUNT_STATUS                   PROFILE
+------------------------------ -------------------------------- ------------------------------
+ODSSM                          OPEN                             DEFAULT
+JFSDAMORA                      OPEN                             APPS_PROFILE_PNE
+SDBAL302                       OPEN                             DEFAULT
+READONLY                       OPEN                             DEFAULT
+FCCHOST                        OPEN                             DEFAULT
+IN08248F                       OPEN                             DEFAULT
+FCRMIG                         OPEN                             DEFAULT
+FCRHOST                        OPEN                             DEFAULT
+DBSUPPORT_CLO                  OPEN                             DEFAULT
+FCRBRN                         OPEN                             DEFAULT
+jfsdam_ora                     OPEN                             DEFAULT
+SDBAL301                       OPEN                             DEFAULT
+ODS                            OPEN                             DEFAULT
+AVH8V7                         OPEN                             DEFAULT
+DBPROD2                        OPEN                             DEFAULT
+DBPROD1                        OPEN                             DEFAULT
+SYS                            OPEN                             DEFAULT
+dcbsl101                       EXPIRED                          DEFAULT
+SYSMON                         EXPIRED                          DEFAULT
+dcbsl301                       EXPIRED                          DEFAULT
+dcbsl201                       EXPIRED                          DEFAULT
+SYSMAN                         EXPIRED                          DEFAULT
+SYSTEM                         EXPIRED                          DEFAULT
+FCRARCH                        EXPIRED(GRACE)                   DEFAULT
+FLOWS_FILES                    EXPIRED & LOCKED                 DEFAULT
+MDSYS                          EXPIRED & LOCKED                 DEFAULT
+DBSNMP                         EXPIRED & LOCKED                 MONITORING_PROFILE
+SCOTT                          EXPIRED & LOCKED                 DEFAULT
+WMSYS                          EXPIRED & LOCKED                 DEFAULT
+XS$NULL                        EXPIRED & LOCKED                 DEFAULT
+ORDDATA                        EXPIRED & LOCKED                 DEFAULT
+CTXSYS                         EXPIRED & LOCKED                 DEFAULT
+ANONYMOUS                      EXPIRED & LOCKED                 DEFAULT
+OUTLN                          EXPIRED & LOCKED                 DEFAULT
+APEX_PUBLIC_USER               EXPIRED & LOCKED                 DEFAULT
+SPATIAL_CSW_ADMIN_USR          EXPIRED & LOCKED                 DEFAULT
+MGMT_VIEW                      EXPIRED & LOCKED                 DEFAULT
+SI_INFORMTN_SCHEMA             EXPIRED & LOCKED                 DEFAULT
+ORDSYS                         EXPIRED & LOCKED                 DEFAULT
+EXFSYS                         EXPIRED & LOCKED                 DEFAULT
+ORACLE_OCM                     EXPIRED & LOCKED                 DEFAULT
+APPQOSSYS                      EXPIRED & LOCKED                 DEFAULT
+APEX_030200                    EXPIRED & LOCKED                 DEFAULT
+OWBSYS_AUDIT                   EXPIRED & LOCKED                 DEFAULT
+MDDATA                         EXPIRED & LOCKED                 DEFAULT
+DIP                            EXPIRED & LOCKED                 DEFAULT
+XDB                            EXPIRED & LOCKED                 DEFAULT
+SPATIAL_WFS_ADMIN_USR          EXPIRED & LOCKED                 DEFAULT
+ORDPLUGINS                     EXPIRED & LOCKED                 DEFAULT
+OWBSYS                         EXPIRED & LOCKED                 DEFAULT
+OLAPSYS                        EXPIRED & LOCKED                 DEFAULT
+
+51 rows selected.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select * from dba_profiles where profile='APPS_PROFILE_PNE';
+
+PROFILE                        RESOURCE_NAME                    RESOURCE LIMIT
+------------------------------ -------------------------------- -------- ----------------------------------------
+APPS_PROFILE_PNE               COMPOSITE_LIMIT                  KERNEL   UNLIMITED
+APPS_PROFILE_PNE               SESSIONS_PER_USER                KERNEL   UNLIMITED
+APPS_PROFILE_PNE               CPU_PER_SESSION                  KERNEL   UNLIMITED
+APPS_PROFILE_PNE               CPU_PER_CALL                     KERNEL   UNLIMITED
+APPS_PROFILE_PNE               LOGICAL_READS_PER_SESSION        KERNEL   UNLIMITED
+APPS_PROFILE_PNE               LOGICAL_READS_PER_CALL           KERNEL   UNLIMITED
+APPS_PROFILE_PNE               IDLE_TIME                        KERNEL   UNLIMITED
+APPS_PROFILE_PNE               CONNECT_TIME                     KERNEL   UNLIMITED
+APPS_PROFILE_PNE               PRIVATE_SGA                      KERNEL   UNLIMITED
+APPS_PROFILE_PNE               FAILED_LOGIN_ATTEMPTS            PASSWORD 4
+APPS_PROFILE_PNE               PASSWORD_LIFE_TIME               PASSWORD UNLIMITED
+APPS_PROFILE_PNE               PASSWORD_REUSE_TIME              PASSWORD UNLIMITED
+APPS_PROFILE_PNE               PASSWORD_REUSE_MAX               PASSWORD UNLIMITED
+APPS_PROFILE_PNE               PASSWORD_VERIFY_FUNCTION         PASSWORD VERIFY_FUNCTION
+APPS_PROFILE_PNE               PASSWORD_LOCK_TIME               PASSWORD UNLIMITED
+APPS_PROFILE_PNE               PASSWORD_GRACE_TIME              PASSWORD UNLIMITED
+
+16 rows selected.
+
+
+SYS:JFSPPROD >
+SYS:JFSPPROD > alter user READONLY profile JFS_NOEXPIRE;
+
+User altered.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > select username,account_status,profile from dba_users;
+
+USERNAME                       ACCOUNT_STATUS                   PROFILE
+------------------------------ -------------------------------- ------------------------------
+SYS                            OPEN                             DEFAULT
+SYSTEM                         EXPIRED                          DEFAULT
+OUTLN                          EXPIRED & LOCKED                 DEFAULT
+DIP                            EXPIRED & LOCKED                 DEFAULT
+ORACLE_OCM                     EXPIRED & LOCKED                 DEFAULT
+APPQOSSYS                      EXPIRED & LOCKED                 DEFAULT
+WMSYS                          EXPIRED & LOCKED                 DEFAULT
+EXFSYS                         EXPIRED & LOCKED                 DEFAULT
+CTXSYS                         EXPIRED & LOCKED                 DEFAULT
+XDB                            EXPIRED & LOCKED                 DEFAULT
+ANONYMOUS                      EXPIRED & LOCKED                 DEFAULT
+ORDSYS                         EXPIRED & LOCKED                 DEFAULT
+ORDDATA                        EXPIRED & LOCKED                 DEFAULT
+ORDPLUGINS                     EXPIRED & LOCKED                 DEFAULT
+SI_INFORMTN_SCHEMA             EXPIRED & LOCKED                 DEFAULT
+MDSYS                          EXPIRED & LOCKED                 DEFAULT
+OLAPSYS                        EXPIRED & LOCKED                 DEFAULT
+MDDATA                         EXPIRED & LOCKED                 DEFAULT
+SPATIAL_WFS_ADMIN_USR          EXPIRED & LOCKED                 DEFAULT
+SPATIAL_CSW_ADMIN_USR          EXPIRED & LOCKED                 DEFAULT
+SYSMAN                         EXPIRED                          DEFAULT
+MGMT_VIEW                      EXPIRED & LOCKED                 DEFAULT
+FLOWS_FILES                    EXPIRED & LOCKED                 DEFAULT
+APEX_PUBLIC_USER               EXPIRED & LOCKED                 DEFAULT
+APEX_030200                    EXPIRED & LOCKED                 DEFAULT
+OWBSYS                         EXPIRED & LOCKED                 DEFAULT
+OWBSYS_AUDIT                   EXPIRED & LOCKED                 DEFAULT
+SCOTT                          EXPIRED & LOCKED                 DEFAULT
+FCRMIG                         OPEN                             DEFAULT
+ODS                            OPEN                             DEFAULT
+ODSSM                          OPEN                             DEFAULT
+FCRHOST                        OPEN                             DEFAULT
+FCRBRN                         OPEN                             DEFAULT
+FCCHOST                        OPEN                             DEFAULT
+FCRARCH                        EXPIRED(GRACE)                   DEFAULT
+SYSMON                         EXPIRED                          DEFAULT
+IN08248F                       OPEN                             DEFAULT
+jfsdam_ora                     OPEN                             DEFAULT
+SDBAL301                       OPEN                             DEFAULT
+SDBAL302                       OPEN                             DEFAULT
+AVH8V7                         OPEN                             DEFAULT
+dcbsl101                       EXPIRED                          DEFAULT
+dcbsl201                       EXPIRED                          DEFAULT
+dcbsl301                       EXPIRED                          DEFAULT
+DBSUPPORT_CLO                  OPEN                             DEFAULT
+DBPROD1                        OPEN                             DEFAULT
+DBPROD2                        OPEN                             DEFAULT
+XS$NULL                        EXPIRED & LOCKED                 DEFAULT
+DBSNMP                         EXPIRED & LOCKED                 MONITORING_PROFILE
+JFSDAMORA                      OPEN                             APPS_PROFILE_PNE
+READONLY                       OPEN                             JFS_NOEXPIRE
+
+51 rows selected.
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+
+SYS:JFSPPROD > SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > set lines 180 pages 400
+SYS:JFSPPROD > select * from dba_users where username='READONLY';
+
+USERNAME                          USER_ID PASSWORD                       ACCOUNT_STATUS                   LOCK_DATE EXPIRY_DA DEFAULT_TABLESPACE
+------------------------------ ---------- ------------------------------ -------------------------------- --------- --------- ------------------------------
+TEMPORARY_TABLESPACE           CREATED   PROFILE                        INITIAL_RSRC_CONSUMER_GROUP
+------------------------------ --------- ------------------------------ ------------------------------
+EXTERNAL_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PASSWORD E AUTHENTI
+-------- - --------
+READONLY                               95                                OPEN                                                 USERS
+TEMP                           21-APR-16 JFS_NOEXPIRE                   DEFAULT_CONSUMER_GROUP
+
+10G 11G  N PASSWORD
+
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > set col USERNAME for a30;
+SP2-0158: unknown SET option "col"
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > col USERNAME for a30;
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > /
+
+USERNAME                          USER_ID PASSWORD                       ACCOUNT_STATUS                   LOCK_DATE EXPIRY_DA DEFAULT_TABLESPACE
+------------------------------ ---------- ------------------------------ -------------------------------- --------- --------- ------------------------------
+TEMPORARY_TABLESPACE           CREATED   PROFILE                        INITIAL_RSRC_CONSUMER_GROUP
+------------------------------ --------- ------------------------------ ------------------------------
+EXTERNAL_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PASSWORD E AUTHENTI
+-------- - --------
+READONLY                               95                                OPEN                                                 USERS
+TEMP                           21-APR-16 JFS_NOEXPIRE                   DEFAULT_CONSUMER_GROUP
+
+10G 11G  N PASSWORD
+
+
+SYS:JFSPPROD >
+SYS:JFSPPROD > col USER_ID for a40
+SYS:JFSPPROD > /
+
+USERNAME                          USER_ID PASSWORD                       ACCOUNT_STATUS                   LOCK_DATE EXPIRY_DA DEFAULT_TABLESPACE
+------------------------------ ---------- ------------------------------ -------------------------------- --------- --------- ------------------------------
+TEMPORARY_TABLESPACE           CREATED   PROFILE                        INITIAL_RSRC_CONSUMER_GROUP
+------------------------------ --------- ------------------------------ ------------------------------
+EXTERNAL_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PASSWORD E AUTHENTI
+-------- - --------
+READONLY                       ##########                                OPEN                                                 USERS
+TEMP                           21-APR-16 JFS_NOEXPIRE                   DEFAULT_CONSUMER_GROUP
+
+10G 11G  N PASSWORD
+
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > col EXPIRY_DA for a30
+SYS:JFSPPROD > /
+
+USERNAME                          USER_ID PASSWORD                       ACCOUNT_STATUS                   LOCK_DATE EXPIRY_DA DEFAULT_TABLESPACE
+------------------------------ ---------- ------------------------------ -------------------------------- --------- --------- ------------------------------
+TEMPORARY_TABLESPACE           CREATED   PROFILE                        INITIAL_RSRC_CONSUMER_GROUP
+------------------------------ --------- ------------------------------ ------------------------------
+EXTERNAL_NAME
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PASSWORD E AUTHENTI
+-------- - --------
+READONLY                       ##########                                OPEN                                                 USERS
+TEMP                           21-APR-16 JFS_NOEXPIRE                   DEFAULT_CONSUMER_GROUP
+
+10G 11G  N PASSWORD
+
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+soral301@JFSBNKSRV121:/home/soral301 $
+soral301@JFSBNKSRV121:/home/soral301 $ bc
+qu
+soral301@JFSBNKSRV121:/home/soral301 $
+soral301@JFSBNKSRV121:/home/soral301 $ s
+
+SQL*Plus: Release 11.2.0.4.0 Production on Thu Aug 9 14:02:58 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSPPROD > conn READONLY
+Enter password:
+Connected.
+READONLY:JFSPPROD >
+READONLY:JFSPPROD >
+READONLY:JFSPPROD >
+READONLY:JFSPPROD > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+soral301@JFSBNKSRV121:/home/soral301 $
+soral301@JFSBNKSRV121:/home/soral301 $ bc

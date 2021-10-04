@@ -1,0 +1,64 @@
+
+
+$ lspv |grep hdisk317
+hdisk317        none                                None
+$ lspv |grep hdisk318
+hdisk318        none                                None
+
+
+
+
+$ lscfg -vpl hdisk317 | grep Serial
+        Serial Number...............6005076801810668600000000000154C
+$
+$ lscfg -vpl hdisk318 | grep Serial
+        Serial Number...............6005076801810668600000000000154D
+
+
+
+$ ls -lrt /dev/rhdisk317
+crw-rw----    1 grid     asmadmin     19,317 Jan 13 19:55 /dev/rhdisk317
+$
+$ ls -lrt /dev/rhdisk318
+crw-rw----    1 grid     asmadmin     19,318 Jan 13 19:55 /dev/rhdisk318
+$
+
+
+$ getconf DISK_SIZE /dev/hdisk317
+131072
+$
+$ getconf DISK_SIZE /dev/hdisk318
+131072
+
+
+select path ,failgroup,create_date ,name from v$asm_disk where path in ('/dev/hdisk317','/dev/hdisk318');
+
+select path ,failgroup,create_date ,name from v$asm_disk where name like '%FRS%' order by FAILGROUP;
+
+=========
+
+
+
+SQL> spool DR_FRS_DISK_ADDITION_15JAN16.log
+SQL> set lines 500
+SQL> select * from v$instance;
+
+
+SQL> select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup order by name;
+
+
+
+SQL> col path for a25
+SQL> select path ,failgroup,create_date ,name from v$asm_disk where path in ('/dev/hdisk317','/dev/hdisk318');
+
+
+SQL> ALTER DISKGROUP CANLDN_DATA1 add disk '/dev/hdisk317','/dev/hdisk318' rebalance power 6 ;
+
+
+
+SQL> select path ,failgroup,create_date ,name from v$asm_disk where path in  ('/dev/hdisk317','/dev/hdisk318');
+
+SQL> select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup order by name;
+
+SQL> select * from v$asm_operation;
+

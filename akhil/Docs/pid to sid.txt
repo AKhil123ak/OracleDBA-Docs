@@ -1,0 +1,69 @@
+ col BLOCKER for a40
+col SID_SERIAL for a40
+==========================PID to SID============================================================
+SET PAGESIZE 60
+SET LINESIZE 300
+SELECT
+   CHR(10)||
+   'Check for SESSION ID ---->  '||LPAD( s.sid, 4 )||CHR(10)||CHR(10) as "Session ID"
+FROM
+   v$session s, v$process p
+WHERE
+   p.addr = s.paddr AND
+   p.spid = &Enter_OSPid
+/
+
+
+
+=====================bloking session=====================================
+col BLOCKEE for a20
+select
+(select username || ' - ' || osuser from v$session where sid=a.sid) blocker,
+a.sid || ', ' ||
+(select serial# from v$session where sid=a.sid) sid_serial,
+' is blocking ',
+(select username || ' - ' || osuser from v$session where sid=b.sid) blockee,
+b.sid || ', ' ||
+(select serial# from v$session where sid=b.sid) sid_serial
+from v$lock a, v$lock b
+where a.block = 1
+and b.request > 0
+and a.id1 = b.id1
+and a.id2 = b.id2;   
+
+============================
+
+select a.sid,a.program,b.sql_text
+from v$session a, v$sqltext b
+where a.sql_hash_value = b.hash_value
+and a.sid='&sid'
+order by a.sid,hash_value,piece;
+
+
+=========================
+select plan_table_output from table (dbms_xplan.display_awr('g4qkxbcm27xuk'));
+
+
+
+
+
+
+
+
+
+
+
+dba_hist_sql_plan
+
+
+
+
+
+
+EXPLAIN PLAN FOR
+  SELECT last_name FROM employees;
+  
+  
+  SELECT tf.* FROM DBA_HIST_SQLTEXT ht, table 
+(DBMS_XPLAN.DISPLAY_AWR(ht.sql_id,null, null, 'ALL' )) tf 
+WHERE ht.sql_id='8jgqdgdhrc9uj'; 

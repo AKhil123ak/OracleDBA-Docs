@@ -1,0 +1,30 @@
+set pages 1000
+set lines 200
+col OSPID for a06
+col SID for 99999
+col SERIAL# for 999999
+col SQL_ID for a14
+col USERNAME for a15
+col PROGRAM for a23
+col MODULE for a18
+col OSUSER for a10
+col MACHINE for a25
+col opname for a30
+SELECT SID, SERIAL#, opname, SOFAR, TOTALWORK,USERNAME,SQL_ID,
+ROUND(SOFAR/TOTALWORK*100,2) COMPLETE
+FROM   V$SESSION_LONGOPS
+WHERE
+TOTALWORK != 0
+AND    SOFAR != TOTALWORK
+order by 1;
+
+-----Note: the same query can be used to monitor RMAN backup status
+
+SELECT SID, SERIAL#, CONTEXT, SOFAR, TOTALWORK,
+       ROUND(SOFAR/TOTALWORK*100,2) "%_COMPLETE"
+FROM V$SESSION_LONGOPS
+WHERE OPNAME LIKE 'RMAN%'
+  AND OPNAME NOT LIKE '%aggregate%'
+  AND TOTALWORK != 0
+  AND SOFAR  != TOTALWORK
+;

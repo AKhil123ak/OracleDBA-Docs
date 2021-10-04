@@ -1,0 +1,101 @@
+Steps for Flashcopy
+
+Setp1 (Login in into the 237 server and enter):
+USER ID : FCRPROD
+Password : Oracle@5678 
+
+Step2 (This is for shut down the databasse) Go  to (cd /home/oracle) location:
+cd /osbackup/oracle_backup/BCV_SCRIPTS  |(Go this location ) give ls -lrt if you want to  see the files in that location.and run the below script.|
+sh db_down.sh    
+ 
+ 
+Step3 (Give Exit From it):
+exit
+
+Step4 (sh db_down.sh):
+user Name: su – grid  
+Password: R5hMn!st
+
+sh ASM_down.sh   (Shut down the grid)
+
+Exit from Grid and Root user also
+
+Step5 (Login in into the 230 server and enter):
+
+user ID : FCRPROD             OR oracle
+Password : Oracle@5678           R5hMn!st
+Go to  (cd /home/oracle) location
+
+Step6 (Go to this location for to start Begin the Backup mode):
+cd /fcarch/BCV-SCRIPTS |(Give ls -lrt see the below script and run it)|
+sh Begin-Backup.sh
+
+Step7 (Flash Copy Execution from 237 using FCRPRO ID):
+cd /home/FCRPROD/storage/Live
+sh run_flash_jfsbank.sh
+
+
+Step8 (End the Backup mode in PROD DB Server 230 using Oracle ID ):
+cd /fcarch/BCV-SCRIPTS
+sh END-Backup.sh
+
+
+Step8 (Copy the latest Archive files & Control files from PROD DB Server to Flashcopy DB Server using Oracle ID):
+cd /fcarch/BCV-SCRIPTS
+sh Arch-cp.sh
+
+After Completion of archive logs and control files Run the below script
+
+sh SCP-Rmt.sh
+
+
+
+Step9 (Start ASM in Flashcopy DB server 237 server using grid ID):
+su – grid 
+
+sh ASM_start.sh
+
+exit from grid user
+
+Step10 (Start Catalog Database in 237 server using Oracle ID)
+cd /osbackup/oracle_backup/BCV_SCRIPTS
+
+sh CATDB_start.sh
+
+
+Step10 (Start Flash DB in No-mount in 237 server using Oracle ID):
+sh BCV-STR-NOMOUNT.sh
+
+Step11 (Start Flash DB in Recovery in 237  server  using Oracle ID):
+sh JFSPPROD_BCV_Mas.sh
+
+This will  take 5-10 mins to complete
+
+Step12 (Start Flash DB in Read Only mode in 237 server using Oracle ID):
+sh BCV-RO-DB.sh	
+
+Step13 (Inform Backup Team to trigger CBS Flashcopy DB ):
+
+
+
+
+
+
+
+
+
+
+
+once completed let me know ok
+
+
+..................................
+
+
+22550                                22550
+10000 fee                            10000 
+ 5000 loan                            5000
+ 2350 
+ 3000 amma
+ ..................
+4550+2350=7900-5000=2900

@@ -1,0 +1,304 @@
+select * from v$instance;
+select sysdate from dual;
+
+select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_used order by 1;
+select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_free order by 1;
+
+col OBJECT_NAME for a30
+col segmenT_name for a30
+
+select count(*),object_type from dba_objects where status='INVALID' group by object_type;
+select count(*) from dba_objects where  status='INVALID';
+select count(*),object_type from dba_objects where owner='FRSPROD' and status='INVALID' group by object_type;
+select count(*) from dba_objects where owner='FRSPROD' and status='INVALID';
+select count(*),object_type from dba_objects where owner='CBTRAIN' and status='INVALID' group by object_type;
+select count(*) from dba_objects where owner='CBTRAIN' and status='INVALID';
+
+select owner,object_name,object_type from dba_objects where  status='INVALID' and owner='FRSPROD' ORDER BY OWNER,OBJECT_TYPE;
+select owner,object_name,object_type from dba_objects where  status='INVALID' and owner='CBTRAIN' ORDER BY OWNER,OBJECT_TYPE;
+select owner,object_name,object_type from dba_objects where status='INVALID' ORDER BY OWNER,OBJECT_TYPE;
+
+SELECT COUNT(1),STATUS FROM USER_INDEXES GROUP BY STATUS;
+
+conn frsprod/frsprod
+
+ALTER SESSION ENABLE RESUMABLE TIMEOUT 4600;
+alter session force parallel query;
+alter session force parallel ddl;
+alter session force parallel dml;
+
+set lines 300
+
+select INDEX_OWNER,INDEX_NAME,PARTITION_NAME,TABLESPACE_NAME,COMPRESSION,STATUS from dba_ind_partitions where STATUS='UNUSABLE';
+select INDEX_NAME,OWNER,STATUS,COMPRESSION,TABLESPACE_NAME from dba_INDEXES where STATUS='UNUSABLE';
+select OWNER,INDEX_NAME,INDEX_TYPE,TABLE_NAME,DEGREE from dba_indexes where DEGREE='DEFAULT';
+
+
+===============  must check below   ======
+select  owner,degree,' ALTER index '||OWNER||'.'||INDEX_NAME ||'   noparallel;' from dba_indexes where degree like '%DEFAULT%'  order by index_name;
+select owner,degree,' ALTER TABLE '||OWNER||'.'||TABLE_NAME ||'   noparallel;' from dba_tables where degree like '%DEFAULT%' order by table_name;
+
+==================================
+
+
+
+=========  FCT_ADVANCES   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_ADVANCES' and PARTITION_NAME like '%QTR1_16%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_ADVANCES') and PARTITION_NAME like '%QTR1_16%' order by 4 asc;
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_ADVANCES' and PARTITION_NAME like '%QTR1_16%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_ADVANCES' and partition_name like '%QTR1_16%';
+
+
+
+=========  FCT_ADV_SCHEDULE   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_ADV_SCHEDULE' and PARTITION_NAME like '%QTR1_16%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_ADV_SCHEDULE') and PARTITION_NAME like '%QTR1_16%' order by 4 asc;
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_ADV_SCHEDULE' and PARTITION_NAME like '%QTR1_16%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_ADV_SCHEDULE' and partition_name like '%QTR1_16P%';
+
+
+
+=========  FCT_TD_CONTRACTS    =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_TD_CONTRACTS' and PARTITION_NAME like '%QTR4_15%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_TD_CONTRACTS') and PARTITION_NAME like '%QTR4_15%' order by 4 asc;
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_TD_CONTRACTS' and PARTITION_NAME like '%QTR4_15%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_TD_CONTRACTS' and partition_name like '%QTR4_15P%';
+
+
+
+
+
+
+
+
+'FCT_ACCOUNT_MIS' -- done ==> 06sep
+'FCT_ADVANCES'	-- done
+'FCT_ADV_SCHEDULE' --> done 08sep
+'FCT_BILLS_CONTRACTS' --done ==> 07sep
+'FCT_BILLS_INFO_PARTIES' --done
+'FCT_CASA_ACCOUNTS' -- done ==> sep06
+'FCT_COLLATERAL' ==> 08sep
+'FCT_GL', 
+'FCT_LOAN_CONTRACTS'
+'FCT_TD_CONTRACTS' -- done ==> 06sep
+
+
+FCT_TD_CONTRACTS
+
+=========  FCT_TD_CONTRACTS   ========= 
+
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_TD_CONTRACTS' and PARTITION_NAME like '%QTR1_16%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_TD_CONTRACTS') and PARTITION_NAME like '%QTR1_16%' order by 4 asc;
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_TD_CONTRACTS' and PARTITION_NAME like '%QTR1_16%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_TD_CONTRACTS' and partition_name like '%QTR1_16%';
+
+
+=========  FCT_CASA_ACCOUNTS   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_CASA_ACCOUNTS' and PARTITION_NAME like '%QTR1_16%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_CASA_ACCOUNTS') and PARTITION_NAME like '%QTR1_16%' order by 4 asc
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_CASA_ACCOUNTS' and PARTITION_NAME like '%QTR1_16%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_CASA_ACCOUNTS' and partition_name like '%QTR1_16P%';
+
+=========  FCT_BILLS_CONTRACTS   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_BILLS_CONTRACTS' and PARTITION_NAME like '%QTR4_15%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_BILLS_CONTRACTS') and PARTITION_NAME like '%QTR4_15%' order by 4 asc
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_BILLS_CONTRACTS' and PARTITION_NAME like '%QTR4_15%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_BILLS_CONTRACTS' and partition_name like '%QTR4_15%';
+
+
+
+=========  FCT_ACCOUNT_MIS   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_ACCOUNT_MIS' and PARTITION_NAME like '%QTR4_15%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_ACCOUNT_MIS') and PARTITION_NAME like '%QTR4_15%' order by 4 asc;
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_ACCOUNT_MIS' and PARTITION_NAME like '%QTR4_15%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_ACCOUNT_MIS' and partition_name like '%QTR4_15%';
+
+
+
+
+
+=========  FCT_BILLS_INFO_PARTIES   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_BILLS_INFO_PARTIES' and PARTITION_NAME like '%QTR3_15%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_BILLS_INFO_PARTIES') and PARTITION_NAME like '%QTR3_15%' order by 4 asc
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_BILLS_INFO_PARTIES' and PARTITION_NAME like '%QTR3_15%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_BILLS_INFO_PARTIES' and partition_name like '%QTR3_15P%';
+
+
+
+=========  FCT_COLLATERAL   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_COLLATERAL' and PARTITION_NAME like '%QTR3_15%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_COLLATERAL') and PARTITION_NAME like '%QTR3_15%' order by 4 asc
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_COLLATERAL' and PARTITION_NAME like '%QTR3_15%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_COLLATERAL' and partition_name like '%QTR3_15P%';
+
+
+
+
+=========  FCT_LOAN_CONTRACTS   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_LOAN_CONTRACTS' and PARTITION_NAME like '%QTR3_15%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_LOAN_CONTRACTS') and PARTITION_NAME like '%QTR3_15%' order by 4 asc
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_LOAN_CONTRACTS' and PARTITION_NAME like '%QTR3_15%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_LOAN_CONTRACTS' and partition_name like '%QTR3_15P%';
+
+
+=========  FCT_CASA_ACCOUNTS   =========  
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_CASA_ACCOUNTS' and PARTITION_NAME like '%QTR3_15%' order by TABLE_NAME;
+
+select segment_name,PARTITION_NAME,tablespace_name,bytes/1024/1024/1024 from dba_segments where SEGMENT_NAME in ('FCT_CASA_ACCOUNTS') and PARTITION_NAME like '%QTR3_15%' order by 4 asc
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION,TABLESPACE_NAME from dba_tab_partitions where TABLE_NAME = 'FCT_CASA_ACCOUNTS' and PARTITION_NAME like '%QTR3_15%' order by TABLE_NAME;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_CASA_ACCOUNTS' and partition_name like '%QTR3_15P%';
+
+
+
+==============================	END  ===========================
+
+EXEC DBMS_STATS.GATHER_TABLE_STATS(OWNNAME=>'FRSPROD',TABNAME=>'FCT_TD_CONTRACTS',ESTIMATE_PERCENT=>10,METHOD_OPT=>'FOR ALL COLUMNS SIZE  1',DEGREE=>40);
+EXEC DBMS_STATS.GATHER_TABLE_STATS(OWNNAME=>'FRSPROD',TABNAME=>'FCT_LOAN_CONTRACTS',ESTIMATE_PERCENT=>10,METHOD_OPT=>'FOR ALL COLUMNS SIZE  1',DEGREE=>40);
+
+
+
+ALTER TABLE 	FCT_LOAN_CONTRACTS	MOVE PARTITION 	FCT_LOAN_CONTRACTS_QTR2_15P3_4	compress;
+
+select ' ALTER INDEX  '||INDEX_NAME||'  rebuild  compress;' from dba_INDEXES where STATUS='UNUSABLE';
+
+
+select ' ALTER index  '||index_NAME || ' rebuild partition ' ||PARTITION_NAME ||'  compress; ' from dba_ind_partitions where status='UNUSABLE' order by index_name;
+
+select ' ALTER index  '||index_NAME || ' rebuild ' ||'  compress; ' from dba_INDEXES where status='UNUSABLE' order by index_name;
+
+select ' ALTER index  '||OWNER||'.'||INDEX_NAME || '   noparallel; ' from dba_indexes where degree='DEFAULT' order by index_name;
+
+
+
+
+===============  must check below   ======
+select  owner,degree,' ALTER index '||OWNER||'.'||INDEX_NAME ||'   noparallel;' from dba_indexes where degree like '%DEFAULT%'  order by index_name;
+select owner,degree,' ALTER TABLE '||OWNER||'.'||TABLE_NAME ||'   noparallel;' from dba_tables where degree like '%DEFAULT%' order by table_name;
+
+==================================
+
+
+
+
+
+
+
+
+set feed on
+set lines 1000;
+select name "DATABASE NAME" from v$database;
+show parameter sort_area_size;
+alter session set sort_area_size=104857600;
+show parameter sort_area_size;
+EXEC DBMS_STATS.GATHER_TABLE_STATS(OWNNAME=>'FRSPROD',TABNAME=>'FCT_ADV_SCHEDULE',ESTIMATE_PERCENT=>10,METHOD_OPT=>'FOR ALL COLUMNS SIZE  1',DEGREE=>40);
+spool off
+
+
+
+ ALTER index  IND2_UNQ_FCT_LOAN_CONTRACTS   rebuild partition  FCT_LOAN_CONTRACTS_QTR2_15P3_4  compress  ; 
+
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_ADVANCES' and TABLESPACE_NAME='FRS_QTR2' and PARTITION_NAME like '%QTR2_15P%' order by TABLE_NAME;
+select INDEX_NAME,OWNER,STATUS,COMPRESSION,TABLESPACE_NAME from dba_INDEXES where STATUS='UNUSABLE';
+
+select segment_name,sum(bytes)/(1024*1024*1024) from dba_segments where SEGMENT_NAME in ('FCT_ADVANCES') and PARTITION_NAME like '%QTR2%' group by segment_name;
+
+select segment_name,sum(bytes)/(1024*1024*1024) from dba_segments where SEGMENT_NAME in ('FCT_ADVANCES') and PARTITION_NAME like '%QTR2_15P%' group by segment_name;
+
+select owner,segment_name,tablespace_name,partition_name, segment_type,bytes/1024/1024/1024 from dba_segments where partition_name like '%QTR2_14P%' and tablespace_name='FRS_QTR2' and  segment_name='FCT_ADVANCES';
+
+select owner,segment_name,tablespace_name,partition_name, segment_type,bytes/1024/1024/1024 from dba_segments where partition_name like  '%QTR2_15P%' and tablespace_name='FRS_QTR2' and  segment_name='FCT_ADVANCES';
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_ADVANCES' and partition_name like '%QTR2_13P%' and tablespace_name='FRS_QTR2' ;
+
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_ADVANCES' and partition_name like '%QTR2%' and tablespace_name='FRS_QTR2' ;
+
+
+select ' ALTER index  '||INDEX_NAME || '   rebuild partition  '||partition_name||'  compress  ; ' from dba_ind_partitions where STATUS='UNUSABLE' order by index_name;
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild  compress  ;' from dba_INDEXES where STATUS='UNUSABLE';
+
+select ' ALTER index  '||INDEX_NAME || '   rebuild partition  '||partition_name||'  compress  ; ' from dba_ind_partitions where STATUS='UNUSABLE' order by index_name;
+select ' ALTER index  '||INDEX_NAME || '   rebuild partition  '||partition_name||'  compress  ; ' from dba_ind_partitions where STATUS='UNUSABLE' order by index_name;
+select ' ALTER index  '||OWNER||'.'||INDEX_NAME || '   noparallel; ' from dba_indexes where degree='DEFAULT' order by index_name
+select INDEX_NAME,OWNER,STATUS,COMPRESSION,TABLESPACE_NAME from dba_INDEXES where STATUS='UNUSABLE';
+
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   noparallel  ;' from dba_INDEXES where DEGREE='DEFAULT';
+
+select ' ALTER index  '||INDEX_NAME || '   rebuild partition  '||partition_name||'  compress  ; ' from dba_ind_partitions where ABLE_owner='FRSPROD' and index_name='INDX_ACT_DATE' partition_name like '%QTR2_13P%' and tablespace_name='FRSPART_IDX_QTR2' ;
+
+select TABLE_OWNER,TABLE_NAME,PARTITION_NAME,COMPRESSION from dba_tab_partitions where TABLE_NAME = 'FCT_BILLS_CONTRACTS' and TABLESPACE_NAME='FRS_QTR2' and PARTITION_NAME like '%QTR2_14%' order by TABLE_NAME;
+select INDEX_NAME,OWNER,STATUS,COMPRESSION,TABLESPACE_NAME from dba_INDEXES where STATUS='UNUSABLE';
+select segment_name,sum(bytes)/(1024*1024*1024) from dba_segments where SEGMENT_NAME in ('FCT_LOAN_CONTRACTS') and PARTITION_NAME like '%QTR2_14%' group by segment_name;
+
+select owner,segment_name,tablespace_name,partition_name, segment_type,bytes/1024/1024/1024 from dba_segments where partition_name like '%QTR2_14%' and tablespace_name='FRS_QTR2' and  segment_name='FCT_BILLS_CONTRACTS';
+select ' ALTER TABLE     ' || table_name || '  MOVE partition ' || partition_name || '   COMPRESS; ' from dba_tab_partitions where TABLE_owner='FRSPROD' and table_name='FCT_BILLS_CONTRACTS' and partition_name like '%QTR2_14%';
+
+
+
+select ' ALTER index  '||INDEX_NAME || '   rebuild partition  '||partition_name||'  compress  ; ' from dba_ind_partitions where STATUS='UNUSABLE' order by index_name;
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   rebuild  compress  ;' from dba_INDEXES where STATUS='UNUSABLE';
+
+select ' ALTER index  '||INDEX_NAME || '   rebuild partition  '||partition_name||'  compress  ; ' from dba_ind_partitions where STATUS='UNUSABLE' order by index_name;
+select ' ALTER index  '||INDEX_NAME || '   rebuild partition  '||partition_name||' ; ' from dba_ind_partitions where STATUS='UNUSABLE' order by index_name;
+select ' ALTER index  '||OWNER||'.'||INDEX_NAME || '   noparallel; ' from dba_indexes where degree='DEFAULT' order by index_name
+select INDEX_NAME,OWNER,STATUS,COMPRESSION,TABLESPACE_NAME from dba_INDEXES where STATUS='UNUSABLE';
+
+select ' ALTER index  '||owner|| '.' ||INDEX_NAME || '   noparallel  ;' from dba_INDEXES where DEGREE='DEFAULT';
+
+
+spool FRS_gather_FCT_ADVANCES_22FEB16.log
+set time on
+set echo on
+set feed on
+set lines 1000;
+select name "DATABASE NAME" from v$database;
+show parameter sort_area_size;
+alter session set sort_area_size=104857600;
+show parameter sort_area_size;
+EXEC DBMS_STATS.GATHER_TABLE_STATS(OWNNAME=>'FRSPROD',TABNAME=>'FCT_ADVANCES',ESTIMATE_PERCENT=>10,METHOD_OPT=>'FOR ALL COLUMNS SIZE  1',DEGREE=>40);
+spool off;
+
+EXEC DBMS_STATS.GATHER_TABLE_STATS(OWNNAME=>'FRSPROD',TABNAME=>'FCT_CASA_ACCOUNTS',ESTIMATE_PERCENT=>10,METHOD_OPT=>'FOR ALL COLUMNS SIZE  1',DEGREE=>40);

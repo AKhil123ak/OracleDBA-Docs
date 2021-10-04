@@ -1,0 +1,155 @@
+impdp \"/ as sysdba\" DIRECTORY=FCRARCH_IMP DUMPFILE=XF_OL_ST_TXNLOG_STL_MMDD_EXP_26OCT18_%u.dmp logfile=IMP_XF_OL_ST_TXNLOG_STL_MMDD_07NOV18.log  remap_schema=FCRHOST:FCRARCH remap_tablespace=FCRDATA1:FCRARCH  status=120 parallel=8
+
+oracle@JFSBNKSRV121:/tempstage/FCRARCH_EXP $ cat XF_STCAP_GL_TXNS_MMDD_EXP.sh
+
+expdp \"/ as sysdba\" DIRECTORY=FCRARCH_EXP DUMPFILE=XF_OL_ST_TXNLOG_STL_MMDD_EXP_26OCT18_%u.dmp logfile=XF_OL_ST_TXNLOG_STL_MMDD_07NOV18.log compression=all tables=FCRHOST.XF_OL_ST_TXNLOG_STL_MMDD  status=120 parallel=8
+
+
+
+
+impdp \"/ as sysdba\" DIRECTORY=FCRARCH_IMP DUMPFILE=XF_STCAP_GL_TXNS_MMDD_EXP_26OCT18_%u.dmp logfile=XF_STCAP_GL_TXNS_MMDD_08NOV18.log  remap_schema=FCRHOST:FCRARCH  status=120 parallel=8
+
+
+expdp \"/ as sysdba\" DIRECTORY=FCRARCH_EXP DUMPFILE=XF_STCAP_GL_TXNS_MMDD_EXP_26OCT18_%u.dmp logfile=XF_STCAP_GL_TXNS_MMDD_08NOV18.log compression=all tables=FCRHOST.XF_STCAP_GL_TXNS_MMDD status=120 parallel=8
+
+
+
+SELECT object_name,status,object_type from dba_objects where owner='FCRARCH'
+
+
+SELECT  count(*),object_name,object_type from dba_objects where owner='FCRARCH' group by object_name,object_type;
+
+
+SELECT  count(*),object_type from dba_objects where owner='FCRARCH' group by object_type;
+
+SYS:JFSPPROD > select OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS from dba_tables where TABLE_NAME='XF_STCAP_GL_TXNS_MMDD';
+
+OWNER                          TABLE_NAME                     TABLESPACE_NAME                STATUS
+------------------------------ ------------------------------ ------------------------------ --------
+FCRHOST                        XF_STCAP_GL_TXNS_MMDD                                         VALID
+
+SYS:JFSPPROD > select OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS from dba_tables where TABLE_NAME='XF_OL_ST_TXNLOG_STL_MMDD
+
+  2  SYS:JFSPPROD > select OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS from dba_tables where TABLE_NAME='XF_OL_ST_TXNLOG_STL_MMDD';
+
+OWNER                          TABLE_NAME                     TABLESPACE_NAME                STATUS
+------------------------------ ------------------------------ ------------------------------ --------
+FCRHOST                        XF_OL_ST_TXNLOG_STL_MMDD       FCRDATA1                       VALID
+
+SYS:JFSPPROD > select OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS from dba_tables where TABLE_NAME='GL_ACCOUNTING_EVENT_HIST';
+
+OWNER                          TABLE_NAME                     TABLESPACE_NAME                STATUS
+------------------------------ ------------------------------ ------------------------------ --------
+FCRHOST                        GL_ACCOUNTING_EVENT_HIST                                      VALID
+
+SYS:JFSPPROD > select OWNER,TABLE_NAME,TABLESPACE_NAME,STATUS from dba_tables where TABLE_NAME='GL_EVENT_TRANSACTION';
+
+OWNER                          TABLE_NAME                     TABLESPACE_NAME                STATUS
+------------------------------ ------------------------------ ------------------------------ --------
+FCRHOST                        GL_EVENT_TRANSACTION           FCRDATASML                     VALID
+
+dba_indexes
+
+LN_DAILY_TXN_LOG_HIST
+
+
+11:01:44 SYS:JFSPPROD > select OWNER,INDEX_NAME,TABLE_NAME,TABLE_OWNER,STATUS from dba_indexes where TABLE_NAME='XF_OL_ST_TXNLOG_STL_MMDD' and TABLE_OWNER='FCRHOST';
+
+OWNER                          INDEX_NAME                     TABLE_NAME                     TABLE_OWNER                    STATUS
+------------------------------ ------------------------------ ------------------------------ ------------------------------ --------
+FCRHOST                        IN_XF_OL_ST_TXNLOG_STL_MMDD_2  XF_OL_ST_TXNLOG_STL_MMDD       FCRHOST                        VALID
+
+
+
+
+select OWNER,INDEX_NAME,TABLE_NAME,TABLE_OWNER,STATUS from dba_indexes where TABLE_NAME='XF_STCAP_GL_TXNS_MMDD' and TABLE_OWNER='FCRHOST';
+
+select OWNER,INDEX_NAME,TABLE_NAME,TABLE_OWNER,STATUS from dba_indexes where TABLE_NAME='XF_OL_ST_TXNLOG_STL_MMDD' and TABLE_OWNER='FCRHOST';
+
+
+
+select count(*) from FCRHOST.XF_OL_ST_TXNLOG_STL_MMDD;
+select count(*) from FCRHOST.XF_STCAP_GL_TXNS_MMDD;
+
+"FCRHOST"."XF_STCAP_GL_TXNS_MMDD"
+ 1,452,252
+ 1,258,805
+ 
+ 
+ 
+ Select segment_name,sum(bytes)/1024/1024/1024 as “SIZE in GB” from user_segments where segment_name='XF_STCAP_GL_TXNS_MMDD' group by segment_name; 
+ 
+ 
+ 
+ select segment_name,segment_type,bytes/1024/1024 MB
+ from dba_segments
+ where segment_type='TABLE' and segment_name='<yourtablename>';
+ 
+ 
+ 
+ 
+ impdp \"/ as sysdba\" DIRECTORY=FCRARCH_IMP DUMPFILE=ARCHIVAL_TABLES_EXP_08NOV18_%u.dmp logfile=IMP_ARCHIVAL_TABLES_EXP_08NOV18.log  remap_schema=FCRHOST:FCRARCH remap_tablespace=FCRDATA1:FCRARCH,FCRDATASML:FCRARCH,FCRDATA2:FCRARCH  status=120 parallel=8
+
+ 
+ 
+ expdp \"/ as sysdba\" DIRECTORY=FCRARCH_EXP DUMPFILE=ARCHIVAL_TABLES_EXP_08NOV18_%u.dmp logfile=ARCHIVAL_TABLES_EXP_08NOV18.log compression=all tables=FCRHOST.GL_ACCOUNTING_EVENT_HIST,FCRHOST.XF_STCAP_GL_TXNS_MMDD,FCRHOST.GL_EVENT_TRANSACTION  status=120 parallel=8
+ 
+ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+ 
+ oracle@JFSBNKSRV121:/tempstage/FCRARCH_EXP $ cat XF_STCAP_GL_TXNS_MMDD_EXP.sh
+expdp \"/ as sysdba\" DIRECTORY=FCRARCH_EXP DUMPFILE=XF_OL_ST_TXNLOG_STL_MMDD_EXP_26OCT18_%u.dmp logfile=XF_OL_ST_TXNLOG_STL_MMDD_07NOV18.log compression=all tables=FCRHOST.XF_OL_ST_TXNLOG_STL_MMDD  status=120 parallel=8
+
+
+
+oracle@JFSBNKSRV121:/tempstage/FCRARCH_EXP $ cat XF_STCAP_GL_TXNS_MMDD_IMP.sh
+impdp \"/ as sysdba\" DIRECTORY=FCRARCH_IMP DUMPFILE=XF_OL_ST_TXNLOG_STL_MMDD_EXP_26OCT18_%u.dmp logfile=IMP_XF_OL_ST_TXNLOG_STL_MMDD_07NOV18.log  remap_schema=FCRHOST:FCRARCH remap_tablespace=FCRDATA1:FCRARCH  status=120 parallel=8
+
+
+. exported "FCRHOST"."XF_OL_ST_TXNLOG_STL_MMDD"        22.48 GB 283762179 rows
+Master table "SYS"."SYS_EXPORT_TABLE_01" successfully loaded/unloaded
+
+imported "FCRARCH"."XF_OL_ST_TXNLOG_STL_MMDD"        22.48 GB 283762179 rows
+
+
+
+
+
+
+
+ imported "FCRARCH"."XF_STCAP_GL_TXNS_MMDD":"XF_STCAP_GL_TXNS_MM_666"  1.045 MB   26686 rows
+
+ 
+ "FCRHOST"."XF_STCAP_GL_TXNS_MMDD"  : actual count:2279649404
+ 
+ select count(*) from FCRARCH.XF_STCAP_GL_TXNS_MMDD;
+ 
+ 
+ select owner, table_name, (BLOCKS*AVG_ROW_LEN*8)/(1024/1024) table_size_in_gb from dba_tables where owner='FCRHOST' and table_name='XF_STCAP_GL_TXNS_MMDD';
+ 
+ 
+ select owner, table_name, (BLOCKS*AVG_ROW_LEN*8)/(1024/1024) table_size_in_gb from dba_tables where owner='FCRARCH' and table_name='XF_STCAP_GL_TXNS_MMDD';
+
+select segment_name,segment_type,bytes/1024/1024 MB
+from dba_segments
+where segment_type='TABLE' and segment_name='FCRHOST.XF_STCAP_GL_TXNS_MMDD';
+
+
+select segment_name,segment_type,bytes/1024/1024 MB
+from dba_segments and segment_name='XF_STCAP_GL_TXNS_MMDD';
+
+
+select OWNER,INDEX_NAME,TABLE_NAME,TABLE_OWNER,STATUS from dba_indexes where TABLE_NAME='XF_STCAP_GL_TXNS_MMDD' and TABLE_OWNER='FCRHOST';
+
+
+select 
+   table_name, 
+   index_name, 
+   column_name
+from 
+   dba_ind_columns
+where 
+   table_owner='XXXX'
+order by 
+   table_name, 
+   column_position;

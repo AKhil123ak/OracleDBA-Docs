@@ -1,0 +1,69 @@
+The sporadic ORA-01012 error can be caused by several issues:
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- A down database.
+
+- Held memory segments from a previous instance crash.  Use the ipcs command to find and remove the zombie RAM heap.
+
+- File permissions in ORACLE_HOME have been changed while the database is running.
+
+- An invalid value for the $ORACLE_SID environment variable.
+
+- Exceeding the "processes" init.ora parameter (max sessions reached)
+
+
+Changes
++++++++
+
+Oracle has been forcefully shutdown at OS level or crashed.
+
+ CAUSE
+++++++
+
+An orphaned shared memory segment belonging to the ORACLE_SID still exists from a previous instance startup.
+
+The command
+ps -ef | grep $ORACLE_SID
+
+shows no processes but with ORACLE_SID set the Oracle 'sysresv' utility shows a shared memory segment for a non-existing instance, e.g.
+
+ $ sysresv
+
+IPC Resources for ORACLE_SID "TEST" :
+++++++++++++++++++++++++++++++++++++
+
+Shared Memory:
+ID              KEY
+5963794         0x00000000
+5996563         0x00000000
+6029332         0xb2e3c9ac
+
+Semaphores:
+ID              KEY
+No semaphore resources used
+Oracle Instance not alive for sid "TEST"
+
+
+Solution
++++++++++
+
+On OS level, remove the orphaned shared memory segment using:
+
+ipcrm -m <problem shared memory id>
+
+$ ipcrm -m 5963794
+$ ipcrm -m 5996563
+$ ipcrm -m 6029332
+
+$sqlplus '/as sysdba'
+
+Connected to an idle instance.
+
+SQL> startup Oracle instance started
+Total System Global Area   10689474560 bytes
+Fixed Size                     2237776 bytes
+Variable Size               6375344816 bytes
+Database Buffers            4294967296 bytes
+Redo Buffers                  16924672 bytes
+Oracle Instance Started.
+Oracle Database Opened.

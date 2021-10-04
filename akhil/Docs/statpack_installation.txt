@@ -1,0 +1,48 @@
+--------------create a tablespace for statpackdata------------------------------
+1. CREATE TABLESPACE perfstat DATAFILE '+DATA' size 1g reuse extent management local uniform size 1M segment space management auto;
+ 
+2. ----installation for statspack---------
+@$ORACLE_HOME/rdbms/admin/spcreate
+provide user password oracle123
+provide tablespace name PERFSTAT
+provide temp tablespace name TEMP
+
+select * from stats$level_description;
+
+3 ------- capture the snapshot---------------
+exec statspack.snap(i_snap_level => 6, i_modify_parameter=>'true');
+exec statspack.modify_statspack_parameter(i_snap_level=>6, i_modify_parameter=>'true');
+5. CONN / as sysdba
+
+6. ------CREATE A JOB AND Scheduled the ------- 
+
+BEGIN
+     DBMS_SCHEDULER.CREATE_SCHEDULE(
+     schedule_name => 'perfstat.statspack_every20',
+     repeat_interval => 'FREQ=MINUTELY;BYMINUTE=10,30,50');
+  
+     DBMS_SCHEDULER.CREATE_JOB(
+     job_name => 'perfstat.sp_snapshot',
+     job_type => 'STORED_PROCEDURE',
+     job_action => 'perfstat.statspack.snap',
+     schedule_name => 'perfstat.statspack_every20',
+     comments => 'Statspack collection');
+	 
+     DBMS_SCHEDULER.ENABLE('perfstat.sp_snapshot');
+  END;
+  /
+  
+ 7 ---- capture the snapshot -------------------
+
+BEGIN
+   dbms_scheduler.run_job('perfstat.sp_snapshot');  
+END;
+/
+
+8. ---CREATE STATSPACK REPORT -------------
+  /u01/app/oracle/product/11.2.0/dbhome_1/rdbms/admin/spreport.sql
+  
+  
+ 
+                                               
+

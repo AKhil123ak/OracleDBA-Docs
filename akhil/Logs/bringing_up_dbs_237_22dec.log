@@ -1,0 +1,519 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2018.12.23 15:38:49 =~=~=~=~=~=~=~=~=~=~=~=
+
+oracle@JFSBNKSRV128:/home/oracle $ 
+oracle@JFSBNKSRV128:/home/oracle $ su - grid
+grid's Password: 
+grid@JFSBNKSRV128:/home/grid $ 
+grid@JFSBNKSRV128:/home/grid $ 
+grid@JFSBNKSRV128:/home/grid $ crsctl stat res -t
+CRS-4639: Could not contact Oracle High Availability Services
+CRS-4000: Command Status failed, or completed with errors.
+grid@JFSBNKSRV128:/home/grid $ 
+grid@JFSBNKSRV128:/home/grid $ 
+grid@JFSBNKSRV128:/home/grid $ cd $ORACLE _HOME
+grid@JFSBNKSRV128:/u01/app/grid $ 
+grid@JFSBNKSRV128:/u01/app/grid $ cd bin
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ ./crsctl start has
+CRS-4123: Oracle High Availability Services has been started.
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ crsctl stat res -t
+--------------------------------------------------------------------------------
+NAME           TARGET  STATE        SERVER                   STATE_DETAILS       
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.BIP_DB.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.DATA.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.DATA1.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.FRA.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.LISTENER_FLASH.lsnr
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.MIGDATA.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODRECO.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODREDO.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODVOTE1.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODVOTE2.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODVOTE3.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.REDO01.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.REDO02.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.REDO03.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.STGDATA.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.asm
+               ONLINE  OFFLINE      jfsbnksrv128             Instance Shutdown,S 
+                                                             TARTING             
+ora.ons
+               OFFLINE OFFLINE      jfsbnksrv128                                 
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.catdb.db
+      1        OFFLINE OFFLINE                               Instance Shutdown   
+ora.cssd
+      1        ONLINE  ONLINE       jfsbnksrv128                                 
+ora.diskmon
+      1        OFFLINE OFFLINE                                                   
+ora.evmd
+      1        ONLINE  INTERMEDIATE jfsbnksrv128                                 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ ./crsctl stop has
+CRS-2791: Starting shutdown of Oracle High Availability Services-managed resources on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.BIP_DB.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.DATA.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.FRA.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.MIGDATA.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.PRODRECO.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.PRODREDO.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.PRODVOTE1.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.PRODVOTE2.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.PRODVOTE3.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.REDO01.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.REDO02.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.REDO03.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.STGDATA.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.DATA1.dg' on 'jfsbnksrv128'
+CRS-2673: Attempting to stop 'ora.LISTENER_FLASH.lsnr' on 'jfsbnksrv128'
+CRS-2677: Stop of 'ora.BIP_DB.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.FRA.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.DATA.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.MIGDATA.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.PRODREDO.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.STGDATA.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.PRODVOTE1.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.REDO03.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.PRODVOTE2.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.REDO02.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.REDO01.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.PRODVOTE3.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.PRODRECO.dg' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.LISTENER_FLASH.lsnr' on 'jfsbnksrv128' succeeded
+CRS-2677: Stop of 'ora.DATA1.dg' on 'jfsbnksrv128' succeeded
+CRS-2679: Attempting to clean 'ora.DATA1.dg' on 'jfsbnksrv128'
+CRS-2681: Clean of 'ora.DATA1.dg' on 'jfsbnksrv128' succeeded
+CRS-2673: Attempting to stop 'ora.asm' on 'jfsbnksrv128'
+CRS-2677: Stop of 'ora.asm' on 'jfsbnksrv128' succeeded
+CRS-2673: Attempting to stop 'ora.cssd' on 'jfsbnksrv128'
+CRS-2677: Stop of 'ora.cssd' on 'jfsbnksrv128' succeeded
+CRS-2673: Attempting to stop 'ora.evmd' on 'jfsbnksrv128'
+CRS-2677: Stop of 'ora.evmd' on 'jfsbnksrv128' succeeded
+CRS-2793: Shutdown of Oracle High Availability Services-managed resources on 'jfsbnksrv128' has completed
+CRS-4133: Oracle High Availability Services has been stopped.
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ ./crsctl start has
+CRS-4123: Oracle High Availability Services has been started.
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ crsctl stat res -t
+--------------------------------------------------------------------------------
+NAME           TARGET  STATE        SERVER                   STATE_DETAILS       
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.BIP_DB.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.DATA.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.DATA1.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.FRA.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.LISTENER_FLASH.lsnr
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.MIGDATA.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODRECO.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODREDO.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODVOTE1.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODVOTE2.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.PRODVOTE3.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.REDO01.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.REDO02.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.REDO03.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.STGDATA.dg
+               ONLINE  OFFLINE      jfsbnksrv128                                 
+ora.asm
+               ONLINE  OFFLINE      jfsbnksrv128             Instance Shutdown   
+ora.ons
+               OFFLINE OFFLINE      jfsbnksrv128                                 
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.catdb.db
+      1        OFFLINE OFFLINE                               Instance Shutdown   
+ora.cssd
+      1        ONLINE  OFFLINE                               STARTING            
+ora.diskmon
+      1        OFFLINE OFFLINE                                                   
+ora.evmd
+      1        ONLINE  INTERMEDIATE jfsbnksrv128                                 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ ps -ef|grep pmon
+    grid 11796696        1   0 15:48:11      -  0:00 asm_pmon_+ASM
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ crsctl stat res -t
+--------------------------------------------------------------------------------
+NAME           TARGET  STATE        SERVER                   STATE_DETAILS       
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.BIP_DB.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.DATA.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.DATA1.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.FRA.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.LISTENER_FLASH.lsnr
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.MIGDATA.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.PRODRECO.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.PRODREDO.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.PRODVOTE1.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.PRODVOTE2.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.PRODVOTE3.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.REDO01.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.REDO02.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.REDO03.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.STGDATA.dg
+               ONLINE  ONLINE       jfsbnksrv128                                 
+ora.asm
+               ONLINE  ONLINE       jfsbnksrv128             Started             
+ora.ons
+               OFFLINE OFFLINE      jfsbnksrv128                                 
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.catdb.db
+      1        OFFLINE OFFLINE                               Instance Shutdown   
+ora.cssd
+      1        ONLINE  ONLINE       jfsbnksrv128                                 
+ora.diskmon
+      1        OFFLINE OFFLINE                                                   
+ora.evmd
+      1        ONLINE  ONLINE       jfsbnksrv128                                 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ 
+grid@JFSBNKSRV128:/u01/app/grid/bin $ sudo su - oracle
+grid_passwd:
+[compat]: 3004-300 You entered an invalid login name or password.
+
+Sorry, try again.
+grid_passwd:
+[YOU HAVE NEW MAIL]
+oracle@JFSBNKSRV128:/home/oracle $ 
+oracle@JFSBNKSRV128:/home/oracle $ 
+oracle@JFSBNKSRV128:/home/oracle $ cd /osbackup/oracle _backup/BCV _SCRIPTS
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ sh BCV-RO-DB.sh
+alter database open read only
+*
+ERROR at line 1:
+ORA-01034: ORACLE not available
+Process ID: 0
+Session ID: 0 Serial number: 0
+
+
+select open_mode,name from v$database
+*
+ERROR at line 1:
+ORA-01034: ORACLE not available
+Process ID: 0
+Session ID: 0 Serial number: 0
+
+
+alter database open read only
+*
+ERROR at line 1:
+ORA-01034: ORACLE not available
+Process ID: 0
+Session ID: 0 Serial number: 0
+
+
+select open_mode,name from v$database
+*
+ERROR at line 1:
+ORA-01034: ORACLE not available
+Process ID: 0
+Session ID: 0 Serial number: 0
+
+
+JFSPPROD DB RO failed
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ sh CATDB _start.sh
+ #####     #    ####### ######  ######
+#     #   # #      #    #     # #     #
+#        #   #     #    #     # #     #
+#       #     #    #    #     # ######
+#       #######    #    #     # #     #
+#     # #     #    #    #     # #     #
+ #####  #     #    #    ######  ######
+
+ORACLE instance started.
+
+Total System Global Area 2588848128 bytes
+Fixed Size                  2249160 bytes
+Variable Size            1493175864 bytes
+Database Buffers         1073741824 bytes
+Redo Buffers               19681280 bytes
+Database mounted.
+Database opened.
+CATDB DB startup successful
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ sh BCV-STR-NOMOUNT.sh
+######  ######
+#     # #     #
+#     # #     #
+#     # ######
+#     # #     #
+#     # #     #
+######  ######
+
+
+    #    #    #
+    #    ##   #
+    #    # #  #
+    #    #  # #
+    #    #   ##
+    #    #    #
+
+
+ #    #   ####
+ ##   #  #    #
+ # #  #  #    #
+ #  # #  #    #
+ #   ##  #    #
+ #    #   ####
+
+
+ #    #   ####   #    #  #    #   #####
+ ##  ##  #    #  #    #  ##   #     #
+ # ## #  #    #  #    #  # #  #     #
+ #    #  #    #  #    #  #  # #     #
+ #    #  #    #  #    #  #   ##     #
+ #    #   ####    ####   #    #     #
+
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 1.0476E+11 bytes
+Fixed Size                  2258672 bytes
+Variable Size            2.4159E+10 bytes
+Database Buffers         8.0531E+10 bytes
+Redo Buffers               64835584 bytes
+ORACLE instance started.
+
+Total System Global Area 1.0689E+10 bytes
+Fixed Size                  2255784 bytes
+Variable Size            5502927960 bytes
+Database Buffers         5167382528 bytes
+Redo Buffers               16908288 bytes
+JFSBIP startup successful
+JFSPPROD startup successful
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ ps -ef|grep pmon
+  oracle  8192006        1   0 15:51:06      -  0:00 ora_pmon_JFSBIP
+    grid 11796696        1   0 15:48:11      -  0:00 asm_pmon_+ASM
+  oracle 11862088        1   0 15:51:03      -  0:00 ora_pmon_JFSPPROD
+  oracle 12517424 13434918   0 15:51:15  pts/2  0:00 grep pmon
+  oracle 13041846        1   0 15:50:39      -  0:00 ora_pmon_CATDB
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ sh BCV-RO-DB.sh
+alter database open read only
+*
+ERROR at line 1:
+ORA-01507: database not mounted
+
+
+select open_mode,name from v$database
+                           *
+ERROR at line 1:
+ORA-01507: database not mounted
+
+
+alter database open read only
+*
+ERROR at line 1:
+ORA-01507: database not mounted
+
+
+select open_mode,name from v$database
+                           *
+ERROR at line 1:
+ORA-01507: database not mounted
+
+
+JFSPPROD DB RO failed
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ ps -ef|g        s
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sun Dec 23 15:52:00 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSPPROD > 
+SYS:JFSPPROD > alter database mount;
+
+Database altered.
+
+SYS:JFSPPROD > 
+SYS:JFSPPROD > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ export ORACLE _SID=CATDB
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ s
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sun Dec 23 15:52:28 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:CATDB > 
+SYS:CATDB > alter database mounmtt;
+alter database mount
+*
+ERROR at line 1:
+ORA-01100: database already mounted
+
+
+SYS:CATDB > 
+SYS:CATDB > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ export ORACLE _SID=JFSBIP
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ s
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sun Dec 23 15:53:08 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+
+SYS:JFSBIP > 
+SYS:JFSBIP > alter database mount;
+
+Database altered.
+
+SYS:JFSBIP > 
+SYS:JFSBIP > exit
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ sh BCV-RO-DB.sh
+
+Database altered.
+
+
+OPEN_MODE            NAME
+-------------------- ---------
+READ ONLY            JFSPPROD
+
+
+Database altered.
+
+
+OPEN_MODE            NAME
+-------------------- ---------
+READ ONLY            JFSBIP
+
+READ ONLY            JFSPPROD                                                   
+JFSPPROD DB RO successful
+READ ONLY            JFSBIP                                                     
+JFSBIP DB RO successful
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ 
+grid@JFSBNKSRV128:/home/grid $ ps -ef | grep d.bin
+    grid  4259978        1   0 15:47:49      -  0:00 /u01/app/grid/bin/cssdagent
+    grid  6422776        1   1 15:47:49      -  0:17 /u01/app/grid/bin/oraagent.bin
+    grid  8650958        1   0 15:47:50      -  0:00 /u01/app/grid/bin/evmd.bin
+    grid 10551342        1   0 15:47:50      -  0:00 /u01/app/grid/bin/ocssd.bin
+    grid 12124396        1   1 15:46:14      -  0:11 /u01/app/grid/bin/ohasd.bin reboot
+    grid 12451864  8650958   0 15:47:51      -  0:00 /u01/app/grid/bin/evmlogger.bin -o /u01/app/grid/evm/log/evmlogger.info -l /u01/app/grid/evm/log/evmlogger.log
+    grid 12517556  4456520   0 16:23:17  pts/2  0:00 grep d.bin
+    grid 13697060        1   0 15:47:50      -  0:00 /u01/app/grid/bin/tnslsnr LISTENER_FLASH -inherit
+grid@JFSBNKSRV128:/home/grid $
+grid@JFSBNKSRV128:/home/grid $ sqlplus / as sysasm
+
+SQL*Plus: Release 11.2.0.4.0 Production on Sun Dec 23 16:24:42 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Automatic Storage Management option
+
+SQL>
+SQL> show parameter disk
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+asm_diskgroups                       string      FRA, PRODRECO, MIGDATA, REDO01
+                                                 , REDO02, REDO03, BIP_DB, DATA
+                                                 , STGDATA, PRODREDO, PRODVOTE1
+                                                 , PRODVOTE2, PRODVOTE3
+asm_diskstring                       string      /dev/rhdisk*
+SQL>
+SQL>

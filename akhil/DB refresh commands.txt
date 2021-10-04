@@ -1,0 +1,21 @@
+tail -f rman_restore_JFSPPROD_20Nov18_1852.log
+tail -1000f rman_restore_JFSPPROD_20Nov18_1852.log
+
+
+
+cat full_backup_JFSPPROD_21Jan19_0308.out|grep "finished piece" | wc -l
+cat full_backup_JFSPPROD_21Jan19_0308.out | grep "input datafile" | wc -l;
+
+cat rman_restore_JFSPPROD_21Jan19_1603.log|grep "restored backup piece" | wc -l
+cat rman_restore_JFSPPROD_21Jan19_1603.log | grep "restoring datafile" | wc -l;
+
+cat rman_restore_JFSPPROD_20Nov18_1852.log|grep "backup piece" | wc -l
+cat rman_restore_JFSPPROD_20Nov18_1852.log|grep "starting piece" | wc -l
+finished piece
+
+cat rman_restore_JFSPPROD_20Nov18_1852.log|grep "+JFSSIM" | wc -l
+cat rman_restore_JFSPPROD_19Dec18_1947.log | grep "+JFSSIM" | wc -l; date
+
+
+
+

@@ -1,0 +1,72 @@
+SELECT count(*),status,object_type from dba_objects where owner='FCCHOST' group by status,object_type ;
+
+SELECT  count(*),status,object_type from dba_objects where owner='FCCHOST',object_type='INDEX' group by status;
+select count(*),owner from dba_objects where object_type='INDEX' group by owner ;
+
+
+select count(*),owner from dba_objects where object_type='INDEX'  group by owner ;
+
+
+
+select  distinct TABLESPACE_NAME  from dba_segments where OWNER IN ('FCRHOST','FCCHOST','FCRBRN') and SEGMENT_TYPE IN('INDEX','INDEX PARTITION','LOBINDEX')
+
+
+select OWNER,SEGMENT_TYPE, TABLESPACE_NAME, count(*) from dba_segments where OWNER IN ('FCRHOST','FCCHOST','FCRBRN') and SEGMENT_TYPE IN('INDEX','INDEX PARTITION','LOBINDEX')  group by SEGMENT_TYPE, TABLESPACE_NAME;
+
+
+
+SELECT segement_type,count(*) from dba_segemnts where OWNER IN ('FCRHOST',FCCHOST','FCRBRN') group by segement_type
+
+
+select OWNER, SEGMENT_NAME,SEGMENT_TYPE from dba_segments where TABLESPACE_NAME='FCRHOST' and SEGMENT_NAME='INDEX';
+
+
+
+select OWNER,SEGMENT_NAME,SEGMENT_TYPE, TABLESPACE_NAME, count(*) from dba_segments  where SEGMENT_TYPE IN('INDEX','INDEX PARTITION','LOBINDEX')  group by OWNER,SEGMENT_NAME,SEGMENT_TYPE, TABLESPACE_NAME;
+
+
+select SEGMENT_TYPE, TABLESPACE_NAME, count(*) from dba_segments where OWNER IN ('FCRHOST','FCCHOST','FCRBRN') and SEGMENT_TYPE IN('INDEX','INDEX PARTITION','LOBINDEX')  group by SEGMENT_TYPE, TABLESPACE_NAME;
+
+
+
+select dbms_metadata.get_ddl('INDEX','INDEX_NAME', 'FCRBRN') FROM DUAL;
+
+from all_indexes
+where owner in ( 'FCCDFLT',              
+'FCCDFLT',             
+'BRNINDX1',              
+'FCCHOST',           
+'FCRDATA2',              
+'FCRHOST',             
+'FCCHOST',             
+'FCRBRN',            
+'BRNDATA1',              
+'FCCDATAMED',            
+'FCRINDXSML',           
+'FCCDATAPARTXL',         
+'FCCINDXPARTXL',         
+'FCCINDXPARTMED',        
+'FCRDATA1',
+'FCRDATA1',            
+'FCCINDXSML',            
+'FCRDATA1',        
+'FCRDATA2',            
+'FCRHOST',           
+'FCRHOST',             
+'FCRBRN',            
+'FCCDATASML',            
+'BRNDATA1');
+set heading off;
+ set echo off;
+ Set pages 999;
+ set long 90000;
+ 
+ FCRMIG
+select dbms_metadata.get_ddl('FCCDFLT','FCCDFLT','BRNINDX1','FCCHOST','FCRDATA2','FCRHOST','FCCHOST','FCRBRN','BRNDATA1','FCCDATAMED','FCRINDXSML','FCRDATA1','FCRDATA2','FCRHOST','FCRHOST','FCRBRN','FCCDATASML','BRNDATA1') from dual;
+
+
+
+
+
+
+          

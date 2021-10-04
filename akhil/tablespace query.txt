@@ -1,0 +1,55 @@
+set pagesize 1000
+set linesize 150  pau off
+col tsname  format         a40 justify c heading 'Tablespace'
+col totsize format 999,999,990 justify c heading 'Total|(MB)'
+col avasize format 999,999,990 justify c heading 'Available|MB)'
+col usedsize format 999,999,990 justify c heading 'Used|(MB)'
+col pctusd  format         990 justify c heading 'Pct|Used'
+col pf      format         990 justify c heading 'Pct|Free'
+ 
+break on report
+compute sum of "totsize" "avasize" on report
+select 
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+     (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_data_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(bytes)/1024/1024,0) avasize,
+            nvl(sum(bytes),0)      totfree
+       from dba_free_space  free group by tablespace_name) free
+where
+total.tsname = free.tsname(+) 
+UNION
+select 
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+    (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_temp_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(BYTES_USED)/1024/1024,0) avasize,
+            nvl(sum(BYTES_FREE),0)      totfree
+       from V$TEMP_SPACE_HEADER  free group by tablespace_name) free,
+       dba_temp_files dbf
+where
+  total.tsname = dbf.tablespace_name
+  and total.tsname = free.tsname(+)
+order by 6 desc;

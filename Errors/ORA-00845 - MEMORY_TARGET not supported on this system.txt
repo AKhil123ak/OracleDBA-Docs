@@ -1,0 +1,46 @@
+ORA-00845: MEMORY_TARGET not supported on this system
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+This error comes up because you tried to use the Automatic Memory Management (AMM) feature of Oracle 11g R2.
+Well done, but it seems that your shared memory filesystem (shmfs) is not big enough. 
+So let’s look at the steps necessary to enlarge your shared memory filesystem to avoid the error above.
+
+First of all, login as root and have a look at the filesystem:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[root@oracle-em oracle]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/vg_oracleem-lv_root
+                       93G   19G   69G  22% /
+tmpfs                 5.9G  112K  5.9G   1% /dev/shm
+/dev/sda1             485M   99M  362M  22% /boot
+
+So we can see that tmpfs has a size of 6GB. 
+We can change the size of that filesystem by issuing the following command (where “12g” is the size I want for my MEMORY_TARGET):
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[root@oracle-em oracle]# mount -t tmpfs shmfs -o size=12g /dev/shm
+
+This command (re)mounts the shmfs filesystem (check this post for more information about shmfs) with the option “size=12g“.
+The shared memory file system should be big enough to accommodate the MEMORY_TARGET and MEMORY_MAX_TARGET values, or Oracle will throw the ORA-00845 error. 4
+Note that when changing something with the mount command, the changes are not permanent.
+
+To make the change persistent, edit your /etc/fstab file to include the option you specified above:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[root@oracle-em ~]# cat /etc/fstab
+[..]
+tmpfs                   /dev/shm                tmpfs   size=12g        0 0
+[..]
+In my case, I replaced the “defaults” option with the size=12g option. After saving the file, the changes should be permanent. Now back to Oracle. Let’s see if we can start the database now…
+
+SQL> startup nomount
+ORACLE instance started.
+
+Total System Global Area 1.1758E+10 bytes
+Fixed Size                  2239056 bytes
+Variable Size            5939135920 bytes
+Database Buffers         5804916736 bytes
+Redo Buffers               12128256 bytes
+Bingo! Now go and enjoy your automatically managed memory configuration!

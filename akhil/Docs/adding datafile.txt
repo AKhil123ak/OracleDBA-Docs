@@ -1,0 +1,80 @@
+database -asm disk group size ,datafile -dba_data_files
+
+
+check the tablespace
+set lines 200
+set pages 200
+col PCT_FREE format a30
+
+SELECT   tablespace_name, ROUND ((total_space / 1024 / 1024), 2) total_space_in_mb,
+         ROUND ((total_free_space / 1024 / 1024), 2) total_free_in_mb,
+         ROUND (((total_space - total_free_space) / 1024 / 1024),
+                2
+               ) used_space_in_mb,
+         LPAD (   TO_CHAR (NVL (ROUND ((100 * sum_free_blocks
+                                        / sum_alloc_blocks
+                                       ),
+                                       2
+                                      ),
+                                0
+                               ),
+                           'FM990.00'
+                          )
+               || '%',
+               8,
+               ' '
+              ) pct_free
+    FROM (SELECT   tablespace_name, SUM (blocks) sum_alloc_blocks,
+                   SUM (BYTES) total_space
+              FROM dba_data_files
+          GROUP BY tablespace_name),
+         (SELECT   b.tablespace_name fs_ts_name,
+                   NVL (SUM (BYTES), 0) total_free_space,
+                   SUM (blocks) sum_free_blocks
+              FROM dba_free_space a, dba_tablespaces b
+             WHERE a.tablespace_name(+) = b.tablespace_name
+          GROUP BY b.tablespace_name, status)
+   WHERE tablespace_name = fs_ts_name
+UNION ALL
+SELECT   d.tablespace_name, ROUND ((a.BYTES / 1024 / 1024), 2) total_space,
+         ROUND ((a.BYTES / 1024 / 1024) - (NVL (t.BYTES, 0) / 1024 / 1024), 2),
+         ROUND (NVL (t.BYTES, 0) / 1024 / 1024, 2),
+         LPAD (   TO_CHAR (100 - (NVL (t.BYTES / a.BYTES * 100, 0)),
+                           'FM990.00'
+                          )
+               || '%',
+               8,
+               ' '
+              )
+    FROM dba_tablespaces d,
+         (SELECT   tablespace_name, SUM (BYTES) BYTES
+              FROM dba_temp_files
+          GROUP BY tablespace_name) a,
+         (SELECT   tablespace_name, SUM (bytes_cached) BYTES
+              FROM v$temp_extent_pool
+          GROUP BY tablespace_name) t
+   WHERE d.tablespace_name = a.tablespace_name(+)
+     AND d.tablespace_name = t.tablespace_name(+)
+     AND d.extent_management LIKE 'LOCAL'
+     AND d.CONTENTS LIKE 'TEMPORARY'
+ORDER BY 5 DESC;
+ 
+then check the datafiles by dba_data_files(Adding Datafile in a Tablespace) :
+
+alter tablespace XXJFS add datafile '/data2/orajfs/PROD/XXJFS02.dbf' size 3G
+      
+	  Modify Datafile:
+	  
+alter database datafile '/data2/orajfs/PROD/a_txn_data08.dbf' resize 14g
+
+take backup after add the space:
+alter database backup controlfile to '/home/oracle/ogl_controlfile_30_may.ctl'
+alter database backup controlfile to trace
+
+
+
+ to find out default tablespace:
+ 
+ SELECT PROPERTY_VALUE FROM DATABASE_PROPERTIES WHERE PROPERTY_NAME = 'DEFAULT_PERMANENT_TABLESPACE';(to check the default tablespace)
+ select * from database_properties  where property_name like '%TABLESPACE';
+

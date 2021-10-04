@@ -1,0 +1,44 @@
+ORA-00265: instance recovery required, cannot set ARCHIVELOG mode
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This error usually caused when database crashed unfortunately or we shutdown database with the help of database shutdown command 
+as: shutdown abort, startup force mount or shutdown abort. 
+These types of command will required instance recovery in next startup. In short it need clean database startup
+
+
+Solution;
++++++++++
+
+SQL> select open_mode from v$database;
+
+OPEN_MODE
+——————–
+MOUNTED
+
+
+// Open your database and shutdown it normally, as follow:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+SQL> alter database open;
+
+
+/ Now startup database in mount state:
+++++++++++++++++++++++++++++++++++++++
+
+SQL> startup mount
+
+
+// Now issue following to convert database into archivelog mode:
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+SQL> alter database archivelog;
+
+Database altered.
+
+
+// Now open database:
++++++++++++++++++++++
+
+SQL> alter database open;
+
+Database altered.

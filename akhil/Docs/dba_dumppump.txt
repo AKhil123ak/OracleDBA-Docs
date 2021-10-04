@@ -1,0 +1,1 @@
+ select OWNER_NAME,JOB_NAME,OPERATION,STATE from dba_datapump_jobs;

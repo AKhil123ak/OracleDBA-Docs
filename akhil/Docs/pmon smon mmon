@@ -1,0 +1,3 @@
+PMON and SMON are two required background processes. PMON is the Process Monitor which is responsible for recovering processes when the user process fails. PMON does the process cleanup. SMON is the System Monitor which is responsible for recovering the system after a failure.
+
+MMON (Manageability Monitor) is a background process that gathers memory statistics (snapshots) and stores this information in the AWR (automatic workload repository). MMON is also responsible for issuing alerts for metrics that exceed their thresholds. This process was introduced in Oracle 10g.

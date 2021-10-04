@@ -1,0 +1,66 @@
+db replications;
+=========================
+
+
+ALTER SESSION SET NLS_DATE_FORMAT = 'HH24:MI:SS';
+
+set pages 500
+select t.sequence#,t.applied,t.first_time,t.next_time,t.completion_time from v$archived_log t
+where t.applied='YES'
+order by t.sequence# asc;   
+
+
+  
+replication:
+149 217
+230 130(2 databases(JFSPROD,JFSBIP)
+
+health check reports 37,149,230(2),26,14,244,58
+
+
+alerts check 230(2),149,37
+backup check 37,149,237,244----- /backup or backup_log
+
+
+
+gap
+===========
+select * from v$archive_gap
+
+$ scp log_file_name_n.arc oracle@standby:/log/file/location/log_file_name_n.arc
+
+
+"9001030150029889"|"816384285395"
+
+
+
+full_backup_JFSPPROD_18Nov18_0239.out
+
+
+Finished backup
+
+
+Hi Team,
+
+ Please find the replication report attached.
+
+Thanks and Regards,
+tulsi.pragnya
+Oracle DB Team
+Ext No:12387
+
+gunzip 
+tar -xvf 123.tar
+
+MOCK - 
+User -- 500 MB
+Temp - 30 GB
+UNDOTBS1 - 94 GB (3 datafiles)
+
+SIM 
+User -- 500 MB
+
+CBS / Patch
+User -- 500 MB
+Temp - 30 GB
+UNDOTBS1 - 32 GB

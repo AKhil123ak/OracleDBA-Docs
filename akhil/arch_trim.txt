@@ -1,0 +1,2044 @@
+
+
+nohup gzip `ls -lrt *.trc |grep "Feb 06"|awk '{print $9}'` &
+nohup gzip `ls -lrt *.trc |grep "Jan 02"|awk '{print $9}'` &
+nohup gzip `ls -lrt *.trc |grep "Jan 03"|awk '{print $9}'` &
+nohup gzip `ls -lrt *.trc |grep "Jan 04"|awk '{print $9}'` &
+nohup gzip `ls -lrt *.trc |grep "Jan 05"|awk '{print $9}'` &
+nohup gzip `ls -lrt *.trc |grep "Jan 06"|awk '{print $9}'` &
+
+
+
+gzip `ls -lrt *.txt |grep "Oct"|awk '{print $9}'`
+
+gzip `ls -lrt *.txt |grep "Sep"|awk '{print $9}'`
+
+gzip `ls -lrt *.ARC | grep "Nov 14" | awk '{print $9}'` .
+
+gzip `ls -lrt *.ARC | grep "Aug 14" | awk '{print $9}'` 
+
+gzip `ls -lrt *.txt | grep "Aug" | awk '{print $9}'`          
+
+
+
+nohup gzip `ls -lrt|grep "Apr 02"|awk '{print $9}'`
+
+
+nohup gzip `ls -lrt|grep "Apr 06"|awk '{print $9}'`
+
+
+nohup gzip `ls -lrt|grep "Apr 07"|awk '{print $9}'`
+
+
+
+gzip `ls -lrt *.ARC | grep "Jul" | awk '{print $9}'` 
+
+
+gzip `ls -lrt | grep "Jul 01" | awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb"|awk '{print $9}'`
+
+
+gzip `ls -lrt|grep "May"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct"|awk '{print $9}'`
+
+
+
+May 04
+
+rm `ls -lrt|grep "Feb 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb"|awk '{print $9}'`
+
+Mar
+
+rm `ls -lrt|grep "Mar"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 13"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 14"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 15"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 21"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 01"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 02"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 03"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 04"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 05"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 06"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 07"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 08"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 09"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 10"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 11"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 12"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 13"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 14"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 15"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 16"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 17"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 18"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 19"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 20"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 21"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun 22"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 28"|awk '{print $9}'`
+
+
+
+
+rm `ls -lrt|grep "Jun 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 12"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 13"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Jun 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 16"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 17"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Jun 18"|awk '{print $9}'`
+
+
+      
+rm `ls -lrt|grep "Jun 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 22"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 23"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Jun 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 01"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 02"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Jul 03"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Jul 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 05"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 06"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 08"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 09"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 20"|awk '{print $9}'`
+rm `ls -lrt|grep "Jul 21"|awk '{print $9}'`
+
+
+
+
+rm `ls -lrt|grep "Jul 22"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 23"|awk '{print $9}'`
+rm `ls -lrt|grep "Jul 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 25"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 26"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 27"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 30"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 31"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 01"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 02"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 03"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 04"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 05"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 06"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 07"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 09"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 11"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 12"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 13"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 14"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 14"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 13"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 20"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 25"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 26"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 28"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Sep 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 02"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 03"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 04"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 07"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 08"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 09"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 11"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 12"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 13"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 14"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 15"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 16"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 17"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 18"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 19"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 16"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Mar 14"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Sep 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 19"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 20"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 21"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 22"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 23"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 24"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 25"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 26"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 27"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 28"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 29"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 30"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Sep 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 24"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Sep 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 01"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 02"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 03"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 04"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 05"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 06"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 07"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 08"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 09"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 10"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 06"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 07"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 08"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 09"|awk '{print $9}'`
+
+
+
+
+rm `ls -lrt|grep "Oct 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 12"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 18"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 19"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 22"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 23"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 24"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 25"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 26"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 27"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 30"|awk '{print $9}'`
+
+
+
+
+rm `ls -lrt|grep "Oct 27"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 28"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 31"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov"|awk '{print $9}'`
+rm `ls -lrt|grep "Nov 01"|awk '{print $9}'`
+rm `ls -lrt|grep "Nov 02"|awk '{print $9}'`
+rm `ls -lrt|grep "Nov 02"|awk '{print $9}'`
+rm `ls -lrt|grep "Nov 03"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Nov 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 05"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 10"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 21"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 27"|awk '{print $9}'`
+rm `ls -lrt|grep "Nov 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 22"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 29"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 31"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 05"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 11"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 16"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 21"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 22"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 23"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 29"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 30"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 31"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 02"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 05"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 06"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 08"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 11"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 12"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 24"|awk '{print $9}'`
+
+nohup  gzip `ls -lrt|grep "Feb"|awk '{print $9}'`  &
+
+rm `ls -lrt|grep "Mar 10"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Mar 05"|awk '{print $9}'`
+rm `ls -lrt|grep "Mar 06"|awk '{print $9}'`
+rm `ls -lrt|grep "Mar 07"|awk '{print $9}'`
+rm `ls -lrt|grep "Mar 08"|awk '{print $9}'`
+rm `ls -lrt|grep "Mar 09"|awk '{print $9}'`
+rm `ls -lrt|grep "Mar 10"|awk '{print $9}'`
+
+
+
+
+rm `ls -lrt|grep "Mar 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 30"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Apr 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 07"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 18"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 29"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 10"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 26"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 29"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 31"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May"|awk '{print $9}'`
+rm `ls -lrt|grep "Jun"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 01"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 02"|awk '{print $9}'`
+
+
+
+
+rm `ls -lrt|grep "Jun 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 04"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 26"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun "|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 30"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 23"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 31"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 13"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 14"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 30"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 31"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 31"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 09"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Sep 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 17"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Sep 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 02"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 26"|awk '{print $9}'`
+rm `ls -lrt|grep "Oct 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 31"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 01"|awk '{print $9}'`
+rm `ls -lrt|grep "Nov 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 01"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 02"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 06"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 12"|awk '{print $9}'`
+rm `ls -lrt|grep "Dec 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 23"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 27"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 29"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 31"|awk '{print $9}'`
+
+Jan 01
+
+
+rm `ls -lrt|grep "Jan 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 10"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 13"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 21"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 22"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 26"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 31"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 03"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 05"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 15"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 17"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 18"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 28"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Mar 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 06"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Mar 07"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Mar 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 11"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Mar 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 31"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 05"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 27"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Apr 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 20"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "May 31"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 18"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jun 22"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 28"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jun 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 06"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 11"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 10"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 15"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 16"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 25"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jul 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jul 31"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 05"|awk '{print $9}'`
+rm `ls -lrt|grep "Aug 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 08"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 17"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 19"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Aug 23"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 30"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Aug 31"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Sep 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 05"|awk '{print $9}'`
+rm `ls -lrt|grep "Sep 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 22"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Sep 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Sep 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 01"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 02"|awk '{print $9}'`
+
+
+
+rm `ls -lrt|grep "Oct 07"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 09"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 21"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Oct 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Oct 31"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 01"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 05"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 09"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 14"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 21"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 23"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Nov 24"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 25"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 26"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 27"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 28"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Nov 29"|awk '{print $9}'`
+
+
+Dec 01
+
+rm `ls -lrt|grep "Dec"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 06"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 07"|awk '{print $9}'`
+
+Dec 09
+
+rm `ls -lrt|grep "Dec 09"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 15"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Dec 24"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Dec 31"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 01"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 22"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Jan 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 22"|awk '{print $9}'`
+rm `ls -lrt|grep "Jan 25"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 26"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 27"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 29"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan 30"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Jan"|awk '{print $9}'`
+
+
+
+
+
+
+
+rm `ls -lrt|grep "Feb"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 01"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 02"|awk '{print $9}'`
+
+
+
+
+rm `ls -lrt|grep "Feb 03"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 04"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 06"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 07"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 08"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 10"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 12"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 13"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 14"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 17"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 16"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Feb 19"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 21"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 20"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Feb 26"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Mar 02"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 05"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 11"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 15"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 18"|awk '{print $9}'`
+
+rm `ls -lrt|grep "Mar 19"|awk '{print $9}'`
+
+
+
+TRACE_LEVEL_SERVER = 16
+TRACE_FILE_SERVER = SERVER
+TRACE_DIRECTORY_SERVER =/backupvg/dmp/list_trace/
+TRACE_TIMESTAMP_SERVER = ON
+TRACE_FILELEN_SERVER = 10240
+TRACE_FILENO_SERVER = 5
+
+
+
+rm `ls -lrt|grep "Mar 20"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "May 29"|awk '{print $9}'`
+
+
+rm `ls -lrt|grep "Apr 16"|awk '{print $9}'`
+
+
+nohup gzip  `ls -lrt|grep "May 30"|awk '{print $9}'`  &
+
+gzip  `ls -lrt|grep "Apr 16"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Apr 29"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Apr 23"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Apr 29"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Apr 30"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "May 03"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "May 04"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "May 05"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "May 05"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "May 08"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "May 09"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "May 05"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "May 05"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jun 09"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jun 12"|awk '{print $9}'`
+
+
+
+
+
+rm  `ls -lrt|grep "Jun 22"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jun 25"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 06"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 07"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 08"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 09"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 10"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 10"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 11"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 12"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 13"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 14"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 15"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 16"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 17"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 20"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 21"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 24"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 25"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 26"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 31"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 29"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jul 30"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jul 31"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 01"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 02"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 03"|awk '{print $9}'`
+
+
+
+rm  `ls -lrt|grep "Aug 04"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 06"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 08"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 09"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Aug 10"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Aug 10"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 11"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 12"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 13"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 14"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 15"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 16"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 17"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Aug 18"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 19"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Aug 20"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Aug 21"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Aug 23"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Aug 25"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Sep 07"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Sep 05"|awk '{print $9}'`
+rm  `ls -lrt|grep "Sep 03"|awk '{print $9}'`
+rm  `ls -lrt|grep "Sep 04"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Sep 08"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Sep 09"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 10"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Sep 11"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 13"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 14"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 15"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 16"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 18"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 19"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 20"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 21"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 22"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 25"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 26"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Sep 28"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Sep 30"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Feb"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Oct 02"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Oct 03"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 05"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Mar 16"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 09"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Oct 10"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 11"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Oct 12"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 13"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 15"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 17"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Oct 21"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Oct 23"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 24"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Oct 24"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 29"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 30"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Oct 31"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 01"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Nov 02"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Nov 03"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 04"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Nov 09"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Nov 10"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 11"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Nov 12"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 13"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 14"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 15"|awk '{print $9}'`
+
+
+
+
+rm  `ls -lrt|grep "Nov 16"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 17"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 18"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Nov 19"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 21"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Nov 22"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 26"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 28"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Nov 29"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Nov 30"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Dec 01"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Dec 02"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Dec 03"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Dec 04"|awk '{print $9}'`
+rm  `ls -lrt|grep "Dec 05"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Dec 11"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Dec 13"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Dec 17"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Dec 18"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Dec 19"|awk '{print $9}'`
+
+
+
+
+rm  `ls -lrt|grep "Jan 01"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jan 02"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 03"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 04"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jan 05"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jan 06"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 08"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 09"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 10"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 11"|awk '{print $9}'`
+
+
+
+rm  `ls -lrt|grep "Jan 23"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 25"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 27"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Jan 29"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Jan 31"|awk '{print $9}'`
+
+rm  `ls -lrt|grep "Feb 01"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Feb 08"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Feb 09"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Feb 10"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Feb 28"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Feb 12"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Feb 29"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Mar 08"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Mar 14"|awk '{print $9}'`
+
+
+rm  `ls -lrt|grep "Apr 15"|awk '{print $9}'`
+
+
+
+nohup cp fcrdb_765588623_1_623* /backupvg/dmp/arch_fcr

@@ -1,0 +1,24 @@
+with arch_report as (
+SELECT
+distinct FIRST_TIME,first_change#,scn_to_timestamp(first_change#), next_change#,scn_to_timestamp(next_change#),
+(
+extract( day from (scn_to_timestamp(next_change#) - scn_to_timestamp(first_change#)) )*24*60*60 +
+extract( hour from (scn_to_timestamp(next_change#) - scn_to_timestamp(first_change#)) )*60*60 +
+extract( minute from (scn_to_timestamp(next_change#) - scn_to_timestamp(first_change#)) )*60 +
+extract( second from (scn_to_timestamp(next_change#) - scn_to_timestamp(first_change#)) )
+) Diff_Value
+ from v$archived_log
+where to_char(FIRST_TIME,'DD-MM-YYYY HH24:MI:SS') > '08-04-2019 07:00:00'
+and to_char(FIRST_TIME,'DD-MM-YYYY HH24:MI:SS') <'08-04-2019 20:00:00'
+Order by 1
+)
+select to_char(arch.FIRST_TIME,'DD-MM-YYYY'), max(arch.Diff_Value), round(avg(arch.Diff_Value)), min(arch.Diff_Value)
+from arch_report arch
+group by to_char(arch.FIRST_TIME,'DD-MM-YYYY')
+WITH  Applied as(
+select  to_char(lh.first_time,'DD-MON-YYYY HH24:MI:SS') SeqApplied from
+v$log_history lh where lh.sequence#=(select masequence#)from v$log_history)), 
+LogRec as (
+select maal.first_time) SeqRecieved from
+v$archived_log al where al.sequence#=(select masequence#)from v$archived_log)) 
+select to_char(LogRec.SeqRecieved,'DD-MON-YYYY HH24:MI:SS') as SeqRecieved, Applied.SeqApplied from Applied, LogRec;

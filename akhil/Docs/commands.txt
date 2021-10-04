@@ -1,0 +1,408 @@
+os level cmds:
+. oraenv
++ASM
+asmcmd
+hostname
+cat /etc/oratab
+export ORACLE_SID=
+df -g  (home,farch,temp,u01)
+du -sg *
+$ ps -ef|grep pmon
+$ ps -ef|grep lsnr
+lsnrctl status 
+crontab -l
+SELECT SYSTIMESTAMP FROM DUAL;
+
+db level cmds:
+=================================
+startup mount restrict
+drop database
+==============================
+select owner, table_name, (BLOCKS*AVG_ROW_LEN*8)/(1024/1024) table_size_in_gb from dba_tables where owner='FCRARCH';
+
+set time on (to set the time)
+select sum(bytes/1024/1024/1024) from v$datafile;
+select sum(bytes/1024/1024) database_size from v$datafile; (to know the database size)and  v can use dba_data_files also 
+select instance_name,status from v$instance;
+select dbid,name,open_mode,log_mode,database_role from v$database;
+select 
+( select sum(bytes)/1024/1024/1024 data_size from dba_data_files ) +
+( select nvl(sum(bytes),0)/1024/1024/1024 temp_size from dba_temp_files ) +
+( select sum(bytes)/1024/1024/1024 redo_size from sys.v_$log ) +
+( select sum(BLOCK_SIZE*FILE_SIZE_BLKS)/1024/1024/1024 controlfile_size from v$controlfile) "Size in GB"
+from
+dual;
+
+set lines 300;
+sho parameter dump 
+select * from v$controlfile;
+sho parameter pfile;
+sho parameter spfile;                                                               
+select name,state ,free_mb/1024,total_mb/1024 from v$asm_diskgroup order by name;
+select name,path,free_mb/1024,total_mb/1024 from v$asm_disk order by name;
+select tablespace_name,bytes/1024/1024 from sys.sm$ts_free order by 1;
+select * from v$log;
+select BYTES/1024/1024,  GROUP# from v$log;
+SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') "DATE" FROM DUAL;
+select max(sequence#) from v$archived_log;(See this in DC servers how many archives are applied)
+select max(sequence#) from v$archived_log where applied='YES';(To know if DR and DC are in sync use it )
+==================================================================================
+(log gap ) bounce the DR database with this commands:
+col process for a7
+col status for a12
+col group# for 999
+col thread# for 999
+col sequence# for 999999
+select process,status,group#,thread#,sequence# from v$managed_standby;
+
+ alter database recover managed standby database cancel;
+ alter database recover managed standby database using current logfile disconnect;
+ alter database recover managed standby database using current logfile disconnect from session;
+ alter database recover managed standby database disconnect from session;
+
+=======================================================
+To see the  gap:
+.........................
+
+SELECT ARCH.THREAD# "Thread", ARCH.SEQUENCE# "Last Sequence Received",
+APPL.SEQUENCE# "Last Sequence Applied", (ARCH.SEQUENCE# - APPL.SEQUENCE#) "Difference"
+FROM
+(SELECT THREAD# ,SEQUENCE# FROM V$ARCHIVED_LOG WHERE (THREAD#,FIRST_TIME ) IN
+(SELECT THREAD#,MAX(FIRST_TIME) FROM V$ARCHIVED_LOG GROUP BY THREAD#)) ARCH,
+(SELECT THREAD# ,SEQUENCE# FROM V$LOG_HISTORY WHERE (THREAD#,FIRST_TIME ) IN
+(SELECT THREAD#,MAX(FIRST_TIME) FROM V$LOG_HISTORY GROUP BY THREAD#)) APPL
+WHERE
+ARCH.THREAD# = APPL.THREAD#
+ORDER BY 1;
+=======================================================
+
+
+ SELECT VALUE FROM V$DIAG_INFO WHERE NAME = 'Default Trace File'; (to check default tracefile)
+ SELECT VALUE FROM V$DIAG_INFO WHERE NAME = 'Diag Trace';
+SELECT PID, PROGRAM, TRACEFILE FROM V$PROCESS;
+
+select archived_thread#,archived_seq#,applied_thread#,applied_seq#  from v$archive_dest_status
+
+
+ set lines 300;
+ select * from v$flash_recovery_area_usage;
+select count(*),status,username from v$session  group by status,username;
+
+
+
+select distinct owner from dba_segments where owner in (select username from dba_users where default_tablespace not in ('SYSTEM','SYSAUX') );
+
+
+ select USERNAME,ACCOUNT_STATUS,EXPIRY_DATE,PROFILE from dba_users;
+ 
+ select USERNAME from SYS.ALL_USERS
+ 
+ select * from dba_profiles;
+ select * from dba_roles;
+ 
+
+ desc V$RMAN_BACKUP_JOB_DETAILS
+
+select * from db_operations group by program
+///////////////////////////////
+ to check the time in database level:
+
+select to_char(sysdate,'MM-DD-YYYY HH24:MI:SS'), to_char(current_date,'MM-DD-YYYY HH24:MI:SS') from dual; (Pacific Daylight Time PDT ,EDT - Eastern Daylight Time)
+
+/////////////////////////////////////////////////////////
+alter system switch logfile;
+
+prompt////////////////////////////////////////////////////
+
+select tablespace_name,bytes/1024/1024 from sys.sm$ts_free order by 1;
+///////////////////////////////////////////////////////////////
+
+set pagesize 1000
+set linesize 150  pau off
+col tsname  format         a40 justify c heading 'Tablespace'
+col totsize format 999,999,990 justify c heading 'Total|(MB)'
+col avasize format 999,999,990 justify c heading 'Available|MB)'
+col usedsize format 999,999,990 justify c heading 'Used|(MB)'
+col pctusd  format         990 justify c heading 'Pct|Used'
+col pf      format         990 justify c heading 'Pct|Free'
+ 
+break on report
+compute sum of "totsize" "avasize" on report
+select 
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+     (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_data_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(bytes)/1024/1024,0) avasize,
+            nvl(sum(bytes),0)      totfree
+       from dba_free_space  free group by tablespace_name) free
+where
+total.tsname = free.tsname(+) 
+UNION
+select 
+  total.tsname, totsize, avasize,
+  (total.totsize-free.avasize) usedsize,
+  ((1 - free.avasize/total.totsize)*100)  pctusd,
+  ((free.avasize/total.totsize)*100)  pf,
+    (case when (free.avasize/total.totsize)*100 <=0 then 'Immediate action required!'
+            when (free.avasize/total.totsize)*100 <5  then 'Critical (<5% free)'
+            when (free.avasize/total.totsize)*100 <10 then 'Warning (<10% free)'
+            else 'Free Space Available'
+            end) msg
+from
+  (select tablespace_name tsname,
+          sum(bytes/1024/1024) totsize
+          from dba_temp_files group by tablespace_name) total,
+  (select   tablespace_name  tsname,
+            nvl(sum(BYTES_USED)/1024/1024,0) avasize,
+            nvl(sum(BYTES_FREE),0)      totfree
+       from V$TEMP_SPACE_HEADER  free group by tablespace_name) free,
+       dba_temp_files dbf
+where
+  total.tsname = dbf.tablespace_name
+  and total.tsname = free.tsname(+)
+order by 6 desc;
+////////////////////////////////////////////
+
+insert into STATS$IDLE_EVENT (event) values ('PX Deq: Index Merge Close');
+//////////////////////////////////////////////////////////
+
+select OWNER, SEGMENT_NAME,SEGMENT_TYPE from dba_segments where TABLESPACE_NAME='PRD_BIPLATFORM';
+
+////////////////tablespace query ////////////////////
+
+col FILE_NAME for a60
+set line 200
+select 
+	file_name,
+	tablespace_name,
+	round(bytes/1024/1024 ,2) "Current Size (MB)",
+ 	 		autoextensible "Autoextend",
+	round(increment_by*8192/1024/1024 ,2) "Autoextend Size (MB)",
+	round(maxbytes/1024/1024 ,2) "Max Size (MB)" 
+from dba_temp_files
+where tablespace_name='TEMP'
+/
+
+////////////temp spaces///////////////////////
+
+SET PAGESIZE 60
+SET LINESIZE 300 	
+COL TABLESPACE_SIZE_GB FOR 999,999,999,999
+COL ALLOCATED_SPACE_GB FOR 999,999,999,999
+COL FREE_SPACE_GB FOR 999,999,999,999
+SELECT TABLESPACE_NAME,
+TABLESPACE_SIZE/1024/1024/1024 TABLESPACE_SIZE_GB,
+ALLOCATED_SPACE/1024/1024/1024 ALLOCATED_SPACE_GB,
+FREE_SPACE/1024/1024/1024 FREE_SPACE_GB
+FROM   dba_temp_free_space;
+///////////////////////////////////////////////////////////////////
+select status, count(*) from v$session group by status;
+
+
+///////////////////////////////////////////////////////////////////////////////////
+select max(sequence#) from v$archived_log;
+select max(sequence#) from v$archived_log where applied ='YES';   (to check that dbs are in sink or not 130,230)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if temp is full then use this command ( alter database tempfile '+DATA/jfstst/tempfile/temp.264.901536189' resize 5g;   this is for resizing the temp ) applied only for temporary tablespace
+
+SELECT SEQUENCE#, to_char(FIRST_TIME,'hh24:mi:ss dd/mm/yyyy'), to_char(NEXT_TIME,'hh24:mi:ss dd/mm/yyyy'),APPLIED FROM V$ARCHIVED_LOG where next_time>sysdate-1 ORDER BY SEQUENCE# ;
+
+
+lcheck whether backup is running or not in 237 server :
+
+select sid,opname,round(time_remaining/60) as tim_rem_in_min,sofar,totalwork,start_time,units from v$session_longops where time_remaining > 0 order by start_time;
+ 	
+LOG_ARCHIVE_FORMAT = 'log%t_%s_%r.arc'
+
+%t_%s_%r.dbf
+
+Archive log file names must contain each of the elements %s (sequence), %t (thread), and %r (resetlogs ID) to ensure that all archive log file names are unique. 
+If the LOG_ARCHIVE_FORMAT initialization parameter is set in the parameter file, then make sure the parameter value contains the %s, %t, and %r elements. 
+Otherwise, the following error is displayed at the time of instance startup:
+
+ORA-19905: log_archive_format must contain %s, %t and %r
+
+select sid, row_type, operation, status, to_char(start_time,'dd-mm-yyyyhh24:mi:ss') start_time, to_char(end_time,'dd-mm-yyyy hh24:mi:ss')end_time from v$rman_status;
+
+select path from v$asm_disk;
+
+show parameter asm_diskstring;
+
+env|grep -i ORACLE_HOME
+
+ls -l /proc/262366/cwd
+
+
+
+
+Commands For password unlock
+---------------------------------------
+
+SELECT username, account_status FROM dba_users WHERE ACCOUNT_STATUS LIKE '%EXPIRED%';(check with this )
+
+alter user READONLY(USERNAME) IDENTIFIED by readonly_1234(PASSWORD) ACCOUNT UNLOCK;
+
+
+
+
+ Client address: (ADDRESS=(PROTOCOL=tcp)(HOST=172.17.70.254)(PORT=48775))
+
+
+
+
+
+OPATCH To see
+-----------------------------
+
+cd $ORACLE_HOME
+
+cd OPatch                                                                     /u01/oradev/DEV/12.1.0/cfgtoollogs/opatch/lsinv/lsinventory2018-06-05_18-48-18PM.txt
+                                                                              /db/orajfs/PROD/12.1.0/cfgtoollogs/opatch/lsinv/lsinventory2018-06-05_18-50-06PM.txt
+$ ./opatch lsinventory
+
+
+
+registry$history  (to know the latest patch details)
+
+
+drp the user(schema)
+drop schema schema_name cascade;
+ select username,default_tablespace from dba_users where username in ('FCRPREPROD','FCCPREPROD','BRNPREPROD');
+
+019403:oraerror comes when ur droping the user .
+('FCRPREPROD','FCCPREPROD','BRNPREPROD');
+
+ 
+Priviliges checking:
+===========================================
+
+select
+lpad(' ', 2*level) || granted_role "User, his roles and privileges"
+from
+(
+/* THE USERS */
+select
+null     grantee,
+username granted_role
+from
+dba_users
+where
+username like upper('%&enter_username%')
+/* THE ROLES TO ROLES RELATIONS */
+union
+select
+grantee,
+granted_role
+from
+dba_role_privs
+/* THE ROLES TO PRIVILEGE RELATIONS */
+union
+select
+grantee,
+privilege
+from
+dba_sys_privs
+)
+start with grantee is null
+connect by grantee = prior granted_role;---(GIVE THE USERNAME)
+
+To check schema size
+++++++++++++++++++++
+
+select sum(bytes)/1024/1024/1024 as size_in_gb,segment_type from dba_segments group by segment_type;
+
+select sum(bytes)/1024/1024/1024 schema_size_gig from dba_segments where owner='&owner';
+////////////////////////////////////////////////////////////////////////
+
+select tablespace_name,bytes/1024/1024/1024 from dba_free_space;(in gb)
+select tablespace_name,bytes/1024/1024 from dba_temp_free_space;(in mb)
+dba_temp_free_space
+dba_free_space
+dba_users (for users)
+//////////////////////////////////////////////////////////
+
+////////user related query///////(create a script for users )
+
+SELECT dbms_metadata.get_ddl('USER','FCRHOST') FROM dual;
+
+SELECT DBMS_METADATA.GET_GRANTED_DDL('ROLE_GRANT','SCOTT') from dual;
+
+SELECT DBMS_METADATA.GET_GRANTED_DDL('OBJECT_GRANT','SCOTT') from dual;
+
+SELECT DBMS_METADATA.GET_GRANTED_DDL('SYSTEM_GRANT','SCOTT') from dual;
+
+SELECT dbms_metadata.get_ddl('ROLE','RESOURCE') from dual;
+
+SELECT DBMS_METADATA.GET_GRANTED_DDL('SYSTEM_GRANT','RESOURCE') from dual;
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+If Any table segment related error comes then we need to ask L1/L2 wether we can  run the  script or not and then  we need to run the below script.
+
+alter table sys.AUD$ storage(next 50m);
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+ To check the audit deatils :
+............................
+SELECT * FROM DBA_STMT_AUDIT_OPTS where rownum<2;
+
+SELECT * FROM DBA_PRIV_AUDIT_OPTS;
+
+SELECT * FROM DBA_OBJ_AUDIT_OPTS where rownum<2;
+
+col JOB_NAME FOR a30
+
+col JOB_FREQUENCY FOR a40
+
+SELECT JOB_NAME,JOB_STATUS,AUDIT_TRAIL,JOB_FREQUENCY FROM DBA_AUDIT_MGMT_CLEANUP_JOBS;
+/////////////////////////////////////////////////////////////////////////////////
+
+
+ set lines 300
+ select *  from dba_profiles;
+
+===========================================================================
+DELETE FROM TEMP_AC_ACCT_CRR_CODE
+
+
+
+==================================================================================
+AWR locations run directly in db level
+
+@?/rdbms/admin/awrrpt.sql
+
+===================================================================================
+AWR snap shots:(this is for snapshot we can run before or after the execution of any query)
+
+exec dbms_workload_repository.create_snapshot;
+
+set pages 5000
+
+set heading off
+
+SELECT 'ALTER SYSTEM KILL SESSION '''||sid||','||serial#||''' immediate;' FROM v$session where status='INACTIVE';
+
+ssh fcoperator@172.17.70.106 lsfcmap
+
+SELECT * FROM BA_CCY_CODE WHERE COD_CCY = :B1 AND FLG_MNT_STATUS
+ = 'A'
+
+ 
+
+
+
+
+

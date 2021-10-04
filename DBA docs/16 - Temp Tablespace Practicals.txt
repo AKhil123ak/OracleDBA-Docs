@@ -1,0 +1,60 @@
+Temporary tablespace Practicals
++++++++++++++++++++++++++++++++
+
++++++++++++++++++++++++++
+VIEW TEMP TABLESPACE INFO
++++++++++++++++++++++++++
+
+> select FILE_NAME,TABLESPACE_NAME from dba_temp_files;
+> select PROPERTY_VALUE from database_properties;
+> select name from v$tempfile;
+> select * from dba_tablespace_groups;
+> select FILE_NAME,TABLESPACE_NAME from dba_temp_files;
+> select * from database_properties where property_name like '%TABLESPACE%' to know the default temp tablespace 
+
++++++++++++++++++++++++++++
+Create temporary tablespace
+++++++++++++++++++++++++++++
+
+> CREATE TEMPORARY TABLESPACE temp16 TEMPFILE '/u01/app/PROD/oradata/PROD/temp016.dbf' SIZE 20m ;
+
++++++++++++++++++++++++++++++++++++++++
+Assign the default temporary tablespace
++++++++++++++++++++++++++++++++++++++++
+
+> ALTER DATABASE DEFAULT TEMPORARY TABLESPACE temp16;
+
+++++++++++++++++++++++++++++++
+ASSIGN USER TO TEMP TABLESPACE and TEMP TABLESPACE GROUP
+++++++++++++++++++++++++++++++
+
+> alter user testuser temporary tablespace temp2;
+> alter user u2 temporary tablespace TEMP_TBS_GRP01;
+
+++++++++++++++++++++++++++++++++++++
+Creating temporary tablespace group
+++++++++++++++++++++++++++++++++++++
+
+> CREATE TEMPORARY TABLESPACE temp116 TEMPFILE '/u01/app/PROD/oradata/PROD/gtemp016.dbf' size 50m TABLESPACE GROUP tmpgrp16;
+> select * from dba_tablespace_groups;
+> select tablespace_name,group_name from dba_tablespace_groups;
+
+++++++++++++++++++++++++++++++++++++++
+Adding temporary tablespace to Group
+++++++++++++++++++++++++++++++++++++
+
+> ALTER TABLESPACE temp16 TABLESPACE GROUP TMPGRP16;
+> ALTER TABLESPACE temp12 TABLESPACE GROUP TMPGRP10;
+
+++++++++++++++++++++++++++++++++++++++++++++++
+Assign the default temporary tablespace group
+++++++++++++++++++++++++++++++++++++++++++++++
+
+> ALTER DATABASE DEFAULT TEMPORARY TABLESPACE TMPGRP16;
+> select FILE_NAME,TABLESPACE_NAME from dba_temp_files;
+
++++++++++++++++++++++++++++++++++++
+drop temporary temporary tablespace
++++++++++++++++++++++++++++++++++++
+
+> DROP TABLESPACE TEMP1 INCLUDING CONTENTS AND DATAFILES;

@@ -1,0 +1,248 @@
+++++++++++++++++++++++++++
+HOT backup, restore, clone
+++++++++++++++++++++++++++ 
+
+Take the locations of files
+===========================
+
+> select file_name from dba_data_files;
+> select name from v$controlfile;
+> select member from v$logfile;
+
+database should be in archivelog mode
+=====================================
+
+> archive log list
+
+create directory 
+================
+
+$ mkdir -p /u02/app/Hotbkp_aug
+
+Begin the backup
+================
+
+> alter database begin backup;
+
+> select distinct(STATUS) from  v$backup;
+
+copy files to backup location
+=============================
+note:take the backup of archivefiles also
+
+$cd /u01/app/PROD/oradata/PROD
+$cp -r * /u02/app/Hotbkp_aug
+$ cp -r /u01/app/PROD/fast_recovery_area/PROD/control03.ctl /u02/app/Hotbkp_aug
+
+> alter database backup controlfile to trace as '/u02/HOTBKP_17Aug/ctrlprodhot.txt';
+
+End the backup
+===============
+
+> alter database end backup;
+take the backup of archivefiles
+
+> alter database switch logfile;
+copy the last archived log to backup location. beacause it contains the info stating the db switched to end backup mode
+
+++++++++++++++++++++++
+loss of full database 
+++++++++++++++++++++++
+
+delete all the files
+====================
+
+$cd /u01/app/PROD/oradata/PROD
+$rm -rf *
+$rm -rf /u01/app/PROD/fast_recovery_area/PROD/control03.ctl
+
+if you can able to connect sqlplus then shutdown abort.otherwise kill the process
+=================================================================================
+
+++++++++++++++++++
+Restore the files
+++++++++++++++++++
+
+$cd /u02/app/Hotbkp_aug
+$ cp -r * /u01/app/PROD/oradata/PROD 
+$cd /u01/app/PROD/oradata/PROD
+$mv $ mv control03.ctl /u01/app/PROD/fast_recovery_area/PROD/
+
+++++++++++++++++++++
+RECOVER THE DATABASE
+++++++++++++++++++++
+
+> startup mount
+> recover database; --> use this cmd if we loss only datafiles
+> Recover database using backup controlfile until cancel; --> use this is we loss all files including control files
+
+> Recover database until cancel using backup controlfile;
+ORA-00279: change 2306527 generated at 08/17/2017 23:44:17 needed for thread 1
+ORA-00289: suggestion :
+/u01/app/PROD/fast_recovery_area/PROD/archivelog/2017_08_17/o1_mf_1_13_%u_.arc
+ORA-00280: change 2306527 for thread 1 is in sequence #13
+
+
+Specify log: {<RET>=suggested | filename | AUTO | CANCEL}
+/u01/app/PROD/oradata/PROD/redo0115a.log
+Log applied.
+Media recovery complete.
+SYS ON PROD:17-AUG-17>
+
+
+> alter database open resetlogs;
+
+> shutdown immediate
+
+> startup
+
+> select name from v$database;
+
+Note - 
+If it is not working recovry use the below parameter. 
+
+SQL> ALTER SYSTEM SET "_allow_resetlogs_corruption"= TRUE SCOPE = SPFILE;
+
+System altered.
+
+SQL>
+
+--->Usring Hotbackup Refresh the environment (from PROD to HOTDB14)
+
+Note - using the existing oracle home now
+. if you wnat you can create new oracle home
+
+- create env file 
+
+[oracle@linux ~]$ cat HOTDB14.env
+ORACLE_BASE=/u02/app/TEST11; export ORACLE_BASE
+ORACLE_HOME=$ORACLE_BASE/product/11.2.0.4; export ORACLE_HOME
+ORACLE_SID=HOTDB14; export ORACLE_SID
+PATH=$ORACLE_HOME/bin:$PATH; export PATH
+
+[oracle@linux ~]$
+
+- create parameter file 
+
+[oracle@linux dbs]$ cat initHOTDB14.env
+processes                = 150
+  sga_max_size             = 600M
+  sga_target               = 452M
+  control_files            = "/u02/app/HOTDB14/fast_recovery_area/HOTDB14/control03.ctl"
+  db_block_size            = 8192
+  compatible               = "11.2.0.4.0"
+  db_recovery_file_dest    = "/u02/app/HOTDB14/fast_recovery_area"
+  db_recovery_file_dest_size= 4182M
+  _allow_resetlogs_corruption= TRUE
+  undo_tablespace          = "UNDOTBS_08"
+  remote_login_passwordfile= "EXCLUSIVE"
+  db_domain                = ""
+  dispatchers              = "(PROTOCOL=TCP) (SERVICE=HOTDB14XDB)"
+#  local_listener           = "LISTENER_HOTDB14"
+  audit_file_dest          = "/u02/app/HOTDB14/admin/HOTDB14/adump"
+  audit_trail              = "DB"
+  db_name                  = "HOTDB14"
+  open_cursors             = 300
+  pga_aggregate_target     = 1428M
+  diagnostic_dest          = "/u02/app/HOTDB14"
+
+[oracle@linux dbs]$
+
+create directory structure 
+$mkdir -p /u02/app/HOTDB14/fast_recovery_area/HOTDB14
+$mkdir -p /u02/app/HOTDB14/fast_recovery_area
+$mkdir -p /u02/app/HOTDB14/admin/HOTDB14/adump
+
+- prepare the controlfile script
+use the source environmnet controlfile backup (/u02/app/Hotbkp_aug/ctrlprodhot.txt')
+
+$cp -r /u02/app/Hotbkp_aug/ctrlprodhot.txt /u02/app/HOTDB14/Hotdb14.sql
+
+[oracle@linux HOTDB14]$ cat /u02/app/HOTDB14/Hotdb14.sql
+CREATE CONTROLFILE SET DATABASE "HOTDB14" RESETLOGS  ARCHIVELOG
+    MAXLOGFILES 40
+    MAXLOGMEMBERS 3
+    MAXDATAFILES 100
+    MAXINSTANCES 8
+    MAXLOGHISTORY 292
+LOGFILE
+  GROUP 15 '/u02/app/HOTDB14/oradata/HOTDB14/redo0115a.log'  SIZE 100M BLOCKSIZE 512,
+  GROUP 16 '/u02/app/HOTDB14/oradata/HOTDB14/redo016a.log'  SIZE 100M BLOCKSIZE 512,
+  GROUP 17 '/u02/app/HOTDB14/oradata/HOTDB14/redo017a.log'  SIZE 100M BLOCKSIZE 512
+-- STANDBY LOGFILE
+DATAFILE
+  '/u02/app/HOTDB14/oradata/HOTDB14/system01.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/sysaux01.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/PROD245.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/users01.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/example01.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/finance11.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/big_ts.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/big_ts18.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/user11.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/undo0982.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/PROD222.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/big_ts1.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/undo01286.dbf',
+  '/u02/app/HOTDB14/oradata/HOTDB14/big_ts13.dbf'
+CHARACTER SET WE8MSWIN1252
+;
+[oracle@linux HOTDB14]$
+
+- create direcotry 
+
+$mkdir -p /u02/app/HOTDB14/oradata/HOTDB14
+
+- copy the file from backup location to target location 
+
+$cd /u02/app/Hotbkp_aug/
+$cp -r * /u02/app/HOTDB14/oradata/HOTDB14
+
+$cd /u02/app/HOTDB14/oradata/HOTDB14
+$rm -rf control03.ctl
+plese delte if any conrolfile is there
+
+- run the env file 
+
+$. HOTDB14.env
+
+> startup nomount pfile='initHOTDB14.env';
+ORACLE instance started.
+
+Total System Global Area  626327552 bytes
+Fixed Size                  2255832 bytes
+Variable Size             352322600 bytes
+Database Buffers          268435456 bytes
+Redo Buffers                3313664 bytes
+SYS ON HOTDB14:14-AUG-17> @/u02/app/HOTDB14/Hotdb14.sql;
+
+Control file created.
+
+SYS ON HOTDB14:14-AUG-17>
+
+> recover database using BACKUP CONTROLFILE until cancel;
+
+> alter database open resetlogs;
+
+SYS ON HOTDB14:14-AUG-17> select status from v$instance;
+
+STATUS
+------------
+OPEN
+
+SYS ON HOTDB14:14-AUG-17> select name from v$database;
+
+NAME
+---------
+HOTDB14
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+===========RPT_BA_R135 truncation script
+
+select * from v$instance;
+select sysdate from dual;
+col OBJECT_NAME for a30
+set feed on;
+SET LINESIZE 500
+SET PAGESIZE 1500
+col DEGREE for a15;
+select name,state,total_mb,free_mb from v$asm_diskgroup_stat order by name;
+select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_free order by 1;
+Select count(*),object_type from dba_objects where  status='INVALID' group by object_type;
+select count(*),object_type from dba_objects where OWNER='FRSPROD'  and status='INVALID' group by object_type;
+select owner,object_name,object_type from dba_objects where status='INVALID' ORDER BY OWNER,OBJECT_TYPE;
+select OWNER,INDEX_NAME,TABLE_NAME,status,compression,degree,TABLESPACE_NAME from dba_indexes where STATUS IN ('INVALID','UNUSABLE');
+
+ALTER SESSION ENABLE RESUMABLE TIMEOUT 3600;
+
+alter session force parallel query;
+
+alter session force parallel ddl;
+
+alter session force parallel dml;
+
+
+select count(*) from FRSPROD.RPT_BA_R135;
+Truncate table FRSPROD.RPT_BA_R135 drop storage ;
+select count(*) from FRSPROD.RPT_BA_R135;
+
+select tablespace_name,bytes/1024/1024/1024 from sys.sm$ts_free order by 1;
+select count(*),object_type from dba_objects where  status='INVALID' group by object_type;
+select count(*),object_type from dba_objects where OWNER='FRSPROD' and status='INVALID' group by object_type;
+select count(*)from dba_objects where OWNER='FRSPROD' and status='INVALID';
+select owner,object_name,object_type from dba_objects where status='INVALID' ORDER BY OWNER,OBJECT_TYPE;
+
+======================================
+create or replace directory FCR_IMP  as '/backupvg_new';
+
+grant read,write on directory FCR_IMP to FRSPROD;
+
+expdp DIRECTORY=FCR_exp DUMPFILE=RPT_BA_R135_12MAR16_%u.dmp logfile=RPT_BA_R135_12MAR16.log tables=FCRUSER.RPT_BA_R135 status=120 parallel=5
+
+impdp directory=FCR_exp DUMPFILE=RPT_BA_R135_13FEB16_%u.dmp logfile=imp_RPT_BA_R135_13FEB16.log status=120 TABLE_EXISTS_ACTION=APPEND remap_schema=FCRUSER:frsprod tables=FCRUSER.RPT_BA_R135 parallel=5

@@ -1,0 +1,17 @@
+set line 200
+col SIZE_GB for a30
+col partition_name for a30
+col segment_type for a30
+col segment_name for a30
+col owner for a30
+col SIZE_GB format 9999999999
+SELECT owner, segment_name, segment_type, partition_name, ROUND(bytes/(1024*1024*1024),2) SIZE_GB FROM DBA_SEGMENTS
+WHERE SEGMENT_TYPE IN ('TABLE', 'TABLE PARTITION', 'TABLE SUBPARTITION',
+'INDEX', 'INDEX PARTITION', 'INDEX SUBPARTITION', 'TEMPORARY', 'LOBINDEX', 'LOBSEGMENT', 'LOB PARTITION')
+--AND TABLESPACE_NAME LIKE 'COSTE%'
+--AND SEGMENT_NAME LIKE 'P2010201%'
+--AND partition_name LIKE 'P20100201%'
+--AND segment_type = 'TABLE'
+--AND OWNER = 'TARGET_POC'
+AND ROUND(bytes/(1024*1024*1024),2) > 10
+ORDER BY bytes DESC;

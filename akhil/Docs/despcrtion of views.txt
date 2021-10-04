@@ -1,0 +1,173 @@
+SYS:JFSPPROD > desc dba_data_files
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ FILE_NAME                                          VARCHAR2(257)
+ FILE_ID                                            NUMBER
+ TABLESPACE_NAME                                    VARCHAR2(30)
+ BYTES                                              NUMBER
+ BLOCKS                                             NUMBER
+ STATUS                                             VARCHAR2(9)
+ RELATIVE_FNO                                       NUMBER
+ AUTOEXTENSIBLE                                     VARCHAR2(3)
+ MAXBYTES                                           NUMBER
+ MAXBLOCKS                                          NUMBER
+ INCREMENT_BY                                       NUMBER
+ USER_BYTES                                         NUMBER
+ USER_BLOCKS                                        NUMBER
+ ONLINE_STATUS                                      VARCHAR2(7)
+
+SYS:JFSPPROD >
+SYS:JFSPPROD >
+SYS:JFSPPROD > desc dba_tablespaces;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TABLESPACE_NAME                           NOT NULL VARCHAR2(30)
+ BLOCK_SIZE                                NOT NULL NUMBER
+ INITIAL_EXTENT                                     NUMBER
+ NEXT_EXTENT                                        NUMBER
+ MIN_EXTENTS                               NOT NULL NUMBER
+ MAX_EXTENTS                                        NUMBER
+ MAX_SIZE                                           NUMBER
+ PCT_INCREASE                                       NUMBER
+ MIN_EXTLEN                                         NUMBER
+ STATUS                                             VARCHAR2(9)
+ CONTENTS                                           VARCHAR2(9)
+ LOGGING                                            VARCHAR2(9)
+ FORCE_LOGGING                                      VARCHAR2(3)
+ EXTENT_MANAGEMENT                                  VARCHAR2(10)
+ ALLOCATION_TYPE                                    VARCHAR2(9)
+ PLUGGED_IN                                         VARCHAR2(3)
+ SEGMENT_SPACE_MANAGEMENT                           VARCHAR2(6)
+ DEF_TAB_COMPRESSION                                VARCHAR2(8)
+ RETENTION                                          VARCHAR2(11)
+ BIGFILE                                            VARCHAR2(3)
+ PREDICATE_EVALUATION                               VARCHAR2(7)
+ ENCRYPTED                                          VARCHAR2(3)
+ COMPRESS_FOR                                       VARCHAR2(12)
+
+SYS:JFSPPROD > desc dba_objects
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OWNER                                              VARCHAR2(30)
+ OBJECT_NAME                                        VARCHAR2(128)
+ SUBOBJECT_NAME                                     VARCHAR2(30)
+ OBJECT_ID                                          NUMBER
+ DATA_OBJECT_ID                                     NUMBER
+ OBJECT_TYPE                                        VARCHAR2(19)
+ CREATED                                            DATE
+ LAST_DDL_TIME                                      DATE
+ TIMESTAMP                                          VARCHAR2(19)
+ STATUS                                             VARCHAR2(7)
+ TEMPORARY                                          VARCHAR2(1)
+ GENERATED                                          VARCHAR2(1)
+ SECONDARY                                          VARCHAR2(1)
+ NAMESPACE                                          NUMBER
+ EDITION_NAME                                       VARCHAR2(30)
+
+SYS:JFSPPROD > desc dba_tables
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OWNER                                     NOT NULL VARCHAR2(30)
+ TABLE_NAME                                NOT NULL VARCHAR2(30)
+ TABLESPACE_NAME                                    VARCHAR2(30)
+ CLUSTER_NAME                                       VARCHAR2(30)
+ IOT_NAME                                           VARCHAR2(30)
+ STATUS                                             VARCHAR2(8)
+ PCT_FREE                                           NUMBER
+ PCT_USED                                           NUMBER
+ INI_TRANS                                          NUMBER
+ MAX_TRANS                                          NUMBER
+ INITIAL_EXTENT                                     NUMBER
+ NEXT_EXTENT                                        NUMBER
+ MIN_EXTENTS                                        NUMBER
+ MAX_EXTENTS                                        NUMBER
+ PCT_INCREASE                                       NUMBER
+ FREELISTS                                          NUMBER
+ FREELIST_GROUPS                                    NUMBER
+ LOGGING                                            VARCHAR2(3)
+ BACKED_UP                                          VARCHAR2(1)
+ NUM_ROWS                                           NUMBER
+ BLOCKS                                             NUMBER
+ EMPTY_BLOCKS                                       NUMBER
+ AVG_SPACE                                          NUMBER
+ CHAIN_CNT                                          NUMBER
+ AVG_ROW_LEN                                        NUMBER
+ AVG_SPACE_FREELIST_BLOCKS                          NUMBER
+ NUM_FREELIST_BLOCKS                                NUMBER
+ DEGREE                                             VARCHAR2(10)
+ INSTANCES                                          VARCHAR2(10)
+ CACHE                                              VARCHAR2(5)
+ TABLE_LOCK                                         VARCHAR2(8)
+ SAMPLE_SIZE                                        NUMBER
+ LAST_ANALYZED                                      DATE
+ PARTITIONED                                        VARCHAR2(3)
+ IOT_TYPE                                           VARCHAR2(12)
+ TEMPORARY                                          VARCHAR2(1)
+ SECONDARY                                          VARCHAR2(1)
+ NESTED                                             VARCHAR2(3)
+ BUFFER_POOL                                        VARCHAR2(7)
+ FLASH_CACHE                                        VARCHAR2(7)
+ CELL_FLASH_CACHE                                   VARCHAR2(7)
+ ROW_MOVEMENT                                       VARCHAR2(8)
+ GLOBAL_STATS                                       VARCHAR2(3)
+ USER_STATS                                         VARCHAR2(3)
+ DURATION                                           VARCHAR2(15)
+ SKIP_CORRUPT                                       VARCHAR2(8)
+ MONITORING                                         VARCHAR2(3)
+ CLUSTER_OWNER                                      VARCHAR2(30)
+ DEPENDENCIES                                       VARCHAR2(8)
+ COMPRESSION                                        VARCHAR2(8)
+ COMPRESS_FOR                                       VARCHAR2(12)
+ DROPPED                                            VARCHAR2(3)
+ READ_ONLY                                          VARCHAR2(3)
+ SEGMENT_CREATED                                    VARCHAR2(3)
+ RESULT_CACHE                                       VARCHAR2(7)
+
+SYS:JFSPPROD > desc dba_free_space
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TABLESPACE_NAME                                    VARCHAR2(30)
+ FILE_ID                                            NUMBER
+ BLOCK_ID                                           NUMBER
+ BYTES                                              NUMBER
+ BLOCKS                                             NUMBER
+ RELATIVE_FNO                                       NUMBER
+
+ SYS:JFSPPROD > desc db_operations
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ INST_ID                                            NUMBER
+ SID                                                NUMBER
+ SERIAL                                             NUMBER
+ MACHINE                                            VARCHAR2(64)
+ TERMINAL                                           VARCHAR2(30)
+ PROGRAM                                            VARCHAR2(48)
+ SQL_TEXT                                           VARCHAR2(1000)
+ USERS                                              NUMBER
+ OPERATION                                          VARCHAR2(64)
+ TARGET                                             VARCHAR2(64)
+ SOFAR                                              NUMBER
+ TOTALWORK                                          NUMBER
+ TIMEREMAINING                                      NUMBER
+ TIMEELAPSED                                        NUMBER
+ MESSAGE                                            VARCHAR2(512)
+ USERNAME                                           VARCHAR2(30)
+ STATUS                                             VARCHAR2(8)
+ TIME_STAMP                                         DATE
+
+
+SYS:JFSPPROD > desc dba_roles
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLE                                      NOT NULL VARCHAR2(30)
+ PASSWORD_REQUIRED                                  VARCHAR2(8)
+ AUTHENTICATION_TYPE                                VARCHAR2(11)
+
+SYS:JFSPPROD > desc dba_profiles
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PROFILE                                   NOT NULL VARCHAR2(30)
+ RESOURCE_NAME                             NOT NULL VARCHAR2(32)
+ RESOURCE_TYPE                                      VARCHAR2(8)
+ LIMIT                                              VARCHAR2(40)
+

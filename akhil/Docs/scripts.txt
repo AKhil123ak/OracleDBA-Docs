@@ -1,0 +1,1029 @@
+production server
+=============================
+oracle@JFSBNKSRV121:/home/oracle $ cat index_rebuld01.sh
+sqlplus / as sysdba  <<EOF
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14583 ONLINE parallel 10;
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14584 ONLINE parallel 10;
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14595 ONLINE parallel 10;
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14596 ONLINE parallel 10;
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14600 ONLINE parallel 10;
+
+EOF
+======================================
+oracle@JFSBNKSRV121:/home/oracle $ cat index_rebuld02.sh
+sqlplus / as sysdba  <<EOF
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14601 ONLINE parallel 10;
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14605 ONLINE parallel 10;
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14606 ONLINE parallel 10;
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14611 ONLINE parallel 10;
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14612 ONLINE parallel 10;
+EOF
+==========================================
+oracle@JFSBNKSRV121:/home/oracle $ cat rman_arc_del.sh
+run {
+crosscheck archivelog all;
+delete archivelog until time 'sysdate - 1/24';
+}
+===================================================
+oracle@JFSBNKSRV121:/home/oracle $ cat rman_cron.sh
+export ORACLE_HOME=/u01/app/oracle/11.2.0
+export ORACLE_SID=JFSPPROD
+dt=`date +%d-%m-%y-%T`
+export dt
+/u01/app/oracle/11.2.0/bin/rman target / cmdfile /home/oracle/rman_arc_del.sh msglog /home/oracle/backup/JFSPPROD_ARC_DEL_$dt.log
+exit
+======================================================
+
+
+====================================================
+oracle@JFSBNKSRV121:/fcarch/BCV-SCRIPTS $ cat Begin-Backup.sh
+banner START BEGIN BKP MODE
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=JFSPPROD
+LOG_HOME=/fcarch/BCV
+PATH=$ORACLE_HOME/bin:$PATH
+export LOG_HOME ORACLE_SID ORACLE_HOME PATH
+cd /fcarch/BCV_LOG
+_DIR=`date |grep -v grep |awk '{print $3"_"$2"_"$6"_"$4}'`
+mkdir $_DIR
+mv /fcarch/BCV/* /fcarch/BCV_LOG/$_DIR/
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter database begin backup;
+select distinct status from v\$backup;
+set feedback off
+set heading off
+spool /fcarch/BCV/begin_status_JFSPPROD.txt
+select distinct status from v\$backup;
+spool off
+EOF
+
+ORACLE_SID=JFSBIP
+export ORACLE_SID
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter system switch logfile;
+alter database begin backup;
+select distinct status from v\$backup;
+set feedback off
+set heading off
+spool /fcarch/BCV/begin_status_JFSBIP.txt
+select distinct status from v\$backup;
+spool off
+EOF
+
+cat /fcarch/BCV/begin_status_JFSPPROD.txt |grep -i active |grep -v NOT
+status=$?
+if [ $status -eq 0 ]
+        then
+        echo "JFSPPROD Begin backup successful"
+
+        else
+        echo "JFSPPROD Begin backup failed"
+fi
+
+cat /fcarch/BCV/begin_status_JFSBIP.txt |grep -i active |grep -v NOT
+status=$?
+if [ $status -eq 0 ]
+        then
+        echo "JFSBIP Begin backup successful"
+
+        else
+        echo "JFSBIP Begin backup failed"
+fi
+
+==============================================================
+oracle@JFSBNKSRV121:/fcarch/BCV-SCRIPTS $ cat END-Backup.sh
+banner START END BKP MODE
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=JFSPPROD
+PATH=$ORACLE_HOME/bin:$PATH
+LOG_HOME=/fcarch/BCV/
+export LOG_HOME ORACLE_SID ORACLE_HOME PATH
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter database END backup;
+alter database create standby controlfile as '/fcarch/BCV/JFSPPROD_BCV_STDCtl.ctl';
+alter system archive log current;
+alter system switch logfile;
+alter system switch logfile;
+select distinct status from v\$backup;
+spool /fcarch/BCV/end_status_JFSPPROD.txt
+select distinct status from v\$backup;
+spool off
+EOF
+
+ORACLE_SID=JFSBIP
+export ORACLE_SID
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter database END backup;
+alter database create standby controlfile as '/fcarch/BCV/JFSBIP_BCV_STDCtl.ctl';
+alter system archive log current;
+alter system switch logfile;
+alter system switch logfile;
+select distinct status from v\$backup;
+spool /fcarch/BCV/end_status_JFSBIP.txt
+select distinct status from v\$backup;
+spool off
+EOF
+cat /fcarch/BCV/end_status_JFSPPROD.txt |grep -i NOT
+status=$?
+if [ $status -eq 0 ]
+        then
+        echo "JFSPPROD end backup successful"
+        else
+        echo "JFSPPROD end backup failed"
+fi
+
+cat /fcarch/BCV/end_status_JFSBIP.txt |grep -i NOT
+status=$?
+if [ $status -eq 0 ]
+        then
+        echo "JFSBIP end backup successful"
+        else
+        echo "JFSBIP end backup failed"
+fi
+
+================================
+
+oracle@JFSBNKSRV121:/fcarch/BCV-SCRIPTS $ cat Arch-cp.sh
+###### SCRIPT FOR REMOTE DATA COPY ######################
+##### COPYRIGHT : Mohd Saif ############################
+##### DATE : 28 APR 2016 ##############################
+#######################################################
+
+#PLEASE ENSURE TO UPDATE BELOW VARIABLES BEFORE USING THIS SCRIPT #######
+
+################VARIABLES#########################################
+SOURCE_JFSPPROD=/fcarch/JFSPPROD ########## ABSOLUTE PATH
+TARGET=/fcarch/BCV ########## ABSOLUTE PATH
+SOURCE_JFSBIP=/fcarch/JFSBIP ########## ABSOLUTE PATH
+##################################################################
+
+echo "****************JFSPPROD SOURCE FILES COUNT**********************"
+ls -lrt $SOURCE_JFSPPROD/*.dbf |tail -10 |awk '{print $9}'|wc -l
+_COUNT=`ls -lrt $SOURCE_JFSPPROD/*.dbf |tail -10 |awk '{print $9}'|wc -l`
+
+
+echo "*******************************************************"
+
+echo "****************JFSPPROD COPY FILES BEGIN *****************************"
+
+for i in `ls -lrt $SOURCE_JFSPPROD/*.dbf |tail -10 |awk '{print $9}'`
+do
+echo cp -p $i $TARGET
+cp -p $i $TARGET
+STATUS=$?
+done
+echo ""
+echo ""
+echo ""
+echo "****************JFSPPROD COPY FILES END *****************************"
+#if [ $STATUS -eq 0 ]
+#       then
+#       echo "JFSPPROD FILES COPY SUCCESSFUL"
+#       else
+#       echo "JFSPPROD FILES COPY FAILED"
+#fi
+
+
+if [ $_COUNT -lt 10 ]
+        then
+        echo "JFSPPROD COPIED LESS FILES PLS CHECK !!!!! $_COUNT"
+        else
+        echo "JFSPPROD FILES COPY SUCCESS"
+fi
+
+echo "****************JFSBIP SOURCE FILES COUNT**********************"
+ls -lrt $SOURCE_JFSBIP/*.dbf |tail -10 |awk '{print $9}'|wc -l
+_COUNT=`ls -lrt $SOURCE_JFSBIP/*.dbf |tail -10 |awk '{print $9}'|wc -l`
+
+
+echo "*******************************************************"
+
+echo "****************JFSBIP COPY FILES BEGIN *****************************"
+
+for i in `ls -lrt $SOURCE_JFSBIP/*.dbf |tail -10 |awk '{print $9}'`
+do
+echo cp -p $i $TARGET
+cp -p $i $TARGET
+STATUS=$?
+done
+echo ""
+echo ""
+echo ""
+echo "****************JFSBIP COPY FILES END *****************************"
+#if [ $STATUS -eq 0 ]
+#       then
+#       echo "JFSBIP FILES COPY SUCCESSFUL"
+#       else
+#       echo "JFSBIP FILES COPY FAILED"
+#fi
+
+
+if [ $_COUNT -lt 10 ]
+        then
+        echo "JFSBIP COPIED LESS FILES PLS CHECK !!!!! $_COUNT"
+        else
+        echo "JFSBIP FILES COPY SUCCESS"
+fi
+===================================================
+oracle@JFSBNKSRV121:/fcarch/BCV-SCRIPTS $ cat SCP-Rmt.sh
+###### SCRIPT FOR REMOTE DATA COPY ######################
+##### COPYRIGHT : Mohd Saif ############################
+##### DATE : 28 APR 2016 ##############################
+#######################################################
+
+#PLEASE ENSURE TO UPDATE BELOW VARIABLES BEFORE USING THIS SCRIPT #######
+
+
+##############################################################################
+SOURCE=/fcarch/BCV     #FULL ABSOLUTE PATH REQUIRED
+TARGET=/osbackup/oracle_backup/BCV_FILES     #FULL ABSOLUTE PATH REQUIRED
+_APP_USER=oracle                           #remote username
+REMOTE_SERVER=172.17.70.237                 #Remote server name / IP address
+#############################################################################
+
+
+echo "****************SOURCE FILES COUNT**********************"
+ls -lrt $SOURCE/* |tail -26 |awk '{print $9}'|wc -l
+_COUNT=`ls -lrt $SOURCE/* |tail -26 |awk '{print $9}'|wc -l`
+
+
+echo "*******************************************************"
+
+echo "**************** COPY BEGIN *****************************"
+
+for i in `ls -lrt $SOURCE/* |tail -26 |awk '{print $9}'`
+do
+echo scp -p $i $_APP_USER@$REMOTE_SERVER:$TARGET
+scp -p $i $_APP_USER@$REMOTE_SERVER:$TARGET
+#cp -p $i $TARGET
+STATUS=$?
+done
+echo ""
+echo ""
+echo ""
+echo "**************** COPY END *****************************"
+#if [ $STATUS -eq 0 ]
+#       then
+#       echo "COPY SUCCESSFUL"
+#       else
+#       echo "COPY FAILED"
+#fi
+
+
+if [ $_COUNT -lt 20 ]
+        then
+        echo "COPIED LESS FILES PLS CHECK !!!!! $_COUNT"
+        echo "EXPECTED 26 FILES, COPIED $_COUNT"
+        else
+        echo "COPY SUCCESS"
+fi
+=============================================
+oracle@JFSBNKSRV121:/fcarch/BCV-SCRIPTS $ cat run.sh
+##### CATALOG DB START ###################################
+
+#ssh oracle@172.17.70.237 /osbackup/oracle_backup/BCV_SCRIPTS/CATDB_start.sh
+ssh oracle@172.17.70.237 /osbackup/oracle_backup/BCV_SCRIPTS/db_status_chk.sh CATDB
+_STATUS=$?
+echo STATUS OF DB BEGIN BACKUP MODE IS $_STATUS
+ssh oracle@172.17.70.237 /osbackup/oracle_backup/BCV_SCRIPTS/end_backup.sh CATDB
+================================================
+
+flash copy server
+===================================================
+
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat JFSPPROD_start.sh
+banner flash-JFSPPROD
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=JFSPPROD
+PATH=$ORACLE_HOME/bin:$PATH
+LOG_HOME=/osbackup/oracle_backup/BCV_SCRIPTS
+export ORACLE_SID ORACLE_HOME PATH
+echo "STARTTING DB IN READONLY MODE - JFSPPROD"
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+startup nomount;
+alter database mount standby database;
+alter database open read only;
+select name,open_mode from v\$database;
+EOF
+
+status=`ps -ef |grep ora_pmon_JFSPPROD |grep -c -v pts`
+if [ $status -eq 0 ]
+        then
+        echo "UAT DB STARTUP FAILED"
+        exit 1
+        else
+        echo "UAT DB startup successful"
+fi
+=========================================================
+
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat JFSPPROD_start.sh
+banner flash-JFSPPROD
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=JFSPPROD
+PATH=$ORACLE_HOME/bin:$PATH
+LOG_HOME=/osbackup/oracle_backup/BCV_SCRIPTS
+export ORACLE_SID ORACLE_HOME PATH
+echo "STARTTING DB IN READONLY MODE - JFSPPROD"
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+startup nomount;
+alter database mount standby database;
+alter database open read only;
+select name,open_mode from v\$database;
+EOF
+
+status=`ps -ef |grep ora_pmon_JFSPPROD |grep -c -v pts`
+if [ $status -eq 0 ]
+        then
+        echo "UAT DB STARTUP FAILED"
+        exit 1
+        else
+        echo "UAT DB startup successful"
+fi
+
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat CATDB_start.sh
+banner CATDB
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=CATDB
+PATH=$ORACLE_HOME/bin:$PATH
+LOG_HOME=/osbackup/oracle_backup/BCV_FILES
+export ORACLE_SID ORACLE_HOME PATH
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+startup;
+EOF
+
+status=`ps -ef |grep ora_pmon_CATDB |grep -c -v pts`
+if [ $status -eq 0 ]
+        then
+        echo "CATDB DB STARTUP FAILED"
+        exit 1
+        else
+        echo "CATDB DB startup successful"
+fi
+
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $
+=====================================================
+
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat BCV-STR-NOMOUNT.sh
+banner DB in no mount
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=JFSPPROD
+PATH=$ORACLE_HOME/bin:$PATH
+export ORACLE_SID ORACLE_HOME PATH
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+startup nomount;
+EOF
+
+ORACLE_SID=JFSBIP
+export ORACLE_SID
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+startup nomount;
+EOF
+
+status=`ps -ef |grep ora_pmon_JFSBIP |grep -c -v pts`
+if [ $status -eq 0 ]
+        then
+        echo "JFSBIP STARTUP FAILED !!! "
+        exit 1
+        else
+        echo "JFSBIP startup successful"
+fi
+
+
+status=`ps -ef |grep ora_pmon_JFSPPROD |grep -c -v pts`
+if [ $status -eq 0 ]
+ then
+        echo "JFSPPROD STARTUP FAILED !!! "
+        exit 1
+        else
+        echo "JFSPPROD startup successful"
+fi
+=====================================
+
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat JFSPPROD_BCV.sh
+run
+{
+restore standby controlfile from '/osbackup/oracle_backup/BCV_FILES/JFSPPROD_BCV_STDCtl.ctl';
+sql 'alter database mount standby database';
+catalog start with '/osbackup/oracle_backup/BCV_FILES/' noprompt;
+recover database;
+}
+=========================================================
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat BCV-RO-DB.sh
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=JFSPPROD
+PATH=$ORACLE_HOME/bin:$PATH
+export ORACLE_SID ORACLE_HOME PATH
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter database open read only;
+spool /osbackup/oracle_backup/BCV_FILES/RO_status_JFSPPROD.txt
+select open_mode,name from v\$database;
+spool off
+EOF
+
+ORACLE_SID=JFSBIP
+export ORACLE_SID
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter database open read only;
+spool /osbackup/oracle_backup/BCV_FILES/RO_status_JFSBIP.txt
+select open_mode,name from v\$database;
+spool off
+EOF
+cat /osbackup/oracle_backup/BCV_FILES/RO_status_JFSPPROD.txt |grep -i ONLY
+status=$?
+if [ $status -eq 0 ]
+        then
+        echo "JFSPPROD DB RO successful"
+        else
+        echo "JFSPPROD DB RO failed"
+        exit 1
+fi
+
+cat /osbackup/oracle_backup/BCV_FILES/RO_status_JFSBIP.txt |grep -i ONLY
+status=$?
+if [ $status -eq 0 ]
+        then
+        echo "JFSBIP DB RO successful"
+        else
+        echo "JFSBIP DB RO failed"
+        exit 1
+fi
+exit
+===========================================
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat db_down.sh
+banner DB DOWN
+#######################
+# Stopping FLASH COPY JFSPPROD ,JFSBIP and CATDB database Instance
+#######################
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=JFSPPROD
+PATH=$ORACLE_HOME/bin:$PATH
+LOG_HOME=/osbackup/oracle_backup/BCV_FILES
+export ORACLE_SID ORACLE_HOME PATH
+########################################
+
+echo "SHUTTING DOWN DATABASE JFSPPROD"
+
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+shutdown immediate;
+
+EOF
+echo ""
+echo ""
+status=`ps -ef |grep ora_pmon_JFSPPROD |grep -c -v pts`
+if [ $status -eq 0 ]
+        then
+        echo "$ORACLE_SID DB down successful"
+        else
+        echo "JFSPPROD DB DOWN FAILED"
+        exit 1
+fi
+
+echo ""
+echo ""
+echo ""
+###### CATDB DB DOWN PROCESS #####################################
+
+echo "SHUTTING DOWN DATABASE JFSUAT"
+echo ""
+echo ""
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=CATDB
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+shutdown immediate;
+EOF
+
+echo ""
+echo ""
+status=`ps -ef |grep ora_pmon_CATDB |grep -c -v pts`
+
+if [ $status -eq 0 ]
+        then
+        echo "CATDB DB down successful"
+        else
+        echo "CATDB DB DOWN FAILED"
+        exit 1
+fi
+###### JFSBIP DB DOWN PROCESS #####################################
+
+echo "SHUTTING DOWN DATABASE JFSBIP"
+echo ""
+echo ""
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=JFSBIP
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+shutdown immediate;
+EOF
+status=`ps -ef |grep ora_pmon_JFSBIP |grep -c -v pts`
+if [ $status -eq 0 ]
+        then
+        echo "JFSBIP DB down successful"
+        else
+        echo "JFSBIP DB DOWN FAILED"
+        exit 1
+fi
+##### CTRL FILE AND OTHER BACKUP ##################################
+
+cd  /osbackup/oracle_backup/
+_DIR=`date |grep -v grep |awk '{print $3"_"$2"_"$6"_"$4}'`
+mkdir $_DIR
+touch /osbackup/oracle_backup/BCV_FILES/1
+mv /osbackup/oracle_backup/BCV_FILES/* /osbackup/oracle_backup/$_DIR/
+
+=============================================================
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat CATDB_down.sh
+###### CATDB DB DOWN PROCESS #####################################
+
+echo "SHUTTING DOWN DATABASE CATALOGUE"
+echo ""
+echo ""
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=CATDB
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+shutdown immediate;
+EOF
+
+echo ""
+echo ""
+status=`ps -ef |grep ora_pmon_CATDB |grep -c -v pts`
+
+if [ $status -eq 0 ]
+        then
+        echo "CATDB DB down successful"
+        else
+        echo "CATDB DB DOWN FAILED"
+        exit 1
+fi
+======================================================================
+
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat end_backup.sh
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=$1
+PATH=$ORACLE_HOME/bin:$PATH
+export ORACLE_SID ORACLE_HOME PATH
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter database END backup;
+alter system archive log current;
+alter system switch logfile;
+select distinct status from v\$backup;
+spool /tmp/end_status_$1.txt
+select distinct status from v\$backup;
+spool off
+EOF
+==============================================================================
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat end_backup.sh
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=$1
+PATH=$ORACLE_HOME/bin:$PATH
+export ORACLE_SID ORACLE_HOME PATH
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter database END backup;
+alter system archive log current;
+alter system switch logfile;
+select distinct status from v\$backup;
+spool /tmp/end_status_$1.txt
+select distinct status from v\$backup;
+spool off
+EOF
+oracle@JFSBNKSRV128:/osbackup/oracle_backup/BCV_SCRIPTS $ cat db_status_chk.sh
+ORACLE_HOME=/u01/app/oracle/11.2.0
+ORACLE_SID=$1
+PATH=$ORACLE_HOME/bin:$PATH
+LOG_HOME=/osbackup/oracle_backup/BCV_FILES
+export ORACLE_SID ORACLE_HOME PATH
+/u01/app/oracle/11.2.0/bin/sqlplus -s / as sysdba << EOF
+alter system switch logfile;
+alter database begin backup;
+select distinct status from v\$backup;
+set feedback off
+set heading off
+spool /tmp/begin_status_$1.txt
+select distinct status from v\$backup;
+spool off
+EOF
+========================================================
+oracle@JFSBNKSRV128:/home/FCRPROD/storage/Live $ cat run_flash_jfsbank.sh
+clear
+DIR=`pwd`
+
+cd $DIR
+
+log="JFSBANK_FlashCopy_Log_`date '+%d%b%y_%H%M'`.log"
+
+echo "Please Wait.................."
+
+echo "\n\n\n"
+
+echo "FLASH COPY is running now....................."
+
+echo "\n\n\n"
+
+sh $DIR/flashcopy.sh > $log
+
+echo "\n\n\n"
+
+echo Flash Copy is Completed Now, below is the copying status
+echo
+echo
+ssh fcoperator@172.17.70.106 lsfcmap
+
+=================================================================
+oracle@JFSBNKSRV128:/home/oracle $ cat jfspprod_rman_bkp.sh
+run{
+allocate channel t1 type 'sbt_tape' parms
+'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo.opt)';
+allocate channel t2 type 'sbt_tape' parms
+'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo.opt)';
+allocate channel t3 type 'sbt_tape' parms
+'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo.opt)';
+allocate channel t4 type 'sbt_tape' parms
+'ENV=(TDPO_OPTFILE=/usr/tivoli/tsm/client/oracle/bin64/tdpo.opt)';
+SET NEWNAME FOR DATAFILE 1 to '+DATA';
+SET NEWNAME FOR DATAFILE 2 to '+DATA';
+SET NEWNAME FOR DATAFILE 3 to '+DATA';
+SET NEWNAME FOR DATAFILE 4 to '+DATA';
+SET NEWNAME FOR DATAFILE 5 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 6 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 7 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 8 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 9 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 10 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 11 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 12 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 13 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 14 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 15 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 16 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 17 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 18 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 19 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 20 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 21 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 22 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 23 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 24 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 25 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 26 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 27 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 28 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 29 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 30 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 31 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 32 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 33 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 34 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 35 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 36 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 37 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 38 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 39 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 40 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 41 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 42 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 43 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 44 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 45 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 46 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 47 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 48 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 49 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 50 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 51 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 52 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 53 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 54 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 55 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 56 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 57 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 58 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 59 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 60 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 61 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 62 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 63 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 64 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 65 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 66 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 67 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 68 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 69 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 70 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 71 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 72 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 73 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 74 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 75 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 76 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 77 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 78 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 79 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 80 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 81 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 82 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 83 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 84 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 85 to '+DATA';
+SET NEWNAME FOR DATAFILE 86 to '+DATA';
+SET NEWNAME FOR DATAFILE 87 to '+DATA';
+SET NEWNAME FOR DATAFILE 88 to '+DATA';
+SET NEWNAME FOR DATAFILE 89 to '+DATA';
+SET NEWNAME FOR DATAFILE 90 to '+DATA';
+SET NEWNAME FOR DATAFILE 91 to '+DATA';
+SET NEWNAME FOR DATAFILE 92 to '+DATA';
+SET NEWNAME FOR DATAFILE 93 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 94 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 95 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 96 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 97 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 98 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 99 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 100 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 101 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 102 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 103 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 104 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 105 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 106 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 107 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 108 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 109 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 110 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 111 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 112 to '+DATA';
+SET NEWNAME FOR DATAFILE 113 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 114 to '+DATA';
+SET NEWNAME FOR DATAFILE 115 to '+DATA';
+SET NEWNAME FOR DATAFILE 116 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 117 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 118 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 119 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 120 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 121 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 122 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 123 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 124 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 125 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 126 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 127 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 128 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 129 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 130 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 131 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 132 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 133 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 134 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 135 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 136 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 137 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 138 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 139 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 140 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 141 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 142 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 143 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 144 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 145 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 146 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 147 to '+DATA';
+SET NEWNAME FOR DATAFILE 148 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 149 to '+DATA';
+SET NEWNAME FOR DATAFILE 150 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 151 to '+DATA';
+SET NEWNAME FOR DATAFILE 152 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 153 to '+DATA';
+SET NEWNAME FOR DATAFILE 154 to '+MIGDATA';
+SET NEWNAME FOR DATAFILE 155 to '+DATA';
+SET NEWNAME FOR DATAFILE 156 to '+DATA';
+SET NEWNAME FOR DATAFILE 157 to '+DATA';
+SET NEWNAME FOR DATAFILE 158 to '+DATA';
+SET NEWNAME FOR DATAFILE 159 to '+DATA';
+SET NEWNAME FOR DATAFILE 160 to '+DATA';
+SET NEWNAME FOR DATAFILE 161 to '+DATA';
+SET NEWNAME FOR DATAFILE 162 to '+DATA';
+SET NEWNAME FOR DATAFILE 163 to '+DATA';
+SET NEWNAME FOR DATAFILE 164 to '+DATA';
+SET NEWNAME FOR DATAFILE 165 to '+DATA';
+SET NEWNAME FOR DATAFILE 166 to '+DATA';
+SET NEWNAME FOR DATAFILE 167 to '+DATA';
+SET NEWNAME FOR DATAFILE 168 to '+DATA';
+SET NEWNAME FOR DATAFILE 169 to '+DATA';
+SET NEWNAME FOR DATAFILE 170 to '+DATA';
+SET NEWNAME FOR DATAFILE 171 to '+DATA';
+SET NEWNAME FOR DATAFILE 172 to '+DATA';
+SET NEWNAME FOR DATAFILE 173 to '+DATA';
+SET NEWNAME FOR DATAFILE 174 to '+DATA';
+SET NEWNAME FOR DATAFILE 175 to '+DATA';
+SET NEWNAME FOR DATAFILE 176 to '+DATA';
+SET NEWNAME FOR DATAFILE 177 to '+DATA';
+SET NEWNAME FOR DATAFILE 178 to '+DATA';
+SET NEWNAME FOR DATAFILE 179 to '+DATA';
+SET NEWNAME FOR DATAFILE 180 to '+DATA';
+SET NEWNAME FOR DATAFILE 181 to '+DATA';
+SET NEWNAME FOR DATAFILE 182 to '+DATA';
+SET NEWNAME FOR DATAFILE 183 to '+DATA';
+SET NEWNAME FOR DATAFILE 184 to '+DATA';
+SET NEWNAME FOR DATAFILE 185 to '+DATA';
+SET NEWNAME FOR DATAFILE 186 to '+DATA';
+SET NEWNAME FOR DATAFILE 187 to '+DATA';
+SET NEWNAME FOR DATAFILE 188 to '+DATA';
+SET NEWNAME FOR DATAFILE 189 to '+DATA';
+SET NEWNAME FOR DATAFILE 190 to '+DATA';
+SET NEWNAME FOR DATAFILE 191 to '+DATA';
+SET NEWNAME FOR DATAFILE 192 to '+DATA';
+SET NEWNAME FOR DATAFILE 193 to '+DATA';
+SET NEWNAME FOR DATAFILE 194 to '+DATA';
+SET NEWNAME FOR DATAFILE 195 to '+DATA';
+SET NEWNAME FOR DATAFILE 196 to '+DATA';
+SET NEWNAME FOR DATAFILE 197 to '+DATA';
+SET NEWNAME FOR DATAFILE 198 to '+DATA';
+SET NEWNAME FOR DATAFILE 199 to '+DATA';
+SET NEWNAME FOR DATAFILE 200 to '+DATA';
+SET NEWNAME FOR DATAFILE 201 to '+DATA';
+SET NEWNAME FOR DATAFILE 202 to '+DATA';
+SET NEWNAME FOR DATAFILE 203 to '+DATA';
+SET NEWNAME FOR DATAFILE 204 to '+DATA';
+SET NEWNAME FOR DATAFILE 205 to '+DATA';
+SET NEWNAME FOR DATAFILE 206 to '+DATA';
+SET NEWNAME FOR DATAFILE 207 to '+DATA';
+SET NEWNAME FOR DATAFILE 208 to '+DATA';
+SET NEWNAME FOR DATAFILE 209 to '+DATA';
+SET NEWNAME FOR DATAFILE 210 to '+DATA';
+SET NEWNAME FOR DATAFILE 211 to '+DATA';
+SET NEWNAME FOR DATAFILE 212 to '+DATA';
+SET NEWNAME FOR DATAFILE 213 to '+DATA';
+SET NEWNAME FOR DATAFILE 214 to '+DATA';
+SET NEWNAME FOR DATAFILE 215 to '+DATA';
+SET NEWNAME FOR DATAFILE 216 to '+DATA';
+SET NEWNAME FOR DATAFILE 217 to '+DATA';
+SET NEWNAME FOR DATAFILE 218 to '+DATA';
+SET NEWNAME FOR DATAFILE 219 to '+DATA';
+SET NEWNAME FOR DATAFILE 220 to '+DATA';
+SET NEWNAME FOR DATAFILE 221 to '+DATA';
+SET NEWNAME FOR DATAFILE 222 to '+DATA';
+SET NEWNAME FOR DATAFILE 223 to '+DATA';
+SET NEWNAME FOR DATAFILE 224 to '+DATA';
+SET NEWNAME FOR DATAFILE 225 to '+DATA';
+SET NEWNAME FOR DATAFILE 226 to '+DATA';
+SET NEWNAME FOR DATAFILE 227 to '+DATA';
+SET NEWNAME FOR DATAFILE 228 to '+DATA';
+SET NEWNAME FOR DATAFILE 229 to '+DATA';
+SET NEWNAME FOR DATAFILE 230 to '+DATA';
+SET NEWNAME FOR DATAFILE 231 to '+DATA';
+SET NEWNAME FOR DATAFILE 232 to '+DATA';
+SET NEWNAME FOR DATAFILE 233 to '+DATA';
+SET NEWNAME FOR DATAFILE 234 to '+DATA';
+SET NEWNAME FOR DATAFILE 235 to '+DATA';
+SET NEWNAME FOR DATAFILE 236 to '+DATA';
+SET NEWNAME FOR DATAFILE 237 to '+DATA';
+SET NEWNAME FOR DATAFILE 238 to '+DATA';
+SET NEWNAME FOR DATAFILE 239 to '+DATA';
+SET NEWNAME FOR DATAFILE 240 to '+DATA';
+SET NEWNAME FOR DATAFILE 241 to '+DATA';
+SET NEWNAME FOR DATAFILE 242 to '+DATA';
+SET NEWNAME FOR DATAFILE 243 to '+DATA';
+SET NEWNAME FOR DATAFILE 244 to '+DATA';
+SET NEWNAME FOR DATAFILE 245 to '+DATA';
+SET NEWNAME FOR DATAFILE 246 to '+DATA';
+SET NEWNAME FOR DATAFILE 247 to '+DATA';
+SET NEWNAME FOR DATAFILE 248 to '+DATA';
+SET NEWNAME FOR DATAFILE 249 to '+DATA';
+SET NEWNAME FOR DATAFILE 250 to '+DATA';
+SET NEWNAME FOR DATAFILE 251 to '+DATA';
+SET NEWNAME FOR DATAFILE 252 to '+DATA';
+SET NEWNAME FOR DATAFILE 253 to '+DATA';
+SET NEWNAME FOR DATAFILE 254 to '+DATA';
+SET NEWNAME FOR DATAFILE 255 to '+DATA';
+SET NEWNAME FOR DATAFILE 256 to '+DATA';
+SET NEWNAME FOR DATAFILE 257 to '+DATA';
+SET NEWNAME FOR DATAFILE 258 to '+DATA';
+SET NEWNAME FOR DATAFILE 259 to '+DATA';
+SET NEWNAME FOR DATAFILE 260 to '+DATA';
+SET NEWNAME FOR DATAFILE 261 to '+DATA';
+SET NEWNAME FOR DATAFILE 262 to '+DATA';
+SET NEWNAME FOR DATAFILE 263 to '+DATA';
+SET NEWNAME FOR DATAFILE 264 to '+DATA';
+SET NEWNAME FOR DATAFILE 265 to '+DATA';
+SET NEWNAME FOR DATAFILE 266 to '+DATA';
+SET NEWNAME FOR DATAFILE 267 to '+DATA';
+SET NEWNAME FOR DATAFILE 268 to '+DATA';
+SET NEWNAME FOR DATAFILE 269 to '+DATA';
+SET NEWNAME FOR DATAFILE 270 to '+DATA';
+SET NEWNAME FOR DATAFILE 271 to '+DATA';
+SET NEWNAME FOR DATAFILE 272 to '+DATA';
+SET NEWNAME FOR DATAFILE 273 to '+DATA';
+SET NEWNAME FOR DATAFILE 274 to '+DATA';
+SET NEWNAME FOR DATAFILE 275 to '+DATA';
+SET NEWNAME FOR DATAFILE 276 to '+DATA';
+SET NEWNAME FOR DATAFILE 277 to '+DATA';
+SET NEWNAME FOR DATAFILE 278 to '+DATA';
+SET NEWNAME FOR DATAFILE 279 to '+DATA';
+SET NEWNAME FOR DATAFILE 280 to '+DATA';
+SET NEWNAME FOR DATAFILE 281 to '+DATA';
+SET NEWNAME FOR DATAFILE 282 to '+DATA';
+SET NEWNAME FOR DATAFILE 283 to '+DATA';
+SET NEWNAME FOR DATAFILE 284 to '+DATA';
+SET NEWNAME FOR DATAFILE 285 to '+DATA';
+SET NEWNAME FOR DATAFILE 286 to '+DATA';
+SET NEWNAME FOR DATAFILE 287 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 288 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 289 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 290 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 291 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 292 to '+DATA';
+SET NEWNAME FOR DATAFILE 293 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 294 to '+DATA';
+SET NEWNAME FOR DATAFILE 295 to '+DATA';
+SET NEWNAME FOR DATAFILE 296 to '+DATA';
+SET NEWNAME FOR DATAFILE 297 to '+DATA';
+SET NEWNAME FOR DATAFILE 298 to '+DATA';
+SET NEWNAME FOR DATAFILE 299 to '+DATA';
+SET NEWNAME FOR DATAFILE 300 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 301 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 302 to '+DATA';
+SET NEWNAME FOR DATAFILE 303 to '+DATA';
+SET NEWNAME FOR DATAFILE 304 to '+DATA';
+SET NEWNAME FOR DATAFILE 305 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 306 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 307 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 308 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 309 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 310 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 311 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 312 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 339 to '+DATA';
+SET NEWNAME FOR DATAFILE 340 to '+DATA';
+SET NEWNAME FOR DATAFILE 341 to '+DATA';
+SET NEWNAME FOR DATAFILE 342 to '+DATA';
+SET NEWNAME FOR DATAFILE 343 to '+DATA';
+SET NEWNAME FOR DATAFILE 344 to '+DATA';
+SET NEWNAME FOR DATAFILE 345 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 346 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 347 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 348 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 349 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 350 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 351 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 352 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 353 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 354 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 355 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 356 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 357 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 358 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 359 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 360 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 361 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 362 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 363 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 364 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 365 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 366 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 367 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 368 to '+PRODRECO';
+SET NEWNAME FOR DATAFILE 369 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 370 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 371 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 372 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 373 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 374 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 375 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 376 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 377 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 378 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 379 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 380 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 381 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 382 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 383 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 384 to '+STGDATA';
+SET NEWNAME FOR DATAFILE 385 to '+PRODRECO';
+restore database from TAG='TAG20180211T114404';
+switch datafile all;
+release channel t1;
+release channel t2;
+release channel t3;
+release channel t4;
+ }
+
+
+
+
+
+
+
+
+
+
+

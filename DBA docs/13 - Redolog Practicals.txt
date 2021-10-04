@@ -1,0 +1,173 @@
+REDOLOG FILE PRACTICALS
+
+
+connect sysdba
+$sqlplus '/as sysdba'
+> set linesize 100;
+> col MEMBER format a40;
+> select  GROUP#,MEMBER from v$logfile;
+
+++++++++++++++++++++++++++++++++
+HOW TO CHECK LOG SEQUENCE NUMBER
+++++++++++++++++++++++++++++++++
+
+> select group#,sequence#,members,status from v$log;
+
+++++++++++++++++++++++
+CREATE A REDOLOG FILE
+++++++++++++++++++++++
+note: the size will be taken for a group and all the members under a group will have same size
+
+> Alter database add logfile('/u01/app/PROD/oradata/PROD/redo1.log') size 10m;
+> alter database add logfile '/u01/app/PROD/oradata/PROD/redo05.log' size 10m;
+> alter database add logfile ('/u01/app/PROD/oradata/PROD/redo05.log','/u01/app/PROD/oradata/PROD/redo06.log') size 10m;
+
++++++++++++++++++++++++++
+Creating group and member
++++++++++++++++++++++++++
+
+> alter database add logfile group 1 ('/u01/app/PROD/oradata/PROD/redo086a.log') size 50m;
+> alter database add logfile group 1 '/u01/app/PROD/oradata/PROD/redo086a.log' size 50m;
+
+++++++++++++++++++++++++++++++
+Adding member to exising group
+++++++++++++++++++++++++++++++
+ 
+> alter database add logfile member '/u02/app/PROD/oradata/PROD/redo093b.log' to group 1;
+> alter database add logfile member '/u01/app/PROD/oradata/PROD/redo07.log','/u01/app/PROD/oradata/PROD/redo08.log' to group 4;
+> alter database add logfile member '/u01/app/PROD/oradata/PROD/redo09.log' to group 1,'/u01/app/PROD/oradata/PROD/redo10.log' to group 2;
+
++++++++++++++++++++++++++++++++++++
+Drop the memeber from exising group
++++++++++++++++++++++++++++++++++++
+note: we can not remove all members in a group but we can remove in OS level
+
+> alter system switch logfile;
+> alter database drop logfile member '/u02/app/PROD/oradata/PROD/redo013b.log';
+
+++++++++++++++
+Drop the group
+++++++++++++++
+
+> alter database clear unarchived logfile group 5;
+> alter database drop logfile group 1;
+
++++++++++++++
+Find the size
+++++++++++++++
+ 
+> Select group#,members,bytes/1024/1024 from v$log;
+
++++++++++++++++++++++++++++++++
+Relocate or rename redo logfile
++++++++++++++++++++++++++++++++
+ 
+> shutdown immediate
+
+Move the file to new location 
+$ mkdir -p /u02/app/PROD/oradata/PROD
+$ mv /u01/app/PROD/oradata/PROD/redo03a.log /u02/app/PROD/oradata/PROD or rename the file
+
+> startup mount;
+> alter database rename file '/u01/app/PROD/oradata/PROD/redo023a.log' to '/u02/app/PROD/oradata/PROD/redo023a.log'; or rename the file
+> alter database open;
+> select  GROUP#,MEMBER from v$logfile;
+
++++++++++++++++++++
+Resize redologfile
++++++++++++++++++++
+
+You cannot resize logfiles. If you want to resize a logfile create a new logfile group with the new size and subsequently drop the old logfile group
+
++++++++++++++++++++++++++++
+check the redologfile size 
++++++++++++++++++++++++++++
+
+> Select group#, bytes/1024/1024 from v$log;
+
+
+A log switch occurs when LGWR stops writing to one redo log group and starts writing to another. 
+By default, a log switch occurs automatically when the current redo log file group fills.
+
+You can force a log switch to make the currently active group inactive and available for redo log maintenance operations. 
+For example, you want to drop the currently active group, but are not able to do so until the group is inactive. 
+You may also wish to force a log switch if the currently active group needs to be archived at a specific time before the members of the group are completely filled. 
+This option is useful in configurations with large redo log files that take a long time to fill.
+
+the size of three groups are 50 MB, lets increase it to 55 MB
+> select group#,members,bytes/1024/1024 from v$log;
+
+    GROUP#    MEMBERS BYTES/1024/1024
+---------- ---------- ---------------
+         1          1              50
+         2          1              50
+         3          1              50
+
+first create another three groups with 55 MB size
+> alter database add logfile group 11 '/u01/app/PROD/oradata/PROD/redo11.log' size 55m;
+> alter database add logfile group 12 '/u01/app/PROD/oradata/PROD/redo12.log' size 55m;
+> alter database add logfile group 13 '/u01/app/PROD/oradata/PROD/redo13.log' size 55m;
+
+> select group#,members,status from v$log;
+
+    GROUP#    MEMBERS STATUS
+---------- ---------- ----------------
+         1          1 INACTIVE
+         2          1 CURRENT
+         3          1 INACTIVE
+        11          1 UNUSED
+        12          1 UNUSED
+        13          1 UNUSED
+
+now, manually switch the logfile
+> alter system switch logfile;
+> select group#,members,status from v$log;
+
+    GROUP#    MEMBERS STATUS
+---------- ---------- ----------------
+         1          1 INACTIVE
+         2          1 ACTIVE
+         3          1 INACTIVE
+        11          1 CURRENT
+        12          1 UNUSED
+        13          1 UNUSED
+
+thats all, we are done, still if we wanna delete old groups, make all members in old groups are inactive and delete those
+> alter system checkpoint;
+> select group#,members,status from v$log;
+
+    GROUP#    MEMBERS STATUS
+---------- ---------- ----------------
+         1          1 INACTIVE
+         2          1 INACTIVE
+         3          1 INACTIVE
+        11          1 CURRENT
+        12          1 UNUSED
+        13          1 UNUSED
+
+now,delete old groups and rename new groups and members if we want
+
++++++++++++++++++++++++++++++++
+REUSE DROPPED MEMBER IN A GROUP
++++++++++++++++++++++++++++++++
+note:we can reuse the member back to any group
+
+> alter database add logfile member '/u01/db/oraprod/oradata/prod/redo04a.log' reuse to group 4;
+
+REUSE DROPPED GROUP
++++++++++++++++++++
+
+> alter database drop logfile group 5;
+> alter database add logfile group 5 '/u01/app/PROD/oradata/PROD/redo06.log' reuse;
+
+
+
+SQL> alter system switch logfile;
+
+SQL> select status from v$log;
+
+++++++
+Views:
+++++++ 
+ 
+? V$CONTROLFILE ? V$LOGFILE ? V$LOG 

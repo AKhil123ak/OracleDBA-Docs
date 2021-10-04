@@ -1,0 +1,303 @@
+select path ,failgroup,create_date ,name from v$asm_disk where path in  ('/dev/rhdisk69','/dev/rhdisk71','/dev/rhdisk65','/dev/rhdisk67');
+
+select path ,failgroup,create_date ,name from v$asm_disk where path in
+('/dev/hdisk61','/dev/hdisk65','/dev/hdisk69','/dev/hdisk73','/dev/hdisk63','/dev/hdisk67','/dev/hdisk71','/dev/hdisk75','/dev/hdisk64','/dev/hdisk68','/dev/hdisk72','/dev/hdisk76');
+
+
+
+lspv |grep hdisk61
+lspv |grep hdisk65
+lspv |grep hdisk61
+
+
+SQL> select path ,failgroup,create_date ,name from v$asm_disk where name like '%CANLDN%' order by FAILGROUP;
+
+PATH                 FAILGROUP                      CREATE_DA NAME
+-------------------- ------------------------------ --------- ------------------------------
+/dev/rhdisk31        CANLDN_DATA1_0000              06-JUN-14 CANLDN_DATA1_0000
+/dev/rhdisk28        CANLDN_DATA1_0001              06-JUN-14 CANLDN_DATA1_0001
+/dev/rhdisk34        CANLDN_DATA1_0002              06-JUN-14 CANLDN_DATA1_0002
+/dev/rhdisk37        CANLDN_DATA1_0003              06-JUN-14 CANLDN_DATA1_0003
+/dev/rhdisk32        CANLDN_REDO1_0000              06-JUN-14 CANLDN_REDO1_0000
+/dev/rhdisk29        CANLDN_REDO1_0001              06-JUN-14 CANLDN_REDO1_0001
+/dev/rhdisk35        CANLDN_REDO2_0000              06-JUN-14 CANLDN_REDO2_0000
+/dev/rhdisk38        CANLDN_REDO2_0001              06-JUN-14 CANLDN_REDO2_0001
+
+
+
+
+lspv |grep hdisk75
+lspv |grep hdisk76
+lspv |grep hdisk77
+lspv |grep hdisk78
+lspv |grep hdisk79
+lspv |grep hdisk80
+lspv |grep hdisk81
+lspv |grep hdisk82
+
+
+grid@DC_INT_DB/asm/grid>lspv |grep hdisk75
+hdisk75         none                                None
+grid@DC_INT_DB/asm/grid>lspv |grep hdisk76
+hdisk76         none                                None
+grid@DC_INT_DB/asm/grid>lspv |grep hdisk77
+hdisk77         none                                None
+grid@DC_INT_DB/asm/grid>lspv |grep hdisk78
+hdisk78         none                                None
+grid@DC_INT_DB/asm/grid>lspv |grep hdisk79
+hdisk79         none                                None
+grid@DC_INT_DB/asm/grid>lspv |grep hdisk80
+hdisk80         none                                None
+grid@DC_INT_DB/asm/grid>lspv |grep hdisk81
+hdisk81         none                                None
+grid@DC_INT_DB/asm/grid>lspv |grep hdisk82
+hdisk82         none                                None
+
+
+
+
+lscfg -vpl hdisk75 | grep Serial 
+lscfg -vpl hdisk76 | grep Serial 
+lscfg -vpl hdisk77 | grep Serial 
+lscfg -vpl hdisk78 | grep Serial 
+lscfg -vpl hdisk79 | grep Serial 
+lscfg -vpl hdisk80 | grep Serial 
+lscfg -vpl hdisk81 | grep Serial 
+lscfg -vpl hdisk82 | grep Serial 
+
+
+grid@DC_INT_DB/asm/grid>lscfg -vpl hdisk75 | grep Serial
+        Serial Number...............6005076801808641A0000000000018DE
+grid@DC_INT_DB/asm/grid>lscfg -vpl hdisk76 | grep Serial
+        Serial Number...............6005076801808641A0000000000018E2
+grid@DC_INT_DB/asm/grid>lscfg -vpl hdisk77 | grep Serial
+        Serial Number...............6005076801808641A0000000000018DF
+grid@DC_INT_DB/asm/grid>lscfg -vpl hdisk78 | grep Serial
+        Serial Number...............6005076801808641A0000000000018E3
+grid@DC_INT_DB/asm/grid>lscfg -vpl hdisk79 | grep Serial
+        Serial Number...............6005076801808641A0000000000018DC
+grid@DC_INT_DB/asm/grid>lscfg -vpl hdisk80 | grep Serial
+        Serial Number...............6005076801808641A0000000000018E0
+grid@DC_INT_DB/asm/grid>lscfg -vpl hdisk81 | grep Serial
+        Serial Number...............6005076801808641A0000000000018DD
+grid@DC_INT_DB/asm/grid>lscfg -vpl hdisk82 | grep Serial
+        Serial Number...............6005076801808641A0000000000018E1
+
+
+
+ls -lrt /dev/rhdisk75
+ls -lrt /dev/rhdisk76
+ls -lrt /dev/rhdisk77
+ls -lrt /dev/rhdisk78
+ls -lrt /dev/rhdisk79
+ls -lrt /dev/rhdisk80
+ls -lrt /dev/rhdisk81
+ls -lrt /dev/rhdisk82
+
+
+grid@DC_INT_DB/asm/grid>ls -lrt /dev/rhdisk75
+crw-rw----    1 grid     asmadmin     18, 82 Jun 17 20:06 /dev/rhdisk75
+grid@DC_INT_DB/asm/grid>ls -lrt /dev/rhdisk76
+crw-rw----    1 grid     asmadmin     18, 76 Jun 17 20:06 /dev/rhdisk76
+grid@DC_INT_DB/asm/grid>ls -lrt /dev/rhdisk77
+crw-rw----    1 grid     asmadmin     18, 78 Jun 17 20:06 /dev/rhdisk77
+grid@DC_INT_DB/asm/grid>ls -lrt /dev/rhdisk78
+crw-rw----    1 grid     asmadmin     18, 75 Jun 17 20:06 /dev/rhdisk78
+grid@DC_INT_DB/asm/grid>ls -lrt /dev/rhdisk79
+crw-rw----    1 grid     asmadmin     18, 80 Jun 17 20:06 /dev/rhdisk79
+grid@DC_INT_DB/asm/grid>ls -lrt /dev/rhdisk80
+crw-rw----    1 grid     asmadmin     18, 79 Jun 17 20:06 /dev/rhdisk80
+grid@DC_INT_DB/asm/grid>ls -lrt /dev/rhdisk81
+crw-rw----    1 grid     asmadmin     18, 81 Jun 17 20:06 /dev/rhdisk81
+grid@DC_INT_DB/asm/grid>ls -lrt /dev/rhdisk82
+crw-rw----    1 grid     asmadmin     18, 77 Jun 17 20:06 /dev/rhdisk82
+
+
+
+getconf DISK_SIZE /dev/hdisk75
+getconf DISK_SIZE /dev/hdisk76
+getconf DISK_SIZE /dev/hdisk77
+getconf DISK_SIZE /dev/hdisk78
+getconf DISK_SIZE /dev/hdisk79
+getconf DISK_SIZE /dev/hdisk80
+getconf DISK_SIZE /dev/hdisk81
+getconf DISK_SIZE /dev/hdisk82
+
+grid@DC_INT_DB/asm/grid>getconf DISK_SIZE /dev/hdisk75
+32768
+grid@DC_INT_DB/asm/grid>getconf DISK_SIZE /dev/hdisk76
+32768
+grid@DC_INT_DB/asm/grid>getconf DISK_SIZE /dev/hdisk77
+32768
+grid@DC_INT_DB/asm/grid>getconf DISK_SIZE /dev/hdisk78
+32768
+grid@DC_INT_DB/asm/grid>getconf DISK_SIZE /dev/hdisk79
+32768
+grid@DC_INT_DB/asm/grid>getconf DISK_SIZE /dev/hdisk80
+32768
+grid@DC_INT_DB/asm/grid>getconf DISK_SIZE /dev/hdisk81
+32768
+grid@DC_INT_DB/asm/grid>getconf DISK_SIZE /dev/hdisk82
+32768
+
+
+'/dev/rhdisk75','/dev/rhdisk76','/dev/rhdisk77','/dev/rhdisk78','/dev/rhdisk79','/dev/rhdisk80','/dev/rhdisk81','/dev/rhdisk82'
+
+
+
+====  '/dev/rhdisk75' 
+
+ALTER DISKGROUP CANLDN_DATA1 add disk '/dev/rhdisk75','/dev/rhdisk76','/dev/rhdisk77','/dev/rhdisk78','/dev/rhdisk79','/dev/rhdisk80','/dev/rhdisk81','/dev/rhdisk82' rebalance power 6 ;
+
+
+
+
+
+================	DISK Addition     ================	
+
+
+SQL> spool DC_CANLDN_DISK_ADDITION_01AUG15.log
+SQL> set lines 500
+SQL> select * from v$instance;
+
+INSTANCE_NUMBER INSTANCE_NAME    HOST_NAME                                                        VERSION           STARTUP_T STATUS       PAR    THREAD# ARCHIVE LOG_SWITCH_WAIT LOGINS     SHU DATABASE_STATUS   INSTANCE_ROLE      ACTIVE_ST BLO
+--------------- ---------------- ---------------------------------------------------------------- ----------------- --------- ------------ --- ---------- ------- --------------- ---------- --- ----------------- ------------------ --------- ---
+              1 +ASM             DC_INT_DB                                                        11.2.0.3.0        10-JAN-15 STARTED      NO           0 STOPPED                 ALLOWED    NO  ACTIVE            UNKNOWN            NORMAL    NO
+
+SQL> select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup order by name;
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+CANBAH_DATA1                   MOUNTED               128   59.2802734
+CANBAH_REDO1                   MOUNTED                 4   3.43457031
+CANBAH_REDO2                   MOUNTED                 4   3.43457031
+CANHKG_DATA1                   MOUNTED               128   41.9150391
+CANHKG_REDO1                   MOUNTED                 4   2.83691406
+CANHKG_REDO2                   MOUNTED                 4   2.83691406
+CANLDN_DATA1                   MOUNTED               128   2.90332031
+CANLDN_REDO1                   MOUNTED                 4   2.83691406
+CANLDN_REDO2                   MOUNTED                 4   2.83691406
+CANNYC_DATA1                   MOUNTED               128   39.9130859
+CANNYC_REDO1                   MOUNTED                 4   1.84082031
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+CANNYC_REDO2                   MOUNTED                 4   1.84082031
+CANSHA_DATA1                   MOUNTED               128   24.4697266
+CANSHA_REDO1                   MOUNTED                 4   2.82128906
+CANSHA_REDO2                   MOUNTED                 4   2.83691406
+CONJON_DATA1                   MOUNTED               128   63.7177734
+CONJON_REDO1                   MOUNTED                 4   3.25390625
+CONJON_REDO2                   MOUNTED                 4   3.25390625
+DATA                           MOUNTED                 1   .943359375
+INTFCDB_DATA1                  MOUNTED               128   123.220703
+INTFCDB_REDO1                  MOUNTED                 4   3.33496094
+INTFCDB_REDO2                  MOUNTED                 4   3.43457031
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+INTREP_DATA1                   MOUNTED                10   4.64550781
+
+23 rows selected.
+
+SQL> col path for a25
+SQL> select path ,failgroup,create_date ,name from v$asm_disk where path in  ('/dev/rhdisk75','/dev/rhdisk76','/dev/rhdisk77','/dev/rhdisk78','/dev/rhdisk79','/dev/rhdisk80','/dev/rhdisk81','/dev/rhdisk82');
+
+PATH                      FAILGROUP                      CREATE_DA NAME
+------------------------- ------------------------------ --------- ------------------------------
+/dev/rhdisk75
+/dev/rhdisk76
+/dev/rhdisk77
+/dev/rhdisk82
+/dev/rhdisk79
+/dev/rhdisk80
+/dev/rhdisk81
+/dev/rhdisk78
+
+8 rows selected.
+
+SQL> ALTER DISKGROUP CANLDN_DATA1 add disk '/dev/rhdisk75','/dev/rhdisk76','/dev/rhdisk77','/dev/rhdisk78','/dev/rhdisk79','/dev/rhdisk80','/dev/rhdisk81','/dev/rhdisk82' rebalance power 6 ;
+
+Diskgroup altered.
+
+SQL> select path ,failgroup,create_date ,name from v$asm_disk where path in  ('/dev/rhdisk75','/dev/rhdisk76','/dev/rhdisk77','/dev/rhdisk78','/dev/rhdisk79','/dev/rhdisk80','/dev/rhdisk81','/dev/rhdisk82');
+
+PATH                      FAILGROUP                      CREATE_DA NAME
+------------------------- ------------------------------ --------- ------------------------------
+/dev/rhdisk75             CANLDN_DATA1_0004              01-AUG-15 CANLDN_DATA1_0004
+/dev/rhdisk76             CANLDN_DATA1_0005              01-AUG-15 CANLDN_DATA1_0005
+/dev/rhdisk77             CANLDN_DATA1_0006              01-AUG-15 CANLDN_DATA1_0006
+/dev/rhdisk78             CANLDN_DATA1_0007              01-AUG-15 CANLDN_DATA1_0007
+/dev/rhdisk79             CANLDN_DATA1_0008              01-AUG-15 CANLDN_DATA1_0008
+/dev/rhdisk80             CANLDN_DATA1_0009              01-AUG-15 CANLDN_DATA1_0009
+/dev/rhdisk81             CANLDN_DATA1_0010              01-AUG-15 CANLDN_DATA1_0010
+/dev/rhdisk82             CANLDN_DATA1_0011              01-AUG-15 CANLDN_DATA1_0011
+
+8 rows selected.
+
+SQL> select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup order by name;
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+CANBAH_DATA1                   MOUNTED               128   59.2802734
+CANBAH_REDO1                   MOUNTED                 4   3.43457031
+CANBAH_REDO2                   MOUNTED                 4   3.43457031
+CANHKG_DATA1                   MOUNTED               128   41.9150391
+CANHKG_REDO1                   MOUNTED                 4   2.83691406
+CANHKG_REDO2                   MOUNTED                 4   2.83691406
+CANLDN_DATA1                   MOUNTED               384   258.887695
+CANLDN_REDO1                   MOUNTED                 4   2.83691406
+CANLDN_REDO2                   MOUNTED                 4   2.83691406
+CANNYC_DATA1                   MOUNTED               128   39.9130859
+CANNYC_REDO1                   MOUNTED                 4   1.84082031
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+CANNYC_REDO2                   MOUNTED                 4   1.84082031
+CANSHA_DATA1                   MOUNTED               128   24.4697266
+CANSHA_REDO1                   MOUNTED                 4   2.82128906
+CANSHA_REDO2                   MOUNTED                 4   2.83691406
+CONJON_DATA1                   MOUNTED               128   63.7177734
+CONJON_REDO1                   MOUNTED                 4   3.25390625
+CONJON_REDO2                   MOUNTED                 4   3.25390625
+DATA                           MOUNTED                 1   .943359375
+INTFCDB_DATA1                  MOUNTED               128   123.220703
+INTFCDB_REDO1                  MOUNTED                 4   3.33496094
+INTFCDB_REDO2                  MOUNTED                 4   3.43457031
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+INTREP_DATA1                   MOUNTED                10   4.64550781
+
+23 rows selected.
+
+SQL> select * from v$asm_operation;
+
+GROUP_NUMBER OPERA STAT      POWER     ACTUAL      SOFAR   EST_WORK   EST_RATE EST_MINUTES ERROR_CODE
+------------ ----- ---- ---------- ---------- ---------- ---------- ---------- ----------- --------------------------------------------
+           7 REBAL RUN           6          6       6993      85368       6789          11
+
+SQL> /
+
+GROUP_NUMBER OPERA STAT      POWER     ACTUAL      SOFAR   EST_WORK   EST_RATE EST_MINUTES ERROR_CODE
+------------ ----- ---- ---------- ---------- ---------- ---------- ---------- ----------- --------------------------------------------
+           7 REBAL RUN           6          6       7113      85368       6470          12
+
+SQL> /
+
+GROUP_NUMBER OPERA STAT      POWER     ACTUAL      SOFAR   EST_WORK   EST_RATE EST_MINUTES ERROR_CODE
+------------ ----- ---- ---------- ---------- ---------- ---------- ---------- ----------- --------------------------------------------
+           7 REBAL RUN           6          6       8313      85369       6714          11
+
+SQL> /
+
+GROUP_NUMBER OPERA STAT      POWER     ACTUAL      SOFAR   EST_WORK   EST_RATE EST_MINUTES ERROR_CODE
+------------ ----- ---- ---------- ---------- ---------- ---------- ---------- ----------- --------------------------------------------
+           7 REBAL RUN           6          6       9513      85370       6819          11
+
+SQL> /
+
+GROUP_NUMBER OPERA STAT      POWER     ACTUAL      SOFAR   EST_WORK   EST_RATE EST_MINUTES ERROR_CODE
+------------ ----- ---- ---------- ---------- ---------- ---------- ---------- ----------- --------------------------------------------
+           7 REBAL RUN           6          6      10233      85371       6586          11
+

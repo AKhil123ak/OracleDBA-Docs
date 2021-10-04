@@ -1,0 +1,106 @@
+SYS:JFSPPROD > select * from v$instance;
+SP2-0734: unknown command beginning "select * ..." - rest of line ignored.
+SYS:JFSPPROD > select * from v$instance;
+
+INSTANCE_NUMBER INSTANCE_NAME
+--------------- ----------------
+HOST_NAME
+----------------------------------------------------------------
+VERSION           STARTUP_T STATUS       PAR    THREAD# ARCHIVE LOG_SWITCH_WAIT
+----------------- --------- ------------ --- ---------- ------- ---------------
+LOGINS     SHU DATABASE_STATUS   INSTANCE_ROLE      ACTIVE_ST BLO
+---------- --- ----------------- ------------------ --------- ---
+              1 JFSPPROD
+JFSBNKSRV121
+11.2.0.4.0        24-JUN-18 OPEN         NO           1 STARTED
+ALLOWED    NO  ACTIVE            PRIMARY_INSTANCE   NORMAL    NO
+
+
+SYS:JFSPPROD > select sysdate from dual;
+
+SYSDATE
+---------
+29-JUN-18
+
+SYS:JFSPPROD > set time on;
+14:24:52 SYS:JFSPPROD > select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup_stat order by name;
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+BIP_DB                         MOUNTED               100   84.7021484
+DATA                           CONNECTED            5200   223.176758
+FRA                            CONNECTED             100   99.9189453
+MIGDATA                        CONNECTED            2400   8.73144531
+PRODRECO                       CONNECTED               1   .911132813
+PRODREDO                       CONNECTED             208   82.9316406
+PRODVOTE1                      MOUNTED                10   9.94921875
+PRODVOTE2                      MOUNTED                10   9.94921875
+PRODVOTE3                      MOUNTED                10   9.94921875
+REDO01                         CONNECTED              50   23.9248047
+REDO02                         CONNECTED              50   23.9248047
+
+NAME                           STATE       TOTAL_MB/1024 FREE_MB/1024
+------------------------------ ----------- ------------- ------------
+REDO03                         CONNECTED              50   23.9248047
+STGDATA                        CONNECTED            2400    18.453125
+
+13 rows selected.
+
+14:25:12 SYS:JFSPPROD > select TABLESPACE_NAME,BYTES/1024/1024/1024 from sm$ts_free order by 1;
+
+TABLESPACE_NAME                BYTES/1024/1024/1024
+------------------------------ --------------------
+BRNDATA1                                 50.5877686
+BRNINDX1                                 .774414063
+FCCDATALAR                                    55.75
+FCCDATAMED                                24.515625
+FCCDATAPARTLAR                           .556640625
+FCCDATAPARTMED                           157.154297
+FCCDATAPARTXL                            22.3046875
+FCCDATASML                               1.34661865
+FCCDATAXL                                        39
+FCCDFLT                                  15.2072754
+FCCHOST                                  33.8239746
+
+TABLESPACE_NAME                BYTES/1024/1024/1024
+------------------------------ --------------------
+FCCINDXLAR                                    .1875
+FCCINDXMED                                .19140625
+FCCINDXPARTLAR                           .278320313
+FCCINDXPARTMED                           57.5717773
+FCCINDXPARTXL                            84.3261719
+FCCINDXSML                                45.685791
+FCCINDXXL                                        12
+FCRARCH                                  439.984985
+FCRBRN                                    1.2890625
+FCRDATA1                                 222.602356
+FCRDATA2                                 81.0792847
+
+TABLESPACE_NAME                BYTES/1024/1024/1024
+------------------------------ --------------------
+FCRDATASML                                146.02417
+FCRDATAXL                                37.9912109
+FCRHOST                                  70.5742188
+FCRINDXSML                               7.84185791
+FCRINDXXL                                1.19238281
+SYSAUX                                    29.663269
+SYSTEM                                   4.56640625
+UNDOTBS1                                 152.263672
+USERS                                     5.9977417
+
+ ALTER TABLESPACE FCCDATAPARTX ADD DATAFILE '+DATA' size 20G;
+
+
+
+ ALTER TABLESPACE FCRDATA2 ADD DATAFILE '+DATA' size 20G;
+
+ 
+ select TABLESPACE_NAME,BYTES/1024/1024/1024 from sm$ts_free order by 1;
+ 
+ select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup_stat order by name;
+ 
+alter database backup controlfile to trace;
+
+
+
+ alter database backup controlfile to '/home/oracle/JFSPPROD_control_bkp_29jun18.ctl';

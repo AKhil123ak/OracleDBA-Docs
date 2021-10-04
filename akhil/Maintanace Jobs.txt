@@ -1,0 +1,9 @@
+select * from DBA_AUTOTASK_JOB_HISTORY;
+
+select * from DBA_AUTOTASK_WINDOW_CLIENTS;
+
+select * from DBA_AUTOTASK_CLIENT;
+
+select * from DBA_AUTOTASK_CLIENT_HISTORY;
+
+select * from DBA_AUTOTASK_SCHEDULE;

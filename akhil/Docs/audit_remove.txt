@@ -1,0 +1,13 @@
+select owner from dba_tables where table_name='ACTB_HISTORY_MMDD'
+ORACLE 
+evry month 
+trace 
+find /u01/app/oracle/admin/JFSIIB/adump -type f -name '*.aud' -mtime +30 -exec rm {} \;     ---> one month 
+
+ASM --- 3 EVRY DAY 
+
+find /u01/app/12.2.0.1/grid/rdbms/audit -type f -name '*.aud' -mtime +30 -exec rm {} \; 
+
+/////////////////////////////////////////////////////////
+find /backup/ARCH/JFSCIB -type f -name '*.dbf' -mtime +30 -exec rm {} \; 
+

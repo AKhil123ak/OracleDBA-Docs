@@ -1,0 +1,18 @@
+db replications;
+=========================
+set pages 500
+select t.sequence#,t.applied,t.first_time,t.next_time,t.completion_time from v$archived_log t
+  where t.applied='YES'
+  order by t.sequence# asc;   
+  
+  
+ALTER SESSION SET NLS_DATE_FORMAT = 'HH24:MI:SS';
+
+
+
+gap
+===========
+sql>select * from v$archive_gap
+
+$ scp log_file_name_n.arc oracle@standby:/log/file/location/log_file_name_n.arc
+

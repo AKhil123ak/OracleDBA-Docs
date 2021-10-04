@@ -1,0 +1,240 @@
+Using username "soral301".
+Last login: Tue Jul 24 07:53:27 IST 2018 on ssh from 172.17.73.151
+***************************************************************************
+*                                                                         *
+*      Welcome to Janalakshmi Financial Services.                         *
+*                                                                         *
+*                                                                         *
+* If you are not authorized to use this system, log off now.              *
+* The Access to this system is for Authorized Use only.                   *
+* Use this system is subject to audit at any time by request of           *
+* Janalakshmi Financial Services or IBM management only.                  *
+*                                                                         *
+* This system contains information proprietary to Janalakshmi Financial   *
+* Services                                                                *
+*                                                                         *
+* Any unauthorized user or use of such information may result in          *
+* civil and or criminal penalties. Use of this system equipment           *
+* is subject to monitoring and be controlled at all times by or on behalf *
+* of Janalakshmi Financial Services                                       *
+*                                                                         *
+***************************************************************************
+
+
+$
+$
+$ sqlplus / as sysdba
+
+SQL*Plus: Release 11.2.0.4.0 Production on Tue Jul 24 15:55:22 2018
+
+Copyright (c) 1982, 2013, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Automatic Storage Management option
+
+SYS:EBANKUAT > select USERNAME,ACCOUNT_STATUS,EXPIRY_DATE,DEFAULT_TABLESPACE,PROFILE from dba_users  where username='APPUSER1';
+
+no rows selected
+
+SYS:EBANKUAT > select username from dba_users  where username='APPUSER1';
+
+no rows selected
+
+SYS:EBANKUAT > select username from dba_users;
+
+USERNAME
+------------------------------
+PERFSTAT
+JFS_UAT_IB
+EXPENSE_MANAGER_UAT
+JFS_UAT_USER
+IN04762H
+JFS_SIT_USER
+IN08248F
+JFS_SIT_BASE
+EXPENSE_SIT_MANAGER
+JFS_SIT_IB
+JFS_SIT_3RDPARTY
+
+USERNAME
+------------------------------
+JFS_UAT_3RDPARTY
+JFS_UAT_BASE
+DBSUPPORT_CLO
+JFS_SIT_READONLY
+JFS_UAT_READONLY
+JFS_UAT3_USER
+EXPENSE_MANAGER_SIM
+JFS_UAT3_3RDPARTY
+JFS_SIM_USER
+JFS_UAT3_IB
+JFS_UAT3_BASE
+
+USERNAME
+------------------------------
+JFS_SIM_3RDPARTY
+JFS_UAT3_READONLY
+JFS_SIM_READONLY
+JFS_SIM_BASE
+JFS_SIM_IB
+XS$NULL
+CTXSYS
+APPQOSSYS
+SYSTEM
+SYS
+OUTLN
+
+33 rows selected.
+
+SYS:EBANKUAT >
+SYS:EBANKUAT >
+SYS:EBANKUAT >
+SYS:EBANKUAT >
+SYS:EBANKUAT >
+SYS:EBANKUAT > select * from dba_roles;
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+CONNECT                        NO       NONE
+RESOURCE                       NO       NONE
+DBA                            NO       NONE
+SELECT_CATALOG_ROLE            NO       NONE
+EXECUTE_CATALOG_ROLE           NO       NONE
+DELETE_CATALOG_ROLE            NO       NONE
+EXP_FULL_DATABASE              NO       NONE
+IMP_FULL_DATABASE              NO       NONE
+LOGSTDBY_ADMINISTRATOR         NO       NONE
+DBFS_ROLE                      NO       NONE
+AQ_ADMINISTRATOR_ROLE          NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+AQ_USER_ROLE                   NO       NONE
+DATAPUMP_EXP_FULL_DATABASE     NO       NONE
+DATAPUMP_IMP_FULL_DATABASE     NO       NONE
+ADM_PARALLEL_EXECUTE_TASK      NO       NONE
+GATHER_SYSTEM_STATISTICS       NO       NONE
+JAVA_DEPLOY                    NO       NONE
+RECOVERY_CATALOG_OWNER         NO       NONE
+SCHEDULER_ADMIN                NO       NONE
+HS_ADMIN_SELECT_ROLE           NO       NONE
+HS_ADMIN_EXECUTE_ROLE          NO       NONE
+HS_ADMIN_ROLE                  NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+GLOBAL_AQ_USER_ROLE            GLOBAL   GLOBAL
+JAVAUSERPRIV                   NO       NONE
+JAVAIDPRIV                     NO       NONE
+JAVASYSPRIV                    NO       NONE
+JAVADEBUGPRIV                  NO       NONE
+EJBCLIENT                      NO       NONE
+JMXSERVER                      NO       NONE
+JAVA_ADMIN                     NO       NONE
+CTXAPP                         NO       NONE
+XDBADMIN                       NO       NONE
+XDB_SET_INVOKER                NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+AUTHENTICATEDUSER              NO       NONE
+XDB_WEBSERVICES                NO       NONE
+XDB_WEBSERVICES_WITH_PUBLIC    NO       NONE
+XDB_WEBSERVICES_OVER_HTTP      NO       NONE
+OLAP_XS_ADMIN                  NO       NONE
+CWM_USER                       NO       NONE
+OLAP_USER                      NO       NONE
+SPATIAL_WFS_ADMIN              NO       NONE
+WFS_USR_ROLE                   NO       NONE
+SPATIAL_CSW_ADMIN              NO       NONE
+CSW_USR_ROLE                   NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+ORACLE_JAVA_DEV                NO       NONE
+JFS_SIT_OWNER_ROLE             NO       NONE
+JFS_SIT_READ_WRITE_ROLE        NO       NONE
+JFS_SIT_READ_ONLY_ROLE         NO       NONE
+JFS_UAT_OWNER_ROLE             NO       NONE
+JFS_UAT_READ_WRITE_ROLE        NO       NONE
+JFS_UAT_READ_ONLY_ROLE         NO       NONE
+JFS_UAT3_OWNER_ROLE            NO       NONE
+JFS_UAT3_READ_WRITE_ROLE       NO       NONE
+JFS_UAT3_READ_ONLY_ROLE        NO       NONE
+JFS_SIM_OWNER_ROLE             NO       NONE
+
+ROLE                           PASSWORD AUTHENTICAT
+------------------------------ -------- -----------
+JFS_SIM_READ_WRITE_ROLE        NO       NONE
+JFS_SIM_READ_ONLY_ROLE         NO       NONE
+
+57 rows selected.
+
+SYS:EBANKUAT > select sum(bytes/1024/1024), owner from dba_segments group by owner order by 1 desc;
+
+SUM(BYTES/1024/1024) OWNER
+-------------------- ------------------------------
+           1506.9375 JFS_UAT_3RDPARTY
+            1408.375 JFS_SIT_3RDPARTY
+           1335.3125 SYS
+            1096.625 EXPENSE_MANAGER_UAT
+           1028.0625 JFS_SIM_3RDPARTY
+                 734 PERFSTAT
+             162.375 SYSTEM
+              106.25 JFS_UAT3_3RDPARTY
+             75.5625 JFS_UAT_BASE
+              51.125 JFS_SIT_BASE
+             45.3125 EXPENSE_MANAGER_SIM
+
+SUM(BYTES/1024/1024) OWNER
+-------------------- ------------------------------
+             32.1875 JFS_SIT_IB
+              23.875 JFS_UAT_IB
+              18.125 JFS_SIM_BASE
+             15.0625 JFS_UAT3_BASE
+                9.25 JFS_SIM_IB
+              8.3125 JFS_UAT3_IB
+               3.625 CTXSYS
+               3.125 EXPENSE_SIT_MANAGER
+               .5625 OUTLN
+
+20 rows selected.
+
+SYS:EBANKUAT > select sum(bytes/1024/1024), owner from dba_segments  where owner not in ('SYS','SYSTEM')group by owner order by 1 desc;;
+select sum(bytes/1024/1024), owner from dba_segments  where owner not in ('SYS','SYSTEM')group by owner order by 1 desc;
+                                                                                                                       *
+ERROR at line 1:
+ORA-00911: invalid character
+
+
+SYS:EBANKUAT > select sum(bytes/1024/1024), owner from dba_segments  where owner not in ('SYS','SYSTEM') group by owner order by 1 desc;
+
+SUM(BYTES/1024/1024) OWNER
+-------------------- ------------------------------
+           1506.9375 JFS_UAT_3RDPARTY
+            1408.375 JFS_SIT_3RDPARTY
+            1096.625 EXPENSE_MANAGER_UAT
+           1028.0625 JFS_SIM_3RDPARTY
+                 734 PERFSTAT
+              106.25 JFS_UAT3_3RDPARTY
+             75.5625 JFS_UAT_BASE
+              51.125 JFS_SIT_BASE
+             45.3125 EXPENSE_MANAGER_SIM
+             32.1875 JFS_SIT_IB
+              23.875 JFS_UAT_IB
+
+SUM(BYTES/1024/1024) OWNER
+-------------------- ------------------------------
+              18.125 JFS_SIM_BASE
+             15.0625 JFS_UAT3_BASE
+                9.25 JFS_SIM_IB
+              8.3125 JFS_UAT3_IB
+               3.625 CTXSYS
+               3.125 EXPENSE_SIT_MANAGER
+               .5625 OUTLN
+
+18 rows selected.
+
+SYS:EBANKUAT >

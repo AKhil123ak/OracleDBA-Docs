@@ -1,0 +1,129 @@
+SYS:JFSPPROD > set ime on;
+SP2-0158: unknown SET option "ime"
+SYS:JFSPPROD > set time on;
+01:19:17 SYS:JFSPPROD > select * from v$instance;
+
+INSTANCE_NUMBER INSTANCE_NAME                                                   
+--------------- ----------------                                                
+HOST_NAME                                                                       
+----------------------------------------------------------------                
+VERSION           STARTUP_T STATUS       PAR    THREAD# ARCHIVE LOG_SWITCH_WAIT 
+----------------- --------- ------------ --- ---------- ------- --------------- 
+LOGINS     SHU DATABASE_STATUS   INSTANCE_ROLE      ACTIVE_ST BLO               
+---------- --- ----------------- ------------------ --------- ---               
+              1 JFSPPROD                                                        
+JFSBNKSRV121                                                                    
+11.2.0.4.0        30-APR-18 OPEN         NO           1 STARTED                 
+ALLOWED    NO  ACTIVE            PRIMARY_INSTANCE   NORMAL    NO                
+                                                                                
+
+01:19:24 SYS:JFSPPROD > select sysdate from dual;
+
+SYSDATE                                                                         
+---------                                                                       
+23-MAY-18                                                                       
+
+01:19:33 SYS:JFSPPROD > sho parameter dump;
+
+NAME                                 TYPE                                       
+------------------------------------ --------------------------------           
+VALUE                                                                           
+------------------------------                                                  
+background_core_dump                 string                                     
+partial                                                                         
+background_dump_dest                 string                                     
+/u01/app/oracle/diag/rdbms/jfs                                                  
+pprod/JFSPPROD/trace                                                            
+core_dump_dest                       string                                     
+/u01/app/oracle/diag/rdbms/jfs                                                  
+pprod/JFSPPROD/cdump                                                            
+max_dump_file_size                   string                                     
+
+NAME                                 TYPE                                       
+------------------------------------ --------------------------------           
+VALUE                                                                           
+------------------------------                                                  
+UNLIMITED                                                                       
+shadow_core_dump                     string                                     
+partial                                                                         
+user_dump_dest                       string                                     
+/u01/app/oracle/diag/rdbms/jfs                                                  
+pprod/JFSPPROD/trace                                                            
+01:19:52 SYS:JFSPPROD > 
+01:21:49 SYS:JFSPPROD > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+01:24:04 SYS:JFSPPROD > 
+01:24:12 SYS:JFSPPROD > 
+01:24:12 SYS:JFSPPROD > 
+01:24:12 SYS:JFSPPROD > startup;
+ORA-32004: obsolete or deprecated parameter(s) specified for RDBMS instance
+ORACLE instance started.
+
+Total System Global Area 1.0636E+11 bytes                                       
+Fixed Size                  2258912 bytes                                       
+Variable Size            2.5770E+10 bytes                                       
+Database Buffers         8.0531E+10 bytes                                       
+Redo Buffers               57647104 bytes                                       
+Database mounted.
+Database opened.
+01:24:41 SYS:JFSPPROD > select name,open_mode,log_mode,database_role from v$database;
+
+NAME      OPEN_MODE            LOG_MODE     DATABASE_ROLE                       
+--------- -------------------- ------------ ----------------                    
+JFSPPROD  READ WRITE           ARCHIVELOG   PRIMARY                             
+
+01:25:23 SYS:JFSPPROD > sho parameter cache_size
+
+NAME                                 TYPE                                       
+------------------------------------ --------------------------------           
+VALUE                                                                           
+------------------------------                                                  
+client_result_cache_size             big integer                                
+0                                                                               
+db_16k_cache_size                    big integer                                
+0                                                                               
+db_2k_cache_size                     big integer                                
+0                                                                               
+db_32k_cache_size                    big integer                                
+0                                                                               
+db_4k_cache_size                     big integer                                
+
+NAME                                 TYPE                                       
+------------------------------------ --------------------------------           
+VALUE                                                                           
+------------------------------                                                  
+0                                                                               
+db_8k_cache_size                     big integer                                
+0                                                                               
+db_cache_size                        big integer                                
+75G                                                                             
+db_flash_cache_size                  big integer                                
+0                                                                               
+db_keep_cache_size                   big integer                                
+0                                                                               
+
+NAME                                 TYPE                                       
+------------------------------------ --------------------------------           
+VALUE                                                                           
+------------------------------                                                  
+db_recycle_cache_size                big integer                                
+0                                                                               
+01:25:43 SYS:JFSPPROD > set lines 300
+01:25:48 SYS:JFSPPROD > sho parameter cache_size
+
+NAME                                 TYPE                             VALUE                                                                                                                                                                                                                                 
+------------------------------------ -------------------------------- ------------------------------                                                                                                                                                                                                        
+client_result_cache_size             big integer                      0                                                                                                                                                                                                                                     
+db_16k_cache_size                    big integer                      0                                                                                                                                                                                                                                     
+db_2k_cache_size                     big integer                      0                                                                                                                                                                                                                                     
+db_32k_cache_size                    big integer                      0                                                                                                                                                                                                                                     
+db_4k_cache_size                     big integer                      0                                                                                                                                                                                                                                     
+db_8k_cache_size                     big integer                      0                                                                                                                                                                                                                                     
+db_cache_size                        big integer                      75G                                                                                                                                                                                                                                   
+db_flash_cache_size                  big integer                      0                                                                                                                                                                                                                                     
+db_keep_cache_size                   big integer                      0                                                                                                                                                                                                                                     
+db_recycle_cache_size                big integer                      0                                                                                                                                                                                                                                     
+01:25:59 SYS:JFSPPROD > 
+01:26:00 SYS:JFSPPROD > spool off;

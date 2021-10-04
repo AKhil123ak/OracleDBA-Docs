@@ -1,0 +1,80 @@
+====For Read Only  user creation===================================================
+
+1. create a role 
+
+  USER_RO
+
+2)
+set line 200
+set pages 500
+set heading off
+SPOOL GRANT_RO_1.sql
+
+SELECT 'GRANT SELECT ON ' ||OWNER|| '.'||OBJECT_NAME||' TO USER_RO;' FROM DBA_OBJECTS WHERE OBJECT_TYPE IN ('TABLE','VIEW') AND OWNER IN ('FCRHOST','FCCHOST','FCRBRN');
+
+spool off
+spool GRANT_RO_2.sql
+--------------------------------------------------------------
+SELECT 'grant execute on ' ||OWNER|| '.'||OBJECT_NAME||' TO USER_RO;' FROM DBA_OBJECTS WHERE OBJECT_TYPE IN ('FUNCTION', 'PROCEDURE') AND OWNER IN ('FCRHOST','FCCHOST','FCRBRN');
+-------------------------------------------------------------------
+spool off;
+
+3) run 
+@GRANT_RO_1.sql
+@GRANT_RO_2.sql
+
+4) create user APPSUSER_1
+
+create user APPSUSER1
+CREATE USER APPSUSER_1 IDENTIFIED BY MyPassword
+DEFAULT TABLESPACE example
+TEMPORARY TABLESPACE temp
+QUOTA unlimited ON example
+PROFILE app_user;
+grant connect, create session, USER_RO  to APPSUSER_1;
+
+
+
+5)
+spool SYNONYM1.sql 
+
+SELECT 'CREATE OR REPLACE SYNONYM APPSUSER_1.'||OBJECT_NAME||' FOR ' ||OWNER||'.'||OBJECT_NAME|| ';' FROM DBA_OBJECTS WHERE OBJECT_TYPE IN ('TABLE','VIEW') AND OWNER IN ('FCRHOST','FCCHOST','FCRBRN');
+spool off 
+spool SYNONYM2.sql
+
+SELECT 'CREATE OR REPLACE SYNONYM APPSUSER_1.'||OBJECT_NAME||' FOR ' ||OWNER||'.'||OBJECT_NAME|| ';' FROM DBA_OBJECTS WHERE OBJECT_TYPE IN ('FUNCTION', 'PROCEDURE') AND OWNER IN ('FCRHOST','FCCHOST','FCRBRN');
+
+spool off
+
+6) @SYNONYM1.sql
+7) @SYNONYM1.sql
+
+
+====For Read/write  Only  user creation===================================================
+
+
+1) create a role 
+
+USER_RW
+
+2)
+set line 200
+set pages 500
+set heading off
+SPOOL GRANT_RW_1.sql
+
+SELECT 'GRANT SELECT, INSERT, UPDATE, DELETE ON ' ||OWNER|| '.'||OBJECT_NAME||' TO USER_RW;' FROM DBA_OBJECTS WHERE OBJECT_TYPE IN ('TABLE',) AND OWNER IN ('FCRHOST','FCCHOST','FCRBRN');
+
+spool off;
+
+3) run @GRANT_RW_1.sql
+
+4) create user APPSUSER_2
+
+CREATE USER APPSUSER_2 IDENTIFIED BY MyPassword
+DEFAULT TABLESPACE example
+TEMPORARY TABLESPACE temp
+QUOTA unlimited ON example
+PROFILE app_user;
+
+5)grant connect, create session, USER_RW  to APPSUSER_2;

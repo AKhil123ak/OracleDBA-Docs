@@ -1,0 +1,22 @@
+cd $ORACLE_HOME/OPatch
+./opatch lsinventory
+
+SET LINESIZE 200
+COLUMN action_time FORMAT A20
+COLUMN action FORMAT A20
+COLUMN namespace FORMAT A20
+COLUMN version FORMAT A30
+COLUMN comments FORMAT A30
+COLUMN bundle_series FORMAT A10
+
+SELECT TO_CHAR(action_time, 'DD-MON-YYYY HH24:MI:SS') AS action_time,
+       action,
+       namespace,
+       version,
+       id,
+       comments,
+       bundle_series
+FROM   registry$history
+ORDER by action_time;
+
+

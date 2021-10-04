@@ -1,0 +1,217 @@
+
+
+
+=============shut down all the databases=======================x` 
+[oracle@SUDRGLRDB01 ~]$ db_env
+[oracle@SUDRGLRDB01 ~]$sqlplus / as sysdba
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Nov 14 10:58:47 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:GLRCNU >
+ 
+SYS:GLRCNU >alter database  backup  controlfile to trace
+SYS:GLRCNU >  alter database backup controlfile to '/home/oracle/jfstst_16_nov.ctl'
+
+SQL> shut immediate;
+
+
+======collect the information==============
+[oracle@SUDRGLRDB01 dev]$ grid_env
+
+
+grid@JFSCBSSRV099:/home/grid $ ps -ef | grep d.bin
+  oracle  8585380 18153704   0   Oct 30      -  0:00 /u01/app/11.2.0/grid/bin/evmlogger.bin -o /u01/app/11.2.0/grid/evm/log/evmlogger.info -l /u01/app/11.2.0/grid/evm/log/evmlogger.log
+  oracle 10944748        1   0   Oct 30      - 211:18 /u01/app/11.2.0/grid/bin/oraagent.bin
+  oracle 12976178        1   0   Oct 30      -  7:56 /u01/app/11.2.0/grid/bin/cssdagent
+  oracle 18153704        1   0   Oct 30      -  0:36 /u01/app/11.2.0/grid/bin/evmd.bin
+  oracle 27787326        1   0   Oct 30      - 133:36 /u01/app/11.2.0/grid/bin/ohasd.bin reboot
+  oracle 36831376        1   0   Oct 30      -  1:17 /u01/app/11.2.0/grid/bin/ocssd.bin
+
+
+[oracle@SUDRGLRDB01 ~]$ crsctl stat res -t
+
+--------------------------------------------------------------------------------
+Name           Target  State        Server                   State details
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.DATA.dg
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.LISTENER_GLRCONU.lsnr
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.REDO1.dg
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.REDO2.dg
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.asm
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.ons
+               OFFLINE OFFLINE      sudrglrdb01              STABLE
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.cssd
+      1        ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.diskmon
+      1        OFFLINE OFFLINE                               STABLE
+ora.evmd
+      1        ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.glrcnu.db
+      1        ONLINE  ONLINE       sudrglrdb01              Open,HOME=/u01/app/o
+                                                             racle/product/12.2.0
+                                                             .1/db_1,STABLE
+--------------------------------------------------------------------------------
+[oracle@SUDRGLRDB01 dev]$
+[oracle@SUDRGLRDB01 dev]$
+[oracle@SUDRGLRDB01 dev]$ sqlplus / as sysasm
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Nov 14 10:35:00 2018
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SQL> show parameter disk
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+asm_diskgroups                       string      REDO1, REDO2
+asm_diskstring                       string      /dev/sd*, /dev/raw/raw*
+SQL>
+SQL>
+SQL> !ls -lrt /dev/sd*
+brw-rw----. 1 root   disk     8, 16 Oct  8 15:00 /dev/sdb
+brw-rw----. 1 root   disk     8,  0 Oct  8 15:00 /dev/sda
+brw-rw----. 1 root   disk     8,  2 Oct  8 15:00 /dev/sda2
+brw-rw----. 1 root   disk     8,  1 Oct  8 15:00 /dev/sda1
+brw-rw----. 1 oracle oinstall 8, 48 Nov 14 10:35 /dev/sdd
+brw-rw----. 1 oracle oinstall 8, 32 Nov 14 10:35 /dev/sdc
+brw-rw----. 1 oracle oinstall 8, 64 Nov 14 10:35 /dev/sde
+
+SQL> !ls -lrt /dev/raw/raw*
+crw-rw----. 1 root disk 162, 0 Oct  8 15:00 /dev/raw/rawctl
+crw-rw----. 1 root disk 162, 2 Nov 14 10:33 /dev/raw/raw2
+crw-rw----. 1 root disk 162, 1 Nov 14 10:33 /dev/raw/raw1
+crw-rw----. 1 root disk 162, 3 Nov 14 10:33 /dev/raw/raw3
+
+SQL> set line 200
+SQL> col PATH for a20
+SQL> select name,path,free_mb/1024,total_mb/1024 from v$asm_disk order by name;
+
+SQL>
+SQL> /
+
+NAME                           PATH                 FREE_MB/1024 TOTAL_MB/1024
+------------------------------ -------------------- ------------ -------------
+DATA_0000                      /dev/sdc                75.203125           100
+REDO1_0000                     /dev/sdd               9.94921875            10
+REDO2_0000                     /dev/sde               9.94921875            10
+
+SQL> exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+======verify grid services====
+[oracle@SUDRGLRDB01 ~]$ ps -ef | grep d.bin
+oracle    2442     1  0 Oct08 ?        01:09:44 /u01/app/12.2.0.1/grid/bin/ohasd.bin reboot
+oracle    2640     1  0 Oct08 ?        04:04:01 /u01/app/12.2.0.1/grid/bin/oraagent.bin
+oracle    2660     1  0 Oct08 ?        00:43:15 /u01/app/12.2.0.1/grid/bin/evmd.bin
+oracle    2671     1  0 Oct08 ?        00:01:08 /u01/app/12.2.0.1/grid/bin/tnslsnr LISTENER_GLRCONU -no_crs_notify -inherit
+oracle    2722  2660  0 Oct08 ?        00:42:42 /u01/app/12.2.0.1/grid/bin/evmlogger.bin -o /u01/app/12.2.0.1/grid/log/[HOSTNAME]/evmd/evmlogger.info -l /u01/app/12.2.0.1/grid/log/[HOSTNAME]/evmd/evmlogger.log
+oracle    2952     1  0 Oct08 ?        00:56:36 /u01/app/12.2.0.1/grid/bin/cssdagent
+oracle    2984     1  0 Oct08 ?        00:47:22 /u01/app/12.2.0.1/grid/bin/ocssd.bin
+oracle   55846 54972  0 11:03 pts/3    00:00:00 grep --color=auto d.bin
+[oracle@SUDRGLRDB01 ~]$
+
+======stop grid services======
+
+oracle@JFSCBSSRV099:/home/oracle $ crsctl stop has
+CRS-2791: Starting shutdown of Oracle High Availability Services-managed resources on 'jfscbssrv099'
+CRS-2673: Attempting to stop 'ora.REDO2.dg' on 'jfscbssrv099'
+CRS-2673: Attempting to stop 'ora.REDO1.dg' on 'jfscbssrv099'
+CRS-2673: Attempting to stop 'ora.DATA.dg' on 'jfscbssrv099'
+CRS-2673: Attempting to stop 'ora.LISTENER_JFSTST.lsnr' on 'jfscbssrv099'
+CRS-2677: Stop of 'ora.REDO2.dg' on 'jfscbssrv099' succeeded
+CRS-2677: Stop of 'ora.REDO1.dg' on 'jfscbssrv099' succeeded
+CRS-2677: Stop of 'ora.LISTENER_JFSTST.lsnr' on 'jfscbssrv099' succeeded
+CRS-2677: Stop of 'ora.DATA.dg' on 'jfscbssrv099' succeeded
+CRS-2679: Attempting to clean 'ora.DATA.dg' on 'jfscbssrv099'
+CRS-2681: Clean of 'ora.DATA.dg' on 'jfscbssrv099' succeeded
+CRS-2673: Attempting to stop 'ora.asm' on 'jfscbssrv099'
+CRS-2677: Stop of 'ora.asm' on 'jfscbssrv099' succeeded
+CRS-2673: Attempting to stop 'ora.cssd' on 'jfscbssrv099'
+CRS-2677: Stop of 'ora.cssd' on 'jfscbssrv099' succeeded
+CRS-2673: Attempting to stop 'ora.evmd' on 'jfscbssrv099'
+CRS-2677: Stop of 'ora.evmd' on 'jfscbssrv099' succeeded
+CRS-2793: Shutdown of Oracle High Availability Services-managed resources on 'jfscbssrv099' has completed
+CRS-4133: Oracle High Availability Services has been stopped.
+=====cross verification========
+[oracle@SUDRGLRDB01 ~]$ ps -ef | grep d.bin
+oracle   55846 54972  0 11:03 pts/3    00:00:00 grep --color=auto d.bin
+==========================================Start ================
+
+[oracle@SUDRGLRDB01 ~]$ ps -ef | grep d.bin
+oracle   55846 54972  0 11:03 pts/3    00:00:00 grep --color=auto d.bin
+
+======start grid services==========
+[oracle@SUDRGLRDB01 ~] crsctl start has 
+
+
+
+
+[oracle@SUDRGLRDB01 ~]$ ps -ef | grep d.bin
+oracle    2442     1  0 Oct08 ?        01:09:44 /u01/app/12.2.0.1/grid/bin/ohasd.bin reboot
+oracle    2640     1  0 Oct08 ?        04:04:01 /u01/app/12.2.0.1/grid/bin/oraagent.bin
+oracle    2660     1  0 Oct08 ?        00:43:15 /u01/app/12.2.0.1/grid/bin/evmd.bin
+oracle    2671     1  0 Oct08 ?        00:01:08 /u01/app/12.2.0.1/grid/bin/tnslsnr LISTENER_GLRCONU -no_crs_notify -inherit
+oracle    2722  2660  0 Oct08 ?        00:42:42 /u01/app/12.2.0.1/grid/bin/evmlogger.bin -o /u01/app/12.2.0.1/grid/log/[HOSTNAME]/evmd/evmlogger.info -l /u01/app/12.2.0.1/grid/log/[HOSTNAME]/evmd/evmlogger.log
+oracle    2952     1  0 Oct08 ?        00:56:36 /u01/app/12.2.0.1/grid/bin/cssdagent
+oracle    2984     1  0 Oct08 ?        00:47:22 /u01/app/12.2.0.1/grid/bin/ocssd.bin
+oracle   55846 54972  0 11:03 pts/3    00:00:00 grep --color=auto d.bin
+[oracle@SUDRGLRDB01 ~]
+
+=======verify grid services=========
+[oracle@SUDRGLRDB01 ~]$ crsctl stat res -t
+
+--------------------------------------------------------------------------------
+Name           Target  State        Server                   State details
+--------------------------------------------------------------------------------
+Local Resources
+--------------------------------------------------------------------------------
+ora.DATA.dg
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.LISTENER_GLRCONU.lsnr
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.REDO1.dg
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.REDO2.dg
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.asm
+               ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.ons
+               OFFLINE OFFLINE      sudrglrdb01              STABLE
+--------------------------------------------------------------------------------
+Cluster Resources
+--------------------------------------------------------------------------------
+ora.cssd
+      1        ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.diskmon
+      1        OFFLINE OFFLINE                               STABLE
+ora.evmd
+      1        ONLINE  ONLINE       sudrglrdb01              STABLE
+ora.glrcnu.db
+      1        ONLINE  ONLINE       sudrglrdb01              Open,HOME=/u01/app/o
+                                                             racle/product/12.2.0
+                                                             .1/db_1,STABLE
+--------------------------------------------------------------------------------
+
+======start database======
+
+
+

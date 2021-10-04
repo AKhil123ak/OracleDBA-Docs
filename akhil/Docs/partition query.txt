@@ -1,0 +1,19 @@
+SELECT index_owner, index_name, partition_name, tablespace_name FROM   dba_ind_PARTITIONS WHERE status = 'UNUSABLE' and index_name in('IX01_ACTB_HISTORY','IX05_ACTB_HISTORY');
+
+alter index FCCHOST.PK01_ACTB_HISTORY rebuild partition SYS_P14552 online parallel 15;
+
+alter index FCCHOST.IX02_ACTB_HISTORY rebuild partition SYS_P14582 online parallel 10;
+
+
+
+
+select 'alter index '||index_owner||'.'||index_name||' rebuild partition '||partition_name||' ONLINE parallel 10;' from dba_ind_partitions where INDEX_NAME='IX02_ACTB_HISTORY' and STATUS='UNUSABLE';
+
+
+nohup sh index_rebuld01.sh &
+nohup sh index_rebuld02.sh &
+
+
+
+
+alias cbsalert='cd /u01/app/oracle/diag/rdbms/jfspprod/JFSPPROD/trace; ls -lrt alert_JFSPPROD.log'

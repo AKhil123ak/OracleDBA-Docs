@@ -1,0 +1,80 @@
+++++++++
+DBLINKS 
+++++++++
+note: Using DB links we can see the data from one server to another
+
+--> listner & TNS configuration on both databases 
+=================================================
+--> create password file on both database
+=========================================
+
+ $ orapwd file=orapwHRMS19 entries=3 password=password force=y
+
+--> Start the listener on both databases
+=========================================
+--> Check the connectivity 
+==========================
+
+ $ tnsping TNS_PROD
+ $ tnsping TNS_DEV
+
+--> Connect as sysdba from one database to another
+==================================================
+ 
+ $ sqlplus sys/password@TNS_HRMS19 as sysdba
+ 
+ $ sqlplus sys/password@TNS_PPRODSEP as sysdba
+ 
+--> Start Listner
+=================
+ 
+ lsnrctl start/status/stop <Listner name>
+ 
+> select name,open_mode from v$database;
+ 
+> select USERNAME from all_users where USERNAME='U1';
+ 
+> select USERNAME from all_users where USERNAME='SCOTT';
+
+++++++++++++++
+CREATE DB LINK
+++++++++++++++
+
+> desc dba_db_links;
+> desc ALL_DB_LINKS;
+> desc USER_DB_LINKS;
+
+> select * from scott.dept;
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+        30 SALES          CHICAGO
+        40 OPERATIONS     BOSTON
+
+> conn /as sysdba
+> create user u4 identified by u4;
+> grant connect,resource to u4 identified by u4;
+
+> grant create database link to u4;
+
+> conn u4/u4
+
+> create database link scott_link connect to scott identified by tiger using 'TNS_HRMS19';
+
+> select DB_LINK,USERNAME from user_db_links;
+
+> select * from tab@SCOTT_LINK;
+
+target database (HRMS19)
+
+> create user scott identified by tiger;
+> create table a (sno number);
+> grant  CREATE SESSION to scott;
+> grant CREATE table to scott;
+
+> select USERNAME,DEFAULT_TABLESPACE from dba_users where USERNAME='SCOTT';
+> create table a (sno number);
+> select * from tab;
+

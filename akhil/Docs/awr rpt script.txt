@@ -1,0 +1,46 @@
+run this query for awr report:
+
+$ORACLE_HOME/rdbms/admin/awrrpt.sql
+@awr.sql
+@?/rdbms/admin/awrrpt.sql
+@/oracle/app/oracle/product/11.2.0/dbhome_1/rdbms/admin/awrddrpt.sql (diiference of 2 awr reports)
+@/oracle/app/oracle/product/11.2.0/dbhome_1/rdbms/admin/awrddrpt.sql (diiference of 2 awr reports)
+@?/rdbms/admin/spreport.sql
+@?/rdbms/admin/ashrpt.sql
+30/10/2018 11:30:00
+@?/rdbms/admin/addmrpt.sql
+@$ORACLE_HOME/rdbms/admin/utlrp.sql
+
+
+set lines 200
+col SNAP_INTERVAL format a20
+col RETENTION format a20
+select * from dba_hist_wr_control;
+
+
+set lines 200
+col SNAP_INTERVAL format a20
+col RETENTION format a20
+select * from dba_hist_wr_control;
+
+ DBID              SNAP_INTERVAL        RETENTION            TOPNSQL
+---------- -------------------- -------------------- ---------- ----------------------------
+3275747663    +00000 01:00:00.0          +00008 00:00:00.0    DEFAULT
+
+--Here interval is set to 1 hour and retention is set to 8 days.
+--You can also create a snapshot manually by executing following procedure
+SQL> exec dbms_workload_repository.create_snapshot;
+
+PL/SQL procedure successfully completed.
+
+--Now let’s change the retention and interval settings. Interval will be set to 15 minutes and retention to 35 days (35x24x60 = 50400)
+
+SQL> exec dbms_workload_repository.modify_snapshot_settings(interval => 15, retention => 50400)
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from dba_hist_wr_control;
+
+ DBID              SNAP_INTERVAL        RETENTION            TOPNSQL
+---------- -------------------- -------------------- -------------------------------------
+3275747663    +00000 00:15:00.0         +00035 00:00:00.0    DEFAULT

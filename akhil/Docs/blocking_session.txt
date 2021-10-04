@@ -1,0 +1,68 @@
+select status from v$session where sid='3323';
+
+select status,count(*) from v$session group by status;
+
+STATUS     COUNT(*)
+-------- ----------
+INACTIVE       2888
+KILLED            4
+ACTIVE           85
+
+
+select
+(select username || ' - ' || osuser from v$session where sid=a.sid) blocker,
+a.sid || ', ' ||
+(select serial# from v$session where sid=a.sid) sid_serial,
+' is blocking ',
+(select username || ' - ' || osuser from v$session where sid=b.sid) blockee,
+b.sid || ', ' ||
+(select serial# from v$session where sid=b.sid) sid_serial
+from v$lock a, v$lock b
+where a.block = 1
+and b.request > 0
+and a.id1 = b.id1
+and a.id2 = b.id2;   
+
+
+select sample_time, session_state, event, consumer_group_id from v$active_session_history;
+
+
+
+select sample_time, session_state, event, consumer_group_id from v$active_session_history
+where user_id = 92 and sample_time between to_date('29-SEP-12 04.55.02 PM','dd-MON-yy hh:mi:ss PM')
+and to_date('29-SEP-12 05.05.02 PM','dd-MON-yy hh:mi:ss PM')
+and session_id = 44 order by 1;
+
+
+
+select event, count(1) from v$active_session_history where machine = 'prolaps01' and sample_time between
+to_date('29-SEP-12 04.55.00 PM','dd-MON-yy hh:mi:ss PM')
+and
+to_date('29-SEP-12 05.05.00 PM','dd-MON-yy hh:mi:ss PM')
+group by event
+order by event;
+
+
+
+
+
+>spool inactive_sessions.sql
+>select 'alter system kill session '||sid||','||session#||' immediate;' from v$session where status='INACTIVE' and username not in ('SYS');
+>spool off;
+>@A.sql 
+
+
+
+sql script
+
+SELECT 'ALTER SYSTEM KILL SESSION '||''''||sid ||','|| serial#||''''||' immediate;'FROM v$session WHERE status ='INACTIVE';
+
+
+
+
+
+
+
+
+
+

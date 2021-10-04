@@ -1,0 +1,172 @@
++++++++++++++
+DB level cmds
++++++++++++++
+
+select sum(bytes/1024/1024/1024) database_size from v$datafile; (to know the database size)and  v can use dba_data_files also 
+select instance_name,status from v$instance;
+select dbid,name,open_mode,log_mode,database_role from v$database;
+select * from v$controlfile;                                                         
+select tablespace_name,bytes/1024/1024 from sys.sm$ts_free order by 1;
+select * from v$log;
+select BYTES/1024/1024,  GROUP# from v$log;
+SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') "DATE" FROM DUAL; 
+select max(sequence#) from v$archived_log;(See this in DC servers how many archives are applied)
+select max(sequence#) from v$archived_log where applied='YES';(To know if DR and DC are in sync use it )
+
+++++++++++++
+temp spaces
+++++++++++++
+
+SET PAGESIZE 60
+SET LINESIZE 300
+COL TABLESPACE_SIZE_GB FOR 999,999,999,999
+COL ALLOCATED_SPACE_GB FOR 999,999,999,999
+COL FREE_SPACE_GB FOR 999,999,999,999
+SELECT TABLESPACE_NAME,
+TABLESPACE_SIZE/1024/1024/1024 TABLESPACE_SIZE_GB,
+ALLOCATED_SPACE/1024/1024/1024 ALLOCATED_SPACE_GB,
+FREE_SPACE/1024/1024/1024 FREE_SPACE_GB
+FROM   dba_temp_free_space;
+
++++++++++++++++++++++++++++++++++++
+To check the sessions and kill them
++++++++++++++++++++++++++++++++++++
+select count(*),status,username from v$session group by status,username;
+select count(*),status from v$session group by status;
+
+select count(*),program from v$session where username is NOt null and username !='SYS' group by program
+ union
+ select count(*) ,'** Total sess count **' from v$session ;
+
+SELECT 'ALTER SYSTEM KILL SESSION '''||sid||','||serial#||''' immediate;' FROM v$session where status='INACTIVE';
+
++++++++++++++++++++++
+To check RMAN status
+++++++++++++++++++++++
+
+select sid, row_type, operation, status, to_char(start_time,'dd-mm-yyyyhh24:mi:ss') start_time, to_char(end_time,'dd-mm-yyyy hh24:mi:ss')end_time from v$rman_status;
+
++++++++++++++++++++++++++++++++++
+To check the ORACLE_HOME location
++++++++++++++++++++++++++++++++++
+
+env|grep -i ORACLE_HOME
+ls -l /proc/10944660/cwd
+
+++++++++++++++++++++
+To check schema size
+++++++++++++++++++++
+
+select sum(bytes)/1024/1024 as size_in_mega,segment_type from dba_segments group by segment_type;
+select owner,sum(bytes)/1024/1024 schema_size_gig from dba_segments group by owner;
+select sum(bytes)/1024/1024 as size_in_gig,segment_type from dba_segments where owner like '%HOST%' group by segment_type;
+
++++++++++++++++
+To check DBsync
++++++++++++++++
+
+select max(sequence#) from v$archived_log;
+select max(sequence#) from v$archived_log where applied ='YES';
+select archived_thread#,archived_seq#,applied_thread#,applied_seq#  from v$archive_dest_status;
+SELECT SEQUENCE#,APPLIED FROM V$ARCHIVED_LOG ORDER BY SEQUENCE#;
+
+col process for a7
+col status for a12
+col group# for 999
+col thread# for 999
+col sequence# for 999999
+
+select process,status,group#,thread#,sequence# from v$managed_standby;
+alter database recover managed standby database disconnect from session;
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+To generate AWR,ASH & ADDM reports and to schedule
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+exec dbms_workload_repository.create_snapshot;
+@?/rdbms/admin/awrrpt.sql
+@?/rdbms/admin/addmrpt.sql
+@?/rdbms/admin/ashrpt.sql
+
+Exec dbms_workload_repository.create_snapshot;
+Exec dbms_workload_repository.modify_snapshot_settings (retention=>20160, interval=> 15);
+
+++++++++++++++++++++++++++++++++++++++++++++++
+To check the daily running jobs on CBS & MBIB
+++++++++++++++++++++++++++++++++++++++++++++++
+
+select start_date,end_date,last_start_date,last_run_duration,NEXT_RUN_DATE,state from dba_scheduler_jobs where job_name='USER_SESSION_JOB';
+
+
+select job_name,owner,status from dba_scheduler_job_run_details where job_name like 'JB_%';     -----> CBS
+
+select job_name,owner,status from dba_scheduler_job_run_details where job_name like 'MASTER_%';
+select job_name,owner,status from dba_scheduler_job_run_details where job_name like 'CONSOLIDATED_%';
+
+SELECT * FROM dba_scheduler_jobs WHERE job_name='USER_SESSION_JOB';
+SELECT * FROM dba_scheduler_jobs WHERE job_name='CONSOLIDATED_TRANSACTION_JOB';
+
+select error# from dba_scheduler_job_run_details where job_name='USER_SESSION_JOB';
+owner,job_name,job_type,
+
+++++++++++++++++++++
+AUDIT logs location
++++++++++++++++++++
+/u01/app/oracle/admin/JFSPPROD/adump
+
++++++++++++++++++++++++++++++++++++++
+to check datafile used and free space
++++++++++++++++++++++++++++++++++++++
+
+SELECT SUBSTR (df.NAME, 1, 40) file_name, df.bytes / 1024 / 1024 allocated_mb,
+((df.bytes / 1024 / 1024) - NVL (SUM (dfs.bytes) / 1024 / 1024, 0))
+used_mb,
+NVL (SUM (dfs.bytes) / 1024 / 1024, 0) free_space_mb
+FROM v$datafile df, dba_free_space dfs
+WHERE df.file# = dfs.file_id(+)
+GROUP BY dfs.file_id, df.NAME, df.file#, df.bytes
+ORDER BY file_name;
+
++++++++++++++++++++++++
+to check the diskgroup
++++++++++++++++++++++++
+select name, state, total_mb, free_mb from v$asm_diskgroup;
+select name,state ,free_mb/1024,total_mb/1024 from v$asm_diskgroup order by name;
+select path from v$asm_disk;
+show parameter asm_diskstring;
+
+++++++++++++++++++++++++
+To check the index size 
+++++++++++++++++++++++++
+select 
+   * 
+from (
+   select 
+      owner, 
+      segment_name, 
+      bytes/1024/1024/1024 in_GB 
+   from 
+      dba_segments 
+   where
+      segment_type = 'INDEX'
+   order by 
+      bytes/1024/1024/1024 desc) 
+where 
+   rownum <= 10;
+
++++++++++++++++++
+RMAN backup size
++++++++++++++++++
+
+select OBJECT_TYPE,MBYTES_PROCESSED,START_TIME,END_TIME,STATUS from V$RMAN_STATUS where START_TIME like '28%' and OPERATION !='RMAN' order by RECID;
+
+++++++++++++++++++
+Listener commands
+++++++++++++++++++
+srvctl stop listener -l LISTENER_MOCK
+srvctl status listener -l LISTENER_MOCK
+srvctl start listener -l LISTENER_MOCK
+
+lsnrctl status 
+
+ssh fcoperator@172.17.70.106 lsfcmap

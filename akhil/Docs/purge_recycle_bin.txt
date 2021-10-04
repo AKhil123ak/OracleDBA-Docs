@@ -1,0 +1,12 @@
+
+
+FCR_purge_recyclebin_26NOV15.log
+set time on;
+select * from v$instance;
+select sysdate from dual;
+select TABLESPACE_NAME,BYTES/1024/1024/1024 from sys.sm$ts_free;
+select * from dba_recyclebin;
+purge dba_recyclebin;
+select * from dba_recyclebin;
+select TABLESPACE_NAME,BYTES/1024/1024/1024 from sys.sm$ts_free;
+spool off;

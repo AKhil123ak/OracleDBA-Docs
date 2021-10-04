@@ -1,0 +1,7 @@
+select owner from dba_tables where table_name='ACTB_HISTORY_MMDD'
+ORACLE 
+evry month 
+trace 
+find /u01/oradev/DEV/12.1.0/rdbms/audit -type f -name '*.aud' -mtime +30 -exec rm {} \;     ---> one month 
+
+ASM --- 3 EVRY DAY 

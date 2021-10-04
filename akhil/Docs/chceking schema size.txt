@@ -1,0 +1,1 @@
+select sum(bytes)/1024/1024/1024 schema_size_gig from dba_segments where owner='&owner'(to check the schema size)

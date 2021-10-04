@@ -1,0 +1,55 @@
+﻿EXPLAIN PLAN FOR
+ 2   select prod_category, avg(amount_sold)
+ 3   from sales s, products p
+ 4   where p.prod_id = s.prod_id
+ 5   group by prod_category;
+
+select plan_table_output from table(dbms_xplan.display('plan_table',null,'basic'));
+
+select plan_table_output from table(dbms_xplan.display_awr('6vz1qyhjjyydq'));
+
+select SQL_ID,SQL_TEXT FROM V$SQL;
+
+
+Query 1 – Below query will give the history of the plan.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+set pages 500
+set lines 145
+col BEGIN_INTERVAL_TIME format a35
+select ss.snap_id, ss.instance_number node, begin_interval_time,
+sql_id, plan_hash_value,
+nvl(executions_delta,0) execs,
+(elapsed_time_delta/decode(nvl(executions_delta,0),0,1,executions_delta))/1000000 avg_etime,
+(buffer_gets_delta/decode(nvl(buffer_gets_delta,0),0,1,executions_delta)) avg_lio
+from DBA_HIST_SQLSTAT S, DBA_HIST_SNAPSHOT SS
+where sql_id = nvl('&sql_id','4dqs2k5tynk61')
+and ss.snap_id = S.snap_id
+and ss.instance_number = S.instance_number
+and executions_delta > 0 --and plan_hash_value=3099046451
+order by 1, 2, 3
+/
+
+
+Query 2 à This is modified DB_operations which will have directly the SQL ID, if below works fine we can replace it with existing db operations.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+create or replace view db_operations_new
+(inst_id, sid, serial, machine, terminal, process, program, sql_text, users, operation, target, sofar, totalwork, timeremaining, timeelapsed, message, username, status, sql_id, sql_fulltext, time_stamp)
+as
+select A.inst_id "Instance",A.sid "Sid",A.serial# "Serial No.",A.machine "Machine",A.terminal "Terminal",A.process "PROCESS",
+       A.program "Program",B.sql_text "Query",B.users_executing "Users" ,C.opname "Operation",C.target "Target",
+       C.sofar "Till Now",C.totalwork "Total Work",C.Time_Remaining "Remaining Time",C.elapsed_seconds "Time Taken",C.Message "Message",
+       A.username "User",A.status "Status" , B.sql_id ,b.SQL_FULLTEXT,
+       sysdate "Time"
+from   gv$session A,gv$sql B,gv$session_longops C
+where  A.sql_address = B.address
+and    B.users_executing > 0
+and    C.inst_id(+) = A.inst_id
+and    C.sid(+) = A.sid
+and    C.serial#(+) = A.serial#
+and    C.sql_address(+) = A.sql_address;
+
+ 
+
+Using query1 share the Plan of the SQL ID.

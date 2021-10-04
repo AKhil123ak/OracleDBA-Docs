@@ -1,0 +1,18 @@
+oracle@JFSBNKSRV121:/home/oracle/backup_log $ cd
+oracle@JFSBNKSRV121:/home/oracle $ history
+10019   cd backup_log
+10020   find /home/oracle/backup_log -type f -name '.log' -mtime +120 -print | wc -l
+10021   find /home/oracle/backup_log -type f -name ".log" -mtime +120 -print
+10022   ls -lrt
+10023   find /home/oracle/backup_log -type f -name ".out" -mtime +120 -print
+10024   find /home/oracle/backup_log -type f -name ".out" -mtime +120 -print
+10025    find /home/oracle/backup_log -type f -name ".out" -mtime +1200-print
+10026   find /home/oracle/backup_log -type f -name ".out" -mtime +60 -print
+10027   find /home/oracle/backup_log -type f -name "*.out" -mtime +60 -print
+10028   find /home/oracle/backup_log -type f -name "*.out" -mtime +120 -delete
+10029   find /home/oracle/backup_log -type f -name "*.out" -mtime +120 -exec rm {} \;
+10030   ls -lrt
+10031   ls -lt
+10032   cd\
+10033   cd
+10034   history

@@ -1,0 +1,161 @@
+
+select
+(select username || ' - ' || osuser from v$session where sid=a.sid) blocker,
+a.sid || ', ' ||
+(select serial# from v$session where sid=a.sid) sid_serial,
+' is blocking ',
+(select username || ' - ' || osuser from v$session where sid=b.sid) blockee,
+b.sid || ', ' ||
+(select serial# from v$session where sid=b.sid) sid_serial
+from v$lock a, v$lock b
+where a.block = 1
+and b.request > 0
+and a.id1 = b.id1
+and a.id2 = b.id2;
+
+
+set line 200 pages 500
+col BLOCKER for a20
+col SID_SERIAL for a15
+col BLOCKEE for a20
+col status for a10
+select
+(select username || ' - ' || osuser from v$session where sid=a.sid) blocker,
+a.sid || ', ' ||
+(select serial# from v$session where sid=a.sid) sid_serial,
+(select status from v$session where sid=a.sid) status,
+(select sql_id from v$session where sid=a.sid) sql_id,
+' is blocking ',
+(select username || ' - ' || osuser from v$session where sid=b.sid) blockee,
+b.sid || ', ' ||
+(select serial# from v$session where sid=b.sid) sid_serial,
+(select sql_id from v$session where sid=b.sid) sql_id
+from v$lock a, v$lock b
+where a.block = 1
+and b.request > 0
+and a.id1 = b.id1
+and a.id2 = b.id2 order by 2;
+   
+
+
+SET PAGESIZE 60
+SET LINESIZE 300
+COLUMN username FORMAT A10
+COLUMN sid FORMAT 9999
+COLUMN serial# FORMAT 99999999
+COLUMN event FORMAT A35
+
+SELECT NVL(s.username, '(oracle)') AS username,
+       s.status,
+	   s.sid,
+	   s.serial#,
+	   s.sql_id,
+       se.event,
+       se.total_waits,
+       se.total_timeouts,
+       se.time_waited,
+       se.average_wait,
+       se.max_wait,
+       se.time_waited_micro
+FROM   v$session_event se,
+       v$session s
+WHERE  s.sid = se.sid
+AND    s.sid = &Session_ID
+ORDER BY se.time_waited DESC
+/
+
+
+ALTER SYSTEM KILL SESSION 'sid,serial#';
+
+ALTER SYSTEM KILL SESSION 'sid,serial#' IMMEDIATE; 
+
+ select count(*),status from v$session group by status;
+
+============================
+
+select a.sid,a.program,a.status,a.sql_id,b.sql_text
+from v$session a, v$sqltext b
+where a.sql_hash_value = b.hash_value
+and a.sid='&sid'
+order by a.sid,hash_value,piece;
+
+
+(or)
+
+
+column machine format A20
+column username format A10
+column program format A30
+column event format A30
+column P1TEXT format A30
+column P2TEXT format A10
+column P3TEXT format A10
+column sql format A120
+set lines 500 pages 5000
+select s.sid, s.serial#, s.username, s.machine, s.program, s.event, 
+substr(q.sql_text, 1, 120) sql, s.p1text, s.p2text, s.p3text, 
+s.seconds_in_wait, s.state
+from v$session s, v$sql q
+where nvl(s.sql_id, s.prev_sql_id) = q.sql_id(+)
+  and nvl(s.sql_child_number, s.prev_child_number) = q.child_number(+)
+  and s.audsid <> userenv('sessionid')
+  and s.sid ='&SID';
+
+=========================
+select plan_table_output from table (dbms_xplan.display_awr('gjwar4v8j8rv9'));
+
+=================================================================
+>>>jayjit sir command:
+
+column machine format A20
+column username format A10
+column program format A30
+column event format A30
+column P1TEXT format A30
+column P2TEXT format A10
+column P3TEXT format A10
+column sql format A120
+set lines 500 pages 5000
+
+select s.sid, s.serial#, s.username, s.machine, s.program, s.event, 
+substr(q.sql_text, 1, 120) sql, s.p1text, s.p2text, s.p3text, 
+s.seconds_in_wait, s.state
+from v$session s, v$sql q
+where nvl(s.sql_id, s.prev_sql_id) = q.sql_id(+)
+  and nvl(s.sql_child_number, s.prev_child_number) = q.child_number(+)
+  and s.audsid <> userenv('sessionid')
+  and s.event not in (
+    'SQL*Net message from client', 'Space Manager: slave idle wait','Streams 
+AQ: qmn slave idle wait',
+    'rdbms ipc message','Streams AQ: qmn coordinator idle wait','jobq slave 
+wait','DIAG idle wait',
+    'smon timer','pmon timer','Streams AQ: waiting for time management or 
+cleanup tasks','VKTM Logical Idle Wait',
+  'pipe get', 'SQL*Net message to client');
+
+
+ SELECT p1, p1text, p2, p2text, p3, p3text  FROM v$session_wait  WHERE 
+event='Streams AQ: waiting for messages in the queue';
+
+SELECT object_name, object_type FROM dba_objects WHERE object_id
+in (
+SELECT p1 FROM v$session_wait  WHERE event='Streams AQ: waiting for messages 
+in the queue';
+);
+
+======================blocking session==================
+SELECT
+   s.blocking_session, 
+   s.sid, 
+   s.serial#, 
+   s.seconds_in_wait
+FROM
+   v$session s
+WHERE
+   blocking_session IS NOT NULL;
+
+
+
+
+
+

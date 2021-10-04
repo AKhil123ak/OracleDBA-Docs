@@ -1,0 +1,83 @@
+$ cat FRSPART_IDX_QTR4_datafile_resize_18OCT15.log
+SYS@frsprod1 SQL>select * from v$instance;
+
+INSTANCE_NUMBER INSTANCE_NAME    HOST_NAME                                                        VERSION           STARTUP_TIM
+--------------- ---------------- ---------------------------------------------------------------- ----------------- -----------
+STATUS       PAR    THREAD# ARCHIVE LOG_SWITCH_WAIT LOGINS     SHU DATABASE_STATUS   INSTANCE_ROLE      ACTIVE_ST BLO
+------------ --- ---------- ------- --------------- ---------- --- ----------------- ------------------ --------- ---
+              1 frsprod1         DR_FRS_DB                                                        11.2.0.2.0        01-OCT-2015
+OPEN         NO           1 STARTED                 ALLOWED    NO  ACTIVE            PRIMARY_INSTANCE   NORMAL    NO
+
+
+Elapsed: 00:00:00.01
+SYS@frsprod1 SQL>set time on;
+06:11:10 SYS@frsprod1 SQL>select sysdate from dual;
+
+SYSDATE
+-----------
+18-OCT-2015
+
+Elapsed: 00:00:00.00
+col FILE_NAME for a60;
+
+
+
+select name,state,total_mb/1024,free_mb/1024 from v$asm_diskgroup_stat order by name;
+
+
+select TABLESPACE_NAME,BYTES/1024/1024/1024 from sm$ts_free order by 1;
+
+select bytes/(1024*1024*1024),file_name from dba_data_files where TABLESPACE_NAME='FRSPART_IDX_QTR1';
+
+select bytes/(1024*1024*1024),file_name from dba_data_files where TABLESPACE_NAME='GBM_EDIDATA';
+
+select bytes/(1024*1024*1024),file_name from dba_data_files where TABLESPACE_NAME='FRS_DATA';
+
+
+
+======================
+
+
+alter database datafile '+FRS_DATA1/frsprod1/datafile/frs_qtr1.1426.902652839' resize 16G;
+
+alter database datafile '+GBM_DATA1/gbm/datafile/gbm_edidata.307.881496287' resize 8392m;
+
+============================
+
+
+select TABLESPACE_NAME,BYTES/1024/1024/1024 from sm$ts_free order by 1;
+
+
+select bytes/(1024*1024*1024),file_name from dba_data_files where TABLESPACE_NAME='FRS_QTR1';
+
+=======================================
+==> new datafile addition
+=======================================
+
+
+ALTER TABLESPACE FRS_QTR1 ADD DATAFILE '+FRS_DATA1' size 32764m;
+
+ALTER TABLESPACE FRS_QTR1 ADD DATAFILE '+FRS_DATA1' size 10G;
+
+ALTER TABLESPACE FCCINDXLARGE ADD DATAFILE '+FCC_DATA1' size 20G;
+
+ALTER TABLESPACE CANHKGPRD ADD DATAFILE '+CANHKG_DATA1' size 20G;
+
+=======================================
+
+select bytes/(1024*1024*1024),file_name from dba_data_files where TABLESPACE_NAME='FCCINDXLARGE';
+
+
+select TABLESPACE_NAME,BYTES/1024/1024/1024 from sm$ts_free where tablespace_name in ('FRSPART_IDX_QTR1', 'FRS_QTR1' )order by 1;
+
+alter database backup controlfile to trace;
+
+
+
+
+alter database backup controlfile to '/oracle/log/FRS_control_bkp_02FEB16.ctl';
+
+Database altered.
+
+Elapsed: 00:00:05.34
+06:23:36 SYS@frsprod1 SQL>spool off;

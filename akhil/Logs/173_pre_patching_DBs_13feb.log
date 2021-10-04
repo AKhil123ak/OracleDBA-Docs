@@ -1,0 +1,241 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2019.02.13 21:45:11 =~=~=~=~=~=~=~=~=~=~=~=
+$ 
+$ whoami
+oracle
+$ 
+$ ps -ef|grep pmon
+  oracle 19726392        1   0   Jan 09      -  1:09 ora_pmon_JFSIIB
+  oracle 21102644        1   0   Dec 27      -  1:45 ora_pmon_CIBUAT
+  oracle 21364750        1   0   Dec 27      -  1:34 ora_pmon_CKYCUAT
+  oracle  3146142        1   0   Sep 19      -  2:55 asm_pmon_+ASM
+  oracle 11141466        1   0   Oct 15      -  4:51 ora_pmon_JFSEXPEN
+  oracle 25362812        1   0   Dec 29      -  1:32 ora_pmon_EDWPRD
+  oracle 26476974 26345844   0 21:52:21  pts/0  0:00 grep pmon
+$ 
+$ export ORACLE_SID=JFSIIB
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 13 21:52:41 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:JFSIIB > 
+SYS:JFSIIB > set time on;
+21:52:46 SYS:JFSIIB > 
+21:52:47 SYS:JFSIIB > alter database backup controlfile to trace;
+
+Database altered.
+
+21:52:57 SYS:JFSIIB > 
+21:52:58 SYS:JFSIIB > show parameter spfile
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+spfile                               string      /u01/app/oracle/product/12.2.0
+                                                 .1/db_1/dbs/spfileJFSIIB.ora
+21:53:02 SYS:JFSIIB > 
+21:53:04 SYS:JFSIIB > create pfile from s[pfile;
+
+File created.
+
+21:53:12 SYS:JFSIIB > 
+21:53:31 SYS:JFSIIB > create pfile '/home/ora='/home/oracle' /pfiniittJFSIIB.ora' from spfile;
+
+File created.
+
+21:54:45 SYS:JFSIIB > alter database backup controlfile to trace as '/home/oracle/JFSIIB.ctrl';_13FEB.ctrl';
+alter database backup controlfile to trace as '/home/oracle/JFSIIB.ctrl';13FEB.ctrl'
+                                                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+21:55:34 SYS:JFSIIB > alter database backup controlfile to trace as '/home/oracle/JFSIIB_13FEB.ctrl';
+
+Database altered.
+
+21:55:42 SYS:JFSIIB > 
+21:55:45 SYS:JFSIIB > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+21:56:24 SYS:JFSIIB > 
+21:56:26 SYS:JFSIIB > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ ps -ef|grep pmon
+  oracle 21102644        1   0   Dec 27      -  1:45 ora_pmon_CIBUAT
+  oracle 21364750        1   0   Dec 27      -  1:34 ora_pmon_CKYCUAT
+  oracle 29163566 26345844   0 21:56:32  pts/0  0:00 grep pmon
+  oracle  3146142        1   0   Sep 19      -  2:55 asm_pmon_+ASM
+  oracle 11141466        1   0   Oct 15      -  4:51 ora_pmon_JFSEXPEN
+  oracle 25362812        1   0   Dec 29      -  1:32 ora_pmon_EDWPRD
+$ 
+$ export ORACLE_SID=CIBUAT
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 13 21:56:41 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:CIBUAT > alter database backup controlfile to trace as '/home/oracle/CIBUAT_13thFEB.ctrl';
+
+Database altered.
+
+SYS:CIBUAT > 
+SYS:CIBUAT > alter create pfile /'/home='/home/oracle/initCIBUAT.ora' from spfile;
+
+File created.
+
+SYS:CIBUAT > 
+SYS:CIBUAT > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+SYS:CIBUAT > 
+SYS:CIBUAT > 
+SYS:CIBUAT > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORALCECLE_SID=CKYCUAT
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 13 21:58:25 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:CKYCUAT > 
+SYS:CKYCUAT > set time on;
+21:58:28 SYS:CKYCUAT > 
+21:58:29 SYS:CKYCUAT > allter database backup controlfile to trace as /'/hjoome/oracle/CKYCUAT_13FEB.ctrl';
+
+Database altered.
+
+21:59:01 SYS:CKYCUAT > 
+21:59:02 SYS:CKYCUAT > altercreate pfile='/home/oracle/initCKYCUAT.ora' from spfile;
+
+File created.
+
+21:59:24 SYS:CKYCUAT > 
+21:59:25 SYS:CKYCUAT > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+21:59:52 SYS:CKYCUAT > 
+21:59:53 SYS:CKYCUAT > 
+21:59:53 SYS:CKYCUAT > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ ps -ef|grep pmon
+  oracle  3146142        1   0   Sep 19      -  2:55 asm_pmon_+ASM
+  oracle 11141466        1   0   Oct 15      -  4:51 ora_pmon_JFSEXPEN
+  oracle 25362812        1   0   Dec 29      -  1:32 ora_pmon_EDWPRD
+$ 
+$ export ORACLE_SID=JFSEXPEN
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 13 22:00:07 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:JFSEXPEN > 
+SYS:JFSEXPEN > set time on;
+22:00:10 SYS:JFSEXPEN > 
+22:00:11 SYS:JFSEXPEN > create alter database backup controlfile to trace as '/home/oracle/JFSEXPEN_13FEB.ctrl';
+
+Database altered.
+
+22:00:43 SYS:JFSEXPEN > 
+22:00:44 SYS:JFSEXPEN > alter create pfile='/home/oracle/initJFSEXPEN.ora' from spfile;
+
+File created.
+
+22:01:08 SYS:JFSEXPEN > 
+22:01:09 SYS:JFSEXPEN > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+22:01:43 SYS:JFSEXPEN > 
+22:01:45 SYS:JFSEXPEN > 
+22:01:45 SYS:JFSEXPEN > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ export ORACLE_SID=EDWPRD
+$ 
+$ s
+
+SQL*Plus: Release 12.2.0.1.0 Production on Wed Feb 13 22:01:57 2019
+
+Copyright (c) 1982, 2017, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+SYS:EDWPRD > 
+SYS:EDWPRD > set time on;
+22:02:00 SYS:EDWPRD > 
+22:02:01 SYS:EDWPRD > alter database backup controlfile to trace as '/home/oracle/EDWPRD_13FEB.ctrl';
+
+Database altered.
+
+22:02:16 SYS:EDWPRD > 
+22:02:17 SYS:EDWPRD > create pfile='/home/oracle/initEDWPRD.ora' from spfile;
+create pfile='/home/oracle/initEDWPRD.ora' from spfile
+*
+ERROR at line 1:
+ORA-01565: error in identifying file '?=/dbs/spfile@.ora'
+ORA-27037: unable to obtain file status
+IBM AIX RISC System/6000 Error: 2: No such file or directory
+Additional information: 7
+
+
+22:02:31 SYS:EDWPRD > show parameter spfile
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+spfile                               string
+22:02:41 SYS:EDWPRD > show parameter pfile;
+
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+spfile                               string
+22:02:48 SYS:EDWPRD > 
+22:02:56 SYS:EDWPRD > create spfile from pfile;
+
+File created.
+
+22:03:15 SYS:EDWPRD > shut immediate;
+Database closed.
+Database dismounted.
+ORACLE instance shut down.
+22:03:46 SYS:EDWPRD > 
+22:03:48 SYS:EDWPRD > 
+22:03:48 SYS:EDWPRD > exit
+Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+$ 
+$ ps -ef|grep pmon
+  oracle 24051878 26345844   0 22:04:04  pts/0  0:00 grep pmon
+  oracle  3146142        1   0   Sep 19      -  2:55 asm_pmon_+ASM
+$ 
+$ 

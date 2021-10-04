@@ -1,0 +1,28 @@
+prod
+Preprod
+UAT
+SIT
+DMD
+DEV
+test
+patch
+
+ORACLE_BASE=/u01/app/DEV; export ORACLE_BASE 
+ORACLE_HOME=$ORACLE_BASE/product/11.2.0.4; export ORACLE_HOME 
+ORACLE_SID=DEV; export ORACLE_SID 
+PATH=$ORACLE_HOME/bin:$PATH; export PATH 
+
+mkdir -p /u01/app/DEV/product/11.2.0.4 
+chown -R oracle:oinstall /u01/app/DEV
+chmod -R 775 /u01 
+
+what is SCN
+archive redo mode
+what is meant by database mount
+
+$ mv /home/oracle /home/oracle1
+$ userdel -r oracle
+$ rm -rf /var/spool/mail/oracle
+$ useradd oracle
+$ mv /home/oracle1 /home/orcle 
+

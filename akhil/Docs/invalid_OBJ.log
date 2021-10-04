@@ -1,0 +1,87 @@
+SQL> 
+SQL> select object_type,count(1) from dba_objects where status='INVALID' group by object_type;
+
+OBJECT_TYPE           COUNT(1)
+------------------- ----------
+FUNCTION                     2
+VIEW                         1
+TRIGGER                      1
+PACKAGE BODY                33
+SYNONYM                      2
+PACKAGE                      7
+
+6 rows selected.
+
+SQL> 
+SQL> select object_type,owner,count(1) from dba_objects where status='INVALID' group by object_type,owner;
+
+OBJECT_TYPE         OWNER                            COUNT(1)
+------------------- ------------------------------ ----------
+VIEW                FCRHOST                                 1
+PACKAGE BODY        ODS                                    18
+SYNONYM             PUBLIC                                  1
+FUNCTION            FCRBRN                                  1
+FUNCTION            FCRHOST                                 1
+PACKAGE             ODS                                     7
+SYNONYM             FCRHOST                                 1
+PACKAGE BODY        FCCHOST                                15
+TRIGGER             FCRHOST                                 1
+
+9 rows selected.
+
+SQL> 
+SQL> select owner,object_name,object_type,status from dba_objects where status='INVALID' order by owner,object_name,object_type;
+
+OWNER                          OBJECT_NAME                         OBJECT_TYPE         STATUS
+------------------------------ ----------------------------------- ------------------- -------
+FCCHOST                        BCPKS_ACCRUAL1                      PACKAGE BODY        INVALID
+FCCHOST                        BCPKS_ACCRUAL2                      PACKAGE BODY        INVALID
+FCCHOST                        BCPKS_DELETE2                       PACKAGE BODY        INVALID
+FCCHOST                        BCPKS_STATUS1                       PACKAGE BODY        INVALID
+FCCHOST                        BCPKS_SUBSYSTEM                     PACKAGE BODY        INVALID
+FCCHOST                        GWPKS_BCSUBSYSTEMPICKUP             PACKAGE BODY        INVALID
+FCCHOST                        GWPKS_BC_CONTRACT                   PACKAGE BODY        INVALID
+FCCHOST                        GWPKS_BUILD_SUBSYSTEM_TS            PACKAGE BODY        INVALID
+FCCHOST                        GWPKS_CREATEBCCONTRACT              PACKAGE BODY        INVALID
+FCCHOST                        GWPKS_LIQUIDATEBCCONTRACT           PACKAGE BODY        INVALID
+FCCHOST                        GWPKS_MODIFYBCCONTRACT              PACKAGE BODY        INVALID
+FCCHOST                        GWPKS_QUERYSEDEAL                   PACKAGE BODY        INVALID
+FCCHOST                        GWPKS_ROLLOVERBCCONTRACT            PACKAGE BODY        INVALID
+FCCHOST                        UDPKS_EVENT                         PACKAGE BODY        INVALID
+FCCHOST                        XPPKS_UTILS                         PACKAGE BODY        INVALID
+FCRBRN                         AP_XMIT_CASH_DEP_VAL                FUNCTION            INVALID
+FCRHOST                        ACVWS_ACDCBIRD                      SYNONYM             INVALID
+FCRHOST                        ACVW_ACDCBIRD                       VIEW                INVALID
+FCRHOST                        FN_CBS_DUMP_EFS                     FUNCTION            INVALID
+FCRHOST                        TR_ON_CR_TABLE_CHECK                TRIGGER             INVALID
+ODS                            ASRTOLDAP                           PACKAGE BODY        INVALID
+ODS                            BLKDEL                              PACKAGE BODY        INVALID
+ODS                            BLKLOAD                             PACKAGE BODY        INVALID
+ODS                            BLKMOD                              PACKAGE BODY        INVALID
+ODS                            CATMGMT                             PACKAGE             INVALID
+ODS                            CATMGMT                             PACKAGE BODY        INVALID
+ODS                            DSTEST                              PACKAGE BODY        INVALID
+ODS                            ENTRYBACKUPRECOV                    PACKAGE             INVALID
+ODS                            ENTRYBACKUPRECOV                    PACKAGE BODY        INVALID
+ODS                            LDAPUPGUTLS                         PACKAGE BODY        INVALID
+ODS                            MANAGEHIQ                           PACKAGE             INVALID
+ODS                            MANAGEHIQ                           PACKAGE BODY        INVALID
+ODS                            MODIFYDN                            PACKAGE             INVALID
+ODS                            MODIFYDN                            PACKAGE BODY        INVALID
+ODS                            OIDRIPKG                            PACKAGE             INVALID
+ODS                            OIDRIPKG                            PACKAGE BODY        INVALID
+ODS                            OIDSECEVENTS                        PACKAGE             INVALID
+ODS                            OIDSECEVENTS                        PACKAGE BODY        INVALID
+ODS                            OID_STATS                           PACKAGE             INVALID
+ODS                            OID_STATS                           PACKAGE BODY        INVALID
+ODS                            OLADD                               PACKAGE BODY        INVALID
+ODS                            OLDELETE                            PACKAGE BODY        INVALID
+ODS                            PURGEADMIN                          PACKAGE BODY        INVALID
+ODS                            REPLEMUTLS                          PACKAGE BODY        INVALID
+ODS                            TSPURGE                             PACKAGE BODY        INVALID
+PUBLIC                         BALANCE_TABLE                       SYNONYM             INVALID
+
+46 rows selected.
+
+SQL> 
+SQL> spool off

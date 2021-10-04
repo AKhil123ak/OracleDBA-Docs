@@ -1,0 +1,11 @@
+
+SET PAGESIZE 60
+SET LINESIZE 300
+COL "Generation Date" FORMAT a20
+ 
+SELECT TRUNC(completion_time)  "Generation Date" ,
+   round(SUM(blocks*block_size)/1048576/1024,0) "Total for the Day in GB"
+FROM gv$archived_log
+GROUP BY TRUNC(completion_time)
+ORDER BY TRUNC(completion_time)
+/

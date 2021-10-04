@@ -1,0 +1,29 @@
+deletion of archive logs through rman
+///////////////////////////////////
+when the mount point is in backup/tempis full :
+the is OS level just check the  (ls -lrt)  cat this rman_arc_del.sh
+and run the script in the rman target / 
+then archive log will be deleted 
+$ history
+1188    env | grep ORA
+1189    rman target / cmd=rman_arc_del.sh
+1190    ls -lrt
+1191    cat
+1192    cat rman_arc_del.sh
+1193    rman target /
+1194    df -gt
+1195    cd
+1196    ls -lrt
+1197    cat rman_arc_del.sh
+1198    ls -lrt
+1199    mv rman_arc_del.sh rman_arc_del.rcv
+1200    ls -lrt
+1201    pwd
+1202    cat rman_arc_del.rcv
+1203    history
+
+$ du -sg *
+ 
+ san switch
+ net app storage unit
+ tsm backup

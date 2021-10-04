@@ -1,0 +1,18 @@
+
+  ======== undo TBS  ====================
+
+1)SELECT DISTINCT STATUS,SUM(1024/1024),COUNT(*) FROM DBA_UNDO_EXTENTS
+GROUP BY STATUS;
+
+2)select	tablespace_name
+,	status
+,	count(*) as HOW_MANY
+from	dba_undo_extents
+group	by tablespace_name
+,	status
+/
+
+
+Active - There is an active transaction using this UNDO extent.
+Unexpired - There is no active transaction, but the extent is not available for reuse.
+Expired - The extent can be reused.
